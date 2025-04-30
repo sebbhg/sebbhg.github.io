@@ -15,8 +15,7 @@ Here is a selection of research works I have authored in financial risk, derivat
 - Gaussian Process Regression (GPR) for accelerating Value-at-Risk and Expected Shortfall calculations  
 - Combines Monte Carlo simulation with supervised learning  
 - Designed to meet regulatory frameworks (FRTB, Basel IV)  
-📄 [Download PDF](https://sebbhg.github.io/files/gpr_derivatives_risk.pdf)
-
+📄 [Download PDF](https://sebbhg.github.io/files/advanced_ml_derivatives.pdf)
 ---
 
 ### 📊 Risk Management & Extreme Values  
