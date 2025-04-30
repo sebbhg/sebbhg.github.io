@@ -65,7 +65,6 @@ include:
 
 # Add this section if not present
 header_pages:
-  - index.md
   - about.markdown
   - cours.md
   - theses.md
