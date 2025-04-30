@@ -58,9 +58,11 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
 include:
   - assets
   - files
+
 # Add this section if not present
 header_pages:
   - index.md
