@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS principal du thème -->
+    <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+
+    <!-- Ton CSS personnalisé -->
+    <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+  </head>
+  <body>
+
+    <!-- 🌗 Bouton de bascule -->
+    <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+
+    <!-- ✅ En-tête du site -->
+    <header class="site-header">
+      <div class="wrapper">
+        <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        <nav class="site-nav">
+          {% for page in site.pages %}
+            {% if page.title and page.nav != false %}
+              <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
+            {% endif %}
+          {% endfor %}
+        </nav>
+      </div>
+    </header>
+
+    <!-- ✅ Contenu de la page -->
+    <main class="page-content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+
+    <!-- ✅ Pied de page -->
+    <footer class="site-footer">
+      <div class="wrapper">
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
+      </div>
+    </footer>
+
+    <!-- 🔌 Script pour le toggle thème -->
+    <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+  </body>
+</html>
