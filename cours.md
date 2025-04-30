@@ -2,6 +2,7 @@
 layout: page
 title: Courses
 permalink: /courses/
+nav_order: 3
 ---
 
 # 📘 Graduate-Level Courses

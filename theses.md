@@ -2,6 +2,7 @@
 layout: page
 title: Theses
 permalink: /theses/
+nav_order: 4
 ---
 
 ## 🎓 Academic Theses in Quantitative Finance

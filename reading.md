@@ -2,6 +2,7 @@
 layout: page
 title: Reading
 permalink: /reading/
+nav_order: 5
 ---
 
 📚 **Selected Readings in Quantitative Finance**  
