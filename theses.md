@@ -1,3 +1,4 @@
+
 ---
 layout: page
 title: Theses
@@ -15,13 +16,15 @@ Here is a selection of research works I have authored in financial risk, derivat
 - Gaussian Process Regression (GPR) for accelerating Value-at-Risk and Expected Shortfall calculations  
 - Combines Monte Carlo simulation with supervised learning  
 - Designed to meet regulatory frameworks (FRTB, Basel IV)  
---
+
+---
 
 ### 📊 Risk Management & Extreme Values  
 📅Oct 2024 – Dec 2024[📄 Download PDF](https://sebbhg.github.io/files/risk_management_extreme_values.pdf)  
 - Used GEV and GPD to estimate financial extremes  
 - Fitted Gaussian, t, and Gumbel copulas to model dependence between assets  
 - Joint simulations for 200-year loss estimates and aggregate exposure  
+
 ---
 
 ### 🧠 Systemic Risks & Contagion in Financial Networks  
