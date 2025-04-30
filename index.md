@@ -22,7 +22,7 @@ CFA Candidate • Derivatives • Portfolio Optimization • Risk Management
 
 <div style="text-align: center; margin-top: 25px;">
   <a href="/about/" style="margin-right: 15px;">📄 About</a>
-  <a href="/cours/" style="margin-right: 15px;">📘 Courses</a>
+  <a href="/courses/" style="margin-right: 15px;">📘 Courses</a>
   <a href="/theses/" style="margin-right: 15px;">🎓 Theses</a>
   <a href="/reading/">📚 Reading</a>
 </div>
