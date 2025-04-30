@@ -18,6 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
+yiyle: " "
 description: A portfolio by Sébastien Haag focused on quantitative finance, algorithmic trading.
 baseurl: "" 
 url: "https://debastien-haag.github.io"  # ← Replace with your actual GitHub usernam
