@@ -42,5 +42,9 @@ My tools of choice:
 - [📧 Email me](mailto:sbthaag@gmail.com)
 - [🔗 LinkedIn](https://www.linkedin.com/in/s%C3%A9bastien-haag/)
 
-
+<p>
+  <a href="https://sebbhg.github.io/files/CV2026.pdf" class="btn" style="padding: 10px 20px; background-color: #0052cc; color: white; text-decoration: none; border-radius: 5px;">
+    📄 Download my CV
+  </a>
+</p>
 
