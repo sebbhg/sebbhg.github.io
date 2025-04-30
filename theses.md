@@ -1,0 +1,64 @@
+---
+layout: page
+title: Theses
+permalink: /theses/
+---
+
+## 🎓 Academic Theses in Quantitative Finance
+
+Here is a selection of research works I have authored in financial risk, derivative modeling, and applied stochastic methods.
+
+---
+
+### 📉 Advanced Statistical and ML Techniques for Pricing and Risk Assessment of Derivative Portfolios  
+**April 2025 – Present @ Natixis Corporate & Investment Banking**  
+- Gaussian Process Regression (GPR) for accelerating Value-at-Risk and Expected Shortfall calculations  
+- Combines Monte Carlo simulation with supervised learning  
+- Designed to meet regulatory frameworks (FRTB, Basel IV)  
+📄 [Download PDF](https://sebbhg.github.io/files/gpr_derivatives_risk.pdf)
+
+---
+
+### 📊 Risk Management & Extreme Values  
+**Oct 2024 – Dec 2024**  
+- Used GEV and GPD to estimate financial extremes  
+- Fitted Gaussian, t, and Gumbel copulas to model dependence between assets  
+- Joint simulations for 200-year loss estimates and aggregate exposure  
+
+---
+
+### 🧠 Systemic Risks & Contagion in Financial Networks  
+**Jan 2024 – Apr 2024**  
+- Modeled systemic banking collapses via Monte Carlo simulation  
+- Identified contagion chains and critical thresholds in interbank networks  
+
+---
+
+### 🌍 Climate Risk and Institutional Investors  
+**Feb 2024**  
+- Investigated physical and transition climate risks  
+- Described how investors adapt ESG policies, risk disclosures, and capital allocation  
+
+---
+
+### 🧾 Autocallable Options: Mechanisms and Applications  
+**Jan 2023 – May 2023**  
+- Pricing and behavior of autocallable structured products  
+- Historical evolution and post-2008 design patterns  
+- Mathematical modeling of activation and payoff paths  
+
+---
+
+### ⚙️ Calibration of the Heston Model  
+**No PDF available yet**  
+- Implemented and calibrated the Heston stochastic volatility model  
+- Used Levenberg-Marquardt for fast convergence  
+- Fitted implied volatility surfaces from market data  
+
+---
+
+### 🧮 Pricing American Options via Longstaff–Schwartz Algorithm  
+**No PDF available yet**  
+- Applied least-squares Monte Carlo for early exercise valuation  
+- Optimal stopping problem in high-dimensional markets  
+- Tested on equity and exotic American options
