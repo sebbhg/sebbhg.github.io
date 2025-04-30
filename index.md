@@ -2,7 +2,7 @@
 layout: page
 title: Home
 permalink: /
-nav_order: 1
+nav_order: 5
 ---
 
 <!-- PHOTO EN HAUT À DROITE -->
