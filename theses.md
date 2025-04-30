@@ -34,7 +34,7 @@ Here is a selection of research works I have authored in financial risk, derivat
 ---
 
 ### 🌍 Climate Risk and Institutional Investors  
-📅Feb 2024  
+📅Feb 2024 [📄 Download PDF](https://sebbhg.github.io/files/climate_risk_institutional_investors.pdf)  
 - Investigated physical and transition climate risks  
 - Described how investors adapt ESG policies, risk disclosures, and capital allocation  
 
