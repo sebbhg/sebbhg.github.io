@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Quantitative Finance & Trading Projects
+title: ""
 ---
 
 Welcome! I’m Sébastien Haag, a Financial Engineering student and Quantitative Trading Analyst.  
