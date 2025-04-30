@@ -17,8 +17,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-
-yiyle: " "
+title: Sébastien Haag
 description: A portfolio by Sébastien Haag focused on quantitative finance, algorithmic trading.
 baseurl: "" 
 url: "https://debastien-haag.github.io"  # ← Replace with your actual GitHub usernam
@@ -63,12 +62,3 @@ include:
   - assets
   - files
 
-sass:
-  style: compressed
-
-defaults:
-  -
-    scope:
-      path: ""
-    values:
-      css: "/assets/css/custom.css"
