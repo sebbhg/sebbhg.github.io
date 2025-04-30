@@ -1,34 +1,50 @@
+/* ✅ Masquer le titre par défaut dans la barre */
 .site-title {
   display: none !important;
 }
 
-/* 🌞 Light Mode (par défaut) */
-body {
-  background-color: #ffffff;
-  color: #000000;
+/* ✅ Thème clair (défaut) */
+:root[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --link-color: #007bff;
+  --nav-color: #f5f5f5;
 }
 
-/* 🌙 Dark Mode automatique */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
+/* ✅ Thème sombre (activé par toggle ou système) */
+:root[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --link-color: #80bfff;
+  --nav-color: #1e1e1e;
+}
 
-  a {
-    color: #80bfff;
-  }
+/* ✅ Application des couleurs */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
 
-  .site-nav {
-    background-color: #1e1e1e;
-  }
+a {
+  color: var(--link-color);
+}
 
-  .site-header, .site-footer {
-    background-color: #1a1a1a;
-    color: #ccc;
-  }
+.site-header,
+.site-footer,
+.site-nav {
+  background-color: var(--nav-color);
+}
 
-  .page-content {
-    background-color: #121212;
-  }
+/* ✅ Ajout optionnel : styliser le bouton toggle */
+button.theme-toggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 999;
+  background: none;
+  border: 1px solid var(--text-color);
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: var(--text-color);
+  cursor: pointer;
 }
