@@ -43,8 +43,16 @@ My tools of choice:
 - [🔗 LinkedIn](https://www.linkedin.com/in/s%C3%A9bastien-haag/)
 
 <p>
-  <a href="https://sebbhg.github.io/files/CV2026.pdf" class="btn" style="padding: 10px 20px; background-color: #0052cc; color: white; text-decoration: none; border-radius: 5px;">
+  <a href="https://sebbhg.github.io/files/CV2026.pdf" style="
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+  ">
     📄 Download my CV
   </a>
 </p>
-
