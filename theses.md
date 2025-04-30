@@ -23,7 +23,7 @@ Here is a selection of research works I have authored in financial risk, derivat
 - Used GEV and GPD to estimate financial extremes  
 - Fitted Gaussian, t, and Gumbel copulas to model dependence between assets  
 - Joint simulations for 200-year loss estimates and aggregate exposure  
-
+[📄 Download PDF](https://sebbhg.github.io/files/risk_management_extreme_values.pdf)
 ---
 
 ### 🧠 Systemic Risks & Contagion in Financial Networks  
