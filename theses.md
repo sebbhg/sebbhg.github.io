@@ -18,7 +18,7 @@ Here is a selection of research works I have authored in financial risk, derivat
 --
 
 ### 📊 Risk Management & Extreme Values  
-📅Oct 2024 – Dec 2024[📄 Download PDF](https://sebbhg.github.io/files/risk_management_extreme_values.pdf)$  
+📅Oct 2024 – Dec 2024[📄 Download PDF](https://sebbhg.github.io/files/risk_management_extreme_values.pdf)  
 - Used GEV and GPD to estimate financial extremes  
 - Fitted Gaussian, t, and Gumbel copulas to model dependence between assets  
 - Joint simulations for 200-year loss estimates and aggregate exposure  
