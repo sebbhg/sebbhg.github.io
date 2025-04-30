@@ -1,3 +1,34 @@
 .site-title {
   display: none !important;
 }
+
+/* 🌞 Light Mode (par défaut) */
+body {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* 🌙 Dark Mode automatique */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  a {
+    color: #80bfff;
+  }
+
+  .site-nav {
+    background-color: #1e1e1e;
+  }
+
+  .site-header, .site-footer {
+    background-color: #1a1a1a;
+    color: #ccc;
+  }
+
+  .page-content {
+    background-color: #121212;
+  }
+}
