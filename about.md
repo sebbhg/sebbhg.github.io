@@ -6,7 +6,7 @@ permalink: /about/
 
 ## 🎯 Who I Am
 
-I’m **Sébastien Haag**, a passionate quantitative finance engineer and CFA candidate, currently working at **Natixis CIB**.  
+I’m **Sébastien Haag**, a passionate quantitative finance engineer and CFA candidate.  
 I specialize in:
 
 - Financial derivatives modeling (Black-Scholes, Lévy processes)
@@ -19,20 +19,20 @@ I specialize in:
 
 ## 📈 What I Do
 
-I build robust models to price complex financial instruments, optimize portfolios, and simulate extreme market conditions.  
+I build robust models to price complex financial instruments, optimize portfolios, and manage risk.  
 My tools of choice:
 
-- **Languages**: Python, R, VBA  
-- **Tools**: Monte Carlo simulation, GPR, time series analysis  
+- **Languages**: Python, R, VBA
+- **Tools**: Monte Carlo simulation, GPR, time series analysis
 - **Topics**: Stress Testing, Asset Allocation, Market Risk
 
 ---
 
 ## 📁 Key Projects
 
-- **Gaussian Process Regression for VaR/ES Acceleration** @ Natixis  
-- **Utility-based Portfolio Optimization** (Advanced Portfolio Theory)  
-- **Convertible Bond Pricer** with Spread Research  
+- **Gaussian Process Regression for VaR/ES Acceleration** @ Natixis
+- **Utility-based Portfolio Optimization** (Advanced Portfolio Theory)
+- **Convertible Bond Pricer** with Spread Research
 - **Credit Analysis Models** using financial statement forecasting
 
 ---
