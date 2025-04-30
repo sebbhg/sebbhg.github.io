@@ -11,7 +11,7 @@ Here is a selection of research works I have authored in financial risk, derivat
 ---
 
 ### 📉 Advanced Statistical and ML Techniques for Pricing and Risk Assessment of Derivative Portfolios  
-📅April 2025 – Present @ Natixis Corporate & Investment Banking 📄[Download PDF](https://sebbhg.github.io/files/advanced_ml_derivatives.pdf) 
+📅 April 2025 – Present @ Natixis Corporate & Investment Banking 📄[Download PDF](https://sebbhg.github.io/files/advanced_ml_derivatives.pdf) 
 - Gaussian Process Regression (GPR) for accelerating Value-at-Risk and Expected Shortfall calculations  
 - Combines Monte Carlo simulation with supervised learning  
 - Designed to meet regulatory frameworks (FRTB, Basel IV)  
@@ -19,7 +19,7 @@ Here is a selection of research works I have authored in financial risk, derivat
 ---
 
 ### 📊 Risk Management & Extreme Values  
-📅Oct 2024 – Dec 2024 [📄 Download PDF](https://sebbhg.github.io/files/risk_management_extreme_values.pdf)  
+📅 Oct 2024 – Dec 2024 [📄 Download PDF](https://sebbhg.github.io/files/risk_management_extreme_values.pdf)  
 - Used GEV and GPD to estimate financial extremes  
 - Fitted Gaussian, t, and Gumbel copulas to model dependence between assets  
 - Joint simulations for 200-year loss estimates and aggregate exposure  
@@ -27,21 +27,21 @@ Here is a selection of research works I have authored in financial risk, derivat
 ---
 
 ### 🧠 Systemic Risks & Contagion in Financial Networks  
-📅Jan 2024 – Apr 2024 [📄 Download PDF](https://sebbhg.github.io/files/systemic_risks_financial_networks.pdf)  
+📅 Jan 2024 – Apr 2024 [📄 Download PDF](https://sebbhg.github.io/files/systemic_risks_financial_networks.pdf)  
 - Modeled systemic banking collapses via Monte Carlo simulation  
 - Identified contagion chains and critical thresholds in interbank networks  
 
 ---
 
 ### 🌍 Climate Risk and Institutional Investors  
-📅Feb 2024 [📄 Download PDF](https://sebbhg.github.io/files/climate_risk_institutional_investors.pdf)  
+📅 Feb 2024 [📄 Download PDF](https://sebbhg.github.io/files/climate_risk_institutional_investors.pdf)  
 - Investigated physical and transition climate risks  
 - Described how investors adapt ESG policies, risk disclosures, and capital allocation  
 
 ---
 
 ### 🧾 Autocallable Options: Mechanisms and Applications  
-📅Jan 2023 – May 2023  
+📅 Jan 2023 – May 2023 [📄 Download PDF](https://sebbhg.github.io/files/autocallable_options_mechanisms.pdf)  
 - Pricing and behavior of autocallable structured products  
 - Historical evolution and post-2008 design patterns  
 - Mathematical modeling of activation and payoff paths  
