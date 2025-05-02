@@ -3,52 +3,53 @@
   display: none !important;
 }
 
-/* ✅ Thème clair (défaut) */
-:root[data-theme="light"] {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --link-color: #007bff;
-  --nav-color: #f5f5f5;
-}
-
-/* ✅ Thème sombre (activé par toggle ou système) */
-:root[data-theme="dark"] {
-  --bg-color: #121212;
-  --text-color: #e0e0e0;
-  --link-color: #80bfff;
-  --nav-color: #1e1e1e;
-}
-
-/* ✅ Application des couleurs */
+/* ✅ Par défaut (light mode) */
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: #ffffff;
+  color: #000000;
 }
 
 a {
-  color: var(--link-color);
+  color: #007bff;
 }
 
 .site-header,
 .site-footer,
 .site-nav {
-  background-color: var(--nav-color);
+  background-color: #f5f5f5;
 }
 
-/* ✅ Ajout optionnel : styliser le bouton toggle */
+/* ✅ Dark mode appliqué par la classe */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode a {
+  color: #80bfff;
+}
+
+body.dark-mode .site-header,
+body.dark-mode .site-footer,
+body.dark-mode .site-nav {
+  background-color: #1e1e1e;
+}
+
+/* ✅ Bouton toggle */
 button.theme-toggle {
   position: fixed;
   top: 15px;
   left: 15px;
   z-index: 999;
   background: none;
-  border: 1px solid var(--text-color);
+  border: 1px solid currentColor;
   border-radius: 5px;
   padding: 5px 10px;
-  color: var(--text-color);
+  color: inherit;
   cursor: pointer;
 }
-/* Encadré visuel pour les sections */
+
+/* ✅ Encadré visuel pour les sections */
 .section-box {
   border: 2px solid #ccc;
   border-radius: 15px;
@@ -58,14 +59,15 @@ button.theme-toggle {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark mode pour l’encadré */
+/* ✅ Encadré en dark mode, texte forcé noir */
 body.dark-mode .section-box {
   background-color: #1f1f1f;
   border-color: #444;
+  color: #000000; /* force texte noir même en dark mode */
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
-/* 🌟 Photo profil */
+/* ✅ Photo profil en cercle */
 .profile-photo {
   width: 50px;
   height: 50px;
@@ -74,7 +76,7 @@ body.dark-mode .section-box {
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-/* 📱 Responsive : centrer sur petits écrans */
+/* 📱 Responsive : centrer photo sur petits écrans */
 @media (max-width: 600px) {
   .profile-photo {
     float: none;
@@ -82,4 +84,3 @@ body.dark-mode .section-box {
     margin: 0 auto 20px auto;
   }
 }
-
