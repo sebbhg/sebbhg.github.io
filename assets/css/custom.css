@@ -64,3 +64,23 @@ body.dark-mode .section-box {
   border-color: #444;
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
+
+/* 🌟 Photo profil */
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  float: right;
+  margin-left: 20px;
+}
+
+/* 📱 Responsive : centrer sur petits écrans */
+@media (max-width: 600px) {
+  .profile-photo {
+    float: none;
+    display: block;
+    margin: 0 auto 20px auto;
+  }
+}

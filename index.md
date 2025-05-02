@@ -6,7 +6,7 @@ nav_order: 1
 ---
 
 <!-- PHOTO EN HAUT À DROITE -->
-<div style="position: absolute; top: 80px; right: 20px;">
+<img src="/assets/images/sebastien.jpg" alt="Sébastien Haag" class="profile-photo" />
   <img src="/assets/images/sebastien.jpg" alt="Sébastien Haag" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.15);" />
 </div>
 
