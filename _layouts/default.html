@@ -28,15 +28,13 @@
       background-color: #1e1e1e;
     }
 
-    /* Position du bouton 🌗 */
+    /* 🌗 Style du bouton dans le nav */
     #theme-toggle {
-      position: absolute;
-      top: 10px;
-      right: 10px;
       background: none;
       border: none;
-      font-size: 1.5em;
+      font-size: 1.2em;
       cursor: pointer;
+      margin-left: 10px;
     }
   </style>
 </head>
@@ -53,12 +51,11 @@
             <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
           {% endif %}
         {% endfor %}
+        <!-- 🌗 Bouton dark mode dans le nav -->
+        <button id="theme-toggle">🌙</button>
       </nav>
     </div>
   </header>
-
-  <!-- 🌗 Bouton dark mode -->
-  <button id="theme-toggle">🌙</button>
 
   <!-- ✅ Contenu principal -->
   <main class="page-content">
