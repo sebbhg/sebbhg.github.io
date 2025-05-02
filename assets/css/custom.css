@@ -83,14 +83,16 @@ body.dark-mode .section-box {
   }
 }
 
-body {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  background-size: cover;
-  color: #ffffff;
+/* 🌞 Light Mode (par défaut) */
+.welcome-box {
+  background-color: #ffffff;
+  color: #000000;
 }
 
-.page-content, .wrapper {
-  background-color: rgba(0, 0, 0, 0.6); /* fond semi-transparent noir */
-  padding: 20px;
-  border-radius: 12px;
+/* 🌙 Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .welcome-box {
+    background-color: #ffffff;  /* garde le fond clair */
+    color: #000000;             /* force le texte en noir */
+  }
 }
