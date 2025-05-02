@@ -83,16 +83,3 @@ body.dark-mode .section-box {
   }
 }
 
-/* 🌞 Light Mode (par défaut) */
-.welcome-box {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-/* 🌙 Dark Mode */
-@media (prefers-color-scheme: dark) {
-  .welcome-box {
-    background-color: #ffffff;  /* garde le fond clair */
-    color: #000000;             /* force le texte en noir */
-  }
-}
