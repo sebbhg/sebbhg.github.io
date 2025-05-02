@@ -9,10 +9,51 @@
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
   <!-- CSS custom -->
   <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+  <style>
+    /* 🌟 Encadré élégant pour les rubriques */
+    .site-nav a {
+      padding: 8px 12px;
+      margin: 4px;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .site-nav a:hover {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    /* 🌙 Dark mode styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .site-nav a {
+      border-color: #555;
+    }
+
+    body.dark-mode .site-nav a:hover {
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* 🌗 Bouton toggle */
+    #theme-toggle {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  </style>
 </head>
 
 <body>
-  <!-- ✅ En-tête du site -->
+  <!-- ✅ En-tête -->
   <header class="site-header">
     <div class="wrapper">
       <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
@@ -23,8 +64,8 @@
             <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
           {% endif %}
         {% endfor %}
-        <!-- 🌙/☀️ bouton dark mode à droite -->
-        <button id="theme-toggle" style="background: none; border: none; font-size: 1.2em; cursor: pointer; margin-left: 10px;">🌙</button>
+        <!-- 🌗 Bouton toggle directement dans le menu -->
+        <button id="theme-toggle" title="Toggle theme">🌙</button>
       </nav>
     </div>
   </header>
@@ -32,9 +73,7 @@
   <!-- ✅ Contenu principal -->
   <main class="page-content">
     <div class="wrapper">
-      <div class="section-box">
-        {{ content }}
-      </div>
+      {{ content }}
     </div>
   </main>
 
