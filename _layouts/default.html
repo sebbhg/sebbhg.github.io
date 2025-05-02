@@ -14,7 +14,7 @@
 
   <body>
     <!-- 🌗 Bouton de bascule -->
-    <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+    <button id="theme-toggle" class="theme-toggle" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; position: absolute; top: 10px; right: 10px;">🌙</button>
 
     <!-- ✅ En-tête du site -->
     <header class="site-header">
@@ -30,22 +30,45 @@
         </nav>
       </div>
     </header>
-
+  
     <!-- ✅ Contenu de la page -->
     <main class="page-content">
       <div class="wrapper">
         {{ content }}
       </div>
     </main>
-
+        
     <!-- ✅ Pied de page -->
     <footer class="site-footer">
       <div class="wrapper">
-        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
+        <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</p> 
       </div>
     </footer>
-
+        
     <!-- 🔌 Script pour le thème -->
-    <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+    <script>
+      function toggleTheme() {
+        const body = document.body;
+        const button = document.getElementById('theme-toggle');
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+          button.textContent = '☀️';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          button.textContent = '🌙';
+          localStorage.setItem('theme', 'light');
+        }
+      }
+
+      window.onload = function() {
+        const body = document.body;
+        const button = document.getElementById('theme-toggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+          body.classList.add('dark-mode');
+          button.textContent = '☀️';
+        }
+      };
+    </script>
   </body>
 </html>
