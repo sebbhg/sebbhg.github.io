@@ -5,10 +5,6 @@ permalink: /
 nav_order: 1
 ---
 
-<!-- PHOTO EN HAUT À DROITE -->
-<img src="/assets/images/sebastien.jpg" alt="Sébastien Haag" class="profile-photo" />
-</div>
-
 <!-- TEXTE D'ACCUEIL -->
 <div style="max-width: 750px; margin: auto; padding-top: 40px;">
 
@@ -26,4 +22,8 @@ CFA Candidate • Derivatives • Portfolio Optimization • Risk Management
   <a href="/reading/">📚 Reading</a>
 </div>
 
+
+<!-- PHOTO EN DESSOUS, CENTRÉE -->
+<div style="text-align: center; margin-top: 20px;">
+  <img src="/assets/images/sebastien.jpg" alt="Sébastien Haag" class="profile-photo" />
 </div>
