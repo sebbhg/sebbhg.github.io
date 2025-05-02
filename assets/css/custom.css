@@ -48,7 +48,7 @@ button.theme-toggle {
   color: var(--text-color);
   cursor: pointer;
 }
-/* Encadrement joli pour les rubriques */
+/* Encadré visuel pour les sections */
 .section-box {
   border: 2px solid #ccc;
   border-radius: 15px;
@@ -58,7 +58,7 @@ button.theme-toggle {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* 🌙 Dark mode ajustement */
+/* Dark mode pour l’encadré */
 body.dark-mode .section-box {
   background-color: #1f1f1f;
   border-color: #444;

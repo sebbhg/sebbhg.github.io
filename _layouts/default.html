@@ -24,15 +24,17 @@
           {% endif %}
         {% endfor %}
         <!-- 🌙/☀️ bouton dark mode à droite -->
-        <button id="theme-toggle" style="background: none; border: none; font-size: 1.2em; cursor: pointer;">🌙</button>
+        <button id="theme-toggle" style="background: none; border: none; font-size: 1.2em; cursor: pointer; margin-left: 10px;">🌙</button>
       </nav>
     </div>
   </header>
 
   <!-- ✅ Contenu principal -->
   <main class="page-content">
-    <div class="wrapper section-box">
-      {{ content }}
+    <div class="wrapper">
+      <div class="section-box">
+        {{ content }}
+      </div>
     </div>
   </main>
 
@@ -46,8 +48,7 @@
   <!-- 🔌 Script dark mode -->
   <script>
     const toggleButton = document.getElementById('theme-toggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let theme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+    let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     document.body.classList.toggle('dark-mode', theme === 'dark');
     toggleButton.textContent = theme === 'dark' ? '☀️' : '🌙';
 
