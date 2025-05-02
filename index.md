@@ -6,7 +6,15 @@ nav_order: 1
 ---
 
 <!-- TEXTE D'ACCUEIL -->
-<div style="max-width: 750px; margin: auto; padding-top: 40px;">
+<div style="
+  max-width: 750px;
+  margin: auto;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+">
 
 <h2 style="text-align: center;">Sébastien Haag</h2>
 <p style="text-align: center; font-size: 1.2em;">
