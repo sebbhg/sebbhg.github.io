@@ -18,7 +18,7 @@ nav_order: 1
 
   <h2 style="text-align: center;">Sébastien Haag</h2>
   <p style="text-align: center; font-size: 1.2em;">
-    Quantitative Finance Engineer & Trader
+    Quantitative Finance & Trader Engineer
     <br/>
     CFA Candidate • Derivatives • Portfolio Optimization • Risk Management
   </p>
@@ -26,7 +26,7 @@ nav_order: 1
   <div style="text-align: center; margin-top: 25px;">
     <a href="/about/" style="margin-right: 15px;">📄 About</a>
     <a href="/courses/" style="margin-right: 15px;">📘 Courses</a>
-    <a href="/theses/" style="margin-right: 15px;">🎓 Theses</a>
+    <a href="/Projects/" style="margin-right: 15px;">🎓 Projects</a>
     <a href="/reading/">📚 Reading</a>
   </div>
 
