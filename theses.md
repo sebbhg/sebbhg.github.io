@@ -1,18 +1,18 @@
 ---
 layout: page
-title: Theses
-permalink: /theses/
+title: Projects
+permalink: /Projects/
 nav_order: 4
 ---
 
-## 🎓 Academic Theses in Quantitative Finance
+## 🎓 Academic Projects in Quantitative Finance
 
 Here is a selection of research works I have authored in financial risk, derivative modeling, and applied stochastic methods.
 
 ---
 
 ### 📉 Advanced Statistical and ML Techniques for Pricing and Risk Assessment of Derivative Portfolios  
-📅 April 2025 – Present @ Natixis Corporate & Investment Banking 📄[Download PDF](https://sebbhg.github.io/files/advanced_ml_derivatives.pdf) 
+📅 March 2025 – May 2025 📄[Download PDF](https://sebbhg.github.io/files/MLPGR.pdf) 
 - Gaussian Process Regression (GPR) for accelerating Value-at-Risk and Expected Shortfall calculations  
 - Combines Monte Carlo simulation with supervised learning  
 - Designed to meet regulatory frameworks (FRTB, Basel IV)  
