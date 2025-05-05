@@ -11,6 +11,16 @@ Here is a selection of research works I have authored in financial risk, derivat
 
 ---
 
+### 📉 Bayesian Quadrature for Efficient and Accurate CVA Computation
+📅 May 2025 📄[Download PDF](https://sebbhg.github.io/files/LBQAFCVAC2.pdf)
+- Applies Gaussian Process Regression (GPR) and Bayesian Quadrature (BQ) to accelerate counterparty credit risk calculations
+- Focuses on Credit Valuation Adjustment (CVA) under the LGM-1F model
+- Combines analytical methods, Monte Carlo simulations, and Bayesian techniques for efficient valuation
+- Targets interest rate derivatives like swaps, swaptions, and cancellable swaps
+- Designed to meet regulatory standards (Basel III, FRTB) with reduced computational load
+
+---
+
 ### 📉 Advanced Statistical and ML Techniques for Pricing and Risk Assessment of Derivative Portfolios  
 📅 March 2025 – May 2025 📄[Download PDF](https://sebbhg.github.io/files/MLPGR.pdf) 
 - Gaussian Process Regression (GPR) for accelerating Value-at-Risk and Expected Shortfall calculations  
