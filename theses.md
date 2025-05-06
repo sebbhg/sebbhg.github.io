@@ -12,7 +12,7 @@ Here is a selection of research works I have authored in financial risk, derivat
 ---
 
 ### 📈 Bayesian Quadrature for Efficient and Accurate CVA Computation
-📅 May 2025 📄[Download PDF](https://sebbhg.github.io/files/LBQAFCVAC2.pdf)
+📅 May 2025 📄[Download PDF](https://sebbhg.github.io/files/LBQAFCVAC3.pdf)
 - Applies Gaussian Process Regression (GPR) and Bayesian Quadrature (BQ) to accelerate counterparty credit risk calculations
 - Focuses on Credit Valuation Adjustment (CVA) under the LGM-1F model
 - Combines analytical methods, Monte Carlo simulations, and Bayesian techniques for efficient valuation
