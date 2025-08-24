@@ -44,7 +44,7 @@ My tools of choice:
 - [🔗 LinkedIn](https://www.linkedin.com/in/s%C3%A9bastien-haag/)
 
 <p>
-  <a href="https://sebbhg.github.io/files/CV2026.pdf" style="
+  <a href="https://sebbhg.github.io/files/CV25:26_VIE:CDI_Sebastien_COIC.pdf" style="
     display: inline-block;
     padding: 10px 20px;
     background-color: #007bff;
