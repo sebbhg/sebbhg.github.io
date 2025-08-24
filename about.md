@@ -7,7 +7,7 @@ nav_order: 2
 
 ## 🎯 Who I Am
 
-I’m **Sébastien Haag**, a passionate quantitative finance engineer and CFA candidate.  
+I’m **Sébastien Coïc**, a passionate quantitative finance engineer and CFA candidate.  
 I specialize in:
 
 - Financial derivatives modeling (Black-Scholes, Lévy processes)
@@ -40,7 +40,7 @@ My tools of choice:
 
 ## 📬 Contact
 
-- [📧 Email me](mailto:sbthaag@gmail.com)
+- [📧 Email me](mailto:sbtcoic@gmail.com)
 - [🔗 LinkedIn](https://www.linkedin.com/in/s%C3%A9bastien-haag/)
 
 <p>
