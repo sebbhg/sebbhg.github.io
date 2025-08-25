@@ -16,7 +16,7 @@ nav_order: 1
   border: 1px solid #ddd;
 ">
 
-  <h2 style="text-align: center;">Sébastien Coïc</h2>
+  <h2 style="text-align: center;">Sébastien HAAG</h2>
   <p style="text-align: center; font-size: 1.2em;">
     Quantitative Finance & Trader Engineer
     <br/>
