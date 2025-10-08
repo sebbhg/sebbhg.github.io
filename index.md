@@ -107,6 +107,32 @@ full_bleed: true
     line-height: 1.6;
   }
 
+  /* === Logo initials (à droite comme Goldman Sachs) === */
+  .hero-logo {
+    position: absolute;
+    right: 2vw;
+    bottom: 12vh;
+    font-size: clamp(4rem, 12vw, 14rem);
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.07);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    font-family: "Times New Roman", serif;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1;
+    animation: fadeInLogo 2s ease-out 1.5s forwards;
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  @keyframes fadeInLogo {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
   /* Fade-in animation */
   @keyframes fadeInUp {
     from {
@@ -147,6 +173,9 @@ full_bleed: true
       <a class="btn" href="{{ '/what-i-do' | relative_url }}">What I do</a>
     </div>
   </div>
+
+  <!-- Logo initials (SH) like Goldman Sachs -->
+  <div class="hero-logo">SH</div>
 </section>
 
 <!-- ===== Full-width secondary video with slogan ===== -->
