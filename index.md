@@ -33,32 +33,33 @@ full_bleed: true
   /* ===== Image logo (replaces text SH) ===== */
   .hero-logo-img{
     position:absolute;
-    right:-0.35em;              /* 🔥 bord très plaqué à droite, légèrement coupé */
-    top:36%;                    /* 🔥 plus haut (au lieu de 44%) */
+    right:-2.2vw;              /* 🔥 plus plaqué encore (presque bord coupé) */
+    top:36%;
     transform:translateY(-36%);
-    z-index:3;                  
-    width:min(17vw, 50vh);      /* taille équilibrée */
+    z-index:3;
+    width:min(17vw, 50vh);
     height:auto;
     opacity:0;
     animation:fadeInLogo 1.2s ease-out 1.0s forwards;
-    pointer-events:none; user-select:none;
+    pointer-events:none; 
+    user-select:none;
   }
 
   @keyframes fadeInLogo{
-    from{ opacity:0; transform:translateY(-36%) translateX(30px); }
+    from{ opacity:0; transform:translateY(-36%) translateX(40px); }
     to  { opacity:1; transform:translateY(-36%) translateX(0); }
   }
 
   @media (max-width:880px){
     .hero-logo-img{
-      right:-0.15em;
+      right:-1.2vw;  /* léger décalage sur mobile */
       top:42%;
       transform:translateY(-42%);
       width:min(24vw, 34vh);
     }
   }
 
-  /* ===== Secondary video (inchangé) ===== */
+  /* ===== Secondary video ===== */
   .promo-video{ position:relative; z-index:0; width:100%; margin:-1270px 0 0; }
   .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
   @supports not (aspect-ratio:16/9){ .promo-video-frame{padding-top:56.25%} .promo-video-el{position:absolute;left:0;top:0;width:100%;height:100%} }
@@ -94,11 +95,11 @@ full_bleed: true
     </div>
   </div>
 
-  <!-- Image logo (upload your file to /assets/images/sh-logo.png) -->
+  <!-- Image logo -->
   <img class="hero-logo-img" src="/assets/images/sh-logo.png" alt="SH monogram">
 </section>
 
-<!-- ===== Full-width secondary video (no overlay text) ===== -->
+<!-- ===== Full-width secondary video ===== -->
 <section class="promo-video">
   <div class="promo-video-frame">
     <video class="promo-video-el" autoplay muted loop playsinline preload="auto"
