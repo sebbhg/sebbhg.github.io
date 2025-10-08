@@ -11,7 +11,7 @@ full_bleed: true
   <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{{ '/assets/images/hero-poster.jpg' | relative_url }}">
     <source src="{{ '/assets/videos/trading-hero.mp4' | relative_url }}" type="video/mp4">
     <!-- Optionnel :
-    <source src="{{ '/assets/videos/trading-hero.webm' | relative_url }}" type="video/webm"> -->
+    <source src="{{ '/assets/videos/trading-hero.webm' | relative_url }}" type="video/webm"> --> 
   </video>
 
   <!-- Overlay sombre -->
