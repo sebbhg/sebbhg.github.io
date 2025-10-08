@@ -49,10 +49,55 @@
       cursor: pointer;
       margin-left: 10px;
     }
+
+    /* 🟢 Ticker container */
+    .tv-ticker-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: #0b1220;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    body:not(.dark-mode) .tv-ticker-wrap {
+      background: #ffffff;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
   </style>
 </head>
 
 <body>
+  <!-- ===== Top Market Ticker (TradingView) ===== -->
+  <div class="tv-ticker-wrap">
+    <div class="tradingview-widget-container" style="max-width: 1600px; margin: 0 auto;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+        "symbols": [
+          { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+          { "proName": "NASDAQ:NDX",       "title": "Nasdaq 100" },
+          { "proName": "DJ:DJI",           "title": "Dow Jones" },
+          { "proName": "EURONEXT:PX1",     "title": "CAC 40" },
+          { "proName": "XETR:DAX",         "title": "DAX" },
+          { "proName": "FOREXCOM:UKXGBP",  "title": "FTSE 100" },
+          { "proName": "EUREX:FESX1!",     "title": "Euro Stoxx 50 Fut" },
+          { "proName": "TVC:NI225",        "title": "Nikkei 225" },
+          { "proName": "TVC:VIX",          "title": "VIX" },
+          { "proName": "OANDA:XAUUSD",     "title": "Gold" },
+          { "proName": "TVC:UKOIL",        "title": "Brent" },
+          { "proName": "CRYPTO:BTCUSD",    "title": "BTC/USD" }
+        ],
+        "showSymbolLogo": true,
+        "isTransparent": true,
+        "displayMode": "adaptive",
+        "colorTheme": "dark",
+        "locale": "en"
+      }
+      </script>
+    </div>
+  </div>
+  <!-- ===== /Top Market Ticker ===== -->
+
   <!-- ✅ En-tête -->
   <header class="site-header">
     <div class="wrapper">
