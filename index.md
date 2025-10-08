@@ -161,8 +161,6 @@ full_bleed: true
 
     <!-- Text overlay -->
     <div class="promo-caption">
-      <h2>Markets. Models. Risk.</h2>
-      <p>From pricing to XVA, I build reliable tooling for trading desks.</p>
     </div>
   </div>
 </section>
