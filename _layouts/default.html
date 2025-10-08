@@ -11,65 +11,196 @@
   <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
   <style>
-    /* 🌟 Encadré élégant pour les rubriques */
-    .site-nav a {
-      padding: 8px 12px;
-      margin: 4px;
-      border: 2px solid #ccc;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: background-color 0.3s, color 0.3s;
+    /* =====================
+       THEME NOIR GLOBAL
+       ===================== */
+    :root{
+      --bg: #000;          /* fond global noir */
+      --bg-2: #0a0a0a;     /* noir très légerement différent pour les séparations */
+      --text: #e6e6e6;     /* texte principal */
+      --muted: #a8a8a8;    /* texte secondaire */
+      --border: #222;      /* bordures discrètes */
+      --accent: #2c8cff;   /* bleu discret pour hover/actif */
+      --card: #0d0d0d;     /* blocs */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --sidebar-w: 250px;  /* largeur sidebar desktop */
+      --ticker-h: 44px;    /* hauteur approx. du ticker (pour le décalage) */
     }
 
-    .site-nav a:hover {
-      background-color: #f0f0f0;
-      color: #333;
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      line-height: 1.55;
     }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-    /* 🌙 Dark mode styles */
-    body.dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-
-    body.dark-mode .site-nav a {
-      border-color: #555;
-    }
-
-    body.dark-mode .site-nav a:hover {
-      background-color: #333;
-      color: #fff;
-    }
-
-    /* 🌗 Bouton toggle */
-    #theme-toggle {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      margin-left: 10px;
-    }
-
-    /* 🟢 Ticker container */
-    .tv-ticker-wrap {
+    /* ============ TICKER TOP ============ */
+    .tv-ticker-wrap{
       position: sticky;
       top: 0;
       z-index: 9999;
-      background: #0b1220;
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      height: var(--ticker-h);
+      background: #000; /* reste noir */
+      border-bottom: 1px solid var(--border);
+    }
+    .tradingview-widget-container{ max-width: 1600px; margin: 0 auto; }
+
+    /* ============ LAYOUT PRINCIPAL ============ */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: calc(100vh - var(--ticker-h));
     }
 
-    body:not(.dark-mode) .tv-ticker-wrap {
-      background: #ffffff;
-      border-bottom: 1px solid rgba(0,0,0,.08);
+    /* ============ SIDEBAR ============ */
+    .sidebar {
+      position: sticky;
+      top: var(--ticker-h);
+      align-self: start;
+      height: calc(100vh - var(--ticker-h));
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      padding: 18px 14px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .brand .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(44,140,255,.6);
+    }
+    .brand .title {
+      font-weight: 700; letter-spacing: .4px;
+    }
+    .brand small { color: var(--muted); display: block; font-weight: 500; }
+
+    .nav {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .nav a {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      background: var(--bg);
+      transition: border-color .2s, background-color .2s, transform .06s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 500;
+    }
+    .nav a:hover {
+      border-color: var(--accent);
+      background: #0b0b0b;
+    }
+    .nav a.active {
+      border-color: var(--accent);
+      background: #0f0f0f;
+      box-shadow: inset 0 0 0 1px rgba(44,140,255,.25);
+    }
+    .nav small {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      font-size: .72rem;
+      margin: 10px 2px 4px;
+    }
+
+    .sidebar-footer{
+      margin-top: auto;
+      padding: 8px 2px 2px;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* ============ HEADER (optionnel si tu veux un header au-dessus du contenu) ============ */
+    .site-header {
+      display: none; /* on masque l'ancien header top puisqu'on a la sidebar */
+    }
+
+    /* ============ CONTENU ============ */
+    .content {
+      min-width: 0;
+      padding: 28px 24px 40px;
+    }
+    .wrapper { max-width: 1100px; margin: 0 auto; }
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    /* ============ FOOTER ============ */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--muted);
+      padding: 16px 24px;
+    }
+
+    /* ============ MOBILE ============ */
+    .mobile-bar{
+      display: none;
+      position: sticky;
+      top: var(--ticker-h);
+      z-index: 999;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 14px;
+    }
+    .burger{
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 960px){
+      .layout { grid-template-columns: 0 1fr; }
+      .sidebar {
+        position: fixed;
+        left: 0; top: var(--ticker-h);
+        width: min(88vw, 320px);
+        height: calc(100vh - var(--ticker-h));
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+        background: var(--bg);
+        box-shadow: 18px 0 40px rgba(0,0,0,.4);
+      }
+      .sidebar.open { transform: translateX(0); }
+      .mobile-bar{ display: flex; justify-content: space-between; align-items: center; }
+      .content { padding: 18px 16px 32px; }
+      .wrapper { max-width: 100%; }
     }
   </style>
 </head>
 
 <body>
-  <!-- ===== Top Market Ticker (TradingView) ===== -->
+  <!-- ===== TICKER TRADINGVIEW EN HAUT ===== -->
   <div class="tv-ticker-wrap">
-    <div class="tradingview-widget-container" style="max-width: 1600px; margin: 0 auto;">
+    <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
       {
@@ -85,7 +216,7 @@
           { "proName": "TVC:VIX",          "title": "VIX" },
           { "proName": "OANDA:XAUUSD",     "title": "Gold" },
           { "proName": "TVC:UKOIL",        "title": "Brent" },
-          { "proName": "CRYPTO:BTCUSD",    "title": "BTC/USD" }
+          { "proName": "CRYPTO:BTCUSD",    "title": "BTC" }
         ],
         "showSymbolLogo": true,
         "isTransparent": true,
@@ -96,51 +227,79 @@
       </script>
     </div>
   </div>
-  <!-- ===== /Top Market Ticker ===== -->
+  <!-- ===== /TICKER ===== -->
 
-  <!-- ✅ En-tête -->
-  <header class="site-header">
-    <div class="wrapper">
-      <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-      <nav class="site-nav">
+  <!-- Barre mobile (bouton pour ouvrir la sidebar) -->
+  <div class="mobile-bar">
+    <button class="burger" id="openSidebar">☰ Menu</button>
+    <div style="font-weight:700;">{{ site.title }}</div>
+  </div>
+
+  <div class="layout">
+    <!-- ===== SIDEBAR GAUCHE ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="dot"></div>
+        <div>
+          <div class="title">{{ site.title }}</div>
+          <small>Quant Finance & Trading</small>
+        </div>
+      </div>
+
+      <div class="nav">
+        <small>Navigation</small>
         {% assign sorted_pages = site.pages | sort: "nav_order" %}
-        {% for page in sorted_pages %}
-          {% if page.title and page.nav != false %}
-            <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
+        {% for p in sorted_pages %}
+          {% if p.title and p.nav != false %}
+            <a href="{{ p.url | relative_url }}" class="{% if page.url == p.url %}active{% endif %}">
+              <span>{{ p.title }}</span>
+              {% if page.url == p.url %}<span>●</span>{% endif %}
+            </a>
           {% endif %}
         {% endfor %}
-        <!-- 🌗 Bouton toggle directement dans le menu -->
-        <button id="theme-toggle" title="Toggle theme">🌙</button>
-      </nav>
-    </div>
-  </header>
+      </div>
 
-  <!-- ✅ Contenu principal -->
-  <main class="page-content">
-    <div class="wrapper">
-      {{ content }}
-    </div>
-  </main>
+      <div class="sidebar-footer">
+        &copy; {{ site.time | date: '%Y' }} {{ site.author.name }}
+      </div>
+    </aside>
 
-  <!-- ✅ Pied de page -->
+    <!-- ===== CONTENU ===== -->
+    <main class="content">
+      <div class="wrapper">
+        <div class="content-card">
+          {{ content }}
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer bas (optionnel, on garde pour cohérence) -->
   <footer class="site-footer">
     <div class="wrapper">
       <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
     </div>
   </footer>
 
-  <!-- 🔌 Script dark mode -->
+  <!-- JS : ouverture/fermeture sidebar mobile -->
   <script>
-    const toggleButton = document.getElementById('theme-toggle');
-    let theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.body.classList.toggle('dark-mode', theme === 'dark');
-    toggleButton.textContent = theme === 'dark' ? '☀️' : '🌙';
+    const sidebar = document.getElementById('sidebar');
+    const openBtn  = document.getElementById('openSidebar');
 
-    toggleButton.addEventListener('click', () => {
-      theme = (theme === 'dark') ? 'light' : 'dark';
-      document.body.classList.toggle('dark-mode', theme === 'dark');
-      toggleButton.textContent = theme === 'dark' ? '☀️' : '🌙';
-      localStorage.setItem('theme', theme);
+    function closeOnOutsideClick(e){
+      if (!sidebar.contains(e.target) && !openBtn.contains(e.target)){
+        sidebar.classList.remove('open');
+        document.removeEventListener('click', closeOnOutsideClick);
+      }
+    }
+
+    openBtn && openBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      if (sidebar.classList.contains('open')){
+        setTimeout(() => document.addEventListener('click', closeOnOutsideClick), 0);
+      } else {
+        document.removeEventListener('click', closeOnOutsideClick);
+      }
     });
   </script>
 </body>
