@@ -35,10 +35,8 @@ full_bleed: true
   <!-- Texte de présentation -->
   <div class="hero-content">
     <p class="eyebrow">Quantitative Finance & Trading</p>
-    <h1>Sébastien HAAG</h1>
+    <h1>Official Website of Sébastien HAAG</h1>
     <p class="subtitle">
-      Building robust pricing, risk & XVA tooling — <strong>CFA Level I holder</strong>.<br/>
-      IRS / XCCY / Swaptions · EE/EEE · CVA/XVA · LGM-1F · GPR & Bayesian Quadrature
     </p>
 
     <div class="hero-actions">
