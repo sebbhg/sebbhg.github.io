@@ -79,34 +79,6 @@ full_bleed: true
     pointer-events: none;
   }
 
-  /* Slogan styling */
-  .promo-caption {
-    position: absolute;
-    left: clamp(16px, 4vw, 48px);
-    bottom: clamp(14px, 4vw, 60px);
-    max-width: min(80ch, 60vw);
-    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1.4s ease-out 2s forwards;
-  }
-
-  .promo-caption h2 {
-    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-    font-weight: 800;
-    color: #ffffff;
-    margin: 0 0 0.5rem;
-    letter-spacing: 0.02em;
-  }
-
-  .promo-caption p {
-    font-size: clamp(1rem, 1.15vw, 1.25rem);
-    color: #cfd2d8;
-    margin: 0;
-    opacity: 0.95;
-    line-height: 1.6;
-  }
-
   /* === Logo initials (à droite comme Goldman Sachs) === */
   .hero-logo {
     position: absolute;
@@ -178,7 +150,7 @@ full_bleed: true
   <div class="hero-logo">SH</div>
 </section>
 
-<!-- ===== Full-width secondary video with slogan ===== -->
+<!-- ===== Full-width secondary video (no text overlay) ===== -->
 <section class="promo-video">
   <div class="promo-video-frame">
     <video class="promo-video-el" autoplay muted loop playsinline preload="auto"
@@ -187,9 +159,5 @@ full_bleed: true
     </video>
 
     <div class="promo-scrim"></div>
-
-    <!-- Text overlay -->
-    <div class="promo-caption">
-    </div>
   </div>
 </section>
