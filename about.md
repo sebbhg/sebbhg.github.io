@@ -1,7 +1,7 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: What I do
+permalink: /what-i-do/
 nav_order: 2
 ---
 
