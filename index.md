@@ -29,6 +29,12 @@ full_bleed: true
     animation: fadeInUp 1.4s ease-out 1.3s forwards;
   }
 
+  /* === HERO VIDEO SECTION === */
+  .hero-video {
+    position: relative; /* ✅ necessary for logo positioning */
+    overflow: hidden;
+  }
+
   /* === Secondary video styling (adjusted position) === */
   .promo-video {
     width: 100%;
@@ -92,7 +98,7 @@ full_bleed: true
     font-family: "Times New Roman", serif;
     user-select: none;
     pointer-events: none;
-    z-index: 1;
+    z-index: 2; /* ✅ ensure it's above the overlay */
     animation: fadeInLogo 2s ease-out 1.5s forwards;
     opacity: 0;
     transform: translateX(40px);
