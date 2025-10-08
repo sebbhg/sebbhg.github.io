@@ -15,7 +15,7 @@ full_bleed: true
   /* === Secondary video styling (adjusted position) === */
   .promo-video {
     width: 100%;
-    margin: -1170px 0 0; /* ⬅️ Adjust vertical position */
+    margin: -1270px 0 0; /* ⬅️ Adjust vertical position */
   }
 
   .promo-video-frame {
