@@ -7,107 +7,91 @@ full_bleed: true
 ---
 
 <style>
-  /* Fade-in general animation */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
+  /* Fade-in */
+  @keyframes fadeInUp { from{opacity:0;transform:translateY(25px)} to{opacity:1;transform:translateY(0)} }
+
+  /* Move down + fade-in */
+  .eyebrow.shifted{
+    margin-top:40px; opacity:0; transform:translateY(10px);
+    animation:fadeInUp 1.4s ease-out .3s forwards;
+  }
+  .hero-content h1{
+    opacity:0; transform:translateY(20px);
+    animation:fadeInUp 1.4s ease-out .8s forwards;
+  }
+  .hero-content .subtitle{
+    opacity:0; transform:translateY(20px);
+    animation:fadeInUp 1.4s ease-out 1.3s forwards;
   }
 
-  /* Move down the "Quantitative Finance & Trading" line + fade-in */
-  .eyebrow.shifted {
-    margin-top: 40px;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeInUp 1.4s ease-out 0.3s forwards;
+  /* HERO stacking so logo stays on top */
+  .hero-video{position:relative; z-index:2; overflow:hidden;}
+  .hero-overlay{position:absolute; inset:0; z-index:1;}
+  .hero-content{position:relative; z-index:2;}
+
+  /* Secondary video below hero */
+  .promo-video{
+    position:relative; z-index:0;
+    width:100%; margin:-1270px 0 0; /* (ta valeur) */
+  }
+  .promo-video-frame{
+    position:relative; width:100%; aspect-ratio:16/9; overflow:hidden;
+    background:#000; border-top:1px solid #222; border-bottom:1px solid #222;
+  }
+  @supports not (aspect-ratio:16/9){
+    .promo-video-frame{padding-top:56.25%}
+    .promo-video-el{position:absolute;left:0;top:0;width:100%;height:100%}
+  }
+  .promo-video-el{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05);
+  }
+  .promo-scrim{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.7) 100%);
+    pointer-events:none;
   }
 
-  /* Main title fade-in */
-  .hero-content h1 {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1.4s ease-out 0.8s forwards;
+  /* ===== MONOGRAMME "SH" façon Goldman ===== */
+  .hero-logo{
+    position:absolute;
+    right:2.2vw;
+    top:44%;                 /* ← remonte le logo (45–48% selon goût) */
+    transform:translateY(-44%);
+    text-align:center;
+    z-index:3;               /* au-dessus de tout le hero */
+    opacity:0;
+    animation:fadeInLogo 1.6s ease-out 1.2s forwards;
+    user-select:none; pointer-events:none;
+    font-family:"Times New Roman", Georgia, serif;
+    line-height:.78;         /* serrer l’empilement */
+  }
+  .hero-logo span{
+    display:block;
+    font-weight:700;
+    font-size:clamp(6rem, 13vw, 15rem);   /* responsive */
+    color:rgba(255,255,255,.10);          /* remplissage doux */
+    -webkit-text-stroke:1.5px rgba(255,255,255,.25); /* fin liseré clair */
+    letter-spacing:-.04em;
+  }
+  /* Chevauchement subtil pour un monogramme stylé */
+  .hero-logo .s{
+    transform:translateX(6%);             /* décale légèrement le S */
+    margin-bottom:-.22em;                 /* chevauche le H */
+  }
+  .hero-logo .h{
+    transform:translateX(-4%);            /* léger décalage inverse */
   }
 
-  /* Subtitle fade-in */
-  .hero-content .subtitle {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1.4s ease-out 1.3s forwards;
+  @keyframes fadeInLogo{
+    from{opacity:0; transform:translateY(-44%) translateX(40px)}
+    to  {opacity:1; transform:translateY(-44%) translateX(0)}
   }
 
-  /* === HERO VIDEO SECTION === */
-  .hero-video {
-    position: relative;
-    z-index: 2;
-    overflow: hidden;
-  }
-
-  .hero-overlay { position: absolute; inset: 0; z-index: 1; }
-  .hero-content { position: relative; z-index: 2; }
-
-  /* === Secondary video styling (below hero) === */
-  .promo-video {
-    position: relative;
-    z-index: 0;
-    width: 100%;
-    margin: -1270px 0 0; /* adjust as before */
-  }
-
-  .promo-video-frame {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-    background: #000;
-    border-top: 1px solid #222;
-    border-bottom: 1px solid #222;
-  }
-
-  .promo-video-el {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(.8) contrast(1.05) saturate(1.05);
-  }
-
-  .promo-scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 65%, rgba(0,0,0,.7) 100%);
-    pointer-events: none;
-  }
-
-  /* === LOGO INITIALS (vertical style like Goldman Sachs) === */
-  .hero-logo {
-    position: absolute;
-    right: 2.5vw;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align: center;
-    line-height: 0.8;
-    z-index: 3;
-    font-family: 'Times New Roman', serif;
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 700;
-    opacity: 0;
-    animation: fadeInLogo 2s ease-out 1.5s forwards;
-  }
-
-  .hero-logo span {
-    display: block;
-    font-size: clamp(6rem, 13vw, 15rem);
-    letter-spacing: -0.05em;
-  }
-
-  .hero-logo .s { margin-bottom: 0.1em; }
-
-  @keyframes fadeInLogo {
-    to {
-      opacity: 1;
-      transform: translateY(-50%);
-    }
+  /* Ajustements mobile */
+  @media (max-width: 880px){
+    .hero-logo{ right:3vw; top:46%; transform:translateY(-46%); }
+    .hero-logo span{ font-size:clamp(4.5rem, 18vw, 10rem); -webkit-text-stroke:1.2px rgba(255,255,255,.22); }
   }
 </style>
 
@@ -138,7 +122,7 @@ full_bleed: true
     </div>
   </div>
 
-  <!-- Vertical SH logo -->
+  <!-- Monogramme vertical stylé -->
   <div class="hero-logo">
     <span class="s">S</span>
     <span class="h">H</span>
