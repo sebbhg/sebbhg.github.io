@@ -111,7 +111,7 @@ full_bleed: true
   <!-- Main title and content -->
   <div class="hero-content">
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
-    <h1>Official Website of Sébastien HAAG</h1>
+    <h1>Turning Models into Market Impact</h1>
 
     <p class="subtitle">
       Quantitative Finance Engineer — <strong>CFA Level I Holder</strong>.<br/>
@@ -139,8 +139,6 @@ full_bleed: true
 
     <!-- Text overlay -->
     <div class="promo-caption">
-      <h2>Turning Models into Market Impact</h2>
-      <p>From pricing to XVA, I build reliable and scalable quantitative tools for modern trading desks.</p>
     </div>
   </div>
 </section>
