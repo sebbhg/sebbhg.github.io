@@ -19,7 +19,7 @@ full_bleed: true
   .hero-content h1{
     opacity:0; transform:translateY(20px);
     animation:fadeInUp 1.4s ease-out .8s forwards;
-  }
+  } 
   .hero-content .subtitle{
     opacity:0; transform:translateY(20px);
     animation:fadeInUp 1.4s ease-out 1.3s forwards;
