@@ -15,7 +15,7 @@ full_bleed: true
   /* === Secondary video styling (adjusted position) === */
   .promo-video {
     width: 100%;
-    margin: -200px 0 0; /* ⬅️ Adjust vertical position */
+    margin: -990px 0 0; /* ⬅️ Adjust vertical position */
   }
 
   .promo-video-frame {
@@ -115,7 +115,6 @@ full_bleed: true
 
     <p class="subtitle">
       Quantitative Finance Engineer — <strong>CFA Level I Holder</strong>.<br/>
-      Specialized in Pricing, Risk & XVA Modeling: IRS / XCCY / Swaptions · EE/EEE · CVA/XVA · LGM-1F · GPR & Bayesian Quadrature.
     </p>
 
     <div class="hero-actions">
