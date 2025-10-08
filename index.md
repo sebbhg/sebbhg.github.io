@@ -33,8 +33,8 @@ full_bleed: true
   /* ===== Image logo (replaces text SH) ===== */
   .hero-logo-img{
     position:absolute;
-    right:-3.8vw;              /* 🔥 plus plaqué encore (presque bord coupé) */
-    top:36%;
+    right:-4.0vw;              /* 🔥 plus plaqué encore (presque bord coupé) */
+    top:40%%;
     transform:translateY(-36%);
     z-index:3;
     width:min(17vw, 50vh);
