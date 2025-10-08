@@ -24,74 +24,49 @@ full_bleed: true
     animation:fadeInUp 1.4s ease-out 1.3s forwards;
   }
 
-  /* HERO stacking so logo stays on top */
+  /* HERO layer order so logo stays on top */
   .hero-video{position:relative; z-index:2; overflow:hidden;}
   .hero-overlay{position:absolute; inset:0; z-index:1;}
   .hero-content{position:relative; z-index:2;}
 
-  /* Secondary video below hero */
-  .promo-video{
-    position:relative; z-index:0;
-    width:100%; margin:-1270px 0 0; /* (ta valeur) */
-  }
-  .promo-video-frame{
-    position:relative; width:100%; aspect-ratio:16/9; overflow:hidden;
-    background:#000; border-top:1px solid #222; border-bottom:1px solid #222;
-  }
-  @supports not (aspect-ratio:16/9){
-    .promo-video-frame{padding-top:56.25%}
-    .promo-video-el{position:absolute;left:0;top:0;width:100%;height:100%}
-  }
-  .promo-video-el{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05);
-  }
-  .promo-scrim{
-    position:absolute; inset:0;
-    background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.7) 100%);
-    pointer-events:none;
-  }
+  /* 2nd video stays below */
+  .promo-video{position:relative; z-index:0; width:100%; margin:-1270px 0 0;}
+  .promo-video-frame{position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222;}
+  @supports not (aspect-ratio:16/9){ .promo-video-frame{padding-top:56.25%} .promo-video-el{position:absolute;left:0;top:0;width:100%;height:100%} }
+  .promo-video-el{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05);}
+  .promo-scrim{position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.7) 100%); pointer-events:none;}
 
-  /* ===== MONOGRAMME "SH" façon Goldman ===== */
+  /* ===== MONOGRAM "S / H" — solid white like Goldman ===== */
   .hero-logo{
     position:absolute;
-    right:2.2vw;
-    top:44%;                 /* ← remonte le logo (45–48% selon goût) */
-    transform:translateY(-44%);
+    right:-0.1em;                 /* bord droit très proche / légèrement coupé */
+    top:42%;                      /* remonte un peu */
+    transform:translateY(-42%);
     text-align:center;
-    z-index:3;               /* au-dessus de tout le hero */
-    opacity:0;
-    animation:fadeInLogo 1.6s ease-out 1.2s forwards;
+    line-height:.74;              /* interlignage serré pour toucher visuellement */
+    z-index:3;                    /* au-dessus du contenu et de l’overlay */
     user-select:none; pointer-events:none;
-    font-family:"Times New Roman", Georgia, serif;
-    line-height:.78;         /* serrer l’empilement */
+    opacity:0; animation:fadeInLogo 1.2s ease-out 1.0s forwards;
+    font-family: "Times New Roman", Georgia, serif; /* serif classique type GS */
   }
   .hero-logo span{
     display:block;
-    font-weight:700;
-    font-size:clamp(6rem, 13vw, 15rem);   /* responsive */
-    color:rgba(255,255,255,.10);          /* remplissage doux */
-    -webkit-text-stroke:1.5px rgba(255,255,255,.25); /* fin liseré clair */
-    letter-spacing:-.04em;
+    font-weight:800;
+    /* très grand : borné par la largeur ET la hauteur viewport */
+    font-size: min(16vw, 48vh);
+    color:#fff;                   /* plein blanc, sans contour */
+    letter-spacing:-.02em;
   }
-  /* Chevauchement subtil pour un monogramme stylé */
-  .hero-logo .s{
-    transform:translateX(6%);             /* décale légèrement le S */
-    margin-bottom:-.22em;                 /* chevauche le H */
-  }
-  .hero-logo .h{
-    transform:translateX(-4%);            /* léger décalage inverse */
-  }
+  /* micro-ajustements d’optique pour un vrai monogramme */
+  .hero-logo .s{ margin-bottom:-.18em; transform:translateX(0.02em); }
+  .hero-logo .h{ transform:translateX(-0.01em); }
 
-  @keyframes fadeInLogo{
-    from{opacity:0; transform:translateY(-44%) translateX(40px)}
-    to  {opacity:1; transform:translateY(-44%) translateX(0)}
-  }
+  @keyframes fadeInLogo{ from{opacity:0; transform:translateY(-42%) translateX(30px)} to{opacity:1; transform:translateY(-42%) translateX(0)} }
 
-  /* Ajustements mobile */
+  /* version mobile : plus petit et un peu plus centré verticalement */
   @media (max-width: 880px){
-    .hero-logo{ right:3vw; top:46%; transform:translateY(-46%); }
-    .hero-logo span{ font-size:clamp(4.5rem, 18vw, 10rem); -webkit-text-stroke:1.2px rgba(255,255,255,.22); }
+    .hero-logo{ right:-0.08em; top:46%; transform:translateY(-46%); }
+    .hero-logo span{ font-size:min(22vw, 32vh); }
   }
 </style>
 
@@ -122,7 +97,7 @@ full_bleed: true
     </div>
   </div>
 
-  <!-- Monogramme vertical stylé -->
+  <!-- Monogramme vertical “S / H” au bord droit -->
   <div class="hero-logo">
     <span class="s">S</span>
     <span class="h">H</span>
