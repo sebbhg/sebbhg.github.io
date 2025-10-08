@@ -8,67 +8,60 @@ full_bleed: true
 
 <style>
   /* Fade-in global */
-  @keyframes fadeInUp { from { opacity: 0; transform: translateY(25px);} to { opacity: 1; transform: translateY(0);} }
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(25px);} to { opacity:1; transform:translateY(0);} }
 
   /* Eyebrow + titles fade-in */
-  .eyebrow.shifted {
-    margin-top: 40px;
-    opacity: 0; transform: translateY(10px);
-    animation: fadeInUp 1.4s ease-out .3s forwards;
+  .eyebrow.shifted{
+    margin-top:40px;
+    opacity:0; transform:translateY(10px);
+    animation:fadeInUp 1.4s ease-out .3s forwards;
   }
-  .hero-content h1 {
-    opacity: 0; transform: translateY(20px);
-    animation: fadeInUp 1.4s ease-out .8s forwards;
+  .hero-content h1{
+    opacity:0; transform:translateY(20px);
+    animation:fadeInUp 1.4s ease-out .8s forwards;
   }
-  .hero-content .subtitle {
-    opacity: 0; transform: translateY(20px);
-    animation: fadeInUp 1.4s ease-out 1.3s forwards;
+  .hero-content .subtitle{
+    opacity:0; transform:translateY(20px);
+    animation:fadeInUp 1.4s ease-out 1.3s forwards;
   }
 
-  /* HERO layers so logo sits above */
-  .hero-video { position: relative; z-index: 2; overflow: hidden; }
-  .hero-overlay { position: absolute; inset: 0; z-index: 1; }
-  .hero-content { position: relative; z-index: 2; }
+  /* HERO layers so the logo sits above */
+  .hero-video{ position:relative; z-index:2; overflow:hidden; }
+  .hero-overlay{ position:absolute; inset:0; z-index:1; }
+  .hero-content{ position:relative; z-index:2; }
 
-  /* Secondary video below hero (unchanged) */
-  .promo-video { position: relative; z-index: 0; width: 100%; margin: -1270px 0 0; }
-  .promo-video-frame { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000; border-top: 1px solid #222; border-bottom: 1px solid #222; }
-  @supports not (aspect-ratio: 16 / 9) { .promo-video-frame{padding-top:56.25%} .promo-video-el{position:absolute;left:0;top:0;width:100%;height:100%} }
-  .promo-video-el { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.8) contrast(1.05) saturate(1.05); }
-  .promo-scrim { position: absolute; inset: 0; background: linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.7) 100%); pointer-events: none; }
-
-  /* ===== Monogram “S / H” — EXACT Goldman style (solid white, serif, cropped right) ===== */
-  .hero-logo{
-    position: absolute;
-    right: -0.12em;          /* bord droit légèrement coupé, comme GS */
-    top: 44%;                /* remonte un peu */
-    transform: translateY(-44%);
-    text-align: center;
-    line-height: .68;        /* interlignage serré, lettres qui se touchent */
-    z-index: 3;
-    user-select: none; pointer-events: none;
-    opacity: 0; animation: fadeInLogo 1.2s ease-out 1.0s forwards;
-    font-family: "Times New Roman", Times, Georgia, serif;  /* serif système, proche GS */
-    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  /* ===== Image logo (replaces text SH) ===== */
+  .hero-logo-img{
+    position:absolute;
+    right:-0.12em;              /* bord droit très proche/coupé, style GS */
+    top:44%;
+    transform:translateY(-44%);
+    z-index:3;                  /* au-dessus de l’overlay et du texte */
+    width:min(16vw, 48vh);      /* taille responsive comme les lettres */
+    height:auto;
+    opacity:0;
+    animation:fadeInLogo 1.2s ease-out 1.0s forwards;
+    pointer-events:none; user-select:none;
+    filter:drop-shadow(0 0 0 transparent); /* propre, pas d’ombre */
   }
-  .hero-logo span{
-    display: block;
-    font-weight: 800;
-    font-size: min(16vw, 48vh);   /* taille massive, même valeur pour S et H */
-    color: #ffffff;               /* PLEIN BLANC */
-    letter-spacing: -0.02em;
+  @keyframes fadeInLogo{
+    from{ opacity:0; transform:translateY(-44%) translateX(30px); }
+    to  { opacity:1; transform:translateY(-44%) translateX(0); }
   }
-  /* Micro-chevauchement pour l’effet monogramme sans fausser la taille */
-  .hero-logo .s{ margin-bottom: -.20em; } /* rapproche S et H, pas de scale */
-  .hero-logo .h{ }
-
-  @keyframes fadeInLogo { from{opacity:0; transform:translateY(-44%) translateX(30px)} to{opacity:1; transform:translateY(-44%) translateX(0)} }
-
-  /* Mobile: plus petit et un peu recentré verticalement */
-  @media (max-width: 880px){
-    .hero-logo{ right: -0.08em; top: 46%; transform: translateY(-46%); }
-    .hero-logo span{ font-size: min(22vw, 34vh); }
+  @media (max-width:880px){
+    .hero-logo-img{
+      right:-0.08em;
+      top:46%; transform:translateY(-46%);
+      width:min(22vw, 34vh);
+    }
   }
+
+  /* ===== Secondary video (inchangé) ===== */
+  .promo-video{ position:relative; z-index:0; width:100%; margin:-1270px 0 0; }
+  .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
+  @supports not (aspect-ratio:16/9){ .promo-video-frame{padding-top:56.25%} .promo-video-el{position:absolute;left:0;top:0;width:100%;height:100%} }
+  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
+  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.7) 100%); pointer-events:none; }
 </style>
 
 <section class="hero-video">
@@ -99,11 +92,8 @@ full_bleed: true
     </div>
   </div>
 
-  <!-- Monogram vertical “S / H” -->
-  <div class="hero-logo">
-    <span class="s">S</span>
-    <span class="h">H</span>
-  </div>
+  <!-- Image logo (upload your file to /assets/images/sh-logo.png) -->
+  <img class="hero-logo-img" src="/assets/images/sh-logo.png" alt="SH monogram">
 </section>
 
 <!-- ===== Full-width secondary video (no overlay text) ===== -->
