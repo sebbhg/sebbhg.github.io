@@ -29,16 +29,17 @@ full_bleed: true
     animation: fadeInUp 1.4s ease-out 1.3s forwards;
   }
 
-  /* === HERO VIDEO SECTION === */
-  .hero-video {
-    position: relative; /* ✅ necessary for logo positioning */
-    overflow: hidden;
-  }
+  /* === HERO VIDEO SECTION (ensure logo is on top of everything here) === */
+  .hero-video { position: relative; z-index: 2; overflow: hidden; }
+  .hero-overlay { position:absolute; inset:0; z-index: 1; }
+  .hero-content { position: relative; z-index: 2; }
 
   /* === Secondary video styling (adjusted position) === */
   .promo-video {
+    position: relative;   /* needed for stacking with z-index */
+    z-index: 0;           /* keep this BELOW the hero section */
     width: 100%;
-    margin: -1270px 0 0; /* Adjust vertical position */
+    margin: -1270px 0 0;  /* Adjust vertical position (your value) */
   }
 
   .promo-video-frame {
@@ -52,75 +53,48 @@ full_bleed: true
   }
 
   @supports not (aspect-ratio: 16 / 9) {
-    .promo-video-frame {
-      padding-top: 56.25%;
-    }
-    .promo-video-el {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-    }
+    .promo-video-frame { padding-top: 56.25%; }
+    .promo-video-el { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
   }
 
   .promo-video-el {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(.8) contrast(1.05) saturate(1.05);
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; filter: brightness(.8) contrast(1.05) saturate(1.05);
   }
 
   .promo-scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, .35) 0%,
-      rgba(0, 0, 0, .55) 65%,
-      rgba(0, 0, 0, .7) 100%
-    );
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 65%, rgba(0,0,0,.7) 100%);
     pointer-events: none;
   }
 
   /* === Logo initials (à droite comme Goldman Sachs) === */
   .hero-logo {
     position: absolute;
-    right: 2vw;
-    bottom: 12vh;
+    right: 3vw;
+    bottom: 16vh;
     font-size: clamp(4rem, 12vw, 14rem);
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.07);
+    color: rgba(255,255,255,0.12); /* un peu plus visible */
     line-height: 0.8;
     letter-spacing: -0.05em;
     font-family: "Times New Roman", serif;
     user-select: none;
     pointer-events: none;
-    z-index: 2; /* ✅ ensure it's above the overlay */
-    animation: fadeInLogo 2s ease-out 1.5s forwards;
+    z-index: 3; /* above overlay + content */
     opacity: 0;
     transform: translateX(40px);
+    animation: fadeInLogo 2s ease-out 1.5s forwards;
   }
 
   @keyframes fadeInLogo {
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    to { opacity: 1; transform: translateX(0); }
   }
 
   /* Fade-in animation */
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(25px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 </style>
 
@@ -163,7 +137,6 @@ full_bleed: true
            poster="/assets/images/trading-broll-poster.jpg">
       <source src="/assets/videos/trading-broll.mp4" type="video/mp4">
     </video>
-
     <div class="promo-scrim"></div>
   </div>
 </section>
