@@ -7,15 +7,32 @@ full_bleed: true
 ---
 
 <style>
-  /* Move down the "Quantitative Finance & Trading" line */
+  /* Move down the "Quantitative Finance & Trading" line + fade-in */
   .eyebrow.shifted {
     margin-top: 40px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 1.4s ease-out 0.3s forwards;
+  }
+
+  /* Main title fade-in */
+  .hero-content h1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.4s ease-out 0.8s forwards;
+  }
+
+  /* Subtitle fade-in */
+  .hero-content .subtitle {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.4s ease-out 1.3s forwards;
   }
 
   /* === Secondary video styling (adjusted position) === */
   .promo-video {
     width: 100%;
-    margin: -1270px 0 0; /* ⬅️ Adjust vertical position */
+    margin: -1270px 0 0; /* Adjust vertical position */
   }
 
   .promo-video-frame {
@@ -71,7 +88,7 @@ full_bleed: true
     text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 1.4s ease-out 0.3s forwards;
+    animation: fadeInUp 1.4s ease-out 2s forwards;
   }
 
   .promo-caption h2 {
@@ -90,7 +107,12 @@ full_bleed: true
     line-height: 1.6;
   }
 
+  /* Fade-in animation */
   @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(25px);
+    }
     to {
       opacity: 1;
       transform: translateY(0);
@@ -139,6 +161,8 @@ full_bleed: true
 
     <!-- Text overlay -->
     <div class="promo-caption">
+      <h2>Markets. Models. Risk.</h2>
+      <p>From pricing to XVA, I build reliable tooling for trading desks.</p>
     </div>
   </div>
 </section>
