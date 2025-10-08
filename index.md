@@ -7,6 +7,10 @@ full_bleed: true
 ---
 
 <style>
+  /* Move down the "Quantitative Finance & Trading" line */
+  .eyebrow.shifted {
+  margin-top: 40px; /* ⬅️ ajuste la hauteur à ton goût */
+  }
   /* === Styles de secours pour la deuxième vidéo === */
   .promo-video{width:100%;margin:-1000px 0;}
   .promo-video-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000;border-top:1px solid #222;border-bottom:1px solid #222;}
@@ -34,7 +38,7 @@ full_bleed: true
 
   <!-- Texte de présentation -->
   <div class="hero-content">
-    <p class="eyebrow">Quantitative Finance & Trading</p>
+    <p class="eyebrow shifted">Quantitative Finance & Trading</p>
     <h1>Official Website of Sébastien HAAG</h1>
     <p class="subtitle">
     </p>
