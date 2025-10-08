@@ -8,7 +8,7 @@ full_bleed: true
 
 <style>
   /* === Styles de secours pour la deuxième vidéo === */
-  .promo-video{width:100%;margin:-80px 0;}
+  .promo-video{width:100%;margin:-480px 0;}
   .promo-video-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000;border-top:1px solid #222;border-bottom:1px solid #222;}
   @supports not (aspect-ratio: 16 / 9) {
     .promo-video-frame{padding-top:56.25%;}
