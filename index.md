@@ -19,7 +19,7 @@ full_bleed: true
   .hero-content h1{
     opacity:0; transform:translateY(20px);
     animation:fadeInUp 1.4s ease-out .8s forwards;
-  } 
+  }
   .hero-content .subtitle{
     opacity:0; transform:translateY(20px);
     animation:fadeInUp 1.4s ease-out 1.3s forwards;
@@ -33,26 +33,28 @@ full_bleed: true
   /* ===== Image logo (replaces text SH) ===== */
   .hero-logo-img{
     position:absolute;
-    right:-0.12em;              /* bord droit très proche/coupé, style GS */
-    top:44%;
-    transform:translateY(-44%);
-    z-index:3;                  /* au-dessus de l’overlay et du texte */
-    width:min(16vw, 48vh);      /* taille responsive comme les lettres */
+    right:-0.35em;              /* 🔥 bord très plaqué à droite, légèrement coupé */
+    top:36%;                    /* 🔥 plus haut (au lieu de 44%) */
+    transform:translateY(-36%);
+    z-index:3;                  
+    width:min(17vw, 50vh);      /* taille équilibrée */
     height:auto;
     opacity:0;
     animation:fadeInLogo 1.2s ease-out 1.0s forwards;
     pointer-events:none; user-select:none;
-    filter:drop-shadow(0 0 0 transparent); /* propre, pas d’ombre */
   }
+
   @keyframes fadeInLogo{
-    from{ opacity:0; transform:translateY(-44%) translateX(30px); }
-    to  { opacity:1; transform:translateY(-44%) translateX(0); }
+    from{ opacity:0; transform:translateY(-36%) translateX(30px); }
+    to  { opacity:1; transform:translateY(-36%) translateX(0); }
   }
+
   @media (max-width:880px){
     .hero-logo-img{
-      right:-0.08em;
-      top:46%; transform:translateY(-46%);
-      width:min(22vw, 34vh);
+      right:-0.15em;
+      top:42%;
+      transform:translateY(-42%);
+      width:min(24vw, 34vh);
     }
   }
 
