@@ -34,7 +34,7 @@ full_bleed: true
   .hero-logo-img{
     position:absolute;
     right:-4.0vw;              /* 🔥 plus plaqué encore (presque bord coupé) */
-    top:38%%; 
+    top:38%; 
     transform:translateY(-36%);
     z-index:3;
     width:min(17vw, 50vh);
