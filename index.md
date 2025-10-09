@@ -320,42 +320,39 @@ setInterval(updateClocks, 1000);
   window.addEventListener('touchend',  onPointerUp);
 })();
 
-/* === Market Status (Tokyo / London / New York) ===
-   Approx horaires standard jours ouvrés (sans jours fériés, ni pauses) :
-   - Tokyo:   09:00–15:00 JST
-   - London:  08:00–16:00 UK
-   - New York:09:30–16:00 ET  (on simplifie 14:00–21:00 UTC, sans DST précis)
-*/
+/* === Market Status (Tokyo / London / New York) === */
 (function(){
   const el = document.getElementById('marketStatus');
+  if(!el) return;
 
   function isWeekday(tz){
-    const d = +new Date().toLocaleString('en-US',{weekday:'0', timeZone:tz}); // 0=Sun
-    return d!==0 && d!==6;
+    const day = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: tz }).format(new Date());
+    return day !== 'Sat' && day !== 'Sun';
   }
-  function hourInTZ(tz){
-    return +new Date().toLocaleString('en-US',{hour:'2-digit', hour12:false, timeZone:tz});
+
+  function hmInTZ(tz){
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      hour:'2-digit', minute:'2-digit', hour12:false, timeZone: tz
+    }).formatToParts(new Date());
+    const h = parseInt(parts.find(p=>p.type==='hour').value, 10);
+    const m = parseInt(parts.find(p=>p.type==='minute').value, 10);
+    return {h, m, t: h*60+m};
   }
-  function minuteInTZ(tz){
-    return +new Date().toLocaleString('en-US',{minute:'2-digit', timeZone:tz});
-  }
+
   function isOpenTokyo(){
     if(!isWeekday('Asia/Tokyo')) return false;
-    const h = hourInTZ('Asia/Tokyo'), m = minuteInTZ('Asia/Tokyo');
-    const t = h*60+m;
-    return t >= 9*60 && t < 15*60; // 09:00–15:00
+    const {t} = hmInTZ('Asia/Tokyo');
+    return t >= 9*60 && t < 15*60; 
   }
   function isOpenLondon(){
     if(!isWeekday('Europe/London')) return false;
-    const h = hourInTZ('Europe/London'), m = minuteInTZ('Europe/London');
-    const t = h*60+m;
-    return t >= 8*60 && t < 16*60; // 08:00–16:00
+    const {t} = hmInTZ('Europe/London');
+    return t >= 8*60 && t < 16*60;
   }
   function isOpenNewYork(){
     if(!isWeekday('America/New_York')) return false;
-    const h = hourInTZ('America/New_York'), m = minuteInTZ('America/New_York');
-    const t = h*60+m;
-    return t >= 9*60+30 && t < 16*60; // 09:30–16:00
+    const {t} = hmInTZ('America/New_York');
+    return t >= (9*60+30) && t < 16*60;
   }
 
   function refresh(){
@@ -363,12 +360,11 @@ setInterval(updateClocks, 1000);
     const london = isOpenLondon();
     const ny     = isOpenNewYork();
 
-    let html = '';
-    html += `<span class="badge ${tokyo ? '' : 'closed'}">TOKYO ${tokyo ? 'LIVE' : 'CLOSED'}</span>`;
-    html += `<span class="badge ${london ? '' : 'closed'}">LONDON ${london ? 'LIVE' : 'CLOSED'}</span>`;
-    html += `<span class="badge ${ny ? '' : 'closed'}">NEW YORK ${ny ? 'LIVE' : 'CLOSED'}</span>`;
-
-    el.innerHTML = html;
+    el.innerHTML = `
+      <span class="badge ${tokyo ? '' : 'closed'}">TOKYO ${tokyo ? 'LIVE' : 'CLOSED'}</span>
+      <span class="badge ${london ? '' : 'closed'}">LONDON ${london ? 'LIVE' : 'CLOSED'}</span>
+      <span class="badge ${ny ? '' : 'closed'}">NEW YORK ${ny ? 'LIVE' : 'CLOSED'}</span>
+    `;
   }
 
   refresh();
