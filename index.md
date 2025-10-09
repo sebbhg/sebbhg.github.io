@@ -118,7 +118,7 @@ full_bleed: true
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
     padding: 12px 0;
-    margin-top: -6px;
+    margin-top: -28px;
     opacity: 1;
     z-index: 10;
     isolation: isolate;
@@ -182,6 +182,7 @@ full_bleed: true
     font-weight:800;
     letter-spacing:.08em;
     padding:8px 12px;
+    margin-top:-12px;
   }
   .market-status .badge{
     display:inline-block;
