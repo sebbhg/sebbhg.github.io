@@ -7,64 +7,142 @@ full_bleed: true
 ---
 
 <style>
-  /* Fade-in global */
-  @keyframes fadeInUp { from { opacity:0; transform:translateY(25px);} to { opacity:1; transform:translateY(0);} }
-
-  /* Eyebrow + titles fade-in */
-  .eyebrow.shifted{
-    margin-top:40px;
-    opacity:0; transform:translateY(10px);
-    animation:fadeInUp 1.4s ease-out .3s forwards;
-  }
-  .hero-content h1{
-    opacity:0; transform:translateY(20px);
-    animation:fadeInUp 1.4s ease-out .8s forwards;
-  }
-  .hero-content .subtitle{
-    opacity:0; transform:translateY(20px);
-    animation:fadeInUp 1.4s ease-out 1.3s forwards;
+  /* === Fade-in global === */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* HERO layers so the logo sits above */
-  .hero-video{ position:relative; z-index:2; overflow:hidden; }
-  .hero-overlay{ position:absolute; inset:0; z-index:1; }
-  .hero-content{ position:relative; z-index:2; }
-
-  /* ===== Image logo (replaces text SH) ===== */
-  .hero-logo-img{
-    position:absolute;
-    right:-4.0vw;              /* 🔥 plus plaqué encore (presque bord coupé) */
-    top:34%; 
-    transform:translateY(-34%);
-    z-index:3;
-    width:min(13vw, 40vh);
-    height:auto;
-    opacity:0;
-    animation:fadeInLogo 1.2s ease-out 1.0s forwards;
-    pointer-events:none; 
-    user-select:none;
+  /* === Hero titles fade-in === */
+  .eyebrow.shifted {
+    margin-top: 40px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 1.4s ease-out .3s forwards;
+  }
+  .hero-content h1 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.4s ease-out .8s forwards;
+  }
+  .hero-content .subtitle {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.4s ease-out 1.3s forwards;
   }
 
-  @keyframes fadeInLogo{
-    from{ opacity:0; transform:translateY(-36%) translateX(40px); }
-    to  { opacity:1; transform:translateY(-36%) translateX(0); }
+  /* === HERO LAYERS === */
+  .hero-video { position: relative; z-index: 2; overflow: hidden; }
+  .hero-overlay { position: absolute; inset: 0; z-index: 1; }
+  .hero-content { position: relative; z-index: 2; }
+
+  /* === LOGO IMAGE === */
+  .hero-logo-img {
+    position: absolute;
+    right: -4.0vw;              /* plaqué à droite */
+    top: 34%;                   /* ajusté plus haut */
+    transform: translateY(-34%);
+    z-index: 3;
+    width: min(13vw, 40vh);     /* taille réduite */
+    height: auto;
+    opacity: 0;
+    animation: fadeInLogo 1.2s ease-out 1.0s forwards;
+    pointer-events: none;
+    user-select: none;
+  }
+  @keyframes fadeInLogo {
+    from { opacity: 0; transform: translateY(-34%) translateX(40px); }
+    to { opacity: 1; transform: translateY(-34%) translateX(0); }
   }
 
-  @media (max-width:880px){
-    .hero-logo-img{
-      right:-1.2vw;  /* léger décalage sur mobile */
-      top:42%;
-      transform:translateY(-42%);
-      width:min(24vw, 34vh);
+  @media (max-width: 880px) {
+    .hero-logo-img {
+      right: -1.2vw;
+      top: 42%;
+      transform: translateY(-42%);
+      width: min(22vw, 34vh);
     }
   }
 
-  /* ===== Secondary video ===== */
-  .promo-video{ position:relative; z-index:0; width:100%; margin:-1270px 0 0; }
-  .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
-  @supports not (aspect-ratio:16/9){ .promo-video-frame{padding-top:56.25%} .promo-video-el{position:absolute;left:0;top:0;width:100%;height:100%} }
-  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
-  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.55) 65%,rgba(0,0,0,.7) 100%); pointer-events:none; }
+  /* === SECONDARY VIDEO === */
+  .promo-video { position: relative; z-index: 0; width: 100%; margin: -1270px 0 0; }
+  .promo-video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #000;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+  }
+  @supports not (aspect-ratio: 16/9) {
+    .promo-video-frame { padding-top: 56.25%; }
+    .promo-video-el {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .promo-video-el {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(.8) contrast(1.05) saturate(1.05);
+  }
+  .promo-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(0, 0, 0, .35) 0%,
+      rgba(0, 0, 0, .55) 65%,
+      rgba(0, 0, 0, .7) 100%);
+    pointer-events: none;
+  }
+
+  /* === WORLD CLOCK BAR === */
+  .world-clock-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background: #000;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    padding: 14px 10px;
+    font-family: "Inter", system-ui, sans-serif;
+    color: #e0e0e0;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .clock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+    text-align: center;
+    opacity: 0.9;
+    transition: opacity .3s;
+  }
+  .clock:hover { opacity: 1; }
+  .clock .city {
+    font-weight: 600;
+    color: #66a3ff;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+  .clock .time {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-top: 4px;
+  }
 </style>
 
 <section class="hero-video">
@@ -109,3 +187,31 @@ full_bleed: true
     <div class="promo-scrim"></div>
   </div>
 </section>
+
+<!-- ===== World Clocks Bar ===== -->
+<div class="world-clock-bar">
+  <div class="clock" data-city="New York" data-tz="America/New_York"></div>
+  <div class="clock" data-city="London" data-tz="Europe/London"></div>
+  <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
+  <div class="clock" data-city="Dubai" data-tz="Asia/Dubai"></div>
+  <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
+  <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
+</div>
+
+<script>
+function updateClocks(){
+  document.querySelectorAll('.clock').forEach(el=>{
+    const city = el.dataset.city;
+    const tz = el.dataset.tz;
+    const now = new Date().toLocaleTimeString('en-GB', {
+      timeZone: tz,
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+    el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
+  });
+}
+updateClocks();
+setInterval(updateClocks, 1000);
+</script>
