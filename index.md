@@ -295,6 +295,8 @@ full_bleed: true
     font-size:1rem;
     color:#aaa;
   }
+
+  /* au-dessus du footer */
   .news-band,
   .after-market {
     position: relative;
@@ -381,16 +383,16 @@ full_bleed: true
 <!-- ===== Latest Updates band ===== -->
 <section class="news-band">
   <div class="news-wrap">
-    <!-- Carte 1 -->
+    <!-- Carte 1 (site en construction) -->
     <article class="update-card">
-      <span class="update-badge">NEW</span>
-      <h3 class="update-title">New CV & Experience section</h3>
-      <p class="update-meta">Oct 2025 · v1.3</p>
+      <span class="update-badge">INFO</span>
+      <h3 class="update-title">Website under construction 🚧</h3>
+      <p class="update-meta">Oct 2025 · Ongoing</p>
       <p class="update-desc">
-        Updated resume with derivatives work, XVA tooling and pricing library improvements.
-        Highlights: IRS/XCCY, swaptions, EE/EEE, CVA/XVA, LGM-1F, GPR & Bayesian Quadrature.
+        This portfolio is currently being enhanced — new pages, animations, and live data integrations are coming soon.
+        Stay tuned for the full Quantitative Finance & Trading experience.
       </p>
-      <a class="update-link" href="{{ '/resumes' | relative_url }}">View CV →</a>
+      <a class="update-link" href="{{ '/' | relative_url }}">Learn more →</a>
     </article>
 
     <!-- Carte 2 -->
