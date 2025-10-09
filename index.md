@@ -66,7 +66,7 @@ full_bleed: true
   /* === SECONDARY VIDEO === */
   .promo-video {
     position: relative;
-    z-index: 0;
+    z-index: 0;              /* ⬅ ensure below clocks */
     width: 100%;
     margin: -1250px 0 0;
   }
@@ -78,6 +78,7 @@ full_bleed: true
     background: #000;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
+    z-index: 0;              /* ⬅ ensure below clocks */
   }
   @supports not (aspect-ratio: 16/9) {
     .promo-video-frame { padding-top: 56.25%; }
@@ -105,37 +106,43 @@ full_bleed: true
       rgba(0, 0, 0, .55) 65%,
       rgba(0, 0, 0, .7) 100%);
     pointer-events: none;
+    z-index: 0;              /* ⬅ ensure below clocks */
   }
 
   /* === WORLD CLOCK BAR (zéro transparence, fond noir, défilement fluide) === */
   .world-clock-bar{
     position: relative;
     overflow: hidden;
-    background:#000 !important;
+    background:#000 !important;     /* fond 100% noir */
     border-top:1px solid #333;
     border-bottom:1px solid #333;
     padding:12px 0;
     margin-top:-6px;
     opacity:1 !important;
     mix-blend-mode:normal !important;
-    isolation:isolate;
+    isolation:isolate;              /* évite tout mélange avec la vidéo */
+    z-index: 5;                     /* au-dessus de la promo-video */
   }
   .world-clock-bar::before{
     content:"";
     position:absolute; inset:0;
-    background:#000;
+    background:#000;                /* couche noire additionnelle */
+    opacity:1;
     z-index:0;
   }
 
   .ticker-wrapper{
     position:relative;
-    z-index:1;
+    z-index:2;                      /* texte au-dessus du fond noir */
     display:flex;
     width:max-content;
     white-space:nowrap;
     animation:tickerMove 90s linear infinite;
     opacity:1 !important;
     filter:none !important;
+    mix-blend-mode:normal !important;
+    backface-visibility:hidden;     /* stabilité rendu */
+    will-change:transform;
   }
 
   @keyframes tickerMove{
@@ -156,27 +163,28 @@ full_bleed: true
     mix-blend-mode:normal !important;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
+    z-index:3;
   }
 
   .clock .city{
     font-weight:900;
-    color:#9ec8ff; /* bleu clair intense et opaque */
+    color:#9ec8ff !important;  /* bleu clair intense et opaque */
     text-transform:uppercase;
     font-size:.92rem;
     letter-spacing:.05em;
     opacity:1 !important;
-    text-shadow:0 0 6px rgba(0,0,0,.85);
+    text-shadow:0 0 6px rgba(0,0,0,.9);
   }
 
   .clock .time{
     font-weight:900;
     font-size:1.28rem;
-    color:#fff !important;
+    color:#ffffff !important;  /* blanc pur forcé */
     margin-top:2px;
     opacity:1 !important;
     text-shadow:
       0 0 0 #000,
-      0 0 8px rgba(0,0,0,.90),
+      0 0 8px rgba(0,0,0,1),
       0 0 1px #000;
   }
 </style>
