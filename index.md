@@ -275,11 +275,13 @@ full_bleed: true
   }
   .activities-section h2,
   .activities-section .activities-title {
-    color:#9ec8ff !important;  /* bleu clair comme les badges INFO/UPDATE */
-    font-size:clamp(1.5rem,3vw,2.2rem);
-    font-weight:800;
-    margin-bottom:0.6rem;
-    text-shadow:0 0 8px rgba(44,140,255,.25);
+    color: #a8d1ff !important; /* même bleu perçu que les badges INFO/UPDATE */
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+    text-shadow:
+      0 0 6px rgba(44,140,255,.4),
+      0 0 12px rgba(44,140,255,.25); /* léger halo bleu pour imiter les badges */
   }
   .activities-section p {
     font-size:1rem;
