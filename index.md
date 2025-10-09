@@ -389,7 +389,7 @@ full_bleed: true
       <h3 class="update-title">Website under construction 🚧</h3>
       <p class="update-meta">Oct 2025 · Ongoing</p>
       <p class="update-desc">
-        This portfolio is currently being enhanced — new pages, animations, and live data integrations are coming soon.
+        This website is currently being enhanced — new pages, animations, and live data integrations are coming soon.
         Stay tuned for the full Quantitative Finance & Trading experience.
       </p>
       <a class="update-link" href="{{ '/' | relative_url }}">Learn more →</a>
