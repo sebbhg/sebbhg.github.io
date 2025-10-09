@@ -74,9 +74,8 @@ full_bleed: true
     position: relative;
     z-index: 0;
     width: 100%;
-    margin: -1450px 0 0; /* plus négatif = horloges plus haut */
+    margin: -1450px 0 0;
   }
-  /* Responsive fine-tuning : ajuste le recouvrement selon la largeur */
   @media (max-width: 1400px) { .promo-video { margin: -1150px 0 0; } }
   @media (max-width: 1200px) { .promo-video { margin: -1050px 0 0; } }
   @media (max-width: 1024px) { .promo-video { margin: -900px  0 0; } }
@@ -110,7 +109,7 @@ full_bleed: true
   }
 
   /* === WORLD CLOCK BAR — opaque, sans transparence === */
-  :root { --clock-speed: 120s; } /* vitesse par défaut du défilement */
+  :root { --clock-speed: 120s; }
   .world-clock-bar {
     position: relative;
     overflow: hidden;
@@ -123,14 +122,9 @@ full_bleed: true
     z-index: 10;
     isolation: isolate;
     -webkit-user-select: none; user-select: none;
-    touch-action: pan-x; /* autorise le slide horizontal */
+    touch-action: pan-x;
   }
-  .world-clock-bar * {
-    background: none !important;
-    opacity: 1 !important;
-    mix-blend-mode: normal !important;
-    filter: none !important;
-  }
+  .world-clock-bar * { background: none !important; opacity: 1 !important; mix-blend-mode: normal !important; filter: none !important; }
 
   .ticker-wrapper {
     position: relative;
@@ -144,45 +138,38 @@ full_bleed: true
   @keyframes tickerMove { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
   .ticker-wrapper.reverse { animation-name: tickerMoveReverse; }
   @keyframes tickerMoveReverse { 0%{transform:translateX(-50%);} 100%{transform:translateX(0);} }
-
   .ticker-wrapper.dragging { animation-play-state: paused; cursor: grabbing; }
 
-  .clock {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    min-width: 150px; margin: 0 35px; text-align: center;
-  }
+  .clock { display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:150px; margin:0 35px; text-align:center; }
   .clock .city {
-    font-weight: 900; color: #7fb3ff; text-transform: uppercase;
-    font-size: .92rem; letter-spacing: .05em;
-    text-shadow: 0 0 6px rgba(0,0,0,.85);
-    animation: clockPulseCity 3.6s ease-in-out infinite; animation-delay: .6s;
+    font-weight:900; color:#7fb3ff; text-transform:uppercase; font-size:.92rem; letter-spacing:.05em;
+    text-shadow:0 0 6px rgba(0,0,0,.85);
+    animation: clockPulseCity 3.6s ease-in-out infinite; animation-delay:.6s;
   }
   .clock .time {
-    font-weight: 900; font-size: 1.28rem; color: #fff; margin-top: 2px;
-    text-shadow: 0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000;
+    font-weight:900; font-size:1.28rem; color:#fff; margin-top:2px;
+    text-shadow:0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000;
     animation: clockPulse 1.8s ease-in-out infinite;
     will-change: transform, text-shadow, opacity; transform: translateZ(0);
   }
   @keyframes clockPulse {
-    0%, 100% { transform: scale(1); text-shadow: 0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000; }
-    50%      { transform: scale(1.03); text-shadow: 0 0 10px rgba(44,140,255,.9), 0 0 22px rgba(44,140,255,.6), 0 0 2px #000; }
+    0%,100% { transform: scale(1); text-shadow: 0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000; }
+    50%     { transform: scale(1.03); text-shadow: 0 0 10px rgba(44,140,255,.9), 0 0 22px rgba(44,140,255,.6), 0 0 2px #000; }
   }
   @keyframes clockPulseCity {
-    0%, 100% { text-shadow: 0 0 6px rgba(0,0,0,.8); }
-    50%      { text-shadow: 0 0 10px rgba(44,140,255,.7), 0 0 18px rgba(44,140,255,.35); }
+    0%,100% { text-shadow: 0 0 6px rgba(0,0,0,.8); }
+    50%     { text-shadow: 0 0 10px rgba(44,140,255,.7), 0 0 18px rgba(44,140,255,.35); }
   }
 
   /* === MARKET STATUS (sous les horloges) === */
   .market-status{
     background:#0a0a0a;
     border-top:1px solid #222;
-    /* pas de border-bottom ici */
     color:#2c8cff;
     text-align:center;
     font-weight:800;
     letter-spacing:.08em;
     padding:8px 12px;
-    /* liens au-dessus de tout */
     position: relative;
     z-index: 50;
   }
@@ -197,12 +184,8 @@ full_bleed: true
     font-weight:800;
   }
   .market-status .closed{ opacity:.7; color:#9aa3b2; border-color:#333; background:#0f0f0f; }
-  .market-status a.badge{
-    text-decoration:none; cursor:pointer; pointer-events:auto;
-  }
-  .market-status a.badge:hover{
-    border-color:#2c8cff99; box-shadow:0 0 0 2px rgba(44,140,255,.12) inset;
-  }
+  .market-status a.badge{ text-decoration:none; cursor:pointer; pointer-events:auto; }
+  .market-status a.badge:hover{ border-color:#2c8cff99; box-shadow:0 0 0 2px rgba(44,140,255,.12) inset; }
 
   /* ===== Bande "Latest Updates" ===== */
   .news-band{
@@ -219,99 +202,46 @@ full_bleed: true
     gap:18px;
   }
   .update-card{
-    position:relative;
-    background:#0d0d0d;
-    border:1px solid #222;
-    border-radius:14px;
-    padding:18px 18px 16px;
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    position:relative; background:#0d0d0d; border:1px solid #222; border-radius:14px;
+    padding:18px 18px 16px; box-shadow:0 10px 30px rgba(0,0,0,.25);
     transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   }
   .update-card::after{
-    content:"";
-    position:absolute; inset:-1px;
-    border-radius:14px;
-    pointer-events:none;
-    background:radial-gradient(600px 200px at 20% -20%, rgba(44,140,255,.15), transparent 70%);
-    opacity:.7;
+    content:""; position:absolute; inset:-1px; border-radius:14px; pointer-events:none;
+    background:radial-gradient(600px 200px at 20% -20%, rgba(44,140,255,.15), transparent 70%); opacity:.7;
   }
-  .update-card:hover{
-    transform:translateY(-2px);
-    box-shadow:0 14px 36px rgba(0,0,0,.35);
-    border-color:#2c8cff55;
-  }
+  .update-card:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,0,0,.35); border-color:#2c8cff55; }
   .update-badge{
-    display:inline-block;
-    font-size:.72rem;
-    letter-spacing:.08em;
-    color:#9ec8ff;
-    background:#0c1220;
-    border:1px solid #1f3b66;
-    border-radius:999px;
-    padding:4px 8px;
-    margin-bottom:10px;
-    font-weight:800;
+    display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff;
+    background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; margin-bottom:10px; font-weight:800;
   }
   .update-title{ margin:0 0 6px; font-size:clamp(1.05rem,2.2vw,1.2rem); font-weight:800; }
   .update-meta{ color:#9aa3b2; font-size:.9rem; margin:0 0 10px; }
   .update-desc{ color:#c9cbd1; margin:0 0 12px; line-height:1.55; }
-  .update-link{
-    display:inline-flex; align-items:center; gap:8px;
-    padding:8px 10px; border:1px solid rgba(255,255,255,.16);
-    border-radius:10px; background:#0f0f0f; color:#fff; font-weight:700; text-decoration:none;
-  }
+  .update-link{ display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:10px; background:#0f0f0f; color:#fff; font-weight:700; text-decoration:none; }
   .update-link:hover{ border-color:#4da0ff; background:#141414; }
-
   @media (max-width:820px){ .news-wrap{ grid-template-columns: 1fr; } }
 
-  /* === SECTION ACTIVITIES (sous les rectangles info/update) === */
-  .activities-section {
-    background:#050505;
-    color:#ccc;
-    text-align:center;
-    padding:40px 20px 50px;
-    border-top:1px solid #111;
-    border-bottom:1px solid #111;
+  /* === SECTION ACTIVITIES === */
+  .activities-section{
+    background:#050505; color:#ccc; text-align:center;
+    padding:40px 20px 50px; border-top:1px solid #111; border-bottom:1px solid #111;
   }
   .activities-section h2,
-  .activities-section .activities-title {
-    color: #a8d1ff !important; /* même bleu perçu que les badges INFO/UPDATE */
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    font-weight: 800;
-    margin-bottom: 0.6rem;
-    text-shadow:
-      0 0 6px rgba(44,140,255,.4),
-      0 0 12px rgba(44,140,255,.25); /* léger halo bleu pour imiter les badges */
+  .activities-section .activities-title{
+    color:#9ec8ff !important;                /* bleu des badges */
+    -webkit-text-fill-color:#9ec8ff !important;
+    filter:none !important; text-shadow:0 0 6px rgba(44,140,255,.25);
+    font-size:clamp(1.5rem,3vw,2.2rem); font-weight:800; margin-bottom:.6rem;
   }
-  .activities-section p {
-    font-size:1rem;
-    color:#aaa;
-    max-width:800px;
-    margin:0 auto;
-    line-height:1.6;
-  }
+  .activities-section p{ font-size:1rem; color:#aaa; max-width:800px; margin:0 auto; line-height:1.6; }
 
   /* === SECTION SCROLLABLE (contenu) === */
   .after-market{
-    background:#050505;
-    color:#ccc;
-    padding:60px 20px 180px;
-    border-top:1px solid #111;
-    text-align:center;
+    background:#050505; color:#ccc; padding:60px 20px 180px; border-top:1px solid #111; text-align:center;
   }
-  .after-market h2{
-    color:#2c8cff;
-    font-size:clamp(1.6rem,3vw,2.4rem);
-    font-weight:800;
-    margin-bottom:1rem;
-  }
-  .after-market p{
-    max-width:850px;
-    margin:0 auto 1rem;
-    line-height:1.7;
-    font-size:1rem;
-    color:#aaa;
-  }
+  .after-market h2{ color:#2c8cff; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; margin-bottom:1rem; }
+  .after-market p{ max-width:850px; margin:0 auto 1rem; line-height:1.7; font-size:1rem; color:#aaa; }
 
   /* au-dessus du footer */
   .news-band, .activities-section, .after-market { position: relative; z-index: 3; }
@@ -342,7 +272,7 @@ full_bleed: true
   <img class="hero-logo-img" src="/assets/images/sh-logo.png" alt="SH monogram">
 </section>
 
-<!-- ===== Full-width secondary video (raccourcie) ===== -->
+<!-- ===== Full-width secondary video ===== -->
 <section class="promo-video">
   <div class="promo-video-frame">
     <video class="promo-video-el" autoplay muted loop playsinline preload="auto"
@@ -353,10 +283,9 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== World Clocks Continuous Ticker (glissable) ===== -->
+<!-- ===== World Clocks ===== -->
 <div class="world-clock-bar" id="clockBar">
   <div class="ticker-wrapper" id="clockTicker">
-    <!-- Première série -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
     <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
     <div class="clock" data-city="Los Angeles" data-tz="America/Los_Angeles"></div>
@@ -393,10 +322,9 @@ full_bleed: true
 <!-- ===== Market Status ===== -->
 <div class="market-status" id="marketStatus">Loading market status…</div>
 
-<!-- ===== Latest Updates band ===== -->
+<!-- ===== Latest Updates ===== -->
 <section class="news-band">
   <div class="news-wrap">
-    <!-- Carte 1 (site en construction) -->
     <article class="update-card">
       <span class="update-badge">INFO</span>
       <h3 class="update-title">Website under construction 🚧</h3>
@@ -408,7 +336,6 @@ full_bleed: true
       <a class="update-link" href="{{ '/' | relative_url }}">Learn more →</a>
     </article>
 
-    <!-- Carte 2 -->
     <article class="update-card">
       <span class="update-badge">UPDATE</span>
       <h3 class="update-title">What I do — Quant Engineering</h3>
@@ -422,10 +349,10 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== Activities (sous les updates) ===== -->
+<!-- ===== Activities ===== -->
 <section class="activities-section">
   <div class="wrapper">
-    <h2 class="activities-title">Activities</h2>
+    <h2 class="activities-title" style="color:#9ec8ff">Activities</h2>
     <p>Explore the different sections of this website to discover projects, courses, theses, and readings.</p>
   </div>
 </section>
@@ -445,62 +372,41 @@ full_bleed: true
 </section>
 
 <script>
-/* === Horloges (heure locale par TZ) === */
+/* === Horloges === */
 function updateClocks(){
   document.querySelectorAll('.clock').forEach(el=>{
     const city = el.dataset.city;
     const tz = el.dataset.tz;
     const now = new Date().toLocaleTimeString('en-GB', {
-      timeZone: tz,
-      hour: '2-digit', minute: '2-digit', hour12: false
+      timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false
     });
     el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
   });
 }
-updateClocks();
-setInterval(updateClocks, 1000);
+updateClocks(); setInterval(updateClocks, 1000);
 
-/* === Interaction : glisser pour accélérer / changer le sens === */
+/* === Drag ticker === */
 (function(){
-  const root = document.documentElement;
   const bar  = document.getElementById('clockBar');
   const wrap = document.getElementById('clockTicker');
-
   let isDown=false, startX=0;
-
-  function speedFromDx(dx){
-    const abs = Math.min(Math.abs(dx), 600); // cap
-    const dur = 120 - (abs/600)*108;         // 120s → 12s
-    return Math.max(12, Math.min(120, dur)).toFixed(0) + 's';
-  }
-
-  function onPointerDown(e){
-    isDown=true;
-    wrap.classList.add('dragging');
-    startX = (e.touches ? e.touches[0].clientX : e.clientX);
-  }
+  const speedFromDx = dx => (Math.max(12, Math.min(120, 120 - (Math.min(Math.abs(dx),600)/600)*108)).toFixed(0)+'s');
+  function onPointerDown(e){ isDown=true; wrap.classList.add('dragging'); startX=(e.touches?e.touches[0].clientX:e.clientX); }
   function onPointerMove(e){
     if(!isDown) return;
-    const x = (e.touches ? e.touches[0].clientX : e.clientX);
-    const dx = x - startX;
-    wrap.classList.toggle('reverse', dx > 0);
+    const x=(e.touches?e.touches[0].clientX:e.clientX);
+    const dx=x-startX;
+    wrap.classList.toggle('reverse', dx>0);
     document.documentElement.style.setProperty('--clock-speed', speedFromDx(dx));
     e.preventDefault();
   }
-  function onPointerUp(){
-    if(!isDown) return;
-    isDown=false;
-    wrap.classList.remove('dragging','reverse');
-    document.documentElement.style.setProperty('--clock-speed', '120s');
-  }
-
+  function onPointerUp(){ if(!isDown) return; isDown=false; wrap.classList.remove('dragging','reverse'); document.documentElement.style.setProperty('--clock-speed','120s'); }
   bar.addEventListener('mousedown', onPointerDown);
   window.addEventListener('mousemove', onPointerMove, { passive:false });
-  window.addEventListener('mouseup',   onPointerUp);
-
+  window.addEventListener('mouseup', onPointerUp);
   bar.addEventListener('touchstart', onPointerDown, { passive:true });
   window.addEventListener('touchmove', onPointerMove, { passive:false });
-  window.addEventListener('touchend',  onPointerUp);
+  window.addEventListener('touchend', onPointerUp);
 })();
 
 /* === Market Status (Tokyo / London / Paris / New York) === */
@@ -509,70 +415,26 @@ setInterval(updateClocks, 1000);
   if(!el) return;
 
   function isWeekday(tz){
-    const day = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: tz }).format(new Date());
+    const day = new Intl.DateTimeFormat('en-US', { weekday:'short', timeZone:tz }).format(new Date());
     return day !== 'Sat' && day !== 'Sun';
   }
-
   function hmInTZ(tz){
-    const parts = new Intl.DateTimeFormat('en-GB', {
-      hour:'2-digit', minute:'2-digit', hour12:false, timeZone: tz
-    }).formatToParts(new Date());
-    const h = parseInt(parts.find(p=>p.type==='hour').value, 10);
-    const m = parseInt(parts.find(p=>p.type==='minute').value, 10);
-    return {h, m, t: h*60+m};
+    const parts = new Intl.DateTimeFormat('en-GB', { hour:'2-digit', minute:'2-digit', hour12:false, timeZone:tz }).formatToParts(new Date());
+    const h = parseInt(parts.find(p=>p.type==='hour').value,10);
+    const m = parseInt(parts.find(p=>p.type==='minute').value,10);
+    return { h, m, t: h*60+m };
   }
-
-  function isOpenTokyo(){
-    if(!isWeekday('Asia/Tokyo')) return false;
-    const {t} = hmInTZ('Asia/Tokyo');
-    return t >= 9*60 && t < 15*60; 
-  }
-  function isOpenLondon(){
-    if(!isWeekday('Europe/London')) return false;
-    const {t} = hmInTZ('Europe/London');
-    return t >= 8*60 && t < 16*60;
-  }
-  // Paris (plage simple)
-  function isOpenParis(){
-    if(!isWeekday('Europe/Paris')) return false;
-    const {t} = hmInTZ('Europe/Paris');
-    return t >= 9*60 && t < 17*60;
-  }
-  function isOpenNewYork(){
-    if(!isWeekday('America/New_York')) return false;
-    const {t} = hmInTZ('America/New_York');
-    return t >= (9*60+30) && t < 16*60;
-  }
+  function isOpenTokyo(){ if(!isWeekday('Asia/Tokyo')) return false; const {t}=hmInTZ('Asia/Tokyo'); return t>=540 && t<900; }
+  function isOpenLondon(){ if(!isWeekday('Europe/London')) return false; const {t}=hmInTZ('Europe/London'); return t>=480 && t<960; }
+  function isOpenParis(){ if(!isWeekday('Europe/Paris')) return false; const {t}=hmInTZ('Europe/Paris'); return t>=540 && t<1020; }
+  function isOpenNewYork(){ if(!isWeekday('America/New_York')) return false; const {t}=hmInTZ('America/New_York'); return t>=(9*60+30) && t<960; }
 
   function refresh(){
-    const tokyo  = isOpenTokyo();
-    const london = isOpenLondon();
-    const paris  = isOpenParis();
-    const ny     = isOpenNewYork();
-
-    const urls = {
-      tokyo:  "https://www.jpx.co.jp/english/markets/",
-      london: "https://www.londonstockexchange.com/",
-      paris:  "https://live.euronext.com/en/markets/paris",
-      ny:     "https://www.nyse.com/"
-    };
-
-    const badge = (isOpen, label, url) => {
-      if(isOpen){
-        return `<a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>`;
-      }
-      return `<span class="badge closed">${label} CLOSED</span>`;
-    };
-
-    el.innerHTML = `
-      ${badge(tokyo,  'TOKYO',    urls.tokyo)}
-      ${badge(london, 'LONDON',   urls.london)}
-      ${badge(paris,  'PARIS',    urls.paris)}
-      ${badge(ny,     'NEW YORK', urls.ny)}
-    `;
+    const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
+    const urls={ tokyo:"https://www.jpx.co.jp/english/markets/", london:"https://www.londonstockexchange.com/", paris:"https://live.euronext.com/en/markets/paris", ny:"https://www.nyse.com/" };
+    const badge=(isOpen,label,url)=> isOpen ? `<a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>` : `<span class="badge closed">${label} CLOSED</span>`;
+    el.innerHTML = `${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)}`;
   }
-
-  refresh();
-  setInterval(refresh, 60_000);
+  refresh(); setInterval(refresh, 60_000);
 })();
 </script>
