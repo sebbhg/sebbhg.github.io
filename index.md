@@ -108,26 +108,27 @@ full_bleed: true
     pointer-events: none;
   }
 
-  /* === WORLD CLOCKS TICKER (défilement façon cotations) === */
+  /* === WORLD CLOCKS TICKER (Défilement continu) === */
   .world-clock-bar {
     position: relative;
     overflow: hidden;
     background: #000;
-    border-top: 1px solid #222;
-    border-bottom: 1px solid #222;
-    padding: 10px 0;
-    margin-top: -6px; /* 🔼 remonte un peu le bandeau */
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 12px 0;
+    margin-top: -6px;
   }
 
-  .ticker-track {
+  .ticker-wrapper {
     display: flex;
     width: max-content;
-    animation: tickerMove 60s linear infinite;
+    white-space: nowrap;
+    animation: tickerMove 90s linear infinite; /* 🔁 défilement plus lent et fluide */
   }
 
   @keyframes tickerMove {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* 🔥 demi-longueur = boucle parfaite */
   }
 
   .clock {
@@ -135,25 +136,26 @@ full_bleed: true
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 140px;
-    margin: 0 25px;
+    min-width: 150px;
+    margin: 0 35px;
     text-align: center;
-    opacity: 1; /* 🔥 moins transparent */
+    opacity: 1; /* ✅ plus aucune transparence */
   }
 
   .clock .city {
-    font-weight: 600;
-    color: #66a3ff;
+    font-weight: 700;
+    color: #5da9ff; /* plus vif */
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     letter-spacing: 0.05em;
   }
 
   .clock .time {
-    font-weight: 700;
-    font-size: 1.2rem;
+    font-weight: 800;
+    font-size: 1.25rem;
     color: #fff;
-    margin-top: 3px;
+    margin-top: 2px;
+    text-shadow: 0 0 6px rgba(0,0,0,0.8);
   }
 </style>
 
@@ -200,16 +202,17 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== World Clocks Ticker ===== -->
+<!-- ===== World Clocks Continuous Ticker ===== -->
 <div class="world-clock-bar">
-  <div class="ticker-track" id="clockTicker">
+  <div class="ticker-wrapper" id="clockTicker">
+    <!-- Première moitié -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
     <div class="clock" data-city="London" data-tz="Europe/London"></div>
     <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
     <div class="clock" data-city="Dubai" data-tz="Asia/Dubai"></div>
     <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
     <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
-    <!-- duplicate to make continuous loop -->
+    <!-- Copie pour défilement infini fluide -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
     <div class="clock" data-city="London" data-tz="Europe/London"></div>
     <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
