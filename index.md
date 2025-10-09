@@ -74,7 +74,7 @@ full_bleed: true
     position: relative;
     z-index: 0;
     width: 100%;
-    margin: -1350px 0 0; /* plus négatif = horloges plus haut */
+    margin: -1450px 0 0; /* plus négatif = horloges plus haut */
   }
   /* Responsive fine-tuning : ajuste le recouvrement selon la largeur */
   @media (max-width: 1400px) { .promo-video { margin: -1150px 0 0; } }
@@ -118,7 +118,7 @@ full_bleed: true
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
     padding: 12px 0;
-    margin-top: -28px;
+    margin-top: -6px;
     opacity: 1;
     z-index: 10;
     isolation: isolate;
@@ -182,7 +182,6 @@ full_bleed: true
     font-weight:800;
     letter-spacing:.08em;
     padding:8px 12px;
-    margin-top:-12px;
   }
   .market-status .badge{
     display:inline-block;
