@@ -266,7 +266,7 @@
       if(h > 0){
         document.documentElement.style.setProperty('--ticker-h', h+'px');
         // applique aussi l'offset CSS au runtime (utile si tu veux changer vite)
-        const offset = getComputedStyle(document.documentElement).getPropertyValue('--sidebar-offset').trim() || '80px';
+        const offset = getComputedStyle(document.documentElement).getPropertyValue('--sidebar-offset').trim() || '60px';
         if(sidebar){
           sidebar.style.top = `calc(${h}px + ${offset})`;
           sidebar.style.height = `calc(100vh - ${h}px - ${offset})`;
