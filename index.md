@@ -39,7 +39,7 @@ full_bleed: true
   /* === LOGO IMAGE === */
   .hero-logo-img {
     position: absolute;
-    right: -4.0vw;           
+    right: -4.0vw;
     top: 34%;
     transform: translateY(-34%);
     z-index: 3;
@@ -54,7 +54,6 @@ full_bleed: true
     from { opacity: 0; transform: translateY(-34%) translateX(40px); }
     to { opacity: 1; transform: translateY(-34%) translateX(0); }
   }
-
   @media (max-width: 880px) {
     .hero-logo-img {
       right: -1.2vw;
@@ -69,7 +68,7 @@ full_bleed: true
     position: relative;
     z-index: 0;
     width: 100%;
-    margin: -1250px 0 0; /* 🔼 légèrement remonté */
+    margin: -1250px 0 0;
   }
   .promo-video-frame {
     position: relative;
@@ -108,22 +107,35 @@ full_bleed: true
     pointer-events: none;
   }
 
-  /* === WORLD CLOCK BAR (contraste total + défilement fluide) === */
+  /* === WORLD CLOCK BAR (zéro transparence, fond noir, défilement fluide) === */
   .world-clock-bar{
     position: relative;
     overflow: hidden;
-    background:#000;
+    background:#000 !important;
     border-top:1px solid #333;
     border-bottom:1px solid #333;
     padding:12px 0;
     margin-top:-6px;
+    opacity:1 !important;
+    mix-blend-mode:normal !important;
+    isolation:isolate;
+  }
+  .world-clock-bar::before{
+    content:"";
+    position:absolute; inset:0;
+    background:#000;
+    z-index:0;
   }
 
   .ticker-wrapper{
+    position:relative;
+    z-index:1;
     display:flex;
     width:max-content;
     white-space:nowrap;
     animation:tickerMove 90s linear infinite;
+    opacity:1 !important;
+    filter:none !important;
   }
 
   @keyframes tickerMove{
@@ -139,28 +151,33 @@ full_bleed: true
     min-width:150px;
     margin:0 35px;
     text-align:center;
-    opacity:1 !important;          
-    filter:none !important;        
+    opacity:1 !important;
+    filter:none !important;
+    mix-blend-mode:normal !important;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
   }
 
   .clock .city{
-    font-weight:800;
-    color:#7fb3ff;                 
+    font-weight:900;
+    color:#9ec8ff; /* bleu clair intense et opaque */
     text-transform:uppercase;
-    font-size:.9rem;
+    font-size:.92rem;
     letter-spacing:.05em;
     opacity:1 !important;
+    text-shadow:0 0 6px rgba(0,0,0,.85);
   }
 
   .clock .time{
     font-weight:900;
-    font-size:1.25rem;
-    color:#fff !important;         
+    font-size:1.28rem;
+    color:#fff !important;
     margin-top:2px;
     opacity:1 !important;
-    text-shadow:0 0 6px rgba(0,0,0,.85);
+    text-shadow:
+      0 0 0 #000,
+      0 0 8px rgba(0,0,0,.90),
+      0 0 1px #000;
   }
 </style>
 
@@ -178,11 +195,9 @@ full_bleed: true
   <div class="hero-content">
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
     <h1>Turning Models into Market Impact</h1>
-
     <p class="subtitle">
       Quantitative Finance Engineer — <strong>CFA Level I Holder</strong>.<br/>
     </p>
-
     <div class="hero-actions">
       <a class="btn primary" href="{{ '/resumes' | relative_url }}">View CV</a>
       <a class="btn" href="{{ '/theses' | relative_url }}">Theses</a>
