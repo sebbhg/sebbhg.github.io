@@ -182,8 +182,7 @@ full_bleed: true
     font-weight:800;
     letter-spacing:.08em;
     padding:8px 12px;
-
-  /* ✅ pour que les liens soient au-dessus de tout */
+    /* liens au-dessus de tout */
     position: relative;
     z-index: 50;
   }
@@ -198,17 +197,11 @@ full_bleed: true
     font-weight:800;
   }
   .market-status .closed{ opacity:.7; color:#9aa3b2; border-color:#333; background:#0f0f0f; }
-
-  /* Badges cliquables quand LIVE */
   .market-status a.badge{
-    display:inline-block;
-    text-decoration:none;
-    cursor:pointer;
-    pointer-events:auto; /* ceinture et bretelles */
+    text-decoration:none; cursor:pointer; pointer-events:auto;
   }
   .market-status a.badge:hover{
-    border-color:#2c8cff99;
-    box-shadow:0 0 0 2px rgba(44,140,255,.12) inset;
+    border-color:#2c8cff99; box-shadow:0 0 0 2px rgba(44,140,255,.12) inset;
   }
 
   /* ===== Bande "Latest Updates" ===== */
@@ -259,35 +252,39 @@ full_bleed: true
     margin-bottom:10px;
     font-weight:800;
   }
-  .update-title{
-    margin:0 0 6px;
-    font-size:clamp(1.05rem,2.2vw,1.2rem);
-    font-weight:800;
-  }
-  .update-meta{
-    color:#9aa3b2;
-    font-size:.9rem;
-    margin:0 0 10px;
-  }
-  .update-desc{
-    color:#c9cbd1;
-    margin:0 0 12px;
-    line-height:1.55;
-  }
+  .update-title{ margin:0 0 6px; font-size:clamp(1.05rem,2.2vw,1.2rem); font-weight:800; }
+  .update-meta{ color:#9aa3b2; font-size:.9rem; margin:0 0 10px; }
+  .update-desc{ color:#c9cbd1; margin:0 0 12px; line-height:1.55; }
   .update-link{
     display:inline-flex; align-items:center; gap:8px;
-    padding:8px 10px;
-    border:1px solid rgba(255,255,255,.16);
-    border-radius:10px;
-    background:#0f0f0f;
-    color:#fff; font-weight:700;
-    text-decoration:none;
+    padding:8px 10px; border:1px solid rgba(255,255,255,.16);
+    border-radius:10px; background:#0f0f0f; color:#fff; font-weight:700; text-decoration:none;
   }
   .update-link:hover{ border-color:#4da0ff; background:#141414; }
 
-  /* Responsive: passe à 1 colonne pour les updates */
-  @media (max-width:820px){
-    .news-wrap{ grid-template-columns: 1fr; }
+  @media (max-width:820px){ .news-wrap{ grid-template-columns: 1fr; } }
+
+  /* === SECTION ACTIVITIES (sous les rectangles info/update) === */
+  .activities-section {
+    background:#050505;
+    color:#ccc;
+    text-align:center;
+    padding:40px 20px 50px;
+    border-top:1px solid #111;
+    border-bottom:1px solid #111;
+  }
+  .activities-section h2 {
+    color:#2c8cff;
+    font-size:clamp(1.5rem,3vw,2.2rem);
+    font-weight:800;
+    margin-bottom:0.6rem;
+  }
+  .activities-section p {
+    font-size:1rem;
+    color:#aaa;
+    max-width:800px;
+    margin:0 auto;
+    line-height:1.6;
   }
 
   /* === SECTION SCROLLABLE (contenu) === */
@@ -313,11 +310,7 @@ full_bleed: true
   }
 
   /* au-dessus du footer */
-  .news-band,
-  .after-market {
-    position: relative;
-    z-index: 3;
-  }
+  .news-band, .activities-section, .after-market { position: relative; z-index: 3; }
 </style>
 
 <section class="hero-video">
@@ -425,6 +418,14 @@ full_bleed: true
   </div>
 </section>
 
+<!-- ===== Activities (sous les updates) ===== -->
+<section class="activities-section">
+  <div class="wrapper">
+    <h2>Activities</h2>
+    <p>Explore the different sections of this website to discover projects, courses, theses, and readings.</p>
+  </div>
+</section>
+
 <!-- ===== SECTION SCROLLABLE ===== -->
 <section class="after-market">
   <div class="wrapper">
@@ -527,11 +528,11 @@ setInterval(updateClocks, 1000);
     const {t} = hmInTZ('Europe/London');
     return t >= 8*60 && t < 16*60;
   }
-  // Paris = même plage que Londres (Euronext Paris).
+  // Paris (plage simple)
   function isOpenParis(){
     if(!isWeekday('Europe/Paris')) return false;
     const {t} = hmInTZ('Europe/Paris');
-    return t >= 9*60 && t < 17*60*1; // 09:00-17:00 CET/CEST (plage simple)
+    return t >= 9*60 && t < 17*60;
   }
   function isOpenNewYork(){
     if(!isWeekday('America/New_York')) return false;
@@ -560,9 +561,9 @@ setInterval(updateClocks, 1000);
     };
 
     el.innerHTML = `
-      ${badge(tokyo,  'TOKYO',   urls.tokyo)}
-      ${badge(london, 'LONDON',  urls.london)}
-      ${badge(paris,  'PARIS',   urls.paris)}
+      ${badge(tokyo,  'TOKYO',    urls.tokyo)}
+      ${badge(london, 'LONDON',   urls.london)}
+      ${badge(paris,  'PARIS',    urls.paris)}
       ${badge(ny,     'NEW YORK', urls.ny)}
     `;
   }
