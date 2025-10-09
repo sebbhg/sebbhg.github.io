@@ -69,13 +69,20 @@ full_bleed: true
     }
   }
 
-  /* === SECONDARY VIDEO (raccourcie pour remonter la suite) === */
+  /* === SECONDARY VIDEO (raccourcie pour remonter horloges & statut) === */
   .promo-video {
     position: relative;
     z-index: 0;
     width: 100%;
-    margin: -850px 0 0; /* <-- était -1250px */
+    margin: -1220px 0 0; /* plus négatif = horloges plus haut */
   }
+  /* Responsive fine-tuning : ajuste le recouvrement selon la largeur */
+  @media (max-width: 1400px) { .promo-video { margin: -1150px 0 0; } }
+  @media (max-width: 1200px) { .promo-video { margin: -1050px 0 0; } }
+  @media (max-width: 1024px) { .promo-video { margin: -900px  0 0; } }
+  @media (max-width: 768px)  { .promo-video { margin: -640px  0 0; } }
+  @media (max-width: 560px)  { .promo-video { margin: -520px  0 0; } }
+
   .promo-video-frame {
     position: relative;
     width: 100%;
