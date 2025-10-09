@@ -99,7 +99,7 @@ full_bleed: true
   }
 
   /* === WORLD CLOCK BAR — opaque, sans transparence === */
-  :root { --clock-speed: 120s; } /* ✅ vitesse par défaut du défilement */
+  :root { --clock-speed: 120s; } /* vitesse par défaut du défilement */
   .world-clock-bar {
     position: relative;
     overflow: hidden;
@@ -130,16 +130,11 @@ full_bleed: true
     animation: tickerMove var(--clock-speed) linear infinite;
     will-change: transform;
   }
-  /* sens normal */
   @keyframes tickerMove { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
-  /* sens inverse (pour glisser vers la droite) */
   .ticker-wrapper.reverse { animation-name: tickerMoveReverse; }
   @keyframes tickerMoveReverse { 0%{transform:translateX(-50%);} 100%{transform:translateX(0);} }
 
-  .ticker-wrapper.dragging {
-    animation-play-state: paused; /* on stoppe pendant le drag */
-    cursor: grabbing;
-  }
+  .ticker-wrapper.dragging { animation-play-state: paused; cursor: grabbing; }
 
   .clock {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -157,8 +152,6 @@ full_bleed: true
     animation: clockPulse 1.8s ease-in-out infinite;
     will-change: transform, text-shadow, opacity; transform: translateZ(0);
   }
-
-  /* === Pulsation Glow (visuel pro) === */
   @keyframes clockPulse {
     0%, 100% { transform: scale(1); text-shadow: 0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000; }
     50%      { transform: scale(1.03); text-shadow: 0 0 10px rgba(44,140,255,.9), 0 0 22px rgba(44,140,255,.6), 0 0 2px #000; }
@@ -167,6 +160,29 @@ full_bleed: true
     0%, 100% { text-shadow: 0 0 6px rgba(0,0,0,.8); }
     50%      { text-shadow: 0 0 10px rgba(44,140,255,.7), 0 0 18px rgba(44,140,255,.35); }
   }
+
+  /* === MARKET STATUS (sous les horloges) === */
+  .market-status{
+    background:#0a0a0a;
+    border-top:1px solid #222;
+    border-bottom:1px solid #222;
+    color:#2c8cff;
+    text-align:center;
+    font-weight:800;
+    letter-spacing:.08em;
+    padding:8px 12px;
+  }
+  .market-status .badge{
+    display:inline-block;
+    margin:0 .35rem;
+    padding:.25rem .5rem;
+    border-radius:.6rem;
+    border:1px solid #1f3b66;
+    background:#0c1220;
+    color:#9ec8ff;
+    font-weight:800;
+  }
+  .market-status .closed{ opacity:.7; color:#9aa3b2; border-color:#333; background:#0f0f0f; }
 </style>
 
 <section class="hero-video">
@@ -242,6 +258,9 @@ full_bleed: true
   </div>
 </div>
 
+<!-- ===== Market Status ===== -->
+<div class="market-status" id="marketStatus">Loading market status…</div>
+
 <script>
 /* === Horloges (heure locale par TZ) === */
 function updateClocks(){
@@ -264,13 +283,11 @@ setInterval(updateClocks, 1000);
   const bar  = document.getElementById('clockBar');
   const wrap = document.getElementById('clockTicker');
 
-  let isDown=false, startX=0, lastX=0, raf=null;
+  let isDown=false, startX=0;
 
-  // Utilitaires vitesse : mappe le delta → vitesse (plus on glisse fort, plus ça va vite)
   function speedFromDx(dx){
     const abs = Math.min(Math.abs(dx), 600); // cap
-    // 120s (lent) → 12s (très rapide)
-    const dur = 120 - (abs/600)*108;
+    const dur = 120 - (abs/600)*108;         // 120s → 12s
     return Math.max(12, Math.min(120, dur)).toFixed(0) + 's';
   }
 
@@ -278,38 +295,83 @@ setInterval(updateClocks, 1000);
     isDown=true;
     wrap.classList.add('dragging');
     startX = (e.touches ? e.touches[0].clientX : e.clientX);
-    lastX  = startX;
   }
   function onPointerMove(e){
     if(!isDown) return;
     const x = (e.touches ? e.touches[0].clientX : e.clientX);
     const dx = x - startX;
-    const dirRight = dx > 0;
-    // sens
-    wrap.classList.toggle('reverse', dirRight);
-    // vitesse
-    const dur = speedFromDx(dx);
-    root.style.setProperty('--clock-speed', dur);
-    lastX = x;
+    wrap.classList.toggle('reverse', dx > 0);
+    document.documentElement.style.setProperty('--clock-speed', speedFromDx(dx));
     e.preventDefault();
   }
   function onPointerUp(){
     if(!isDown) return;
     isDown=false;
-    wrap.classList.remove('dragging');
-    // Retour progressif à la vitesse normale
-    root.style.setProperty('--clock-speed', '120s');
-    wrap.classList.remove('reverse');
+    wrap.classList.remove('dragging','reverse');
+    document.documentElement.style.setProperty('--clock-speed', '120s');
   }
 
-  // Souris
   bar.addEventListener('mousedown', onPointerDown);
   window.addEventListener('mousemove', onPointerMove, { passive:false });
   window.addEventListener('mouseup',   onPointerUp);
 
-  // Touch
   bar.addEventListener('touchstart', onPointerDown, { passive:true });
   window.addEventListener('touchmove', onPointerMove, { passive:false });
   window.addEventListener('touchend',  onPointerUp);
+})();
+
+/* === Market Status (Tokyo / London / New York) ===
+   Approx horaires standard jours ouvrés (sans jours fériés, ni pauses) :
+   - Tokyo:   09:00–15:00 JST
+   - London:  08:00–16:00 UK
+   - New York:09:30–16:00 ET  (on simplifie 14:00–21:00 UTC, sans DST précis)
+*/
+(function(){
+  const el = document.getElementById('marketStatus');
+
+  function isWeekday(tz){
+    const d = +new Date().toLocaleString('en-US',{weekday:'0', timeZone:tz}); // 0=Sun
+    return d!==0 && d!==6;
+  }
+  function hourInTZ(tz){
+    return +new Date().toLocaleString('en-US',{hour:'2-digit', hour12:false, timeZone:tz});
+  }
+  function minuteInTZ(tz){
+    return +new Date().toLocaleString('en-US',{minute:'2-digit', timeZone:tz});
+  }
+  function isOpenTokyo(){
+    if(!isWeekday('Asia/Tokyo')) return false;
+    const h = hourInTZ('Asia/Tokyo'), m = minuteInTZ('Asia/Tokyo');
+    const t = h*60+m;
+    return t >= 9*60 && t < 15*60; // 09:00–15:00
+  }
+  function isOpenLondon(){
+    if(!isWeekday('Europe/London')) return false;
+    const h = hourInTZ('Europe/London'), m = minuteInTZ('Europe/London');
+    const t = h*60+m;
+    return t >= 8*60 && t < 16*60; // 08:00–16:00
+  }
+  function isOpenNewYork(){
+    if(!isWeekday('America/New_York')) return false;
+    const h = hourInTZ('America/New_York'), m = minuteInTZ('America/New_York');
+    const t = h*60+m;
+    return t >= 9*60+30 && t < 16*60; // 09:30–16:00
+  }
+
+  function refresh(){
+    const tokyo  = isOpenTokyo();
+    const london = isOpenLondon();
+    const ny     = isOpenNewYork();
+
+    let html = '';
+    html += `<span class="badge ${tokyo ? '' : 'closed'}">TOKYO ${tokyo ? 'LIVE' : 'CLOSED'}</span>`;
+    html += `<span class="badge ${london ? '' : 'closed'}">LONDON ${london ? 'LIVE' : 'CLOSED'}</span>`;
+    html += `<span class="badge ${ny ? '' : 'closed'}">NEW YORK ${ny ? 'LIVE' : 'CLOSED'}</span>`;
+
+    el.innerHTML = html;
+  }
+
+  refresh();
+  setInterval(refresh, 60_000);
 })();
 </script>
