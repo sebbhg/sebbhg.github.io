@@ -27,25 +27,33 @@
     a{color:inherit;text-decoration:none;}
     img{max-width:100%;display:block;}
 
-    /* === TICKER TRADINGVIEW (fix overflow bug) === */
+    /* === TICKER TRADINGVIEW (fix complet) === */
     .tv-ticker-wrap{
-      position:sticky;top:0;z-index:9999;
-      height:var(--ticker-h);
+      position:sticky;
+      top:0;
+      z-index:9999;
       background:#000;
       border-bottom:1px solid var(--border);
-      overflow:hidden;               /* ✅ coupe tout débordement */
+      height:auto !important;
+      min-height:var(--ticker-h);
+      max-height:65px;
+      overflow:visible !important;
+      box-shadow:0 6px 16px rgba(44,140,255,0.15); /* halo doux */
     }
     .tradingview-widget-container{
-      max-width:1600px;
-      margin:0 auto;
-      height:100%;
+      width:100%;
+      height:auto !important;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:2px 0;
     }
     .tradingview-widget-container iframe{
-      display:block !important;
       width:100% !important;
-      height:var(--ticker-h) !important;
-      min-height:var(--ticker-h) !important;
+      height:auto !important;
+      min-height:40px;
       border:0 !important;
+      display:block;
     }
 
     /* === Layout principal === */
@@ -153,7 +161,7 @@
       .wrapper{max-width:100%;}
     }
 
-    /* === HERO VIDEO (Page d'accueil) === */
+    /* === HERO VIDEO (page Home) === */
     .hero-video{
       position:relative;
       min-height:calc(100vh - var(--ticker-h));
@@ -235,7 +243,7 @@
           { "proName": "CRYPTO:BTCUSD",    "title": "BTC" }
         ],
         "showSymbolLogo": true,
-        "isTransparent": true,
+        "isTransparent": false,
         "displayMode": "adaptive",
         "colorTheme": "dark",
         "locale": "en"
