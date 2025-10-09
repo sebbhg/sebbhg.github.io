@@ -273,12 +273,13 @@ full_bleed: true
     border-top:1px solid #111;
     border-bottom:1px solid #111;
   }
-  .activities-section h2 {
-    color:#9ec8ff;
+  .activities-section h2,
+  .activities-section .activities-title {
+    color:#9ec8ff !important;  /* bleu clair comme les badges INFO/UPDATE */
     font-size:clamp(1.5rem,3vw,2.2rem);
     font-weight:800;
     margin-bottom:0.6rem;
-    text-shadow:0 0 8px rgba(44,140,255,.15);
+    text-shadow:0 0 8px rgba(44,140,255,.25);
   }
   .activities-section p {
     font-size:1rem;
@@ -422,7 +423,7 @@ full_bleed: true
 <!-- ===== Activities (sous les updates) ===== -->
 <section class="activities-section">
   <div class="wrapper">
-    <h2>Activities</h2>
+    <h2 class="activities-title">Activities</h2>
     <p>Explore the different sections of this website to discover projects, courses, theses, and readings.</p>
   </div>
 </section>
