@@ -39,11 +39,11 @@ full_bleed: true
   /* === LOGO IMAGE === */
   .hero-logo-img {
     position: absolute;
-    right: -4.0vw;              /* plaqué à droite */
-    top: 34%;                   /* ajusté plus haut */
+    right: -4.0vw;           
+    top: 34%;
     transform: translateY(-34%);
     z-index: 3;
-    width: min(13vw, 40vh);     /* taille réduite */
+    width: min(13vw, 40vh);
     height: auto;
     opacity: 0;
     animation: fadeInLogo 1.2s ease-out 1.0s forwards;
@@ -65,7 +65,12 @@ full_bleed: true
   }
 
   /* === SECONDARY VIDEO === */
-  .promo-video { position: relative; z-index: 0; width: 100%; margin: -1270px 0 0; }
+  .promo-video {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    margin: -1250px 0 0; /* 🔼 légèrement remonté */
+  }
   .promo-video-frame {
     position: relative;
     width: 100%;
@@ -103,45 +108,52 @@ full_bleed: true
     pointer-events: none;
   }
 
-  /* === WORLD CLOCK BAR === */
+  /* === WORLD CLOCKS TICKER (défilement façon cotations) === */
   .world-clock-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
+    position: relative;
+    overflow: hidden;
     background: #000;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
-    padding: 14px 10px;
-    font-family: "Inter", system-ui, sans-serif;
-    color: #e0e0e0;
-    font-size: 1rem;
-    letter-spacing: 0.03em;
-    overflow-x: auto;
-    white-space: nowrap;
+    padding: 10px 0;
+    margin-top: -6px; /* 🔼 remonte un peu le bandeau */
   }
+
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: tickerMove 60s linear infinite;
+  }
+
+  @keyframes tickerMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
   .clock {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 100px;
+    justify-content: center;
+    min-width: 140px;
+    margin: 0 25px;
     text-align: center;
-    opacity: 0.9;
-    transition: opacity .3s;
+    opacity: 1; /* 🔥 moins transparent */
   }
-  .clock:hover { opacity: 1; }
+
   .clock .city {
     font-weight: 600;
     color: #66a3ff;
     text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     letter-spacing: 0.05em;
   }
+
   .clock .time {
     font-weight: 700;
     font-size: 1.2rem;
     color: #fff;
-    margin-top: 4px;
+    margin-top: 3px;
   }
 </style>
 
@@ -188,14 +200,23 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== World Clocks Bar ===== -->
+<!-- ===== World Clocks Ticker ===== -->
 <div class="world-clock-bar">
-  <div class="clock" data-city="New York" data-tz="America/New_York"></div>
-  <div class="clock" data-city="London" data-tz="Europe/London"></div>
-  <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
-  <div class="clock" data-city="Dubai" data-tz="Asia/Dubai"></div>
-  <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
-  <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
+  <div class="ticker-track" id="clockTicker">
+    <div class="clock" data-city="New York" data-tz="America/New_York"></div>
+    <div class="clock" data-city="London" data-tz="Europe/London"></div>
+    <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
+    <div class="clock" data-city="Dubai" data-tz="Asia/Dubai"></div>
+    <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
+    <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
+    <!-- duplicate to make continuous loop -->
+    <div class="clock" data-city="New York" data-tz="America/New_York"></div>
+    <div class="clock" data-city="London" data-tz="Europe/London"></div>
+    <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
+    <div class="clock" data-city="Dubai" data-tz="Asia/Dubai"></div>
+    <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
+    <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
+  </div>
 </div>
 
 <script>
