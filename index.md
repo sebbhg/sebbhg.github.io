@@ -78,7 +78,6 @@ full_bleed: true
     background: #000;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
-    z-index: 0;
   }
   @supports not (aspect-ratio: 16/9) {
     .promo-video-frame { padding-top: 56.25%; }
@@ -106,11 +105,10 @@ full_bleed: true
       rgba(0, 0, 0, .55) 65%,
       rgba(0, 0, 0, .7) 100%);
     pointer-events: none;
-    z-index: 0;
   }
 
   /* === WORLD CLOCK BAR (zéro transparence, fond noir, défilement fluide) === */
-  .world-clock-bar{
+  .world-clock-bar {
     position: relative;
     overflow: hidden;
     background:#000 !important;
@@ -121,35 +119,30 @@ full_bleed: true
     opacity:1 !important;
     mix-blend-mode:normal !important;
     isolation:isolate;
-    z-index: 5;
   }
-  .world-clock-bar::before{
+  .world-clock-bar::before {
     content:"";
     position:absolute; inset:0;
     background:#000;
-    opacity:1;
     z-index:0;
   }
 
-  .ticker-wrapper{
+  .ticker-wrapper {
     position:relative;
     z-index:1;
     display:flex;
     width:max-content;
     white-space:nowrap;
-    animation:tickerMove 120s linear infinite; /* un poil plus lent avec plus d'horloges */
+    animation:tickerMove 120s linear infinite;
     opacity:1 !important;
     filter:none !important;
-    backface-visibility:hidden;
-    will-change:transform;
   }
-
-  @keyframes tickerMove{
+  @keyframes tickerMove {
     0%{transform:translateX(0);}
     100%{transform:translateX(-50%);}
   }
 
-  .clock{
+  .clock {
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -162,10 +155,9 @@ full_bleed: true
     mix-blend-mode:normal !important;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
-    z-index:2;
   }
 
-  .clock .city{
+  .clock .city {
     font-weight:900;
     color:#9ec8ff !important;
     text-transform:uppercase;
@@ -173,11 +165,12 @@ full_bleed: true
     letter-spacing:.05em;
     opacity:1 !important;
     text-shadow:0 0 6px rgba(0,0,0,.9);
-    animation: clockPulse 4s ease-in-out infinite;  /* optionnel: léger pulse */
-    animation-delay: .7s;
+    animation: clockPulseCity 3.6s ease-in-out infinite;
+    animation-delay: .6s;
+    transform: translateZ(0);
   }
 
-  .clock .time{
+  .clock .time {
     font-weight:900;
     font-size:1.28rem;
     color:#ffffff !important;
@@ -187,18 +180,41 @@ full_bleed: true
       0 0 0 #000,
       0 0 8px rgba(0,0,0,1),
       0 0 1px #000;
-    animation: clockPulse 2.8s ease-in-out infinite; /* ✅ clignotement doux */
+    animation: clockPulse 1.8s ease-in-out infinite;
+    will-change: transform, text-shadow, opacity;
+    transform: translateZ(0);
   }
 
-  /* === Effet de clignotement doux (heures + villes) === */
+  /* === Effets de clignotement (Glow animé) === */
   @keyframes clockPulse {
     0%, 100% {
-      text-shadow: 0 0 8px rgba(0,0,0,.9);
       opacity: 1;
+      transform: scale(1);
+      text-shadow:
+        0 0 0 #000,
+        0 0 8px rgba(0,0,0,1),
+        0 0 1px #000;
     }
     50% {
-      text-shadow: 0 0 18px rgba(44,140,255,.8);
-      opacity: 0.92;
+      opacity: 1;
+      transform: scale(1.03);
+      text-shadow:
+        0 0 10px rgba(44,140,255,.9),
+        0 0 22px rgba(44,140,255,.6),
+        0 0 2px #000;
+    }
+  }
+
+  @keyframes clockPulseCity {
+    0%, 100% {
+      opacity: 1;
+      text-shadow: 0 0 6px rgba(0,0,0,.9);
+    }
+    50% {
+      opacity: .98;
+      text-shadow:
+        0 0 10px rgba(44,140,255,.6),
+        0 0 18px rgba(44,140,255,.35);
     }
   }
 </style>
@@ -247,7 +263,7 @@ full_bleed: true
 <!-- ===== World Clocks Continuous Ticker ===== -->
 <div class="world-clock-bar">
   <div class="ticker-wrapper" id="clockTicker">
-    <!-- Première série (élargie) -->
+    <!-- Première série -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
     <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
     <div class="clock" data-city="Los Angeles" data-tz="America/Los_Angeles"></div>
@@ -263,7 +279,7 @@ full_bleed: true
     <div class="clock" data-city="São Paulo" data-tz="America/Sao_Paulo"></div>
     <div class="clock" data-city="Toronto" data-tz="America/Toronto"></div>
 
-    <!-- Copie exacte pour défilement infini -->
+    <!-- Copie pour défilement infini -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
     <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
     <div class="clock" data-city="Los Angeles" data-tz="America/Los_Angeles"></div>
