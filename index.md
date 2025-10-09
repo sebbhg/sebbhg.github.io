@@ -107,17 +107,17 @@ full_bleed: true
     pointer-events: none;
   }
 
-  /* === WORLD CLOCK BAR — version opaque === */
+  /* === WORLD CLOCK BAR — opaque, sans transparence === */
   .world-clock-bar {
     position: relative;
     overflow: hidden;
-    background: #000;                 /* ✅ fond totalement opaque */
+    background: #000;
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
     padding: 12px 0;
     margin-top: -6px;
     opacity: 1;
-    z-index: 10;                      /* ✅ au-dessus de la vidéo */
+    z-index: 10;
     isolation: isolate;
   }
   .world-clock-bar * {
@@ -125,7 +125,6 @@ full_bleed: true
     opacity: 1 !important;
     mix-blend-mode: normal !important;
     filter: none !important;
-    color: #fff !important;
   }
 
   .ticker-wrapper {
@@ -135,7 +134,6 @@ full_bleed: true
     width: max-content;
     white-space: nowrap;
     animation: tickerMove 120s linear infinite;
-    will-change: transform;
   }
   @keyframes tickerMove {
     0% { transform: translateX(0); }
@@ -154,11 +152,11 @@ full_bleed: true
 
   .clock .city {
     font-weight: 900;
-    color: #9ec8ff;
+    color: #7fb3ff; /* ✅ bleu Bloomberg */
     text-transform: uppercase;
     font-size: .92rem;
     letter-spacing: .05em;
-    text-shadow: 0 0 6px rgba(0,0,0,.9);
+    text-shadow: 0 0 6px rgba(0,0,0,.85);
     animation: clockPulseCity 3.6s ease-in-out infinite;
     animation-delay: .6s;
   }
@@ -166,7 +164,7 @@ full_bleed: true
   .clock .time {
     font-weight: 900;
     font-size: 1.28rem;
-    color: #ffffff;
+    color: #fff;
     margin-top: 2px;
     text-shadow:
       0 0 0 #000,
@@ -177,7 +175,7 @@ full_bleed: true
     transform: translateZ(0);
   }
 
-  /* === Pulsation Glow (visible mais clean) === */
+  /* === Pulsation Glow (visuel pro) === */
   @keyframes clockPulse {
     0%, 100% {
       transform: scale(1);
@@ -197,11 +195,11 @@ full_bleed: true
 
   @keyframes clockPulseCity {
     0%, 100% {
-      text-shadow: 0 0 6px rgba(0,0,0,.9);
+      text-shadow: 0 0 6px rgba(0,0,0,.8);
     }
     50% {
       text-shadow:
-        0 0 10px rgba(44,140,255,.6),
+        0 0 10px rgba(44,140,255,.7),
         0 0 18px rgba(44,140,255,.35);
     }
   }
@@ -247,6 +245,7 @@ full_bleed: true
 <div class="world-clock-bar">
   <div class="ticker-wrapper" id="clockTicker">
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
+    <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
     <div class="clock" data-city="London" data-tz="Europe/London"></div>
     <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
     <div class="clock" data-city="Zurich" data-tz="Europe/Zurich"></div>
@@ -260,6 +259,7 @@ full_bleed: true
 
     <!-- Copie pour le défilement infini -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
+    <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
     <div class="clock" data-city="London" data-tz="Europe/London"></div>
     <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
     <div class="clock" data-city="Zurich" data-tz="Europe/Zurich"></div>
