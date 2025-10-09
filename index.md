@@ -66,7 +66,7 @@ full_bleed: true
   /* === SECONDARY VIDEO === */
   .promo-video {
     position: relative;
-    z-index: 0;              /* ⬅ ensure below clocks */
+    z-index: 0;
     width: 100%;
     margin: -1250px 0 0;
   }
@@ -78,7 +78,7 @@ full_bleed: true
     background: #000;
     border-top: 1px solid #222;
     border-bottom: 1px solid #222;
-    z-index: 0;              /* ⬅ ensure below clocks */
+    z-index: 0;
   }
   @supports not (aspect-ratio: 16/9) {
     .promo-video-frame { padding-top: 56.25%; }
@@ -106,42 +106,41 @@ full_bleed: true
       rgba(0, 0, 0, .55) 65%,
       rgba(0, 0, 0, .7) 100%);
     pointer-events: none;
-    z-index: 0;              /* ⬅ ensure below clocks */
+    z-index: 0;
   }
 
   /* === WORLD CLOCK BAR (zéro transparence, fond noir, défilement fluide) === */
   .world-clock-bar{
     position: relative;
     overflow: hidden;
-    background:#000 !important;     /* fond 100% noir */
+    background:#000 !important;
     border-top:1px solid #333;
     border-bottom:1px solid #333;
     padding:12px 0;
     margin-top:-6px;
     opacity:1 !important;
     mix-blend-mode:normal !important;
-    isolation:isolate;              /* évite tout mélange avec la vidéo */
-    z-index: 5;                     /* au-dessus de la promo-video */
+    isolation:isolate;
+    z-index: 5;
   }
   .world-clock-bar::before{
     content:"";
     position:absolute; inset:0;
-    background:#000;                /* couche noire additionnelle */
+    background:#000;
     opacity:1;
     z-index:0;
   }
 
   .ticker-wrapper{
     position:relative;
-    z-index:2;                      /* texte au-dessus du fond noir */
+    z-index:1;
     display:flex;
     width:max-content;
     white-space:nowrap;
-    animation:tickerMove 90s linear infinite;
+    animation:tickerMove 120s linear infinite; /* un poil plus lent avec plus d'horloges */
     opacity:1 !important;
     filter:none !important;
-    mix-blend-mode:normal !important;
-    backface-visibility:hidden;     /* stabilité rendu */
+    backface-visibility:hidden;
     will-change:transform;
   }
 
@@ -163,29 +162,44 @@ full_bleed: true
     mix-blend-mode:normal !important;
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
-    z-index:3;
+    z-index:2;
   }
 
   .clock .city{
     font-weight:900;
-    color:#9ec8ff !important;  /* bleu clair intense et opaque */
+    color:#9ec8ff !important;
     text-transform:uppercase;
     font-size:.92rem;
     letter-spacing:.05em;
     opacity:1 !important;
     text-shadow:0 0 6px rgba(0,0,0,.9);
+    animation: clockPulse 4s ease-in-out infinite;  /* optionnel: léger pulse */
+    animation-delay: .7s;
   }
 
   .clock .time{
     font-weight:900;
     font-size:1.28rem;
-    color:#ffffff !important;  /* blanc pur forcé */
+    color:#ffffff !important;
     margin-top:2px;
     opacity:1 !important;
     text-shadow:
       0 0 0 #000,
       0 0 8px rgba(0,0,0,1),
       0 0 1px #000;
+    animation: clockPulse 2.8s ease-in-out infinite; /* ✅ clignotement doux */
+  }
+
+  /* === Effet de clignotement doux (heures + villes) === */
+  @keyframes clockPulse {
+    0%, 100% {
+      text-shadow: 0 0 8px rgba(0,0,0,.9);
+      opacity: 1;
+    }
+    50% {
+      text-shadow: 0 0 18px rgba(44,140,255,.8);
+      opacity: 0.92;
+    }
   }
 </style>
 
@@ -233,7 +247,7 @@ full_bleed: true
 <!-- ===== World Clocks Continuous Ticker ===== -->
 <div class="world-clock-bar">
   <div class="ticker-wrapper" id="clockTicker">
-    <!-- Première série -->
+    <!-- Première série (élargie) -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
     <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
     <div class="clock" data-city="Los Angeles" data-tz="America/Los_Angeles"></div>
