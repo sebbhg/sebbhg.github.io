@@ -108,54 +108,59 @@ full_bleed: true
     pointer-events: none;
   }
 
-  /* === WORLD CLOCKS TICKER (Défilement continu) === */
-  .world-clock-bar {
+  /* === WORLD CLOCK BAR (contraste total + défilement fluide) === */
+  .world-clock-bar{
     position: relative;
     overflow: hidden;
-    background: #000;
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
-    padding: 12px 0;
-    margin-top: -6px;
+    background:#000;
+    border-top:1px solid #333;
+    border-bottom:1px solid #333;
+    padding:12px 0;
+    margin-top:-6px;
   }
 
-  .ticker-wrapper {
-    display: flex;
-    width: max-content;
-    white-space: nowrap;
-    animation: tickerMove 90s linear infinite; /* 🔁 défilement plus lent et fluide */
+  .ticker-wrapper{
+    display:flex;
+    width:max-content;
+    white-space:nowrap;
+    animation:tickerMove 90s linear infinite;
   }
 
-  @keyframes tickerMove {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* 🔥 demi-longueur = boucle parfaite */
+  @keyframes tickerMove{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
   }
 
-  .clock {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 150px;
-    margin: 0 35px;
-    text-align: center;
-    opacity: 1; /* ✅ plus aucune transparence */
+  .clock{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-width:150px;
+    margin:0 35px;
+    text-align:center;
+    opacity:1 !important;          
+    filter:none !important;        
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
   }
 
-  .clock .city {
-    font-weight: 700;
-    color: #5da9ff; /* plus vif */
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
+  .clock .city{
+    font-weight:800;
+    color:#7fb3ff;                 
+    text-transform:uppercase;
+    font-size:.9rem;
+    letter-spacing:.05em;
+    opacity:1 !important;
   }
 
-  .clock .time {
-    font-weight: 800;
-    font-size: 1.25rem;
-    color: #fff;
-    margin-top: 2px;
-    text-shadow: 0 0 6px rgba(0,0,0,0.8);
+  .clock .time{
+    font-weight:900;
+    font-size:1.25rem;
+    color:#fff !important;         
+    margin-top:2px;
+    opacity:1 !important;
+    text-shadow:0 0 6px rgba(0,0,0,.85);
   }
 </style>
 
