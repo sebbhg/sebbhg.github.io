@@ -15,7 +15,7 @@ full_bleed: true
 
   /* === Hero titles fade-in === */
   .eyebrow.shifted {
-    margin-top: -20px;
+    margin-top: -25px;
     opacity: 0;
     transform: translateY(10px);
     animation: fadeInUp 1.4s ease-out .3s forwards;
