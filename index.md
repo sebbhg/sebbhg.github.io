@@ -274,10 +274,11 @@ full_bleed: true
     border-bottom:1px solid #111;
   }
   .activities-section h2 {
-    color:#2c8cff;
+    color:#9ec8ff;
     font-size:clamp(1.5rem,3vw,2.2rem);
     font-weight:800;
     margin-bottom:0.6rem;
+    text-shadow:0 0 8px rgba(44,140,255,.15);
   }
   .activities-section p {
     font-size:1rem;
