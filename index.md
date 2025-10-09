@@ -256,7 +256,7 @@ full_bleed: true
 
   <div class="hero-content">
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
-    <h1>Turning Models into Market Impact</h1>
+    <h1>🚀 Turning Models into Market Impact</h1>
     <p class="subtitle">
       Quantitative Finance Engineer — <strong>CFA Level I Holder</strong>.<br/>
     </p>
