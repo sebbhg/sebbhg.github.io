@@ -37,7 +37,7 @@ full_bleed: true
     top:38%; 
     transform:translateY(-36%);
     z-index:3;
-    width:min(17vw, 50vh);
+    width:min(13vw, 40vh);
     height:auto;
     opacity:0;
     animation:fadeInLogo 1.2s ease-out 1.0s forwards;
