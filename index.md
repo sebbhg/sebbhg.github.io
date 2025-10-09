@@ -59,6 +59,7 @@ full_bleed: true
     0%,100% { filter: drop-shadow(0 0 6px rgba(44,140,255,.6)); }
     50%     { filter: drop-shadow(0 0 14px rgba(44,140,255,.95)); }
   }
+
   @media (max-width: 880px) {
     .hero-logo-img {
       right: -1.2vw;
@@ -98,8 +99,8 @@ full_bleed: true
     pointer-events: none;
   }
 
-  /* === WORLD CLOCK BAR — opaque, sans transparence === */
-  :root { --clock-speed: 120s; } /* vitesse par défaut du défilement */
+  /* === WORLD CLOCK BAR === */
+  :root { --clock-speed: 120s; } 
   .world-clock-bar {
     position: relative;
     overflow: hidden;
@@ -112,7 +113,7 @@ full_bleed: true
     z-index: 10;
     isolation: isolate;
     -webkit-user-select: none; user-select: none;
-    touch-action: pan-x; /* autorise le slide horizontal */
+    touch-action: pan-x;
   }
   .world-clock-bar * {
     background: none !important;
@@ -150,7 +151,6 @@ full_bleed: true
     font-weight: 900; font-size: 1.28rem; color: #fff; margin-top: 2px;
     text-shadow: 0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000;
     animation: clockPulse 1.8s ease-in-out infinite;
-    will-change: transform, text-shadow, opacity; transform: translateZ(0);
   }
   @keyframes clockPulse {
     0%, 100% { transform: scale(1); text-shadow: 0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000; }
@@ -161,7 +161,7 @@ full_bleed: true
     50%      { text-shadow: 0 0 10px rgba(44,140,255,.7), 0 0 18px rgba(44,140,255,.35); }
   }
 
-  /* === MARKET STATUS (sous les horloges) === */
+  /* === MARKET STATUS === */
   .market-status{
     background:#0a0a0a;
     border-top:1px solid #222;
@@ -183,6 +183,28 @@ full_bleed: true
     font-weight:800;
   }
   .market-status .closed{ opacity:.7; color:#9aa3b2; border-color:#333; background:#0f0f0f; }
+
+  /* === SECTION SCROLLABLE === */
+  .after-market{
+    background:#050505;
+    color:#ccc;
+    padding:100px 20px 180px;
+    border-top:1px solid #111;
+    text-align:center;
+  }
+  .after-market h2{
+    color:#2c8cff;
+    font-size:clamp(1.6rem,3vw,2.4rem);
+    font-weight:800;
+    margin-bottom:1rem;
+  }
+  .after-market p{
+    max-width:850px;
+    margin:0 auto 1rem;
+    line-height:1.7;
+    font-size:1rem;
+    color:#aaa;
+  }
 </style>
 
 <section class="hero-video">
@@ -210,7 +232,6 @@ full_bleed: true
   <img class="hero-logo-img" src="/assets/images/sh-logo.png" alt="SH monogram">
 </section>
 
-<!-- ===== Full-width secondary video ===== -->
 <section class="promo-video">
   <div class="promo-video-frame">
     <video class="promo-video-el" autoplay muted loop playsinline preload="auto"
@@ -221,153 +242,75 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== World Clocks Continuous Ticker (glissable) ===== -->
 <div class="world-clock-bar" id="clockBar">
   <div class="ticker-wrapper" id="clockTicker">
-    <!-- Première série -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
-    <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
-    <div class="clock" data-city="Los Angeles" data-tz="America/Los_Angeles"></div>
     <div class="clock" data-city="London" data-tz="Europe/London"></div>
     <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
-    <div class="clock" data-city="Zurich" data-tz="Europe/Zurich"></div>
-    <div class="clock" data-city="Dubai" data-tz="Asia/Dubai"></div>
-    <div class="clock" data-city="Mumbai" data-tz="Asia/Kolkata"></div>
-    <div class="clock" data-city="Singapore" data-tz="Asia/Singapore"></div>
-    <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
     <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
+    <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
     <div class="clock" data-city="Sydney" data-tz="Australia/Sydney"></div>
-    <div class="clock" data-city="São Paulo" data-tz="America/Sao_Paulo"></div>
-    <div class="clock" data-city="Toronto" data-tz="America/Toronto"></div>
-
-    <!-- Copie pour défilement infini -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
-    <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
-    <div class="clock" data-city="Los Angeles" data-tz="America/Los_Angeles"></div>
     <div class="clock" data-city="London" data-tz="Europe/London"></div>
     <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
-    <div class="clock" data-city="Zurich" data-tz="Europe/Zurich"></div>
-    <div class="clock" data-city="Dubai" data-tz="Asia/Dubai"></div>
-    <div class="clock" data-city="Mumbai" data-tz="Asia/Kolkata"></div>
-    <div class="clock" data-city="Singapore" data-tz="Asia/Singapore"></div>
-    <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
     <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
-    <div class="clock" data-city="Sydney" data-tz="Australia/Sydney"></div>
-    <div class="clock" data-city="São Paulo" data-tz="America/Sao_Paulo"></div>
-    <div class="clock" data-city="Toronto" data-tz="America/Toronto"></div>
   </div>
 </div>
 
-<!-- ===== Market Status ===== -->
 <div class="market-status" id="marketStatus">Loading market status…</div>
 
+<!-- ===== SECTION SCROLLABLE ===== -->
+<section class="after-market">
+  <div class="wrapper">
+    <h2>Latest Insights & Quantitative Research</h2>
+    <p>
+      Explore upcoming features such as volatility surfaces, CVA dashboards, and market analytics.
+      This section scrolls, so you can showcase dynamic data, visuals, and updates.
+    </p>
+    <p>
+      Ideal for adding trading dashboards, portfolio analytics, or model visualizations.
+    </p>
+  </div>
+</section>
+
 <script>
-/* === Horloges (heure locale par TZ) === */
+/* === Horloges === */
 function updateClocks(){
   document.querySelectorAll('.clock').forEach(el=>{
     const city = el.dataset.city;
     const tz = el.dataset.tz;
     const now = new Date().toLocaleTimeString('en-GB', {
-      timeZone: tz,
-      hour: '2-digit', minute: '2-digit', hour12: false
+      timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false
     });
     el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
   });
 }
-updateClocks();
-setInterval(updateClocks, 1000);
+updateClocks(); setInterval(updateClocks,1000);
 
-/* === Interaction : glisser pour accélérer / changer le sens === */
+/* === Drag horloge === */
 (function(){
-  const root = document.documentElement;
-  const bar  = document.getElementById('clockBar');
-  const wrap = document.getElementById('clockTicker');
-
-  let isDown=false, startX=0;
-
-  function speedFromDx(dx){
-    const abs = Math.min(Math.abs(dx), 600); // cap
-    const dur = 120 - (abs/600)*108;         // 120s → 12s
-    return Math.max(12, Math.min(120, dur)).toFixed(0) + 's';
-  }
-
-  function onPointerDown(e){
-    isDown=true;
-    wrap.classList.add('dragging');
-    startX = (e.touches ? e.touches[0].clientX : e.clientX);
-  }
-  function onPointerMove(e){
-    if(!isDown) return;
-    const x = (e.touches ? e.touches[0].clientX : e.clientX);
-    const dx = x - startX;
-    wrap.classList.toggle('reverse', dx > 0);
-    document.documentElement.style.setProperty('--clock-speed', speedFromDx(dx));
-    e.preventDefault();
-  }
-  function onPointerUp(){
-    if(!isDown) return;
-    isDown=false;
-    wrap.classList.remove('dragging','reverse');
-    document.documentElement.style.setProperty('--clock-speed', '120s');
-  }
-
-  bar.addEventListener('mousedown', onPointerDown);
-  window.addEventListener('mousemove', onPointerMove, { passive:false });
-  window.addEventListener('mouseup',   onPointerUp);
-
-  bar.addEventListener('touchstart', onPointerDown, { passive:true });
-  window.addEventListener('touchmove', onPointerMove, { passive:false });
-  window.addEventListener('touchend',  onPointerUp);
+  const root=document.documentElement,bar=document.getElementById('clockBar'),wrap=document.getElementById('clockTicker');
+  let down=false,startX=0;
+  function speed(dx){const a=Math.min(Math.abs(dx),600);return(Math.max(12,120-(a/600)*108)).toFixed(0)+'s';}
+  function downFn(e){down=true;wrap.classList.add('dragging');startX=(e.touches?e.touches[0].clientX:e.clientX);}
+  function moveFn(e){if(!down)return;const x=(e.touches?e.touches[0].clientX:e.clientX),dx=x-startX;wrap.classList.toggle('reverse',dx>0);root.style.setProperty('--clock-speed',speed(dx));e.preventDefault();}
+  function upFn(){if(!down)return;down=false;wrap.classList.remove('dragging','reverse');root.style.setProperty('--clock-speed','120s');}
+  bar.addEventListener('mousedown',downFn);window.addEventListener('mousemove',moveFn,{passive:false});window.addEventListener('mouseup',upFn);
+  bar.addEventListener('touchstart',downFn,{passive:true});window.addEventListener('touchmove',moveFn,{passive:false});window.addEventListener('touchend',upFn);
 })();
 
-/* === Market Status (Tokyo / London / New York) === */
+/* === Market Status === */
 (function(){
-  const el = document.getElementById('marketStatus');
-  if(!el) return;
-
-  function isWeekday(tz){
-    const day = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: tz }).format(new Date());
-    return day !== 'Sat' && day !== 'Sun';
-  }
-
-  function hmInTZ(tz){
-    const parts = new Intl.DateTimeFormat('en-GB', {
-      hour:'2-digit', minute:'2-digit', hour12:false, timeZone: tz
-    }).formatToParts(new Date());
-    const h = parseInt(parts.find(p=>p.type==='hour').value, 10);
-    const m = parseInt(parts.find(p=>p.type==='minute').value, 10);
-    return {h, m, t: h*60+m};
-  }
-
-  function isOpenTokyo(){
-    if(!isWeekday('Asia/Tokyo')) return false;
-    const {t} = hmInTZ('Asia/Tokyo');
-    return t >= 9*60 && t < 15*60; 
-  }
-  function isOpenLondon(){
-    if(!isWeekday('Europe/London')) return false;
-    const {t} = hmInTZ('Europe/London');
-    return t >= 8*60 && t < 16*60;
-  }
-  function isOpenNewYork(){
-    if(!isWeekday('America/New_York')) return false;
-    const {t} = hmInTZ('America/New_York');
-    return t >= (9*60+30) && t < 16*60;
-  }
-
-  function refresh(){
-    const tokyo  = isOpenTokyo();
-    const london = isOpenLondon();
-    const ny     = isOpenNewYork();
-
-    el.innerHTML = `
-      <span class="badge ${tokyo ? '' : 'closed'}">TOKYO ${tokyo ? 'LIVE' : 'CLOSED'}</span>
-      <span class="badge ${london ? '' : 'closed'}">LONDON ${london ? 'LIVE' : 'CLOSED'}</span>
-      <span class="badge ${ny ? '' : 'closed'}">NEW YORK ${ny ? 'LIVE' : 'CLOSED'}</span>
-    `;
-  }
-
-  refresh();
-  setInterval(refresh, 60_000);
+  const el=document.getElementById('marketStatus');if(!el)return;
+  function isWeekday(tz){const d=new Intl.DateTimeFormat('en-US',{weekday:'short',timeZone:tz}).format(new Date());return d!=='Sat'&&d!=='Sun';}
+  function hm(tz){const p=new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:tz}).formatToParts(new Date());const h=parseInt(p.find(x=>x.type==='hour').value),m=parseInt(p.find(x=>x.type==='minute').value);return{t:h*60+m};}
+  function tokyo(){if(!isWeekday('Asia/Tokyo'))return false;const{t}=hm('Asia/Tokyo');return t>=9*60&&t<15*60;}
+  function london(){if(!isWeekday('Europe/London'))return false;const{t}=hm('Europe/London');return t>=8*60&&t<16*60;}
+  function ny(){if(!isWeekday('America/New_York'))return false;const{t}=hm('America/New_York');return t>=(9*60+30)&&t<16*60;}
+  function refresh(){el.innerHTML=`
+    <span class="badge ${tokyo()?'':'closed'}">TOKYO ${tokyo()?'LIVE':'CLOSED'}</span>
+    <span class="badge ${london()?'':'closed'}">LONDON ${london()?'LIVE':'CLOSED'}</span>
+    <span class="badge ${ny()?'':'closed'}">NEW YORK ${ny()?'LIVE':'CLOSED'}</span>`;}
+  refresh();setInterval(refresh,60000);
 })();
 </script>
