@@ -195,11 +195,90 @@ full_bleed: true
   }
   .market-status .closed{ opacity:.7; color:#9aa3b2; border-color:#333; background:#0f0f0f; }
 
-  /* === SECTION SCROLLABLE === */
+  /* ===== Bande "Latest Updates" ===== */
+  .news-band{
+    background:#050505;
+    border-top:1px solid #111;
+    border-bottom:1px solid #111;
+    padding:28px 20px;
+  }
+  .news-wrap{
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:18px;
+  }
+  .update-card{
+    position:relative;
+    background:#0d0d0d;
+    border:1px solid #222;
+    border-radius:14px;
+    padding:18px 18px 16px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .update-card::after{
+    content:"";
+    position:absolute; inset:-1px;
+    border-radius:14px;
+    pointer-events:none;
+    background:radial-gradient(600px 200px at 20% -20%, rgba(44,140,255,.15), transparent 70%);
+    opacity:.7;
+  }
+  .update-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 36px rgba(0,0,0,.35);
+    border-color:#2c8cff55;
+  }
+  .update-badge{
+    display:inline-block;
+    font-size:.72rem;
+    letter-spacing:.08em;
+    color:#9ec8ff;
+    background:#0c1220;
+    border:1px solid #1f3b66;
+    border-radius:999px;
+    padding:4px 8px;
+    margin-bottom:10px;
+    font-weight:800;
+  }
+  .update-title{
+    margin:0 0 6px;
+    font-size:clamp(1.05rem,2.2vw,1.2rem);
+    font-weight:800;
+  }
+  .update-meta{
+    color:#9aa3b2;
+    font-size:.9rem;
+    margin:0 0 10px;
+  }
+  .update-desc{
+    color:#c9cbd1;
+    margin:0 0 12px;
+    line-height:1.55;
+  }
+  .update-link{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 10px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:10px;
+    background:#0f0f0f;
+    color:#fff; font-weight:700;
+    text-decoration:none;
+  }
+  .update-link:hover{ border-color:#4da0ff; background:#141414; }
+
+  /* Responsive: passe à 1 colonne pour les updates */
+  @media (max-width:820px){
+    .news-wrap{ grid-template-columns: 1fr; }
+  }
+
+  /* === SECTION SCROLLABLE (contenu) === */
   .after-market{
     background:#050505;
     color:#ccc;
-    padding:100px 20px 180px;
+    padding:60px 20px 180px;
     border-top:1px solid #111;
     text-align:center;
   }
@@ -293,6 +372,35 @@ full_bleed: true
 
 <!-- ===== Market Status ===== -->
 <div class="market-status" id="marketStatus">Loading market status…</div>
+
+<!-- ===== Latest Updates band ===== -->
+<section class="news-band">
+  <div class="news-wrap">
+    <!-- Carte 1 -->
+    <article class="update-card">
+      <span class="update-badge">NEW</span>
+      <h3 class="update-title">New CV & Experience section</h3>
+      <p class="update-meta">Oct 2025 · v1.3</p>
+      <p class="update-desc">
+        Updated resume with derivatives work, XVA tooling and pricing library improvements.
+        Highlights: IRS/XCCY, swaptions, EE/EEE, CVA/XVA, LGM-1F, GPR & Bayesian Quadrature.
+      </p>
+      <a class="update-link" href="{{ '/resumes' | relative_url }}">View CV →</a>
+    </article>
+
+    <!-- Carte 2 -->
+    <article class="update-card">
+      <span class="update-badge">UPDATE</span>
+      <h3 class="update-title">What I do — Quant Engineering</h3>
+      <p class="update-meta">Oct 2025 · Labs</p>
+      <p class="update-desc">
+        New “What I do” page: pricing engines, risk aggregation, intraday analytics and
+        research notes. Coming next: CVA dashboard & volatility surface explorer.
+      </p>
+      <a class="update-link" href="{{ '/what-i-do' | relative_url }}">Open page →</a>
+    </article>
+  </div>
+</section>
 
 <!-- ===== SECTION SCROLLABLE ===== -->
 <section class="after-market">
