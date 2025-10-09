@@ -175,7 +175,7 @@ full_bleed: true
   /* === MARKET STATUS (sous les horloges) === */
   .market-status{
     background:#0a0a0a;
-    border-top:1px solid #222;
+    border-top:1px solid #222;   /* pas de border-bottom -> pas de trait sous la zone */
     color:#2c8cff;
     text-align:center;
     font-weight:800;
@@ -193,6 +193,16 @@ full_bleed: true
     font-weight:800;
   }
   .market-status .closed{ opacity:.7; color:#9aa3b2; border-color:#333; background:#0f0f0f; }
+
+  /* Badges cliquables quand LIVE */
+  .market-status a.badge{
+    text-decoration:none;
+    cursor:pointer;
+  }
+  .market-status a.badge:hover{
+    border-color:#2c8cff99;
+    box-shadow:0 0 0 2px rgba(44,140,255,.12) inset;
+  }
 
   /* ===== Bande "Latest Updates" ===== */
   .news-band{
@@ -481,7 +491,7 @@ setInterval(updateClocks, 1000);
   window.addEventListener('touchend',  onPointerUp);
 })();
 
-/* === Market Status (Tokyo / London / New York) === */
+/* === Market Status (Tokyo / London / Paris / New York) === */
 (function(){
   const el = document.getElementById('marketStatus');
   if(!el) return;
@@ -510,6 +520,12 @@ setInterval(updateClocks, 1000);
     const {t} = hmInTZ('Europe/London');
     return t >= 8*60 && t < 16*60;
   }
+  // Paris = même plage que Londres (Euronext Paris).
+  function isOpenParis(){
+    if(!isWeekday('Europe/Paris')) return false;
+    const {t} = hmInTZ('Europe/Paris');
+    return t >= 9*60 && t < 17*60*1; // 09:00-17:00 CET/CEST (plage simple)
+  }
   function isOpenNewYork(){
     if(!isWeekday('America/New_York')) return false;
     const {t} = hmInTZ('America/New_York');
@@ -519,12 +535,28 @@ setInterval(updateClocks, 1000);
   function refresh(){
     const tokyo  = isOpenTokyo();
     const london = isOpenLondon();
+    const paris  = isOpenParis();
     const ny     = isOpenNewYork();
 
+    const urls = {
+      tokyo:  "https://www.jpx.co.jp/english/markets/",
+      london: "https://www.londonstockexchange.com/",
+      paris:  "https://live.euronext.com/en/markets/paris",
+      ny:     "https://www.nyse.com/"
+    };
+
+    const badge = (isOpen, label, url) => {
+      if(isOpen){
+        return `<a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>`;
+      }
+      return `<span class="badge closed">${label} CLOSED</span>`;
+    };
+
     el.innerHTML = `
-      <span class="badge ${tokyo ? '' : 'closed'}">TOKYO ${tokyo ? 'LIVE' : 'CLOSED'}</span>
-      <span class="badge ${london ? '' : 'closed'}">LONDON ${london ? 'LIVE' : 'CLOSED'}</span>
-      <span class="badge ${ny ? '' : 'closed'}">NEW YORK ${ny ? 'LIVE' : 'CLOSED'}</span>
+      ${badge(tokyo,  'TOKYO',   urls.tokyo)}
+      ${badge(london, 'LONDON',  urls.london)}
+      ${badge(paris,  'PARIS',   urls.paris)}
+      ${badge(ny,     'NEW YORK', urls.ny)}
     `;
   }
 
