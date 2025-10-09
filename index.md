@@ -295,6 +295,11 @@ full_bleed: true
     font-size:1rem;
     color:#aaa;
   }
+  .news-band,
+  .after-market {
+    position: relative;
+    z-index: 3;
+  }
 </style>
 
 <section class="hero-video">
