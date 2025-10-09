@@ -175,12 +175,17 @@ full_bleed: true
   /* === MARKET STATUS (sous les horloges) === */
   .market-status{
     background:#0a0a0a;
-    border-top:1px solid #222;   /* pas de border-bottom -> pas de trait sous la zone */
+    border-top:1px solid #222;
+    /* pas de border-bottom ici */
     color:#2c8cff;
     text-align:center;
     font-weight:800;
     letter-spacing:.08em;
     padding:8px 12px;
+
+  /* ✅ pour que les liens soient au-dessus de tout */
+    position: relative;
+    z-index: 50;
   }
   .market-status .badge{
     display:inline-block;
@@ -196,8 +201,10 @@ full_bleed: true
 
   /* Badges cliquables quand LIVE */
   .market-status a.badge{
+    display:inline-block;
     text-decoration:none;
     cursor:pointer;
+    pointer-events:auto; /* ceinture et bretelles */
   }
   .market-status a.badge:hover{
     border-color:#2c8cff99;
