@@ -74,7 +74,7 @@ full_bleed: true
     position: relative;
     z-index: 0;
     width: 100%;
-    margin: -1220px 0 0; /* plus négatif = horloges plus haut */
+    margin: -1350px 0 0; /* plus négatif = horloges plus haut */
   }
   /* Responsive fine-tuning : ajuste le recouvrement selon la largeur */
   @media (max-width: 1400px) { .promo-video { margin: -1150px 0 0; } }
