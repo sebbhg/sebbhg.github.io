@@ -233,20 +233,37 @@ full_bleed: true
 <!-- ===== World Clocks Continuous Ticker ===== -->
 <div class="world-clock-bar">
   <div class="ticker-wrapper" id="clockTicker">
-    <!-- Première moitié -->
+    <!-- Première série -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
+    <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
+    <div class="clock" data-city="Los Angeles" data-tz="America/Los_Angeles"></div>
     <div class="clock" data-city="London" data-tz="Europe/London"></div>
     <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
+    <div class="clock" data-city="Zurich" data-tz="Europe/Zurich"></div>
     <div class="clock" data-city="Dubai" data-tz="Asia/Dubai"></div>
-    <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
+    <div class="clock" data-city="Mumbai" data-tz="Asia/Kolkata"></div>
+    <div class="clock" data-city="Singapore" data-tz="Asia/Singapore"></div>
     <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
-    <!-- Copie pour défilement infini fluide -->
+    <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
+    <div class="clock" data-city="Sydney" data-tz="Australia/Sydney"></div>
+    <div class="clock" data-city="São Paulo" data-tz="America/Sao_Paulo"></div>
+    <div class="clock" data-city="Toronto" data-tz="America/Toronto"></div>
+
+    <!-- Copie exacte pour défilement infini -->
     <div class="clock" data-city="New York" data-tz="America/New_York"></div>
+    <div class="clock" data-city="Chicago" data-tz="America/Chicago"></div>
+    <div class="clock" data-city="Los Angeles" data-tz="America/Los_Angeles"></div>
     <div class="clock" data-city="London" data-tz="Europe/London"></div>
     <div class="clock" data-city="Paris" data-tz="Europe/Paris"></div>
+    <div class="clock" data-city="Zurich" data-tz="Europe/Zurich"></div>
     <div class="clock" data-city="Dubai" data-tz="Asia/Dubai"></div>
-    <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
+    <div class="clock" data-city="Mumbai" data-tz="Asia/Kolkata"></div>
+    <div class="clock" data-city="Singapore" data-tz="Asia/Singapore"></div>
     <div class="clock" data-city="Hong Kong" data-tz="Asia/Hong_Kong"></div>
+    <div class="clock" data-city="Tokyo" data-tz="Asia/Tokyo"></div>
+    <div class="clock" data-city="Sydney" data-tz="Australia/Sydney"></div>
+    <div class="clock" data-city="São Paulo" data-tz="America/Sao_Paulo"></div>
+    <div class="clock" data-city="Toronto" data-tz="America/Toronto"></div>
   </div>
 </div>
 
