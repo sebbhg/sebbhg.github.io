@@ -176,7 +176,7 @@ full_bleed: true
   .market-status{
     background:#0a0a0a;
     border-top:1px solid #222;
-    border-bottom:1px solid #222;
+    border-bottom: none;
     color:#2c8cff;
     text-align:center;
     font-weight:800;
