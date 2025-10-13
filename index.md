@@ -229,8 +229,7 @@ full_bleed: true
   }
   .activities-section h2,
   .activities-section .activities-title{
-    color:#9ec8ff !important;                /* bleu des badges */
-    -webkit-text-fill-color:#9ec8ff !important;
+    color:#9ec8ff !important; -webkit-text-fill-color:#9ec8ff !important;
     filter:none !important; text-shadow:0 0 6px rgba(44,140,255,.25);
     font-size:clamp(1.5rem,3vw,2.2rem); font-weight:800; margin-bottom:.6rem;
   }
@@ -381,7 +380,7 @@ full_bleed: true
 <!-- ===== Activities ===== -->
 <section class="activities-section">
   <div class="wrapper">
-    <h2 class="activities-title" style="color:#9ec8ff !important; text-shadow:0 0 6px rgba(44,140,255,.4), 0 0 12px rgba(44,140,255,.25)">Activities</h2>
+    <h2 class="activities-title" style="color:#9ec8ff !important; text-shadow:0 0 6px rgba(44,140,255,.4), 0 0 12px rgba(44,140,255,.25)">About my Activities</h2>
     <p>Explore the different sections of this website to discover projects, courses, theses, and readings.</p>
   </div>
 </section>
