@@ -272,8 +272,20 @@ full_bleed: true
     background:#2c8cff; border-radius:3px; box-shadow:0 0 12px rgba(44,140,255,.55);
   }
 
+  /* === NOUVEAU : Titre dynamique sous le liseré bleu === */
+  .hub-selected-title{
+    margin:14px 0 6px;
+    color:#fff;
+    font-weight:900;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    text-align:left;
+    font-size:clamp(1.1rem,3vw,1.75rem);
+  }
+
   .hub-panel{
-    margin-top:18px; color:#c9cbd1; line-height:1.65; max-width:850px; text-align:left;
+    margin-top:8px; /* un peu moins, car on a le titre au-dessus */
+    color:#c9cbd1; line-height:1.65; max-width:850px; text-align:left;
   }
 
   /* au-dessus du footer */
@@ -403,6 +415,9 @@ full_bleed: true
       <a class="hub-tab" data-tab="reading" href="#reading" role="tab" aria-selected="false">Reading</a>
     </nav>
 
+    <!-- NOUVEAU : Titre dynamique sous les onglets -->
+    <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
+
     <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
       I describe how I turn quantitative ideas into practical trading tools and engineering workflows: pricing engines, risk aggregation, intraday analytics and research notes. This is the best place to see what I actually build.
     </div>
@@ -480,7 +495,8 @@ updateClocks(); setInterval(updateClocks, 1000);
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const panel = document.getElementById('hubPanel');
-  if(!tabs.length || !panel) return;
+  const titleEl = document.getElementById('hubSelectedTitle');
+  if(!tabs.length || !panel || !titleEl) return;
 
   const copy = {
     what: `I describe how I turn quantitative ideas into practical trading tools and engineering workflows: pricing engines, risk aggregation, intraday analytics and research notes. This is the best place to see what I actually build.`,
@@ -489,18 +505,19 @@ updateClocks(); setInterval(updateClocks, 1000);
     reading: `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`
   };
 
-  function activate(key){
+  function activate(key, labelUpper){
     tabs.forEach(t=>{
       const isActive = t.dataset.tab === key;
       t.classList.toggle('is-active', isActive);
       t.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
+    titleEl.textContent = labelUpper;
     panel.textContent = copy[key] || '';
   }
 
   tabs.forEach(t => t.addEventListener('click', (e)=>{
     e.preventDefault();
-    activate(t.dataset.tab);
+    activate(t.dataset.tab, t.textContent.trim().toUpperCase());
   }));
 })();
 </script>
