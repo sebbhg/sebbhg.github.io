@@ -7,6 +7,14 @@ full_bleed: true
 ---
 
 <style>
+  /* === Variables responsive pour le hero & l’overlap === */
+  :root{
+    /* hauteur du hero : mini 380px, ~58vh en normal, max 640px */
+    --hero-height: clamp(380px, 58vh, 640px);
+    /* quantité de chevauchement pour remonter les horloges (négatif sur la section vidéo 2) */
+    --clock-overlap: clamp(80px, 18vh, 220px);
+  }
+
   /* === Fade-in global === */
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(25px); }
@@ -32,9 +40,23 @@ full_bleed: true
   }
 
   /* === HERO LAYERS === */
-  .hero-video { position: relative; z-index: 2; overflow: hidden; }
+  .hero-video {
+    position: relative; z-index: 2; overflow: hidden;
+    /* hauteur stable et cohérente selon la fenêtre */
+    min-height: var(--hero-height);
+  }
+  /* le <video> du hero n’avait pas de style : on le met en cover */
+  .hero-video .hero-bg{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+  }
   .hero-overlay { position: absolute; inset: 0; z-index: 1; }
-  .hero-content { position: relative; z-index: 2; }
+  .hero-content {
+    position: relative; z-index: 2;
+    /* espacement vertical responsive pour que les titres ne “flottent” pas */
+    padding: clamp(28px, 6vh, 72px) 2rem clamp(18px, 4vh, 48px);
+  }
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img {
@@ -74,13 +96,15 @@ full_bleed: true
     position: relative;
     z-index: 0;
     width: 100%;
-    margin: -1350px 0 0;
+    /* au lieu d’un énorme pixel fixe, on utilise un overlap en vh */
+    margin: calc(-1 * var(--clock-overlap)) 0 0;
   }
-  @media (max-width: 1400px) { .promo-video { margin: -1150px 0 0; } }
-  @media (max-width: 1200px) { .promo-video { margin: -1050px 0 0; } }
-  @media (max-width: 1024px) { .promo-video { margin: -900px  0 0; } }
-  @media (max-width: 768px)  { .promo-video { margin: -640px  0 0; } }
-  @media (max-width: 560px)  { .promo-video { margin: -520px  0 0; } }
+  /* on garde tes paliers, mais en “vh” pour rester proportionnel */
+  @media (max-width: 1400px) { .promo-video { margin: calc(-1 * max(14vh, 120px)) 0 0; } }
+  @media (max-width: 1200px) { .promo-video { margin: calc(-1 * max(16vh, 110px)) 0 0; } }
+  @media (max-width: 1024px) { .promo-video { margin: calc(-1 * max(18vh, 90px))  0 0; } }
+  @media (max-width: 768px)  { .promo-video { margin: calc(-1 * max(20vh, 70px))  0 0; } }
+  @media (max-width: 560px)  { .promo-video { margin: calc(-1 * max(22vh, 60px))  0 0; } }
 
   .promo-video-frame {
     position: relative;
@@ -240,7 +264,9 @@ full_bleed: true
   .after-market{
     background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111;
   }
-  .hub-inner{ max-width:1100px; margin:0 auto; }
+  .hub-inner{
+    max-width:1100px; margin:0 auto;
+  }
   .hub-eyebrow{
     color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
     margin:0 0 10px; text-align:left;
@@ -249,7 +275,9 @@ full_bleed: true
     color:#fff; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; line-height:1.1;
     margin:0 0 16px; text-align:left; text-shadow:0 0 10px rgba(0,0,0,.35);
   }
-  .hub-sub{ color:#9aa3b2; margin:0 0 20px; text-align:left; font-weight:700; }
+  .hub-sub{
+    color:#9aa3b2; margin:0 0 20px; text-align:left; font-weight:700;
+  }
 
   .hub-tabs{
     display:flex; gap:22px; flex-wrap:wrap;
@@ -274,11 +302,6 @@ full_bleed: true
 
   /* au-dessus du footer */
   .news-band, .activities-section, .after-market { position: relative; z-index: 3; }
-
-  /* === Fix Hero sizing (ajouté) === */
-  .hero-video { min-height:520px; height:clamp(520px, 72vh, 820px); }
-  .hero-video .hero-bg { width:100%; height:100%; object-fit:cover; }
-  .hero-content { padding-top:clamp(60px, 14vh, 160px); }
 </style>
 
 <section class="hero-video">
