@@ -222,54 +222,59 @@ full_bleed: true
   .update-link:hover{ border-color:#4da0ff; background:#141414; }
   @media (max-width:820px){ .news-wrap{ grid-template-columns: 1fr; } }
 
-  /* === SECTION ACTIVITIES === */
+  /* === SECTION ACTIVITIES (petit bloc sous les updates) === */
   .activities-section{
     background:#050505; color:#ccc; text-align:center;
     padding:40px 20px 50px; border-top:1px solid #111; border-bottom:1px solid #111;
   }
   .activities-section h2,
   .activities-section .activities-title{
-    color:#9ec8ff !important; -webkit-text-fill-color:#9ec8ff !important;
+    color:#9ec8ff !important;
+    -webkit-text-fill-color:#9ec8ff !important;
     filter:none !important; text-shadow:0 0 6px rgba(44,140,255,.25);
     font-size:clamp(1.5rem,3vw,2.2rem); font-weight:800; margin-bottom:.6rem;
   }
-  .activities-section p{ font-size:1rem; color:#aaa; max-width:800px; margin:9px auto 0 !important; line-height:1.6; }
+  .activities-section p{ font-size:1rem; color:#aaa; max-width:800px; margin:0 auto; line-height:1.6; }
 
-  /* === AJOUT: Activities en 2 colonnes (titre à gauche, texte à droite) === */
-  .activities-section .wrapper{
-    max-width:1100px;
-    margin:0 auto;
-    display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:40px;
-    text-align:left;
-  }
-  .activities-section .wrapper .activities-title{
-    flex:0 0 220px;
-    margin:0;
-  }
-  .activities-section .wrapper p{
-    flex:1 1 auto;
-    margin:0;
-  }
-  @media (max-width: 820px){
-    .activities-section .wrapper{
-      flex-direction:column;
-      text-align:center;
-    }
-    .activities-section .wrapper .activities-title{
-      align-self:center;
-      margin-bottom:.6rem;
-    }
-  }
-
-  /* === SECTION SCROLLABLE (contenu) === */
+  /* === SECTION HUB (remplace "Latest Insights & Quantitative Research") === */
   .after-market{
-    background:#050505; color:#ccc; padding:60px 20px 180px; border-top:1px solid #111; text-align:center;
+    background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111;
   }
-  .after-market h2{ color:#2c8cff; font-size:clamp(1.6rem,3vw,2.4rem); font-weight:800; margin-bottom:1rem; }
-  .after-market p{ max-width:850px; margin:0 auto 1rem; line-height:1.7; font-size:1rem; color:#aaa; }
+  .hub-inner{
+    max-width:1100px; margin:0 auto;
+  }
+  .hub-eyebrow{
+    color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    margin:0 0 10px; text-align:left;
+  }
+  .hub-title{
+    color:#fff; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; line-height:1.1;
+    margin:0 0 16px; text-align:left; text-shadow:0 0 10px rgba(0,0,0,.35);
+  }
+  .hub-sub{
+    color:#9aa3b2; margin:0 0 20px; text-align:left; font-weight:700;
+  }
+
+  .hub-tabs{
+    display:flex; gap:22px; flex-wrap:wrap;
+    align-items:center; justify-content:flex-start;
+    padding:8px 0 10px; border-bottom:1px solid #1a1a1a; margin-bottom:14px;
+  }
+  .hub-tab{
+    position:relative; display:inline-block; cursor:pointer;
+    font-weight:800; letter-spacing:.02em; text-decoration:none;
+    color:#cfd6e4; padding:4px 2px;
+  }
+  .hub-tab:hover{ color:#ffffff; }
+  .hub-tab.is-active{ color:#ffffff; }
+  .hub-tab.is-active::after{
+    content:""; position:absolute; left:0; right:0; bottom:-10px; height:3px;
+    background:#2c8cff; border-radius:3px; box-shadow:0 0 12px rgba(44,140,255,.55);
+  }
+
+  .hub-panel{
+    margin-top:18px; color:#c9cbd1; line-height:1.65; max-width:850px; text-align:left;
+  }
 
   /* au-dessus du footer */
   .news-band, .activities-section, .after-market { position: relative; z-index: 3; }
@@ -377,25 +382,30 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== Activities ===== -->
+<!-- ===== Activities (petit bloc) ===== -->
 <section class="activities-section">
   <div class="wrapper">
-    <h2 class="activities-title" style="color:#9ec8ff !important; text-shadow:0 0 6px rgba(44,140,255,.4), 0 0 12px rgba(44,140,255,.25)">About my Activities</h2>
+    <h2 class="activities-title" style="color:#9ec8ff !important; text-shadow:0 0 6px rgba(44,140,255,.4), 0 0 12px rgba(44,140,255,.25)">About my activities</h2>
     <p>On this website, you will find a wide range of content related to quantitative finance: courses, projects, analyses, interactive tools, and personal insights. The goal is to share diverse resources covering financial modeling, risk theory, portfolio optimization, and machine learning, offering a comprehensive exploration of modern finance from a quantitative and applied perspective.</p>
   </div>
 </section>
 
-<!-- ===== SECTION SCROLLABLE ===== -->
+<!-- ===== SECTION HUB (tabs) ===== -->
 <section class="after-market">
-  <div class="wrapper">
-    <h2>Latest Insights & Quantitative Research</h2>
-    <p>
-      Explore upcoming features such as volatility surfaces, CVA dashboards, and market analytics.
-      This section scrolls, so you can showcase dynamic data, visuals, and updates.
-    </p>
-    <p>
-      Ideal for adding trading dashboards, portfolio analytics, or model visualizations.
-    </p>
+  <div class="hub-inner">
+    <p class="hub-eyebrow">The different sections</p>
+    <h2 class="hub-title">Our Activities</h2>
+
+    <nav class="hub-tabs" id="hubTabs" aria-label="Sections">
+      <a class="hub-tab is-active" data-tab="what" href="#what" role="tab" aria-selected="true">What I do</a>
+      <a class="hub-tab" data-tab="courses" href="#courses" role="tab" aria-selected="false">Courses</a>
+      <a class="hub-tab" data-tab="projects" href="#projects" role="tab" aria-selected="false">Projects</a>
+      <a class="hub-tab" data-tab="reading" href="#reading" role="tab" aria-selected="false">Reading</a>
+    </nav>
+
+    <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
+      I describe how I turn quantitative ideas into practical trading tools and engineering workflows: pricing engines, risk aggregation, intraday analytics and research notes. This is the best place to see what I actually build.
+    </div>
   </div>
 </section>
 
@@ -464,5 +474,33 @@ updateClocks(); setInterval(updateClocks, 1000);
     el.innerHTML = `${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)}`;
   }
   refresh(); setInterval(refresh, 60_000);
+})();
+
+/* === Tabs: Our Activities === */
+(function(){
+  const tabs = document.querySelectorAll('.hub-tab');
+  const panel = document.getElementById('hubPanel');
+  if(!tabs.length || !panel) return;
+
+  const copy = {
+    what: `I describe how I turn quantitative ideas into practical trading tools and engineering workflows: pricing engines, risk aggregation, intraday analytics and research notes. This is the best place to see what I actually build.`,
+    courses: `Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.`,
+    projects: `Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.`,
+    reading: `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`
+  };
+
+  function activate(key){
+    tabs.forEach(t=>{
+      const isActive = t.dataset.tab === key;
+      t.classList.toggle('is-active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    panel.textContent = copy[key] || '';
+  }
+
+  tabs.forEach(t => t.addEventListener('click', (e)=>{
+    e.preventDefault();
+    activate(t.dataset.tab);
+  }));
 })();
 </script>
