@@ -233,7 +233,7 @@ full_bleed: true
     filter:none !important; text-shadow:0 0 6px rgba(44,140,255,.25);
     font-size:clamp(1.5rem,3vw,2.2rem); font-weight:800; margin-bottom:.6rem;
   }
-  .activities-section p{ font-size:1rem; color:#aaa; max-width:800px; margin:10px auto; line-height:1.6; }
+  .activities-section p{ font-size:1rem; color:#aaa; max-width:800px; margin:10px auto 0; line-height:1.6; }
 
   /* === AJOUT: Activities en 2 colonnes (titre à gauche, texte à droite) === */
   .activities-section .wrapper{
