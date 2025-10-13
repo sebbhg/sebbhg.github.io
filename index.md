@@ -40,7 +40,7 @@ full_bleed: true
   .hero-logo-img {
     position: absolute;
     right: -4.0vw;
-    top: 28%;
+    top: 20%;
     transform: translateY(-34%);
     z-index: 3;
     width: min(13vw, 40vh);
