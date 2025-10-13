@@ -236,6 +236,35 @@ full_bleed: true
   }
   .activities-section p{ font-size:1rem; color:#aaa; max-width:800px; margin:0 auto; line-height:1.6; }
 
+  /* === AJOUT: Activities en 2 colonnes (titre à gauche, texte à droite) === */
+  .activities-section .wrapper{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:40px;
+    text-align:left;
+  }
+  .activities-section .wrapper .activities-title{
+    flex:0 0 220px;
+    margin:0;
+  }
+  .activities-section .wrapper p{
+    flex:1 1 auto;
+    margin:0;
+  }
+  @media (max-width: 820px){
+    .activities-section .wrapper{
+      flex-direction:column;
+      text-align:center;
+    }
+    .activities-section .wrapper .activities-title{
+      align-self:center;
+      margin-bottom:.6rem;
+    }
+  }
+
   /* === SECTION SCROLLABLE (contenu) === */
   .after-market{
     background:#050505; color:#ccc; padding:60px 20px 180px; border-top:1px solid #111; text-align:center;
