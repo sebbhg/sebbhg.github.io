@@ -385,7 +385,7 @@ full_bleed: true
 <!-- ===== Activities (petit bloc) ===== -->
 <section class="activities-section">
   <div class="wrapper">
-    <h2 class="activities-title" style="color:#9ec8ff !important; text-shadow:0 0 6px rgba(44,140,255,.4), 0 0 12px rgba(44,140,255,.25)">About my activities</h2>
+    <h2 class="activities-title" style="color:#9ec8ff !important; text-shadow:0 0 6px rgba(44,140,255,.4), 0 0 12px rgba(44,140,255,.25)">About my WebSite</h2>
     <p>On this website, you will find a wide range of content related to quantitative finance: courses, projects, analyses, interactive tools, and personal insights. The goal is to share diverse resources covering financial modeling, risk theory, portfolio optimization, and machine learning, offering a comprehensive exploration of modern finance from a quantitative and applied perspective.</p>
   </div>
 </section>
