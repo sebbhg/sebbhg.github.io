@@ -7,14 +7,6 @@ full_bleed: true
 ---
 
 <style>
-  /* === Variables responsive pour le hero & l’overlap === */
-  :root{
-    /* hauteur du hero : mini 380px, ~58vh en normal, max 640px */
-    --hero-height: clamp(380px, 58vh, 640px);
-    /* quantité de chevauchement pour remonter les horloges (négatif sur la section vidéo 2) */
-    --clock-overlap: clamp(80px, 18vh, 220px);
-  }
-
   /* === Fade-in global === */
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(25px); }
@@ -40,23 +32,9 @@ full_bleed: true
   }
 
   /* === HERO LAYERS === */
-  .hero-video {
-    position: relative; z-index: 2; overflow: hidden;
-    /* hauteur stable et cohérente selon la fenêtre */
-    min-height: var(--hero-height);
-  }
-  /* le <video> du hero n’avait pas de style : on le met en cover */
-  .hero-video .hero-bg{
-    position:absolute; inset:0;
-    width:100%; height:100%;
-    object-fit:cover;
-  }
+  .hero-video { position: relative; z-index: 2; overflow: hidden; }
   .hero-overlay { position: absolute; inset: 0; z-index: 1; }
-  .hero-content {
-    position: relative; z-index: 2;
-    /* espacement vertical responsive pour que les titres ne “flottent” pas */
-    padding: clamp(28px, 6vh, 72px) 2rem clamp(18px, 4vh, 48px);
-  }
+  .hero-content { position: relative; z-index: 2; }
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img {
@@ -96,15 +74,13 @@ full_bleed: true
     position: relative;
     z-index: 0;
     width: 100%;
-    /* au lieu d’un énorme pixel fixe, on utilise un overlap en vh */
-    margin: calc(-1 * var(--clock-overlap)) 0 0;
+    margin: -1350px 0 0;
   }
-  /* on garde tes paliers, mais en “vh” pour rester proportionnel */
-  @media (max-width: 1400px) { .promo-video { margin: calc(-1 * max(14vh, 120px)) 0 0; } }
-  @media (max-width: 1200px) { .promo-video { margin: calc(-1 * max(16vh, 110px)) 0 0; } }
-  @media (max-width: 1024px) { .promo-video { margin: calc(-1 * max(18vh, 90px))  0 0; } }
-  @media (max-width: 768px)  { .promo-video { margin: calc(-1 * max(20vh, 70px))  0 0; } }
-  @media (max-width: 560px)  { .promo-video { margin: calc(-1 * max(22vh, 60px))  0 0; } }
+  @media (max-width: 1400px) { .promo-video { margin: -1150px 0 0; } }
+  @media (max-width: 1200px) { .promo-video { margin: -1050px 0 0; } }
+  @media (max-width: 1024px) { .promo-video { margin: -900px  0 0; } }
+  @media (max-width: 768px)  { .promo-video { margin: -640px  0 0; } }
+  @media (max-width: 560px)  { .promo-video { margin: -520px  0 0; } }
 
   .promo-video-frame {
     position: relative;
@@ -409,8 +385,8 @@ full_bleed: true
 <!-- ===== Activities (petit bloc) ===== -->
 <section class="activities-section">
   <div class="wrapper">
-    <h2 class="activities-title" style="color:#9ec8ff !important; text-shadow:0 0 6px rgba(44,140,255,.4), 0 0 12px rgba(44,140,255,.25)">About my WebSite</h2>
-    <p>You will find a wide range of content related to quantitative finance: courses, projects, analyses, interactive tools, and personal insights. The goal is to share diverse resources covering financial modeling, risk theory, portfolio optimization, and machine learning, offering a comprehensive exploration of modern finance from a quantitative and applied perspective.</p>
+    <h2 class="activities-title" style="color:#9ec8ff !important; text-shadow:0 0 6px rgba(44,140,255,.4), 0 0 12px rgba(44,140,255,.25)">About my activities</h2>
+    <p>On this website, you will find a wide range of content related to quantitative finance: courses, projects, analyses, interactive tools, and personal insights. The goal is to share diverse resources covering financial modeling, risk theory, portfolio optimization, and machine learning, offering a comprehensive exploration of modern finance from a quantitative and applied perspective.</p>
   </div>
 </section>
 
@@ -418,7 +394,7 @@ full_bleed: true
 <section class="after-market">
   <div class="hub-inner">
     <p class="hub-eyebrow">The different sections</p>
-    <h2 class="hub-title">My Activities</h2>
+    <h2 class="hub-title">Our Activities</h2>
 
     <nav class="hub-tabs" id="hubTabs" aria-label="Sections">
       <a class="hub-tab is-active" data-tab="what" href="#what" role="tab" aria-selected="true">What I do</a>
