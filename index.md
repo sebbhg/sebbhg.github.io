@@ -74,7 +74,7 @@ full_bleed: true
     position: relative;
     z-index: 0;
     width: 100%;
-    margin: -1250px 0 0;
+    margin: -1150px 0 0;
   }
   @media (max-width: 1400px) { .promo-video { margin: -1150px 0 0; } }
   @media (max-width: 1200px) { .promo-video { margin: -1050px 0 0; } }
