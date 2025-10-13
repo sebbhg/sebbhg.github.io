@@ -240,9 +240,7 @@ full_bleed: true
   .after-market{
     background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111;
   }
-  .hub-inner{
-    max-width:1100px; margin:0 auto;
-  }
+  .hub-inner{ max-width:1100px; margin:0 auto; }
   .hub-eyebrow{
     color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
     margin:0 0 10px; text-align:left;
@@ -251,9 +249,7 @@ full_bleed: true
     color:#fff; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; line-height:1.1;
     margin:0 0 16px; text-align:left; text-shadow:0 0 10px rgba(0,0,0,.35);
   }
-  .hub-sub{
-    color:#9aa3b2; margin:0 0 20px; text-align:left; font-weight:700;
-  }
+  .hub-sub{ color:#9aa3b2; margin:0 0 20px; text-align:left; font-weight:700; }
 
   .hub-tabs{
     display:flex; gap:22px; flex-wrap:wrap;
@@ -278,6 +274,11 @@ full_bleed: true
 
   /* au-dessus du footer */
   .news-band, .activities-section, .after-market { position: relative; z-index: 3; }
+
+  /* === Fix Hero sizing (ajouté) === */
+  .hero-video { min-height:520px; height:clamp(520px, 72vh, 820px); }
+  .hero-video .hero-bg { width:100%; height:100%; object-fit:cover; }
+  .hero-content { padding-top:clamp(60px, 14vh, 160px); }
 </style>
 
 <section class="hero-video">
