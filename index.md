@@ -514,7 +514,7 @@ full_bleed: true
       <figure class="figure-tilt">
         <img src="/assets/images/image5.png" alt="New York at night — market activity overlay">
         <figcaption>
-          <div class="caption-inner">NYC • Markets • Models → Decisions</div>
+          <div class="caption-inner">Background</div>
         </figcaption>
       </figure>
     </div>
