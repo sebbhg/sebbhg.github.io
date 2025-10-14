@@ -288,7 +288,7 @@ full_bleed: true
     color:#c9cbd1; line-height:1.65; max-width:850px; text-align:justify;
   }
 
-  /* === SURCHARGES: étendre la largeur de la section "Our Activities" === */
+  /* === SURCHARGES: étendre la largeur de la section "Activities" === */
   .after-market .hub-inner{
     max-width: none;
     width: 100%;
