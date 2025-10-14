@@ -302,33 +302,79 @@ full_bleed: true
     padding-right: 24px;
   }
 
-  /* === GALLERY (4 images) === */
+  /* === GALLERY (2 images avec overlay + tilt) === */
   .hub-gallery{
     display:grid;
     grid-template-columns: 1fr 1fr;
     gap:16px;
     max-width:1200px;
     margin:12px 0 36px;
+    perspective: 900px; /* pour le tilt 3D */
   }
   .hub-gallery figure{
+    position:relative;
     aspect-ratio:16/10;
     overflow:hidden;
     border-radius:14px;
     background:#0a0a0a;
     border:1px solid #1f2333;
     box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transform-style: preserve-3d;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
   }
   .hub-gallery img{
     width:100%; height:100%; object-fit:cover;
-    transition:transform .5s ease, filter .5s ease;
+    transition:transform .6s ease, filter .6s ease;
     filter:brightness(.95) contrast(1.08) saturate(1.05);
     display:block;
+    transform: translateZ(0);
+  }
+  /* Overlay texte caché par défaut */
+  .hub-gallery figcaption{
+    position:absolute; inset:0;
+    display:flex; align-items:flex-end;
+    padding:18px;
+    background: linear-gradient(to top, rgba(10,18,36,.85) 0%, rgba(10,18,36,.35) 40%, transparent 70%);
+    color:#e7f1ff;
+    font-weight:800;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    opacity:0; transform: translateY(8px);
+    transition: opacity .35s ease, transform .35s ease;
+    pointer-events:none;
+  }
+  .hub-gallery figcaption .caption-inner{
+    backdrop-filter: blur(3px);
+    padding:8px 10px;
+    border-radius:10px;
+    border:1px solid rgba(76,139,255,.35);
+    background: rgba(15,22,40,.45);
+    box-shadow:0 0 28px rgba(44,140,255,.25) inset;
+  }
+  /* Halo animé au hover */
+  .hub-gallery figure::after{
+    content:"";
+    position:absolute; inset:-1px; border-radius:14px; pointer-events:none;
+    background: radial-gradient(600px 220px at 20% -20%, rgba(44,140,255,.18), transparent 70%);
+    opacity:.0; transition: opacity .35s ease;
+  }
+  /* Effets hover */
+  .hub-gallery figure:hover{
+    box-shadow:0 16px 42px rgba(0,0,0,.45);
+    border-color:#2c8cff55;
   }
   .hub-gallery figure:hover img{
-    transform:scale(1.06);
+    transform: scale(1.06);
     filter:brightness(1.05) contrast(1.08) saturate(1.1);
   }
-  @media (max-width:720px){.hub-gallery{grid-template-columns:1fr;}}
+  .hub-gallery figure:hover figcaption{
+    opacity:1; transform: translateY(0);
+  }
+  .hub-gallery figure:hover::after{ opacity:.9; }
+
+  @media (max-width:900px){
+    .hub-gallery{ grid-template-columns:1fr; }
+  }
 
   /* au-dessus du footer */
   .news-band, .activities-section, .after-market { position: relative; z-index: 3; }
@@ -460,12 +506,20 @@ full_bleed: true
     <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
-    <!-- === GALLERY 2x2 (visible quand "What I do") === -->
+    <!-- === GALLERY (2 images) === -->
     <div class="hub-gallery" id="hubGallery">
-      <figure><img src="/assets/images/image1.png" alt="Volatility Surface"></figure>
-      <figure><img src="/assets/images/image2.png" alt="Yield Curves — OIS vs IRS"></figure>
-      <figure><img src="/assets/images/image3.png" alt="Monte Carlo Simulation — GBM Paths"></figure>
-      <figure><img src="/assets/images/image4.png" alt="3D Normal Distribution"></figure>
+      <figure class="figure-tilt">
+        <img src="/assets/images/image1.png" alt="Volatility Surface">
+        <figcaption>
+          <div class="caption-inner">Volatility Surface</div>
+        </figcaption>
+      </figure>
+      <figure class="figure-tilt">
+        <img src="/assets/images/image2.png" alt="Yield Curves — OIS vs IRS">
+        <figcaption>
+          <div class="caption-inner">Yield Curves — OIS vs IRS</div>
+        </figcaption>
+      </figure>
     </div>
 
     <!-- Contenu initial long (WHAT I DO) -->
@@ -568,7 +622,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs: Our Activities === */
+/* === Tabs: Our Activities + init galerie visible pour "what" === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const panel = document.getElementById('hubPanel');
@@ -576,7 +630,6 @@ updateClocks(); setInterval(updateClocks, 1000);
   const gallery = document.getElementById('hubGallery');
   if(!tabs.length || !panel || !titleEl) return;
 
-  /* Contenus */
   const copy = {
     what: `
       <p>
@@ -614,19 +667,39 @@ updateClocks(); setInterval(updateClocks, 1000);
     });
     titleEl.textContent = labelUpper;
     panel.innerHTML = copy[key] || '';
-
-    /* Afficher/masquer la galerie selon l'onglet */
-    if (gallery){
-      gallery.style.display = (key === 'what') ? 'grid' : 'none';
-    }
+    if (gallery){ gallery.style.display = (key === 'what') ? 'grid' : 'none'; }
   }
 
-  /* Init: forcer état correct au chargement */
+  /* Init */
   activate('what', 'WHAT I DO');
-
   tabs.forEach(t => t.addEventListener('click', (e)=>{
     e.preventDefault();
     activate(t.dataset.tab, t.textContent.trim().toUpperCase());
   }));
+})();
+
+/* === Effet tilt 3D léger sur les images === */
+(function(){
+  const cards = document.querySelectorAll('.figure-tilt');
+  const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
+  cards.forEach(card=>{
+    let rAF;
+    function onMove(e){
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX ?? (e.touches&&e.touches[0].clientX)) - rect.left;
+      const y = (e.clientY ?? (e.touches&&e.touches[0].clientY)) - rect.top;
+      const rx = clamp(((y/rect.height)-0.5)*8,-8,8);
+      const ry = clamp(((x/rect.width)-0.5)*-12,-12,12);
+      cancelAnimationFrame(rAF);
+      rAF = requestAnimationFrame(()=>{
+        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+    }
+    function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
+    card.addEventListener('mousemove', onMove, {passive:true});
+    card.addEventListener('mouseleave', reset);
+    card.addEventListener('touchmove', onMove, {passive:true});
+    card.addEventListener('touchend', reset);
+  });
 })();
 </script>
