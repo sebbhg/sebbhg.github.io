@@ -302,6 +302,34 @@ full_bleed: true
     padding-right: 24px;
   }
 
+  /* === GALLERY (4 images) === */
+  .hub-gallery{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:16px;
+    max-width:1200px;
+    margin:12px 0 36px;
+  }
+  .hub-gallery figure{
+    aspect-ratio:16/10;
+    overflow:hidden;
+    border-radius:14px;
+    background:#0a0a0a;
+    border:1px solid #1f2333;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  .hub-gallery img{
+    width:100%; height:100%; object-fit:cover;
+    transition:transform .5s ease, filter .5s ease;
+    filter:brightness(.95) contrast(1.08) saturate(1.05);
+    display:block;
+  }
+  .hub-gallery figure:hover img{
+    transform:scale(1.06);
+    filter:brightness(1.05) contrast(1.08) saturate(1.1);
+  }
+  @media (max-width:720px){.hub-gallery{grid-template-columns:1fr;}}
+
   /* au-dessus du footer */
   .news-band, .activities-section, .after-market { position: relative; z-index: 3; }
 </style>
@@ -432,6 +460,14 @@ full_bleed: true
     <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
+    <!-- === GALLERY 2x2 (visible quand "What I do") === -->
+    <div class="hub-gallery" id="hubGallery">
+      <figure><img src="/assets/images/image1.png" alt="Volatility Surface"></figure>
+      <figure><img src="/assets/images/image2.png" alt="Yield Curves — OIS vs IRS"></figure>
+      <figure><img src="/assets/images/image3.png" alt="Monte Carlo Simulation — GBM Paths"></figure>
+      <figure><img src="/assets/images/image4.png" alt="3D Normal Distribution"></figure>
+    </div>
+
     <!-- Contenu initial long (WHAT I DO) -->
     <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
       <p>
@@ -537,6 +573,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   const tabs = document.querySelectorAll('.hub-tab');
   const panel = document.getElementById('hubPanel');
   const titleEl = document.getElementById('hubSelectedTitle');
+  const gallery = document.getElementById('hubGallery');
   if(!tabs.length || !panel || !titleEl) return;
 
   /* Contenus */
@@ -576,9 +613,16 @@ updateClocks(); setInterval(updateClocks, 1000);
       t.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
     titleEl.textContent = labelUpper;
-    /* important: garder le HTML (paragraphes) */
     panel.innerHTML = copy[key] || '';
+
+    /* Afficher/masquer la galerie selon l'onglet */
+    if (gallery){
+      gallery.style.display = (key === 'what') ? 'grid' : 'none';
+    }
   }
+
+  /* Init: forcer état correct au chargement */
+  activate('what', 'WHAT I DO');
 
   tabs.forEach(t => t.addEventListener('click', (e)=>{
     e.preventDefault();
