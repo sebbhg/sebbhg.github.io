@@ -285,7 +285,7 @@ full_bleed: true
 
   .hub-panel{
     margin-top:8px;
-    color:#c9cbd1; line-height:1.65; max-width:850px; text-align:left;
+    color:#c9cbd1; line-height:1.65; max-width:850px; text-align:justify;
   }
 
   /* === SURCHARGES: étendre la largeur de la section "Our Activities" === */
