@@ -302,20 +302,25 @@ full_bleed: true
     padding-right: 24px;
   }
 
-  /* === GALLERY (2 images avec overlay + tilt) === */
+  /* === GALLERY PLEIN ÉCRAN (1 image, tilt + overlay) === */
   .hub-gallery{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap:16px;
-    max-width:1200px;
-    margin:12px auto 36px;         /* <-- centre la grille dans la page */
+    position: relative;
+    width: 100vw;                 /* full-bleed */
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;           /* tire en plein écran */
+    margin-right: -50vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
     perspective: 900px;
-    justify-items:center;           /* <-- centre le contenu de chaque colonne */
+    margin-top: 12px;
+    margin-bottom: 36px;
   }
   .hub-gallery figure{
     position:relative;
-    width:min(560px, 100%);         /* <-- largeur max pour rester centré et élégant */
-    aspect-ratio:16/10;
+    width:100%;
+    aspect-ratio: 21/9;           /* paysage cinématique */
     overflow:hidden;
     border-radius:14px;
     background:#0a0a0a;
@@ -331,11 +336,10 @@ full_bleed: true
     display:block;
     transform: translateZ(0);
   }
-  /* Overlay texte caché par défaut */
   .hub-gallery figcaption{
     position:absolute; inset:0;
     display:flex; align-items:flex-end;
-    padding:18px;
+    padding:22px;
     background: linear-gradient(to top, rgba(10,18,36,.85) 0%, rgba(10,18,36,.35) 40%, transparent 70%);
     color:#e7f1ff;
     font-weight:800;
@@ -347,26 +351,24 @@ full_bleed: true
   }
   .hub-gallery figcaption .caption-inner{
     backdrop-filter: blur(3px);
-    padding:8px 10px;
+    padding:10px 12px;
     border-radius:10px;
     border:1px solid rgba(76,139,255,.35);
     background: rgba(15,22,40,.45);
     box-shadow:0 0 28px rgba(44,140,255,.25) inset;
   }
-  /* Halo animé au hover */
   .hub-gallery figure::after{
     content:"";
     position:absolute; inset:-1px; border-radius:14px; pointer-events:none;
-    background: radial-gradient(600px 220px at 20% -20%, rgba(44,140,255,.18), transparent 70%);
+    background: radial-gradient(900px 260px at 20% -20%, rgba(44,140,255,.18), transparent 70%);
     opacity:.0; transition: opacity .35s ease;
   }
-  /* Effets hover */
   .hub-gallery figure:hover{
     box-shadow:0 16px 42px rgba(0,0,0,.45);
     border-color:#2c8cff55;
   }
   .hub-gallery figure:hover img{
-    transform: scale(1.06);
+    transform: scale(1.04);
     filter:brightness(1.05) contrast(1.08) saturate(1.1);
   }
   .hub-gallery figure:hover figcaption{
@@ -375,7 +377,7 @@ full_bleed: true
   .hub-gallery figure:hover::after{ opacity:.9; }
 
   @media (max-width:900px){
-    .hub-gallery{ grid-template-columns:1fr; }  /* une colonne, toujours centrée */
+    .hub-gallery figure{ aspect-ratio: 16/9; }
   }
 
   /* au-dessus du footer */
@@ -508,18 +510,12 @@ full_bleed: true
     <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
-    <!-- === GALLERY (2 images) === -->
+    <!-- === GALLERY FULL-WIDTH (1 image paysage) === -->
     <div class="hub-gallery" id="hubGallery">
       <figure class="figure-tilt">
-        <img src="/assets/images/image1.png" alt="Volatility Surface">
+        <img src="/assets/images/image5.png" alt="New York at night — market activity overlay">
         <figcaption>
-          <div class="caption-inner">Volatility Surface</div>
-        </figcaption>
-      </figure>
-      <figure class="figure-tilt">
-        <img src="/assets/images/image2.png" alt="Yield Curves — OIS vs IRS">
-        <figcaption>
-          <div class="caption-inner">Yield Curves — OIS vs IRS</div>
+          <div class="caption-inner">NYC • Markets • Models → Decisions</div>
         </figcaption>
       </figure>
     </div>
@@ -624,7 +620,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs: Our Activities + init galerie visible pour "what" === */
+/* === Tabs: Our Activities + galerie visible pour "what" === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const panel = document.getElementById('hubPanel');
@@ -680,7 +676,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   }));
 })();
 
-/* === Effet tilt 3D léger sur les images === */
+/* === Effet tilt 3D léger sur l'image === */
 (function(){
   const cards = document.querySelectorAll('.figure-tilt');
   const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
@@ -688,10 +684,13 @@ updateClocks(); setInterval(updateClocks, 1000);
     let rAF;
     function onMove(e){
       const rect = card.getBoundingClientRect();
-      const x = (e.clientX ?? (e.touches&&e.touches[0].clientX)) - rect.left;
-      const y = (e.clientY ?? (e.touches&&e.touches[0].clientY)) - rect.top;
-      const rx = clamp(((y/rect.height)-0.5)*8,-8,8);
-      const ry = clamp(((x/rect.width)-0.5)*-12,-12,12);
+      const clientX = (e.clientX ?? (e.touches&&e.touches[0].clientX));
+      const clientY = (e.clientY ?? (e.touches&&e.touches[0].clientY));
+      if (clientX==null || clientY==null) return;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
+      const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
       cancelAnimationFrame(rAF);
       rAF = requestAnimationFrame(()=>{
         card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
