@@ -415,11 +415,38 @@ full_bleed: true
       <a class="hub-tab" data-tab="reading" href="#reading" role="tab" aria-selected="false">Reading</a>
     </nav>
 
-    <!-- NOUVEAU : Titre dynamique sous les onglets -->
+    <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
+    <!-- CONTENU PAR DÉFAUT (WHAT I DO) AVEC TON TEXTE LONG -->
     <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
-      I describe how I turn quantitative ideas into practical trading tools and engineering workflows: pricing engines, risk aggregation, intraday analytics and research notes. This is the best place to see what I actually build.
+      <p>
+        My quantitative journey began with a fascination for how mathematical models could explain and anticipate financial behavior. Over the years, I have progressively refined this passion — evolving from building valuation spreadsheets and market indicators to designing full-fledged pricing and risk-management systems.
+      </p>
+
+      <p>
+        During my early experience at <strong>Société Générale Corporate & Investment Banking</strong>, I worked within the portfolio valuation team on the automation of fund and derivative pricing processes. I developed <em>Monte Carlo valuation tools</em> for structured funds and improved daily PnL explainability through dynamic volatility adjustments and systematic stress testing. This exposure to large-scale data and front-to-risk integration taught me the fundamentals of financial modeling reliability and auditability — critical pillars of any risk engine.
+      </p>
+
+      <p>
+        I then joined <strong>Spread Research</strong> as a <em>Quantitative Analyst Intern</em>, where I focused on <strong>equity derivatives</strong> and market microstructure. My work involved building analytical tools for <em>volatility surface calibration</em>, pricing exotic options using <em>Monte Carlo</em> and <em>finite-difference methods</em>, and exploring hedging strategies such as gamma scalping and delta-neutral positioning. I also studied the dynamics of volatility smiles and skews across maturities, enhancing my understanding of option sensitivities and implied risk premia. This phase solidified my link between mathematical models and their behavior under real market stress.
+      </p>
+
+      <p>
+        Today, I work at <strong>Natixis Corporate & Investment Banking</strong> within the <em>Market & Counterparty Risk Modelling (MCRM)</em> team. My mission is to develop and optimize CVA and XVA models under the <em>Linear Gaussian Model (LGM-1F)</em> framework. I designed a full <strong>CVA engine</strong> integrating zero-coupon bootstrapping, exposure simulation, and analytical estimation of sensitivities. I implemented <em>Gaussian Process Regression (GPR)</em> and <em>Bayesian Quadrature (BQ)</em> methods to approximate Delta, Gamma, Vega, Theta, and Cega — achieving highly stable results with strong computational efficiency. Beyond model development, I also work on <strong>multi-currency frameworks</strong>, curve construction for swap and cross-currency portfolios, and advanced analytics dashboards for traders and risk officers.
+      </p>
+
+      <p>
+        My academic background bridges <strong>engineering and applied mathematics</strong>. I graduated from <strong>CY Tech (formerly EISTI)</strong> with a master’s degree in <em>Financial Mathematics and Quantitative Engineering</em>. My coursework covered <em>stochastic processes, Ito calculus, Monte Carlo methods, machine learning, and portfolio optimization</em>. I also conducted research on <em>portfolio selection under incomplete markets</em> using log-utility maximization, and on <em>volatility surface reconstruction</em> through Heston and SABR calibration. These studies strengthened both my mathematical intuition and my ability to design robust numerical schemes.
+      </p>
+
+      <p>
+        In parallel, I continuously enhance my professional toolkit through certification and self-directed learning. I am a <strong>CFA Level I Holder</strong>, actively pursuing Level II, and I frequently explore academic research in <em>stochastic modeling</em>, <em>Bayesian inference</em>, and <em>deep learning for derivatives pricing</em>. I write Python libraries that implement curve bootstrapping, exposure computation, and neural approximations of pricing functions — bridging quantitative theory and market execution.
+      </p>
+
+      <p>
+        My overarching goal is simple: to turn quantitative elegance into practical trading impact. Every model, dataset, or codebase I build serves one purpose — enabling better, faster, and more transparent decisions in modern financial markets.
+      </p>
     </div>
   </div>
 </section>
@@ -491,18 +518,46 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs: Our Activities === */
+/* === Tabs: Our Activities — utilise innerHTML pour conserver les paragraphes === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const panel = document.getElementById('hubPanel');
   const titleEl = document.getElementById('hubSelectedTitle');
   if(!tabs.length || !panel || !titleEl) return;
 
-  const copy = {
-    what: `I describe how I turn quantitative ideas into practical trading tools and engineering workflows: pricing engines, risk aggregation, intraday analytics and research notes. This is the best place to see what I actually build.`,
-    courses: `Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.`,
-    projects: `Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.`,
-    reading: `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`
+  const copyHtml = {
+    what: `
+      <p>
+        My quantitative journey began with a fascination for how mathematical models could explain and anticipate financial behavior. Over the years, I have progressively refined this passion — evolving from building valuation spreadsheets and market indicators to designing full-fledged pricing and risk-management systems.
+      </p>
+      <p>
+        During my early experience at <strong>Société Générale Corporate & Investment Banking</strong>, I worked within the portfolio valuation team on the automation of fund and derivative pricing processes. I developed <em>Monte Carlo valuation tools</em> for structured funds and improved daily PnL explainability through dynamic volatility adjustments and systematic stress testing. This exposure to large-scale data and front-to-risk integration taught me the fundamentals of financial modeling reliability and auditability — critical pillars of any risk engine.
+      </p>
+      <p>
+        I then joined <strong>Spread Research</strong> as a <em>Quantitative Analyst Intern</em>, where I focused on <strong>equity derivatives</strong> and market microstructure. My work involved building analytical tools for <em>volatility surface calibration</em>, pricing exotic options using <em>Monte Carlo</em> and <em>finite-difference methods</em>, and exploring hedging strategies such as gamma scalping and delta-neutral positioning. I also studied the dynamics of volatility smiles and skews across maturities, enhancing my understanding of option sensitivities and implied risk premia. This phase solidified my link between mathematical models and their behavior under real market stress.
+      </p>
+      <p>
+        Today, I work at <strong>Natixis Corporate & Investment Banking</strong> within the <em>Market & Counterparty Risk Modelling (MCRM)</em> team. My mission is to develop and optimize CVA and XVA models under the <em>Linear Gaussian Model (LGM-1F)</em> framework. I designed a full <strong>CVA engine</strong> integrating zero-coupon bootstrapping, exposure simulation, and analytical estimation of sensitivities. I implemented <em>Gaussian Process Regression (GPR)</em> and <em>Bayesian Quadrature (BQ)</em> methods to approximate Delta, Gamma, Vega, Theta, and Cega — achieving highly stable results with strong computational efficiency. Beyond model development, I also work on <strong>multi-currency frameworks</strong>, curve construction for swap and cross-currency portfolios, and advanced analytics dashboards for traders and risk officers.
+      </p>
+      <p>
+        My academic background bridges <strong>engineering and applied mathematics</strong>. I graduated from <strong>CY Tech (formerly EISTI)</strong> with a master’s degree in <em>Financial Mathematics and Quantitative Engineering</em>. My coursework covered <em>stochastic processes, Ito calculus, Monte Carlo methods, machine learning, and portfolio optimization</em>. I also conducted research on <em>portfolio selection under incomplete markets</em> using log-utility maximization, and on <em>volatility surface reconstruction</em> through Heston and SABR calibration. These studies strengthened both my mathematical intuition and my ability to design robust numerical schemes.
+      </p>
+      <p>
+        In parallel, I continuously enhance my professional toolkit through certification and self-directed learning. I am a <strong>CFA Level I Holder</strong>, actively pursuing Level II, and I frequently explore academic research in <em>stochastic modeling</em>, <em>Bayesian inference</em>, and <em>deep learning for derivatives pricing</em>. I write Python libraries that implement curve bootstrapping, exposure computation, and neural approximations of pricing functions — bridging quantitative theory and market execution.
+      </p>
+      <p>
+        My overarching goal is simple: to turn quantitative elegance into practical trading impact. Every model, dataset, or codebase I build serves one purpose — enabling better, faster, and more transparent decisions in modern financial markets.
+      </p>
+    `,
+    courses: `
+      <p>Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.</p>
+    `,
+    projects: `
+      <p>Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.</p>
+    `,
+    reading: `
+      <p>Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.</p>
+    `
   };
 
   function activate(key, labelUpper){
@@ -512,7 +567,7 @@ updateClocks(); setInterval(updateClocks, 1000);
       t.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
     titleEl.textContent = labelUpper;
-    panel.textContent = copy[key] || '';
+    panel.innerHTML = copyHtml[key] || '';
   }
 
   tabs.forEach(t => t.addEventListener('click', (e)=>{
