@@ -308,11 +308,13 @@ full_bleed: true
     grid-template-columns: 1fr 1fr;
     gap:16px;
     max-width:1200px;
-    margin:12px 0 36px;
-    perspective: 900px; /* pour le tilt 3D */
+    margin:12px auto 36px;         /* <-- centre la grille dans la page */
+    perspective: 900px;
+    justify-items:center;           /* <-- centre le contenu de chaque colonne */
   }
   .hub-gallery figure{
     position:relative;
+    width:min(560px, 100%);         /* <-- largeur max pour rester centré et élégant */
     aspect-ratio:16/10;
     overflow:hidden;
     border-radius:14px;
@@ -373,7 +375,7 @@ full_bleed: true
   .hub-gallery figure:hover::after{ opacity:.9; }
 
   @media (max-width:900px){
-    .hub-gallery{ grid-template-columns:1fr; }
+    .hub-gallery{ grid-template-columns:1fr; }  /* une colonne, toujours centrée */
   }
 
   /* au-dessus du footer */
