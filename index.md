@@ -272,7 +272,7 @@ full_bleed: true
     background:#2c8cff; border-radius:3px; box-shadow:0 0 12px rgba(44,140,255,.55);
   }
 
-  /* === NOUVEAU : Titre dynamique sous le liseré bleu === */
+  /* === Titre dynamique sous le liseré bleu === */
   .hub-selected-title{
     margin:14px 0 6px;
     color:#fff;
@@ -284,8 +284,22 @@ full_bleed: true
   }
 
   .hub-panel{
-    margin-top:8px; /* un peu moins, car on a le titre au-dessus */
+    margin-top:8px;
     color:#c9cbd1; line-height:1.65; max-width:850px; text-align:left;
+  }
+
+  /* === SURCHARGES: étendre la largeur de la section "Our Activities" === */
+  .after-market .hub-inner{
+    max-width: none;
+    width: 100%;
+    margin: 0;
+  }
+  .after-market .hub-panel{
+    max-width: none;
+  }
+  .after-market{
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   /* au-dessus du footer */
@@ -418,7 +432,7 @@ full_bleed: true
     <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
-    <!-- CONTENU PAR DÉFAUT (WHAT I DO) AVEC TON TEXTE LONG -->
+    <!-- Contenu initial long (WHAT I DO) -->
     <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
       <p>
         My quantitative journey began with a fascination for how mathematical models could explain and anticipate financial behavior. Over the years, I have progressively refined this passion — evolving from building valuation spreadsheets and market indicators to designing full-fledged pricing and risk-management systems.
@@ -518,14 +532,15 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs: Our Activities — utilise innerHTML pour conserver les paragraphes === */
+/* === Tabs: Our Activities === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const panel = document.getElementById('hubPanel');
   const titleEl = document.getElementById('hubSelectedTitle');
   if(!tabs.length || !panel || !titleEl) return;
 
-  const copyHtml = {
+  /* Contenus */
+  const copy = {
     what: `
       <p>
         My quantitative journey began with a fascination for how mathematical models could explain and anticipate financial behavior. Over the years, I have progressively refined this passion — evolving from building valuation spreadsheets and market indicators to designing full-fledged pricing and risk-management systems.
@@ -549,15 +564,9 @@ updateClocks(); setInterval(updateClocks, 1000);
         My overarching goal is simple: to turn quantitative elegance into practical trading impact. Every model, dataset, or codebase I build serves one purpose — enabling better, faster, and more transparent decisions in modern financial markets.
       </p>
     `,
-    courses: `
-      <p>Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.</p>
-    `,
-    projects: `
-      <p>Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.</p>
-    `,
-    reading: `
-      <p>Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.</p>
-    `
+    courses: `Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.`,
+    projects: `Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.`,
+    reading: `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`
   };
 
   function activate(key, labelUpper){
@@ -567,7 +576,8 @@ updateClocks(); setInterval(updateClocks, 1000);
       t.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
     titleEl.textContent = labelUpper;
-    panel.innerHTML = copyHtml[key] || '';
+    /* important: garder le HTML (paragraphes) */
+    panel.innerHTML = copy[key] || '';
   }
 
   tabs.forEach(t => t.addEventListener('click', (e)=>{
