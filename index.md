@@ -305,11 +305,10 @@ full_bleed: true
   /* === GALLERY PLEIN ÉCRAN (1 image, tilt + overlay) === */
   .hub-gallery{
     position: relative;
-    width: 100vw;                 /* full-bleed */
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;           /* tire en plein écran */
-    margin-right: -50vw;
+    width: min(88vw, 1200px);
+    margin: 0 auto;   /* centre la galerie horizontalement */
+    left: auto;
+    right: auto;
     display: grid;
     grid-template-columns: 1fr;
     gap: 0;
