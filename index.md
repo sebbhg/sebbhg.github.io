@@ -435,11 +435,11 @@ full_bleed: true
     <!-- Contenu initial long (WHAT I DO) -->
     <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
       <p>
-        My quantitative journey began with a fascination for how mathematical models could explain and anticipate financial behavior. Over the years, I have progressively refined this passion — evolving from building valuation spreadsheets and market indicators to designing full-fledged pricing and risk-management systems.
+        My quantitative journey began with a fascination for how mathematical models could explain and anticipate financial behavior. Over the years, I have progressively refined this passion, evolving from building valuation spreadsheets and market indicators to designing full-fledged pricing and risk-management systems.
       </p>
 
       <p>
-        During my early experience at <strong>Société Générale Corporate & Investment Banking</strong>, I worked within the portfolio valuation team on the automation of fund and derivative pricing processes. I developed <em>Monte Carlo valuation tools</em> for structured funds and improved daily PnL explainability through dynamic volatility adjustments and systematic stress testing. This exposure to large-scale data and front-to-risk integration taught me the fundamentals of financial modeling reliability and auditability — critical pillars of any risk engine.
+        During my early experience at <strong>Société Générale Corporate & Investment Banking</strong>, I worked within the portfolio valuation team on the automation of fund and derivative pricing processes. I developed <em>Monte Carlo valuation tools</em> for structured funds and improved daily PnL explainability through dynamic volatility adjustments and systematic stress testing. This exposure to large-scale data and front-to-risk integration taught me the fundamentals of financial modeling reliability and auditability, critical pillars of any risk engine.
       </p>
 
       <p>
@@ -447,7 +447,7 @@ full_bleed: true
       </p>
 
       <p>
-        Today, I work at <strong>Natixis Corporate & Investment Banking</strong> within the <em>Market & Counterparty Risk Modelling (MCRM)</em> team. My mission is to develop and optimize CVA and XVA models under the <em>Linear Gaussian Model (LGM-1F)</em> framework. I designed a full <strong>CVA engine</strong> integrating zero-coupon bootstrapping, exposure simulation, and analytical estimation of sensitivities. I implemented <em>Gaussian Process Regression (GPR)</em> and <em>Bayesian Quadrature (BQ)</em> methods to approximate Delta, Gamma, Vega, Theta, and Cega — achieving highly stable results with strong computational efficiency. Beyond model development, I also work on <strong>multi-currency frameworks</strong>, curve construction for swap and cross-currency portfolios, and advanced analytics dashboards for traders and risk officers.
+        Today, I work at <strong>Natixis Corporate & Investment Banking</strong> within the <em>Market & Counterparty Risk Modelling (MCRM)</em> team. My mission is to develop and optimize CVA and XVA models under the <em>Linear Gaussian Model (LGM-1F)</em> framework. I designed a full <strong>CVA engine</strong> integrating zero-coupon bootstrapping, exposure simulation, and analytical estimation of sensitivities. I implemented <em>Gaussian Process Regression (GPR)</em> and <em>Bayesian Quadrature (BQ)</em> methods to approximate Delta, Gamma, Vega, Theta, and Cega, achieving highly stable results with strong computational efficiency. Beyond model development, I also work on <strong>multi-currency frameworks</strong>, curve construction for swap and cross-currency portfolios, and advanced analytics dashboards for traders and risk officers.
       </p>
 
       <p>
@@ -455,11 +455,11 @@ full_bleed: true
       </p>
 
       <p>
-        In parallel, I continuously enhance my professional toolkit through certification and self-directed learning. I am a <strong>CFA Level I Holder</strong>, actively pursuing Level II, and I frequently explore academic research in <em>stochastic modeling</em>, <em>Bayesian inference</em>, and <em>deep learning for derivatives pricing</em>. I write Python libraries that implement curve bootstrapping, exposure computation, and neural approximations of pricing functions — bridging quantitative theory and market execution.
+        In parallel, I continuously enhance my professional toolkit through certification and self-directed learning. I am a <strong>CFA Level I Holder</strong>, actively pursuing Level II, and I frequently explore academic research in <em>stochastic modeling</em>, <em>Bayesian inference</em>, and <em>deep learning for derivatives pricing</em>. I write Python libraries that implement curve bootstrapping, exposure computation, and neural approximations of pricing functions, bridging quantitative theory and market execution.
       </p>
 
       <p>
-        My overarching goal is simple: to turn quantitative elegance into practical trading impact. Every model, dataset, or codebase I build serves one purpose — enabling better, faster, and more transparent decisions in modern financial markets.
+        My overarching goal is simple: to turn quantitative elegance into practical trading impact. Every model, dataset, or codebase I build serves one purpose, enabling better, faster, and more transparent decisions in modern financial markets.
       </p>
     </div>
   </div>
