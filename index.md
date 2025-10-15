@@ -222,13 +222,11 @@ full_bleed: true
   .update-link:hover{ border-color:#4da0ff; background:#141414; }
   @media (max-width:820px){ .news-wrap{ grid-template-columns: 1fr; } }
 
-  /* === SECTION HUB (remplace "Latest Insights & Quantitative Research") === */
+  /* === SECTION HUB === */
   .after-market{
     background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111;
   }
-  .hub-inner{
-    max-width:1100px; margin:0 auto;
-  }
+  .hub-inner{ max-width:1100px; margin:0 auto; }
   .hub-eyebrow{
     color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
     margin:0 0 10px; text-align:left;
@@ -236,9 +234,6 @@ full_bleed: true
   .hub-title{
     color:#fff; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; line-height:1.1;
     margin:0 0 16px; text-align:left; text-shadow:0 0 10px rgba(0,0,0,.35);
-  }
-  .hub-sub{
-    color:#9aa3b2; margin:0 0 20px; text-align:left; font-weight:700;
   }
 
   .hub-tabs{
@@ -258,148 +253,92 @@ full_bleed: true
     background:#2c8cff; border-radius:3px; box-shadow:0 0 12px rgba(44,140,255,.55);
   }
 
-  /* === Titre dynamique sous le liseré bleu === */
   .hub-selected-title{
-    margin:14px 0 6px;
-    color:#fff;
-    font-weight:900;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    text-align:left;
-    font-size:clamp(1.1rem,3vw,1.75rem);
+    margin:14px 0 6px; color:#fff; font-weight:900; letter-spacing:.06em;
+    text-transform:uppercase; text-align:left; font-size:clamp(1.1rem,3vw,1.75rem);
   }
 
   .hub-panel{
-    margin-top:8px;
-    color:#c9cbd1; line-height:1.65; text-align:justify;
+    margin-top:8px; color:#c9cbd1; line-height:1.65; text-align:justify;
   }
 
-  /* === SURCHARGES: étendre la largeur de la section "Activities" === */
-  .after-market .hub-inner{
-    max-width: none;
-    width: 100%;
-    margin: 0;
-  }
-  .after-market{
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  /* === LAYOUT: image à gauche, texte à droite === */
+  /* === LAYOUT: image à gauche (badge rond), texte à droite === */
+  .after-market .hub-inner{ max-width: none; width: 100%; margin: 0; padding: 0 24px; }
   .hub-split{
     display:grid;
-    grid-template-columns: minmax(260px, 44%) 1fr; /* <-- image réduite */
-    gap: 22px;
+    grid-template-columns: minmax(260px, 40%) 1fr; /* image plus réduite */
+    gap: 26px;
     align-items: start;
     margin-top: 12px;
   }
-  .hub-split.no-media{
-    grid-template-columns: 1fr;
-  }
+  .hub-split.no-media{ grid-template-columns: 1fr; }
 
-  /* === MEDIA (garde l’effet 3D + overlay) === */
+  /* === MEDIA: Badge rond CY Tech (tilt + halo, aucun rectangle) === */
+  .hub-media{ position: relative; }
   .hub-gallery{
-    position: relative;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
+    position: relative; width: 100%;
+    display: grid; grid-template-columns: 1fr; gap: 0;
     perspective: 900px;
   }
-  .hub-gallery figure{
-    position:relative;
-    width:100%;
-    aspect-ratio: 21/9;
-    overflow:hidden;
-    border-radius:14px;
-    background:#0a0a0a;
-    border:1px solid #1f2333;
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
+  .hub-gallery figure.figure-tilt{
+    position:relative; width: 100%; max-width: 520px; margin: 0 auto;
+    aspect-ratio: 1 / 1;         /* rond */
     transform-style: preserve-3d;
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    /* pas de fond, pas de bord */
+    background: transparent; border: none; box-shadow: none;
   }
-  .hub-gallery img{
-    width:100%; height:100%; object-fit:cover;
-    transition:transform .6s ease, filter .6s ease;
-    filter:brightness(.95) contrast(1.08) saturate(1.05);
-    display:block;
+  /* cercle pur : l'image est recadrée en rond, sans container visible */
+  .hub-gallery figure.figure-tilt img{
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    border-radius: 50%;
+    clip-path: circle(50% at 50% 50%);
+    /* anneau externe subtil */
+    box-shadow:
+      0 0 0 2px rgba(76,139,255,.45) inset,
+      0 8px 28px rgba(0,0,0,.35),
+      0 0 36px rgba(44,140,255,.15);
+    transition: transform .6s ease, filter .6s ease, box-shadow .35s ease;
+    filter: brightness(.98) contrast(1.06) saturate(1.05);
     transform: translateZ(0);
   }
-  /* === Bulle ronde CY Tech === */
-  .cytech-badge {
-    width: 260px;
-    height: 260px;
+  /* halo animé sur hover (autour du rond) */
+  .hub-gallery figure.figure-tilt::after{
+    content:""; position:absolute; inset:-6%;
     border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto;
-    background: none;                  /* supprime tout fond */
-    box-shadow: 0 0 25px rgba(44,140,255,0.35);  /* halo léger */
-    border: none;
-    transition: transform .6s ease, box-shadow .6s ease;
+    background: radial-gradient(420px 220px at 24% -12%, rgba(44,140,255,.18), transparent 70%);
+    pointer-events:none; opacity: .0; transition: opacity .35s ease;
   }
+  .hub-gallery figure.figure-tilt:hover::after{ opacity: .9; }
 
-  /* Animation au survol */
-  .figure-tilt:hover .cytech-badge {
-    transform: scale(1.08);
-    box-shadow:
-      0 0 40px rgba(44,140,255,0.6),
-      0 0 70px rgba(44,140,255,0.4);
-  }
-
-/* Version mobile */
-@media (max-width: 700px) {
-  .cytech-badge {
-    width: 190px;
-    height: 190px;
-  }
-}
-  .hub-gallery figcaption{
-    position:absolute; inset:0;
-    display:flex; align-items:flex-end;
-    padding:22px;
-    background: linear-gradient(to top, rgba(10,18,36,.85) 0%, rgba(10,18,36,.35) 40%, transparent 70%);
-    color:#e7f1ff;
-    font-weight:800;
-    letter-spacing:.04em;
-    text-transform:uppercase;
-    opacity:0; transform: translateY(8px);
-    transition: opacity .35s ease, transform .35s ease;
-    pointer-events:none;
-  }
-  .hub-gallery figcaption .caption-inner{
-    backdrop-filter: blur(3px);
-    padding:10px 12px;
-    border-radius:10px;
-    border:1px solid rgba(76,139,255,.35);
-    background: rgba(15,22,40,.45);
-    box-shadow:0 0 28px rgba(44,140,255,.25) inset;
-  }
-  .hub-gallery figure::after{
-    content:"";
-    position:absolute; inset:-1px; border-radius:14px; pointer-events:none;
-    background: radial-gradient(900px 260px at 20% -20%, rgba(44,140,255,.18), transparent 70%);
-    opacity:.0; transition: opacity .35s ease;
-  }
-  .hub-gallery figure:hover{
-    box-shadow:0 16px 42px rgba(0,0,0,.45);
-    border-color:#2c8cff55;
-  }
-  .hub-gallery figure:hover img{
+  .hub-gallery figure.figure-tilt:hover img{
     transform: scale(1.04);
-    filter:brightness(1.05) contrast(1.08) saturate(1.1);
+    filter: brightness(1.05) contrast(1.08) saturate(1.08);
+    box-shadow:
+      0 0 0 2px rgba(76,139,255,.6) inset,
+      0 12px 42px rgba(0,0,0,.45),
+      0 0 48px rgba(44,140,255,.25);
   }
-  .hub-gallery figure:hover figcaption{
-    opacity:1; transform: translateY(0);
-  }
-  .hub-gallery figure:hover::after{ opacity:.9; }
+
+  /* on masque la légende overlay pour le badge */
+  .hub-gallery figcaption{ display:none; }
 
   @media (max-width:1100px){
-    .hub-split{
-      grid-template-columns: 1fr;
-    }
-    .hub-gallery figure{ aspect-ratio: 16/9; }
+    .hub-split{ grid-template-columns: 1fr; }
   }
+
+  /* === Liste expériences : dates/lieux à droite === */
+  .xp-section{ margin-top: 18px; }
+  .xp-title{ font-weight: 800; color:#e7efff; margin: 18px 0 6px; }
+  .xp-list{ display:flex; flex-direction:column; gap:10px; }
+  .xp-item{
+    display:flex; gap:12px; align-items:flex-start;
+    padding:10px 12px; border:1px solid #1f2333; border-radius:12px; background:#0b0f1a;
+  }
+  .xp-role{ font-weight:800; color:#ffffff; }
+  .xp-company{ color:#9ec8ff; font-weight:800; }
+  .xp-desc{ color:#c9cbd1; margin-top:4px; }
+  .xp-meta{ margin-left:auto; color:#9aa3b2; text-align:right; white-space:nowrap; }
 
   /* au-dessus du footer */
   .news-band, .after-market { position: relative; z-index: 3; }
@@ -523,15 +462,13 @@ full_bleed: true
     <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
-    <!-- ===== Image à gauche + Texte à droite ===== -->
+    <!-- ===== Image (badge rond) à gauche + Texte à droite ===== -->
     <div class="hub-split" id="hubSplit">
       <div class="hub-media">
         <div class="hub-gallery" id="hubGallery">
           <figure class="figure-tilt">
-            <img src="/assets/images/image7.png" alt="CY Tech — Quantitative Engineering Badge" class="cytech-badge">
-            <figcaption>
-              <div class="caption-inner">Background</div>
-            </figcaption>
+            <img src="/assets/images/image7.png" alt="CY Tech round badge">
+            <figcaption><div class="caption-inner">CY Tech</div></figcaption>
           </figure>
         </div>
       </div>
@@ -542,8 +479,40 @@ full_bleed: true
         <p>
           I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
         </p>
+
+        <div class="xp-section">
+          <p class="xp-title"><strong>Professional Experiences</strong></p>
+          <div class="xp-list">
+            <div class="xp-item">
+              <div>
+                <div class="xp-role">Quantitative Trading Analyst</div>
+                <div class="xp-company">Natixis Corporate &amp; Investment Banking</div>
+                <div class="xp-desc">CVA/XVA development under LGM-1F, exposure simulation, sensitivities (Delta, Gamma, Vega, Theta, Cega) with GPR/BQ, multi-currency frameworks and dashboards.</div>
+              </div>
+              <div class="xp-meta">Paris · 2024–Present</div>
+            </div>
+
+            <div class="xp-item">
+              <div>
+                <div class="xp-role">Quantitative Analyst Intern (Equity Derivatives)</div>
+                <div class="xp-company">Spread Research</div>
+                <div class="xp-desc">Vol surface calibration, Monte Carlo &amp; finite-difference pricing, hedging strategies (gamma scalping, delta-neutral), smile/skew dynamics.</div>
+              </div>
+              <div class="xp-meta">Lyon · 2023</div>
+            </div>
+
+            <div class="xp-item">
+              <div>
+                <div class="xp-role">Portfolio Valuation / Quant Intern</div>
+                <div class="xp-company">Société Générale CIB</div>
+                <div class="xp-desc">Automation of fund &amp; derivative pricing, Monte Carlo tools, daily PnL explainability, stress testing, model reliability &amp; auditability.</div>
+              </div>
+              <div class="xp-meta">La Défense · 2022</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </div> <!-- /hub-split -->
   </div>
 </section>
 
@@ -629,6 +598,38 @@ updateClocks(); setInterval(updateClocks, 1000);
       <p>
         I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
       </p>
+
+      <div class="xp-section">
+        <p class="xp-title"><strong>Professional Experiences</strong></p>
+        <div class="xp-list">
+          <div class="xp-item">
+            <div>
+              <div class="xp-role">Quantitative Trading Analyst</div>
+              <div class="xp-company">Natixis Corporate &amp; Investment Banking</div>
+              <div class="xp-desc">CVA/XVA development under LGM-1F, exposure simulation, sensitivities with GPR/BQ, multi-currency frameworks and dashboards.</div>
+            </div>
+            <div class="xp-meta">Paris · 2024–Present</div>
+          </div>
+
+          <div class="xp-item">
+            <div>
+              <div class="xp-role">Quantitative Analyst Intern (Equity Derivatives)</div>
+              <div class="xp-company">Spread Research</div>
+              <div class="xp-desc">Vol surface calibration, Monte Carlo &amp; finite-difference pricing, hedging strategies, smile/skew dynamics.</div>
+            </div>
+            <div class="xp-meta">Lyon · 2023</div>
+          </div>
+
+          <div class="xp-item">
+            <div>
+              <div class="xp-role">Portfolio Valuation / Quant Intern</div>
+              <div class="xp-company">Société Générale CIB</div>
+              <div class="xp-desc">Automation of fund &amp; derivative pricing, Monte Carlo tools, daily PnL explainability, stress testing.</div>
+            </div>
+            <div class="xp-meta">La Défense · 2022</div>
+          </div>
+        </div>
+      </div>
     `,
     courses: `Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.`,
     projects: `Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.`,
@@ -660,7 +661,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   }));
 })();
 
-/* === Effet tilt 3D léger sur l'image === */
+/* === Effet tilt 3D léger sur le badge (image ronde) === */
 (function(){
   const cards = document.querySelectorAll('.figure-tilt');
   const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
