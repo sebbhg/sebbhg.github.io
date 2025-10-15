@@ -325,20 +325,43 @@ full_bleed: true
     display:block;
     transform: translateZ(0);
   }
+  /* === Badge circulaire CY Tech === */
   .cytech-badge {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;                       /* bulle circulaire */
     object-fit: cover;
-    border-radius: 50%;               /* <-- forme badge arrondie */
-    aspect-ratio: 1/1;
-    width: 75%;                       /* <-- taille réduite */
-    margin: 0 auto;                   /* <-- centrée dans le cadre */
     display: block;
-    transition: transform 0.6s ease, filter 0.6s ease;
-    filter: brightness(.95) contrast(1.08) saturate(1.05);
+    margin: 0 auto;
+    border: 2px solid rgba(44,140,255,0.6);   /* halo bleu léger */
+    box-shadow:
+      0 0 20px rgba(44,140,255,0.25),
+      inset 0 0 25px rgba(44,140,255,0.15);
+    background: radial-gradient(circle at 30% 30%, rgba(60,120,255,0.15), transparent 70%);
+    transition:
+      transform .6s ease,
+      filter .6s ease,
+      box-shadow .6s ease,
+      border-color .6s ease;
   }
-  .cytech-badge:hover {
-    transform: scale(1.06) rotate(1deg);
-    filter: brightness(1.1) contrast(1.1) saturate(1.1);
+
+  /* Effet tilt 3D (déjà présent via .figure-tilt) + hover amélioré */
+  .figure-tilt:hover .cytech-badge {
+    transform: scale(1.08) rotate(2deg);
+    filter: brightness(1.08) contrast(1.1) saturate(1.15);
+    border-color: rgba(76,155,255,0.85);
+    box-shadow:
+      0 0 35px rgba(44,140,255,0.55),
+      inset 0 0 45px rgba(44,140,255,0.25);
   }
+  
+/* Version mobile — badge plus petit */
+@media (max-width: 700px) {
+  .cytech-badge {
+    width: 200px;
+    height: 200px;
+  }
+}
   .hub-gallery figcaption{
     position:absolute; inset:0;
     display:flex; align-items:flex-end;
