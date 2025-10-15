@@ -511,7 +511,7 @@ full_bleed: true
       <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
         <p><strong>Education</strong></p>
         <p>
-          J’ai réalisé une classe préparatoire intégrée spécialisée en mathématiques, physique et informatique, ainsi qu’un cursus d’ingénieur en mathématiques appliquées à la finance et un double diplôme en mathématiques à CY Tech.
+          I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
         </p>
       </div>
     </div>
