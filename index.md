@@ -325,6 +325,20 @@ full_bleed: true
     display:block;
     transform: translateZ(0);
   }
+  .cytech-badge {
+    object-fit: cover;
+    border-radius: 50%;               /* <-- forme badge arrondie */
+    aspect-ratio: 1/1;
+    width: 75%;                       /* <-- taille réduite */
+    margin: 0 auto;                   /* <-- centrée dans le cadre */
+    display: block;
+    transition: transform 0.6s ease, filter 0.6s ease;
+    filter: brightness(.95) contrast(1.08) saturate(1.05);
+  }
+  .cytech-badge:hover {
+    transform: scale(1.06) rotate(1deg);
+    filter: brightness(1.1) contrast(1.1) saturate(1.1);
+  }
   .hub-gallery figcaption{
     position:absolute; inset:0;
     display:flex; align-items:flex-end;
@@ -499,7 +513,7 @@ full_bleed: true
       <div class="hub-media">
         <div class="hub-gallery" id="hubGallery">
           <figure class="figure-tilt">
-            <img src="/assets/images/image5.png" alt="New York at night — market activity overlay">
+            <img src="/assets/images/image7.png" alt="CY Tech — Quantitative Engineering Badge" class="cytech-badge">
             <figcaption>
               <div class="caption-inner">Background</div>
             </figcaption>
