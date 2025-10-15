@@ -222,20 +222,6 @@ full_bleed: true
   .update-link:hover{ border-color:#4da0ff; background:#141414; }
   @media (max-width:820px){ .news-wrap{ grid-template-columns: 1fr; } }
 
-  /* === SECTION ACTIVITIES (petit bloc sous les updates) === */
-  .activities-section{
-    background:#050505; color:#ccc; text-align:center;
-    padding:40px 20px 50px; border-top:1px solid #111; border-bottom:1px solid #111;
-  }
-  .activities-section h2,
-  .activities-section .activities-title{
-    color:#9ec8ff !important;
-    -webkit-text-fill-color:#9ec8ff !important;
-    filter:none !important; text-shadow:0 0 6px rgba(44,140,255,.25);
-    font-size:clamp(1.5rem,3vw,2.2rem); font-weight:800; margin-bottom:.6rem;
-  }
-  .activities-section p{ font-size:1rem; color:#aaa; max-width:800px; margin:0 auto; line-height:1.6; }
-
   /* === SECTION HUB (remplace "Latest Insights & Quantitative Research") === */
   .after-market{
     background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111;
@@ -285,7 +271,7 @@ full_bleed: true
 
   .hub-panel{
     margin-top:8px;
-    color:#c9cbd1; line-height:1.65; max-width:850px; text-align:justify;
+    color:#c9cbd1; line-height:1.65; text-align:justify;
   }
 
   /* === SURCHARGES: étendre la largeur de la section "Activities" === */
@@ -294,32 +280,36 @@ full_bleed: true
     width: 100%;
     margin: 0;
   }
-  .after-market .hub-panel{
-    max-width: none;
-  }
   .after-market{
     padding-left: 24px;
     padding-right: 24px;
   }
 
-  /* === GALLERY PLEIN ÉCRAN (1 image, tilt + overlay) === */
+  /* === LAYOUT: image à gauche, texte à droite === */
+  .hub-split{
+    display:grid;
+    grid-template-columns: minmax(280px, 52%) 1fr;
+    gap: 22px;
+    align-items: start;
+    margin-top: 12px;
+  }
+  .hub-split.no-media{
+    grid-template-columns: 1fr;
+  }
+
+  /* === MEDIA (garde l’effet 3D + overlay) === */
   .hub-gallery{
     position: relative;
-    width: min(88vw, 1200px);
-    margin: 0 auto;   /* centre la galerie horizontalement */
-    left: auto;
-    right: auto;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 0;
     perspective: 900px;
-    margin-top: 12px;
-    margin-bottom: 36px;
   }
   .hub-gallery figure{
     position:relative;
     width:100%;
-    aspect-ratio: 21/9;           /* paysage cinématique */
+    aspect-ratio: 21/9;
     overflow:hidden;
     border-radius:14px;
     background:#0a0a0a;
@@ -375,12 +365,15 @@ full_bleed: true
   }
   .hub-gallery figure:hover::after{ opacity:.9; }
 
-  @media (max-width:900px){
+  @media (max-width:1100px){
+    .hub-split{
+      grid-template-columns: 1fr;
+    }
     .hub-gallery figure{ aspect-ratio: 16/9; }
   }
 
   /* au-dessus du footer */
-  .news-band, .activities-section, .after-market { position: relative; z-index: 3; }
+  .news-band, .after-market { position: relative; z-index: 3; }
 </style>
 
 <section class="hero-video">
@@ -485,14 +478,6 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== Activities (petit bloc) ===== -->
-<section class="activities-section">
-  <div class="wrapper">
-    <h2 class="activities-title" style="color:#9ec8ff !important; text-shadow:0 0 6px rgba(44,140,255,.4), 0 0 12px rgba(44,140,255,.25)">About my WebSite</h2>
-    <p>On this website, you will find a wide range of content related to quantitative finance: courses, projects, analyses, interactive tools, and personal insights. The goal is to share diverse resources covering financial modeling, risk theory, portfolio optimization, and machine learning, offering a comprehensive exploration of modern finance from a quantitative and applied perspective.</p>
-  </div>
-</section>
-
 <!-- ===== SECTION HUB (tabs) ===== -->
 <section class="after-market">
   <div class="hub-inner">
@@ -509,45 +494,49 @@ full_bleed: true
     <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
-    <!-- === GALLERY FULL-WIDTH (1 image paysage) === -->
-    <div class="hub-gallery" id="hubGallery">
-      <figure class="figure-tilt">
-        <img src="/assets/images/image5.png" alt="New York at night — market activity overlay">
-        <figcaption>
-          <div class="caption-inner">Background</div>
-        </figcaption>
-      </figure>
-    </div>
+    <!-- ===== Image à gauche + Texte à droite ===== -->
+    <div class="hub-split" id="hubSplit">
+      <div class="hub-media">
+        <div class="hub-gallery" id="hubGallery">
+          <figure class="figure-tilt">
+            <img src="/assets/images/image5.png" alt="New York at night — market activity overlay">
+            <figcaption>
+              <div class="caption-inner">Background</div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
 
-    <!-- Contenu initial long (WHAT I DO) -->
-    <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
-      <p>
-        My quantitative journey began with a fascination for how mathematical models could explain and anticipate financial behavior. Over the years, I have progressively refined this passion, evolving from building valuation spreadsheets and market indicators to designing full-fledged pricing and risk-management systems.
-      </p>
+      <!-- Contenu (justifié) -->
+      <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
+        <p>
+          My quantitative journey began with a fascination for how mathematical models could explain and anticipate financial behavior. Over the years, I have progressively refined this passion, evolving from building valuation spreadsheets and market indicators to designing full-fledged pricing and risk-management systems.
+        </p>
 
-      <p>
-        During my early experience at <strong>Société Générale Corporate & Investment Banking</strong>, I worked within the portfolio valuation team on the automation of fund and derivative pricing processes. I developed <em>Monte Carlo valuation tools</em> for structured funds and improved daily PnL explainability through dynamic volatility adjustments and systematic stress testing. This exposure to large-scale data and front-to-risk integration taught me the fundamentals of financial modeling reliability and auditability, critical pillars of any risk engine.
-      </p>
+        <p>
+          During my early experience at <strong>Société Générale Corporate & Investment Banking</strong>, I worked within the portfolio valuation team on the automation of fund and derivative pricing processes. I developed <em>Monte Carlo valuation tools</em> for structured funds and improved daily PnL explainability through dynamic volatility adjustments and systematic stress testing. This exposure to large-scale data and front-to-risk integration taught me the fundamentals of financial modeling reliability and auditability, critical pillars of any risk engine.
+        </p>
 
-      <p>
-        I then joined <strong>Spread Research</strong> as a <em>Quantitative Analyst Intern</em>, where I focused on <strong>equity derivatives</strong> and market microstructure. My work involved building analytical tools for <em>volatility surface calibration</em>, pricing exotic options using <em>Monte Carlo</em> and <em>finite-difference methods</em>, and exploring hedging strategies such as gamma scalping and delta-neutral positioning. I also studied the dynamics of volatility smiles and skews across maturities, enhancing my understanding of option sensitivities and implied risk premia. This phase solidified my link between mathematical models and their behavior under real market stress.
-      </p>
+        <p>
+          I then joined <strong>Spread Research</strong> as a <em>Quantitative Analyst Intern</em>, where I focused on <strong>equity derivatives</strong> and market microstructure. My work involved building analytical tools for <em>volatility surface calibration</em>, pricing exotic options using <em>Monte Carlo</em> and <em>finite-difference methods</em>, and exploring hedging strategies such as gamma scalping and delta-neutral positioning. I also studied the dynamics of volatility smiles and skews across maturities, enhancing my understanding of option sensitivities and implied risk premia. This phase solidified my link between mathematical models and their behavior under real market stress.
+        </p>
 
-      <p>
-        Today, I work at <strong>Natixis Corporate & Investment Banking</strong> within the <em>Market & Counterparty Risk Modelling (MCRM)</em> team. My mission is to develop and optimize CVA and XVA models under the <em>Linear Gaussian Model (LGM-1F)</em> framework. I designed a full <strong>CVA engine</strong> integrating zero-coupon bootstrapping, exposure simulation, and analytical estimation of sensitivities. I implemented <em>Gaussian Process Regression (GPR)</em> and <em>Bayesian Quadrature (BQ)</em> methods to approximate Delta, Gamma, Vega, Theta, and Cega, achieving highly stable results with strong computational efficiency. Beyond model development, I also work on <strong>multi-currency frameworks</strong>, curve construction for swap and cross-currency portfolios, and advanced analytics dashboards for traders and risk officers.
-      </p>
+        <p>
+          Today, I work at <strong>Natixis Corporate & Investment Banking</strong> within the <em>Market & Counterparty Risk Modelling (MCRM)</em> team. My mission is to develop and optimize CVA and XVA models under the <em>Linear Gaussian Model (LGM-1F)</em> framework. I designed a full <strong>CVA engine</strong> integrating zero-coupon bootstrapping, exposure simulation, and analytical estimation of sensitivities. I implemented <em>Gaussian Process Regression (GPR)</em> and <em>Bayesian Quadrature (BQ)</em> methods to approximate Delta, Gamma, Vega, Theta, and Cega, achieving highly stable results with strong computational efficiency. Beyond model development, I also work on <strong>multi-currency frameworks</strong>, curve construction for swap and cross-currency portfolios, and advanced analytics dashboards for traders and risk officers.
+        </p>
 
-      <p>
-        My academic background bridges <strong>engineering and applied mathematics</strong>. I graduated from <strong>CY Tech (formerly EISTI)</strong> with a master’s degree in <em>Financial Mathematics and Quantitative Engineering</em>. My coursework covered <em>stochastic processes, Ito calculus, Monte Carlo methods, machine learning, and portfolio optimization</em>. I also conducted research on <em>portfolio selection under incomplete markets</em> using log-utility maximization, and on <em>volatility surface reconstruction</em> through Heston and SABR calibration. These studies strengthened both my mathematical intuition and my ability to design robust numerical schemes.
-      </p>
+        <p>
+          My academic background bridges <strong>engineering and applied mathematics</strong>. I graduated from <strong>CY Tech (formerly EISTI)</strong> with a master’s degree in <em>Financial Mathematics and Quantitative Engineering</em>. My coursework covered <em>stochastic processes, Ito calculus, Monte Carlo methods, machine learning, and portfolio optimization</em>. I also conducted research on <em>portfolio selection under incomplete markets</em> using log-utility maximization, and on <em>volatility surface reconstruction</em> through Heston and SABR calibration. These studies strengthened both my mathematical intuition and my ability to design robust numerical schemes.
+        </p>
 
-      <p>
-        In parallel, I continuously enhance my professional toolkit through certification and self-directed learning. I am a <strong>CFA Level I Holder</strong>, actively pursuing Level II, and I frequently explore academic research in <em>stochastic modeling</em>, <em>Bayesian inference</em>, and <em>deep learning for derivatives pricing</em>. I write Python libraries that implement curve bootstrapping, exposure computation, and neural approximations of pricing functions, bridging quantitative theory and market execution.
-      </p>
+        <p>
+          In parallel, I continuously enhance my professional toolkit through certification and self-directed learning. I am a <strong>CFA Level I Holder</strong>, actively pursuing Level II, and I frequently explore academic research in <em>stochastic modeling</em>, <em>Bayesian inference</em>, and <em>deep learning for derivatives pricing</em>. I write Python libraries that implement curve bootstrapping, exposure computation, and neural approximations of pricing functions, bridging quantitative theory and market execution.
+        </p>
 
-      <p>
-        My overarching goal is simple: to turn quantitative elegance into practical trading impact. Every model, dataset, or codebase I build serves one purpose, enabling better, faster, and more transparent decisions in modern financial markets.
-      </p>
+        <p>
+          My overarching goal is simple: to turn quantitative elegance into practical trading impact. Every model, dataset, or codebase I build serves one purpose, enabling better, faster, and more transparent decisions in modern financial markets.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -619,12 +608,13 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs: Our Activities + galerie visible pour "what" === */
+/* === Tabs: switch + layout (image gauche / texte droite) === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const panel = document.getElementById('hubPanel');
   const titleEl = document.getElementById('hubSelectedTitle');
   const gallery = document.getElementById('hubGallery');
+  const split = document.getElementById('hubSplit');
   if(!tabs.length || !panel || !titleEl) return;
 
   const copy = {
@@ -636,19 +626,10 @@ updateClocks(); setInterval(updateClocks, 1000);
         During my early experience at <strong>Société Générale Corporate & Investment Banking</strong>, I worked within the portfolio valuation team on the automation of fund and derivative pricing processes. I developed <em>Monte Carlo valuation tools</em> for structured funds and improved daily PnL explainability through dynamic volatility adjustments and systematic stress testing. This exposure to large-scale data and front-to-risk integration taught me the fundamentals of financial modeling reliability and auditability — critical pillars of any risk engine.
       </p>
       <p>
-        I then joined <strong>Spread Research</strong> as a <em>Quantitative Analyst Intern</em>, where I focused on <strong>equity derivatives</strong> and market microstructure. My work involved building analytical tools for <em>volatility surface calibration</em>, pricing exotic options using <em>Monte Carlo</em> and <em>finite-difference methods</em>, and exploring hedging strategies such as gamma scalping and delta-neutral positioning. I also studied the dynamics of volatility smiles and skews across maturities, enhancing my understanding of option sensitivities and implied risk premia. This phase solidified my link between mathematical models and their behavior under real market stress.
+        I then joined <strong>Spread Research</strong> as a <em>Quantitative Analyst Intern</em>, where I focused on <strong>equity derivatives</strong> and market microstructure. My work involved building analytical tools for <em>volatility surface calibration</em>, pricing exotic options using <em>Monte Carlo</em> and <em>finite-difference methods</em>, and exploring hedging strategies such as gamma scalping and delta-neutral positioning. I also studied the dynamics of volatility smiles and skews across maturities, enhancing my understanding of option sensitivities and implied risk premia.
       </p>
       <p>
-        Today, I work at <strong>Natixis Corporate & Investment Banking</strong> within the <em>Market & Counterparty Risk Modelling (MCRM)</em> team. My mission is to develop and optimize CVA and XVA models under the <em>Linear Gaussian Model (LGM-1F)</em> framework. I designed a full <strong>CVA engine</strong> integrating zero-coupon bootstrapping, exposure simulation, and analytical estimation of sensitivities. I implemented <em>Gaussian Process Regression (GPR)</em> and <em>Bayesian Quadrature (BQ)</em> methods to approximate Delta, Gamma, Vega, Theta, and Cega — achieving highly stable results with strong computational efficiency. Beyond model development, I also work on <strong>multi-currency frameworks</strong>, curve construction for swap and cross-currency portfolios, and advanced analytics dashboards for traders and risk officers.
-      </p>
-      <p>
-        My academic background bridges <strong>engineering and applied mathematics</strong>. I graduated from <strong>CY Tech (formerly EISTI)</strong> with a master’s degree in <em>Financial Mathematics and Quantitative Engineering</em>. My coursework covered <em>stochastic processes, Ito calculus, Monte Carlo methods, machine learning, and portfolio optimization</em>. I also conducted research on <em>portfolio selection under incomplete markets</em> using log-utility maximization, and on <em>volatility surface reconstruction</em> through Heston and SABR calibration. These studies strengthened both my mathematical intuition and my ability to design robust numerical schemes.
-      </p>
-      <p>
-        In parallel, I continuously enhance my professional toolkit through certification and self-directed learning. I am a <strong>CFA Level I Holder</strong>, actively pursuing Level II, and I frequently explore academic research in <em>stochastic modeling</em>, <em>Bayesian inference</em>, and <em>deep learning for derivatives pricing</em>. I write Python libraries that implement curve bootstrapping, exposure computation, and neural approximations of pricing functions — bridging quantitative theory and market execution.
-      </p>
-      <p>
-        My overarching goal is simple: to turn quantitative elegance into practical trading impact. Every model, dataset, or codebase I build serves one purpose — enabling better, faster, and more transparent decisions in modern financial markets.
+        Today, I work at <strong>Natixis Corporate & Investment Banking</strong> within the <em>Market & Counterparty Risk Modelling (MCRM)</em> team. My mission is to develop and optimize CVA and XVA models under the <em>Linear Gaussian Model (LGM-1F)</em> framework. I designed a full <strong>CVA engine</strong> integrating zero-coupon bootstrapping, exposure simulation, and analytical estimation of sensitivities. I implemented <em>Gaussian Process Regression (GPR)</em> and <em>Bayesian Quadrature (BQ)</em> methods to approximate Delta, Gamma, Vega, Theta, and Cega.
       </p>
     `,
     courses: `Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.`,
@@ -664,7 +645,13 @@ updateClocks(); setInterval(updateClocks, 1000);
     });
     titleEl.textContent = labelUpper;
     panel.innerHTML = copy[key] || '';
-    if (gallery){ gallery.style.display = (key === 'what') ? 'grid' : 'none'; }
+
+    /* Image visible seulement pour "what" */
+    if (gallery && split){
+      const showMedia = (key === 'what');
+      gallery.style.display = showMedia ? 'grid' : 'none';
+      split.classList.toggle('no-media', !showMedia);
+    }
   }
 
   /* Init */
