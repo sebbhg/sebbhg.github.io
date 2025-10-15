@@ -281,7 +281,7 @@ full_bleed: true
     perspective: 900px;
   }
   .hub-gallery figure.figure-tilt{
-    position:relative; width: 100%; max-width: 520px; margin: 0 auto;
+    position:relative; width: 100%; max-width: 220px; margin: 0 auto;
     aspect-ratio: 1 / 1;         /* rond */
     transform-style: preserve-3d;
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
