@@ -164,23 +164,29 @@ full_bleed: true
   .cy-holo.is-flipped .flip-inner{ transform: rotateY(180deg); }
   .cy-holo .flip-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:50%; overflow:hidden; }
   .cy-holo .flip-front{ display:grid; place-items:center; }
-  .cy-holo .flip-front .logo{
-    width:78%; height:78%; border-radius:50%; overflow:hidden; position:relative;
-    display:flex; align-items:center; justify-content:center;
-    /* pas de fond carré */
+  /* ===== Correction logo CY Tech (plus de carré, bien centré) ===== */
+  .cy-holo .flip-front .logo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: transparent;
-    box-shadow:0 0 0 1px rgba(255,255,255,.06) inset;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset;
   }
-  .cy-holo .flip-front .logo img{
-    width:100%; height:100%; display:block;
-    object-fit:contain; object-position:center;
-    /* masque dur en cercle pour supprimer TOUT bord carré éventuel */
+  .cy-holo .flip-front .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 50%;
+    background: transparent;
     clip-path: circle(50% at 50% 50%);
     -webkit-mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
-            mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
-    background: transparent;
-    /* légère amélioration de rendu */
-    filter:contrast(1.06) saturate(1.05) brightness(1.02);
+    mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
+    filter: contrast(1.05) saturate(1.05) brightness(1.02);
   }
   .cy-holo .gloss{ position:absolute; inset:0; background: radial-gradient(60% 35% at 30% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.06), transparent 35%), radial-gradient(50% 60% at 70% 85%, rgba(44,140,255,.12), transparent 60%); mix-blend-mode:screen; pointer-events:none; }
   .cy-holo .flip-back{ transform: rotateY(180deg); display:flex; align-items:center; justify-content:center; padding:12px; background:#0b0f1a; color:#cfe3ff; text-align:center; }
