@@ -22,6 +22,7 @@ full_bleed: true
   .hero-video { position: relative; z-index: 2; overflow: hidden; }
   .hero-overlay { position: absolute; inset: 0; z-index: 1; }
   .hero-content { position: relative; z-index: 2; }
+  .hero-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
@@ -164,25 +165,15 @@ full_bleed: true
   .cy-holo.is-flipped .flip-inner{ transform: rotateY(180deg); }
   .cy-holo .flip-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:50%; overflow:hidden; }
   .cy-holo .flip-front{ display:grid; place-items:center; }
-  /* ===== Correction logo CY Tech (plus de carré, bien centré) ===== */
   .cy-holo .flip-front .logo {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
+    width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
+    display:flex; align-items:center; justify-content:center; background: transparent;
     box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset;
   }
   .cy-holo .flip-front .logo img {
-    width: 120%;
-    height: 120%;
-    object-fit: cover;
-    object-position: 43% 35%;
-    border-radius: 50%;
-    background: transparent;
+    width: 120%; height: 120%;
+    object-fit: cover; object-position: 43% 35%;
+    border-radius: 50%; background: transparent;
     clip-path: circle(50% at 50% 50%);
     -webkit-mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
     mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
@@ -329,7 +320,6 @@ full_bleed: true
       <a class="hub-tab" data-tab="reading" href="#reading" role="tab" aria-selected="false">Reading</a>
     </nav>
 
-    <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
     <!-- ===== SPLIT (Education à gauche / Experiences à droite) ===== -->
@@ -421,7 +411,7 @@ function updateClocks(){
     const city = el.dataset.city;
     const tz = el.dataset.tz;
     const now = new Date().toLocaleTimeString('en-GB', { timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false });
-    el.innerHTML = <span class="city">${city}</span><span class="time">${now}</span>;
+    el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
   });
 }
 updateClocks(); setInterval(updateClocks, 1000);
@@ -464,15 +454,18 @@ updateClocks(); setInterval(updateClocks, 1000);
     const m = parseInt(parts.find(p=>p.type==='minute').value,10);
     return { h, m, t: h*60+m };
   }
-  function isOpenTokyo(){ if(!isWeekday('Asia/Tokyo')) return false; const {t}=hmInTZ('Asia/Tokyo'); return t>=540 && t<900; }
-  function isOpenLondon(){ if(!isWeekday('Europe/London')) return false; const {t}=hmInTZ('Europe/London'); return t>=480 && t<960; }
-  function isOpenParis(){ if(!isWeekday('Europe/Paris')) return false; const {t}=hmInTZ('Europe/Paris'); return t>=540 && t<1020; }
-  function isOpenNewYork(){ if(!isWeekday('America/New_York')) return false; const {t}=hmInTZ('America/New_York'); return t>=(9*60+30) && t<960; }
+  function isOpenTokyo(){ if(!isWeekday('Asia/Tokyo')) return false; const {t}=hmInTZ('Asia/Tokyo'); return t>=540 && t<900; }     // 09:00–15:00
+  function isOpenLondon(){ if(!isWeekday('Europe/London')) return false; const {t}=hmInTZ('Europe/London'); return t>=480 && t<960; } // 08:00–16:00
+  function isOpenParis(){ if(!isWeekday('Europe/Paris')) return false; const {t}=hmInTZ('Europe/Paris'); return t>=540 && t<1020; }   // 09:00–17:00
+  function isOpenNewYork(){ if(!isWeekday('America/New_York')) return false; const {t}=hmInTZ('America/New_York'); return t>=(9*60+30) && t<960; } // 09:30–16:00
+
   function refresh(){
     const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
     const urls={ tokyo:"https://www.jpx.co.jp/english/markets/", london:"https://www.londonstockexchange.com/", paris:"https://live.euronext.com/en/markets/paris", ny:"https://www.nyse.com/" };
-    const badge=(isOpen,label,url)=> isOpen ? <a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a> : <span class="badge closed">${label} CLOSED</span>;
-    el.innerHTML = ${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)};
+    const badge=(open,label,url)=> open
+      ? `<a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>`
+      : `<span class="badge closed">${label} CLOSED</span>`;
+    el.innerHTML = `${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)}`;
   }
   refresh(); setInterval(refresh, 60_000);
 })();
@@ -485,9 +478,9 @@ updateClocks(); setInterval(updateClocks, 1000);
   const panelGeneric = document.getElementById('hubPanelGeneric');
 
   const copy = {
-    courses: Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.,
-    projects: Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.,
-    reading:  Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.
+    courses: `Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.`,
+    projects: `Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.`,
+    reading:  `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`,
   };
 
   function activate(key, labelUpper){
@@ -533,7 +526,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
     const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
     cancelAnimationFrame(rAF);
-    rAF = requestAnimationFrame(()=>{ card.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
+    rAF = requestAnimationFrame(()=>{ card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
   }
   function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
   function toggleFlip(){
