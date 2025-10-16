@@ -180,7 +180,7 @@ full_bleed: true
     width: 120%;
     height: 120%;
     object-fit: cover;
-    object-position: 45% 40%;
+    object-position: 43% 35%;
     border-radius: 50%;
     background: transparent;
     clip-path: circle(50% at 50% 50%);
