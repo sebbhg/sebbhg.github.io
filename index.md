@@ -341,7 +341,7 @@ full_bleed: true
             <div class="flip-inner">
               <div class="flip-face flip-front" aria-hidden="false">
                 <div class="logo">
-                  <img src="/assets/images/image7.png" alt="CY Tech logo">
+                  <img src="/assets/images/image13.png" alt="CY Tech logo">
                   <span class="gloss"></span>
                 </div>
               </div>
