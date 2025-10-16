@@ -112,29 +112,32 @@ full_bleed: true
   .hub-split.no-media{ grid-template-columns:1fr; }
   @media (max-width:1100px){ .hub-split{ grid-template-columns:1fr; } }
 
-  /* ===== EDUCATION CARD (gauche) ===== */
-  .edu-card{
+  /* ===== CARTE GÉNÉRIQUE (verre + halo) ===== */
+  .card-glass{
     position:relative; border-radius:18px; padding:16px 16px 18px;
     background: linear-gradient(180deg, rgba(14,18,34,.85), rgba(8,10,20,.9));
     border:1px solid rgba(76,139,255,.28);
     box-shadow: 0 10px 28px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
     overflow:hidden;
   }
-  .edu-card::after{
+  .card-glass::after{
     content:""; position:absolute; inset:-25% -25% -25% -25%;
     background: radial-gradient(50% 40% at 20% 0%, rgba(44,140,255,.18), transparent 60%),
                 radial-gradient(60% 50% at 80% 100%, rgba(159,122,255,.12), transparent 65%);
     filter: blur(18px); opacity:.6; pointer-events:none;
   }
+  .card-title{ margin:0 0 8px; font-size:1.05rem; font-weight:900; color:#e7efff; letter-spacing:.04em; text-transform:uppercase; position:relative; z-index:1; }
+  .card-sub{ margin:.15rem 0 0; color:#9ec8ff; font-weight:700; font-size:.9rem; position:relative; z-index:1; }
+
+  /* ===== EDUCATION (gauche) ===== */
+  .edu-card{ /* hérite de .card-glass */ }
   .edu-header{ display:flex; align-items:center; gap:14px; position:relative; z-index:1; }
-  .edu-title-wrap h4{ margin:0; font-size:1.05rem; font-weight:900; color:#e7efff; letter-spacing:.04em; text-transform:uppercase; }
-  .edu-sub{ margin:.15rem 0 0; color:#9ec8ff; font-weight:700; font-size:.9rem; }
   .edu-body{ position:relative; z-index:1; margin-top:10px; color:#cfe3ff; line-height:1.6; font-size:.98rem; }
 
-  /* BADGE CY Tech “holo” compact + bien aligné */
+  /* BADGE CY Tech “holo” compact + centré */
   .hub-gallery{ perspective:1200px; }
   .cy-holo.figure-tilt{
-    --size: 90px;           /* compacité */
+    --size: 90px;
     width:var(--size); height:var(--size); min-width:var(--size);
     border-radius:50%; position:relative; transform-style:preserve-3d;
     transition: transform .25s ease; cursor:pointer; flex:0 0 auto;
@@ -161,17 +164,27 @@ full_bleed: true
   .cy-holo.is-flipped .flip-inner{ transform: rotateY(180deg); }
   .cy-holo .flip-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:50%; overflow:hidden; }
   .cy-holo .flip-front{ display:grid; place-items:center; }
-  .cy-holo .flip-front .logo{ width:78%; height:78%; border-radius:50%; overflow:hidden; box-shadow:0 0 0 1px rgba(255,255,255,.06) inset; position:relative; }
-  .cy-holo .flip-front .logo img{ width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.06) saturate(1.05) brightness(1.02); }
+  .cy-holo .flip-front .logo{
+    width:78%; height:78%; border-radius:50%; overflow:hidden; position:relative;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 1px rgba(255,255,255,.06) inset;
+    background: radial-gradient(80% 80% at 50% 20%, rgba(255,255,255,.06), transparent 60%);
+  }
+  .cy-holo .flip-front .logo img{
+    width:100%; height:100%; display:block;
+    object-fit:contain;            /* <<< centré et non rogné */
+    object-position:center;        /* <<< bien au milieu */
+    padding:6px;                   /* petit respir */
+    filter:contrast(1.06) saturate(1.05) brightness(1.02);
+  }
   .cy-holo .gloss{ position:absolute; inset:0; background: radial-gradient(60% 35% at 30% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.06), transparent 35%), radial-gradient(50% 60% at 70% 85%, rgba(44,140,255,.12), transparent 60%); mix-blend-mode:screen; pointer-events:none; }
   .cy-holo .flip-back{ transform: rotateY(180deg); display:flex; align-items:center; justify-content:center; padding:12px; background:#0b0f1a; color:#cfe3ff; text-align:center; }
   .cy-holo .flip-back .edu-text{ font-size:.78rem; line-height:1.25; }
-  .cy-holo:hover::before{ filter: blur(7px) brightness(1.12); }
 
   /* ===== EXPERIENCES (droite) ===== */
-  .xp-section{ margin-top: 0; }
-  .xp-title{ font-weight:800; color:#e7efff; margin: 0 0 10px; }
-  .xp-list{ display:flex; flex-direction:column; gap:12px; }
+  .xp-card{ /* hérite de .card-glass */ }
+  .xp-section{ margin-top: 8px; }
+  .xp-list{ display:flex; flex-direction:column; gap:12px; position:relative; z-index:1; }
   .xp-item{
     display:grid; grid-template-columns:52px 1fr auto; gap:14px; align-items:center;
     padding:12px 14px; border:1px solid #1f2333; border-radius:14px; background:#0b0f1a;
@@ -310,7 +323,7 @@ full_bleed: true
     <!-- ===== SPLIT (Education à gauche / Experiences à droite) ===== -->
     <div class="hub-split" id="hubSplit">
       <!-- LEFT: Education card -->
-      <div class="edu-card">
+      <div class="edu-card card-glass">
         <div class="edu-header">
           <figure class="cy-holo figure-tilt" id="eduBadge" role="button" aria-pressed="false" tabindex="0" title="Click to flip">
             <div class="flip-inner">
@@ -330,8 +343,8 @@ full_bleed: true
           </figure>
 
           <div class="edu-title-wrap">
-            <h4>Education</h4>
-            <p class="edu-sub">CY Tech — Applied Mathematics for Finance</p>
+            <h4 class="card-title">Education</h4>
+            <p class="card-sub">CY Tech — Applied Mathematics for Finance</p>
           </div>
         </div>
 
@@ -340,10 +353,12 @@ full_bleed: true
         </div>
       </div>
 
-      <!-- RIGHT: Professional experiences (identique) -->
-      <div>
+      <!-- RIGHT: Professional experiences in a matching card -->
+      <div class="xp-card card-glass">
+        <h4 class="card-title">Professional Experiences</h4>
+        <p class="card-sub">Recent roles & internships</p>
+
         <div class="xp-section">
-          <p class="xp-title"><strong>Professional Experiences</strong></p>
           <div class="xp-list">
             <!-- Natixis -->
             <div class="xp-item">
