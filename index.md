@@ -66,6 +66,13 @@ full_bleed: true
   @keyframes clockPulse{ 0%,100%{ transform:scale(1); text-shadow:0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000; } 50%{ transform:scale(1.03); text-shadow:0 0 10px rgba(44,140,255,.9), 0 0 22px rgba(44,140,255,.6), 0 0 2px #000; } }
   @keyframes clockPulseCity{ 0%,100%{ text-shadow:0 0 6px rgba(0,0,0,.8); } 50%{ text-shadow:0 0 10px rgba(44,140,255,.7), 0 0 18px rgba(44,140,255,.35); } }
 
+  /* === MARKET STATUS === */
+  .market-status{ background:#0a0a0a; border-top:1px solid #222; color:#2c8cff; text-align:center; font-weight:800; letter-spacing:.08em; padding:8px 12px; position:relative; z-index:50; }
+  .market-status .badge{ display:inline-block; margin:0 .35rem; padding:.25rem .5rem; border-radius:.6rem; border:1px solid #1f3b66; background:#0c1220; color:#9ec8ff; font-weight:800; }
+  .market-status .closed{ opacity:.7; color:#9aa3b2; border-color:#333; background:#0f0f0f; }
+  .market-status a.badge{ text-decoration:none; cursor:pointer; pointer-events:auto; }
+  .market-status a.badge:hover{ border-color:#2c8cff99; box-shadow:0 0 0 2px rgba(44,140,255,.12) inset; }
+
   /* ===== Bande "Latest Updates" ===== */
   .news-band{ background:#050505; border-top:1px solid #111; border-bottom:1px solid #111; padding:28px 20px; }
   .news-wrap{ max-width:1100px; margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
@@ -123,34 +130,29 @@ full_bleed: true
   .card-sub{ margin:.15rem 0 0; color:#9ec8ff; font-weight:700; font-size:.9rem; position:relative; z-index:1; }
 
   /* ===== EDUCATION (gauche) ===== */
-  .edu-card{ }
-  .edu-header{ display:flex; align-items:center; gap:14px; position:relative; z-index:1; perspective: 1400px; }
+  .edu-card{ /* hérite de .card-glass */ }
+  .edu-header{ display:flex; align-items:center; gap:14px; position:relative; z-index:1; }
   .edu-body{ position:relative; z-index:1; margin-top:10px; color:#cfe3ff; line-height:1.6; font-size:.98rem; }
 
-  /* ===== CY TECH BADGE 3D (tilt + flip + halo) ===== */
+  /* BADGE CY Tech holo + centrage parfait + pas de “carré dans le rond” */
+  .hub-gallery{ perspective:1200px; }
   .cy-holo.figure-tilt{
-    --size: 100px;
+    --size: 90px;
     width:var(--size); height:var(--size); min-width:var(--size);
-    border-radius:50%;
-    position:relative;
-    transform-style:preserve-3d;
-    transition: transform .25s ease, filter .25s ease;
-    cursor:pointer;
-    flex:0 0 auto;
+    border-radius:50%; position:relative; transform-style:preserve-3d;
+    transition: transform .25s ease; cursor:pointer; flex:0 0 auto;
   }
   .cy-holo::before{
-    content:""; position:absolute; inset:-6px; border-radius:50%;
+    content:""; position:absolute; inset:-5px; border-radius:50%;
     background: conic-gradient(from var(--a,0deg), #2c8cff, #7ad2ff, #9f7aff, #2c8cff);
-    filter: blur(6px); opacity:.75; animation:ringSpin 7s linear infinite;
-    transform: translateZ(-8px);
+    filter: blur(5px); opacity:.7; animation:ringSpin 8s linear infinite;
   }
   @keyframes ringSpin{ to{ --a:360deg; } }
   .cy-holo::after{
-    content:""; position:absolute; inset:-16px; border-radius:50%;
-    background:
-      radial-gradient(60% 60% at 30% 10%, rgba(44,140,255,.22), transparent 55%),
-      radial-gradient(80% 80% at 70% 90%, rgba(159,122,255,.14), transparent 60%);
-    filter: blur(14px); opacity:.5; pointer-events:none; transform: translateZ(-12px);
+    content:""; position:absolute; inset:-14px; border-radius:50%;
+    background: radial-gradient(60% 60% at 30% 10%, rgba(44,140,255,.22), transparent 55%),
+                radial-gradient(80% 80% at 70% 90%, rgba(159,122,255,.14), transparent 60%);
+    filter: blur(10px); opacity:.55; pointer-events:none;
   }
   .cy-holo .flip-inner{
     position:absolute; inset:0; border-radius:50%; overflow:hidden;
@@ -159,47 +161,40 @@ full_bleed: true
     box-shadow: inset 0 0 0 2px rgba(76,139,255,.35), 0 6px 18px rgba(0,0,0,.35);
     backdrop-filter: blur(2px);
   }
-  .cy-holo .flip-inner::before{
-    content:""; position:absolute; inset:4px; border-radius:50%;
-    box-shadow: inset 0 0 0 2px rgba(76,139,255,.35),
-                inset 0 10px 26px rgba(255,255,255,.06),
-                inset 0 -18px 28px rgba(0,0,0,.35);
-    transform: translateZ(2px);
-  }
-  .cy-holo .flip-inner::after{
-    content:""; position:absolute; left:10%; right:10%; bottom:-14px; height:20px;
-    background: radial-gradient(50% 100% at 50% 0%, rgba(0,0,0,.45), transparent 70%);
-    filter: blur(6px); transform: translateZ(-20px) rotateX(75deg);
-  }
   .cy-holo.is-flipped .flip-inner{ transform: rotateY(180deg); }
   .cy-holo .flip-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:50%; overflow:hidden; }
   .cy-holo .flip-front{ display:grid; place-items:center; }
-  .cy-holo .flip-front .logo{
-    width:100%; height:100%; border-radius:50%; overflow:hidden;
-    display:flex; align-items:center; justify-content:center; background:transparent;
+  /* ===== Correction logo CY Tech (plus de carré, bien centré) ===== */
+  .cy-holo .flip-front .logo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
     box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset;
   }
-  .cy-holo .flip-front .logo img{
-    width:120%; height:120%; object-fit:cover; object-position:43% 35%;
-    border-radius:50%; clip-path:circle(50% at 50% 50%);
+  .cy-holo .flip-front .logo img {
+    width: 120%;
+    height: 120%;
+    object-fit: cover;
+    object-position: 43% 35%;
+    border-radius: 50%;
+    background: transparent;
+    clip-path: circle(50% at 50% 50%);
     -webkit-mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
     mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
     filter: contrast(1.05) saturate(1.05) brightness(1.02);
-    transform: scale(1.1) translateZ(8px);
+    transform: scale(1.1);
   }
-  .cy-holo .gloss{
-    position:absolute; inset:0;
-    background:
-      radial-gradient(60% 35% at 30% 10%, rgba(255,255,255,.18), transparent 60%),
-      linear-gradient(180deg, rgba(255,255,255,.06), transparent 35%),
-      radial-gradient(50% 60% at 70% 85%, rgba(44,140,255,.12), transparent 60%);
-    mix-blend-mode:screen; pointer-events:none; transform: translateZ(10px);
-  }
+  .cy-holo .gloss{ position:absolute; inset:0; background: radial-gradient(60% 35% at 30% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.06), transparent 35%), radial-gradient(50% 60% at 70% 85%, rgba(44,140,255,.12), transparent 60%); mix-blend-mode:screen; pointer-events:none; }
   .cy-holo .flip-back{ transform: rotateY(180deg); display:flex; align-items:center; justify-content:center; padding:12px; background:#0b0f1a; color:#cfe3ff; text-align:center; }
   .cy-holo .flip-back .edu-text{ font-size:.78rem; line-height:1.25; }
 
   /* ===== EXPERIENCES (droite) ===== */
-  .xp-card{ }
+  .xp-card{ /* hérite de .card-glass */ }
   .xp-section{ margin-top: 8px; }
   .xp-list{ display:flex; flex-direction:column; gap:12px; position:relative; z-index:1; }
   .xp-item{
@@ -210,6 +205,8 @@ full_bleed: true
   .xp-item:hover{ border-color:#2c8cff55; box-shadow:0 10px 30px rgba(0,0,0,.35); transform: translateY(-1px); }
   .xp-logo{ width:52px; height:52px; border-radius:50%; overflow:hidden; position:relative; box-shadow: 0 0 0 1px rgba(76,139,255,.35) inset, 0 6px 18px rgba(0,0,0,.35); }
   .xp-logo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .xp-logo::after{ content:""; position:absolute; inset:-8%; border-radius:50%; background: radial-gradient(120px 80px at 25% -10%, rgba(44,140,255,.22), transparent 60%); opacity:0; transition:opacity .25s ease; pointer-events:none; }
+  .xp-item:hover .xp-logo::after{ opacity:.9; }
   .xp-role{ font-weight:800; color:#ffffff; line-height:1.25; }
   .xp-company{ color:#9ec8ff; font-weight:800; }
   .xp-desc{ color:#c9cbd1; margin-top:4px; }
@@ -332,11 +329,12 @@ full_bleed: true
       <a class="hub-tab" data-tab="reading" href="#reading" role="tab" aria-selected="false">Reading</a>
     </nav>
 
+    <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
     <!-- ===== SPLIT (Education à gauche / Experiences à droite) ===== -->
     <div class="hub-split" id="hubSplit">
-      <!-- Education -->
+      <!-- LEFT: Education card -->
       <div class="edu-card card-glass">
         <div class="edu-header">
           <figure class="cy-holo figure-tilt" id="eduBadge" role="button" aria-pressed="false" tabindex="0" title="Click to flip">
@@ -367,7 +365,7 @@ full_bleed: true
         </div>
       </div>
 
-      <!-- Experiences -->
+      <!-- RIGHT: Professional experiences in a matching card -->
       <div class="xp-card card-glass">
         <h4 class="card-title">Professional Experiences</h4>
         <p class="card-sub">Recent roles & internships</p>
@@ -411,7 +409,7 @@ full_bleed: true
       </div>
     </div>
 
-    <!-- Panneau générique pour autres onglets -->
+    <!-- ===== Panneau générique (affiché pour les autres onglets) ===== -->
     <div class="hub-panel" id="hubPanelGeneric" style="display:none;" role="region" aria-live="polite"></div>
   </div>
 </section>
@@ -423,7 +421,7 @@ function updateClocks(){
     const city = el.dataset.city;
     const tz = el.dataset.tz;
     const now = new Date().toLocaleTimeString('en-GB', { timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false });
-    el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
+    el.innerHTML = <span class="city">${city}</span><span class="time">${now}</span>;
   });
 }
 updateClocks(); setInterval(updateClocks, 1000);
@@ -473,8 +471,8 @@ updateClocks(); setInterval(updateClocks, 1000);
   function refresh(){
     const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
     const urls={ tokyo:"https://www.jpx.co.jp/english/markets/", london:"https://www.londonstockexchange.com/", paris:"https://live.euronext.com/en/markets/paris", ny:"https://www.nyse.com/" };
-    const badge=(isOpen,label,url)=> isOpen ? `<a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>` : `<span class="badge closed">${label} CLOSED</span>`;
-    el.innerHTML = `${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)}`;
+    const badge=(isOpen,label,url)=> isOpen ? <a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a> : <span class="badge closed">${label} CLOSED</span>;
+    el.innerHTML = ${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)};
   }
   refresh(); setInterval(refresh, 60_000);
 })();
@@ -487,9 +485,9 @@ updateClocks(); setInterval(updateClocks, 1000);
   const panelGeneric = document.getElementById('hubPanelGeneric');
 
   const copy = {
-    courses: `Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.`,
-    projects: `Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.`,
-    reading:  `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`
+    courses: Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.,
+    projects: Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.,
+    reading:  Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.
   };
 
   function activate(key, labelUpper){
@@ -518,7 +516,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   }));
 })();
 
-/* === Tilt 3D + Flip sur le badge CY TECH === */
+/* === Tilt 3D + Flip sur le badge === */
 (function(){
   const card = document.getElementById('eduBadge');
   if (!card) return;
@@ -532,12 +530,10 @@ updateClocks(); setInterval(updateClocks, 1000);
     if (clientX==null || clientY==null) return;
     const x = clientX - rect.left;
     const y = clientY - rect.top;
-    const rx = clamp(((y/rect.height)-0.5)*8,-8,8);
-    const ry = clamp(((x/rect.width)-0.5)*-12,-12,12);
+    const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
+    const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
     cancelAnimationFrame(rAF);
-    rAF = requestAnimationFrame(()=>{
-      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-    });
+    rAF = requestAnimationFrame(()=>{ card.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
   }
   function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
   function toggleFlip(){
