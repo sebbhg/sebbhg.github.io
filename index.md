@@ -187,7 +187,7 @@ full_bleed: true
     -webkit-mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
     mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
     filter: contrast(1.05) saturate(1.05) brightness(1.02);
-    transform: scale(1.1):
+    transform: scale(1.1);
   }
   .cy-holo .gloss{ position:absolute; inset:0; background: radial-gradient(60% 35% at 30% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.06), transparent 35%), radial-gradient(50% 60% at 70% 85%, rgba(44,140,255,.12), transparent 60%); mix-blend-mode:screen; pointer-events:none; }
   .cy-holo .flip-back{ transform: rotateY(180deg); display:flex; align-items:center; justify-content:center; padding:12px; background:#0b0f1a; color:#cfe3ff; text-align:center; }
