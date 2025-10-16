@@ -266,7 +266,7 @@ full_bleed: true
   .after-market .hub-inner{ max-width: none; width: 100%; margin: 0; padding: 0 24px; }
   .hub-split{
     display:grid;
-    grid-template-columns: minmax(260px, 40%) 1fr; /* image plus réduite */
+    grid-template-columns: minmax(220px, 36%) 1fr; /* image CY plus réduite */
     gap: 26px;
     align-items: start;
     margin-top: 12px;
@@ -281,19 +281,16 @@ full_bleed: true
     perspective: 900px;
   }
   .hub-gallery figure.figure-tilt{
-    position:relative; width: 100%; max-width: 220px; margin: 0 auto;
+    position:relative; width: 100%; max-width: 150px; margin: 6px auto 0;
     aspect-ratio: 1 / 1;         /* rond */
     transform-style: preserve-3d;
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    /* pas de fond, pas de bord */
     background: transparent; border: none; box-shadow: none;
   }
-  /* cercle pur : l'image est recadrée en rond, sans container visible */
   .hub-gallery figure.figure-tilt img{
     width: 100%; height: 100%; object-fit: cover; display: block;
     border-radius: 50%;
     clip-path: circle(50% at 50% 50%);
-    /* anneau externe subtil */
     box-shadow:
       0 0 0 2px rgba(76,139,255,.45) inset,
       0 8px 28px rgba(0,0,0,.35),
@@ -302,7 +299,6 @@ full_bleed: true
     filter: brightness(.98) contrast(1.06) saturate(1.05);
     transform: translateZ(0);
   }
-  /* halo animé sur hover (autour du rond) */
   .hub-gallery figure.figure-tilt::after{
     content:""; position:absolute; inset:-6%;
     border-radius: 50%;
@@ -310,7 +306,6 @@ full_bleed: true
     pointer-events:none; opacity: .0; transition: opacity .35s ease;
   }
   .hub-gallery figure.figure-tilt:hover::after{ opacity: .9; }
-
   .hub-gallery figure.figure-tilt:hover img{
     transform: scale(1.04);
     filter: brightness(1.05) contrast(1.08) saturate(1.08);
@@ -319,23 +314,38 @@ full_bleed: true
       0 12px 42px rgba(0,0,0,.45),
       0 0 48px rgba(44,140,255,.25);
   }
-
-  /* on masque la légende overlay pour le badge */
   .hub-gallery figcaption{ display:none; }
 
   @media (max-width:1100px){
     .hub-split{ grid-template-columns: 1fr; }
   }
 
-  /* === Liste expériences : dates/lieux à droite === */
+  /* === Liste expériences : logos + dates/lieux à droite === */
   .xp-section{ margin-top: 18px; }
-  .xp-title{ font-weight: 800; color:#e7efff; margin: 18px 0 6px; }
-  .xp-list{ display:flex; flex-direction:column; gap:10px; }
+  .xp-title{ font-weight: 800; color:#e7efff; margin: 18px 0 8px; }
+  .xp-list{ display:flex; flex-direction:column; gap:12px; }
   .xp-item{
-    display:flex; gap:12px; align-items:flex-start;
-    padding:10px 12px; border:1px solid #1f2333; border-radius:12px; background:#0b0f1a;
+    display:grid; grid-template-columns: 52px 1fr auto;
+    gap:14px; align-items:center;
+    padding:12px 14px; border:1px solid #1f2333; border-radius:14px; background:#0b0f1a;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
   }
-  .xp-role{ font-weight:800; color:#ffffff; }
+  .xp-item:hover{ border-color:#2c8cff55; box-shadow:0 10px 30px rgba(0,0,0,.35); transform: translateY(-1px); }
+
+  .xp-logo{
+    width:52px; height:52px; border-radius:50%; overflow:hidden; position:relative;
+    box-shadow: 0 0 0 1px rgba(76,139,255,.35) inset, 0 6px 18px rgba(0,0,0,.35);
+  }
+  .xp-logo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .xp-logo::after{
+    content:""; position:absolute; inset:-8%;
+    border-radius:50%;
+    background: radial-gradient(120px 80px at 25% -10%, rgba(44,140,255,.22), transparent 60%);
+    opacity:0; transition:opacity .25s ease; pointer-events:none;
+  }
+  .xp-item:hover .xp-logo::after{ opacity:.9; }
+
+  .xp-role{ font-weight:800; color:#ffffff; line-height:1.25; }
   .xp-company{ color:#9ec8ff; font-weight:800; }
   .xp-desc{ color:#c9cbd1; margin-top:4px; }
   .xp-meta{ margin-left:auto; color:#9aa3b2; text-align:right; white-space:nowrap; }
@@ -473,7 +483,7 @@ full_bleed: true
         </div>
       </div>
 
-      <!-- Contenu (justifié) -->
+      <!-- Contenu -->
       <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
         <p><strong>Education</strong></p>
         <p>
@@ -483,29 +493,41 @@ full_bleed: true
         <div class="xp-section">
           <p class="xp-title"><strong>Professional Experiences</strong></p>
           <div class="xp-list">
+            <!-- Natixis -->
             <div class="xp-item">
+              <div class="xp-logo">
+                <img src="/assets/images/image10.png" alt="Natixis CIB logo">
+              </div>
               <div>
                 <div class="xp-role">Quantitative Trading Analyst</div>
                 <div class="xp-company">Natixis Corporate &amp; Investment Banking</div>
-                <div class="xp-desc">CVA/XVA development under LGM-1F, exposure simulation, sensitivities (Delta, Gamma, Vega, Theta, Cega) with GPR/BQ, multi-currency frameworks and dashboards.</div>
+                <div class="xp-desc">CVA/XVA development under LGM-1F, exposure simulation, sensitivities (Delta, Gamma, Vega, Theta, Cega) with GPR/BQ, multi-currency frameworks and analytics dashboards.</div>
               </div>
               <div class="xp-meta">Paris · 2024–Present</div>
             </div>
 
+            <!-- Spread Research -->
             <div class="xp-item">
+              <div class="xp-logo">
+                <img src="/assets/images/image12.png" alt="Spread Research logo">
+              </div>
               <div>
                 <div class="xp-role">Quantitative Analyst Intern (Equity Derivatives)</div>
                 <div class="xp-company">Spread Research</div>
-                <div class="xp-desc">Vol surface calibration, Monte Carlo &amp; finite-difference pricing, hedging strategies (gamma scalping, delta-neutral), smile/skew dynamics.</div>
+                <div class="xp-desc">Volatility surface calibration, Monte Carlo &amp; finite-difference pricing, hedging strategies (gamma scalping, delta-neutral), smile/skew dynamics.</div>
               </div>
               <div class="xp-meta">Lyon · 2023</div>
             </div>
 
+            <!-- Société Générale -->
             <div class="xp-item">
+              <div class="xp-logo">
+                <img src="/assets/images/image11.png" alt="Société Générale CIB logo">
+              </div>
               <div>
                 <div class="xp-role">Portfolio Valuation / Quant Intern</div>
                 <div class="xp-company">Société Générale CIB</div>
-                <div class="xp-desc">Automation of fund &amp; derivative pricing, Monte Carlo tools, daily PnL explainability, stress testing, model reliability &amp; auditability.</div>
+                <div class="xp-desc">Automation of fund &amp; derivative pricing, Monte Carlo tools, daily PnL explainability, systematic stress testing, model reliability and auditability.</div>
               </div>
               <div class="xp-meta">La Défense · 2022</div>
             </div>
@@ -603,28 +625,31 @@ updateClocks(); setInterval(updateClocks, 1000);
         <p class="xp-title"><strong>Professional Experiences</strong></p>
         <div class="xp-list">
           <div class="xp-item">
+            <div class="xp-logo"><img src="/assets/images/image10.png" alt="Natixis CIB logo"></div>
             <div>
               <div class="xp-role">Quantitative Trading Analyst</div>
               <div class="xp-company">Natixis Corporate &amp; Investment Banking</div>
-              <div class="xp-desc">CVA/XVA development under LGM-1F, exposure simulation, sensitivities with GPR/BQ, multi-currency frameworks and dashboards.</div>
+              <div class="xp-desc">CVA/XVA development under LGM-1F, exposure simulation, sensitivities (Delta, Gamma, Vega, Theta, Cega) with GPR/BQ, multi-currency frameworks and analytics dashboards.</div>
             </div>
             <div class="xp-meta">Paris · 2024–Present</div>
           </div>
 
           <div class="xp-item">
+            <div class="xp-logo"><img src="/assets/images/image12.png" alt="Spread Research logo"></div>
             <div>
               <div class="xp-role">Quantitative Analyst Intern (Equity Derivatives)</div>
               <div class="xp-company">Spread Research</div>
-              <div class="xp-desc">Vol surface calibration, Monte Carlo &amp; finite-difference pricing, hedging strategies, smile/skew dynamics.</div>
+              <div class="xp-desc">Volatility surface calibration, Monte Carlo &amp; finite-difference pricing, hedging strategies (gamma scalping, delta-neutral), smile/skew dynamics.</div>
             </div>
             <div class="xp-meta">Lyon · 2023</div>
           </div>
 
           <div class="xp-item">
+            <div class="xp-logo"><img src="/assets/images/image11.png" alt="Société Générale CIB logo"></div>
             <div>
               <div class="xp-role">Portfolio Valuation / Quant Intern</div>
               <div class="xp-company">Société Générale CIB</div>
-              <div class="xp-desc">Automation of fund &amp; derivative pricing, Monte Carlo tools, daily PnL explainability, stress testing.</div>
+              <div class="xp-desc">Automation of fund &amp; derivative pricing, Monte Carlo tools, daily PnL explainability, systematic stress testing, model reliability and auditability.</div>
             </div>
             <div class="xp-meta">La Défense · 2022</div>
           </div>
