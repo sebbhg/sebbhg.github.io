@@ -134,7 +134,7 @@ full_bleed: true
   .edu-header{ display:flex; align-items:center; gap:14px; position:relative; z-index:1; }
   .edu-body{ position:relative; z-index:1; margin-top:10px; color:#cfe3ff; line-height:1.6; font-size:.98rem; }
 
-  /* BADGE CY Tech “holo” compact + centré */
+  /* BADGE CY Tech holo + centrage parfait + pas de “carré dans le rond” */
   .hub-gallery{ perspective:1200px; }
   .cy-holo.figure-tilt{
     --size: 90px;
@@ -167,14 +167,19 @@ full_bleed: true
   .cy-holo .flip-front .logo{
     width:78%; height:78%; border-radius:50%; overflow:hidden; position:relative;
     display:flex; align-items:center; justify-content:center;
+    /* pas de fond carré */
+    background: transparent;
     box-shadow:0 0 0 1px rgba(255,255,255,.06) inset;
-    background: radial-gradient(80% 80% at 50% 20%, rgba(255,255,255,.06), transparent 60%);
   }
   .cy-holo .flip-front .logo img{
     width:100%; height:100%; display:block;
-    object-fit:contain;            /* <<< centré et non rogné */
-    object-position:center;        /* <<< bien au milieu */
-    padding:6px;                   /* petit respir */
+    object-fit:contain; object-position:center;
+    /* masque dur en cercle pour supprimer TOUT bord carré éventuel */
+    clip-path: circle(50% at 50% 50%);
+    -webkit-mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
+            mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
+    background: transparent;
+    /* légère amélioration de rendu */
     filter:contrast(1.06) saturate(1.05) brightness(1.02);
   }
   .cy-holo .gloss{ position:absolute; inset:0; background: radial-gradient(60% 35% at 30% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.06), transparent 35%), radial-gradient(50% 60% at 70% 85%, rgba(44,140,255,.12), transparent 60%); mix-blend-mode:screen; pointer-events:none; }
