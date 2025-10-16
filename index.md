@@ -14,22 +14,9 @@ full_bleed: true
   }
 
   /* === Hero titles fade-in === */
-  .eyebrow.shifted {
-    margin-top: -25px;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeInUp 1.4s ease-out .3s forwards;
-  }
-  .hero-content h1 {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1.4s ease-out .8s forwards;
-  }
-  .hero-content .subtitle {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1.4s ease-out 1.3s forwards;
-  }
+  .eyebrow.shifted { margin-top: -25px; opacity: 0; transform: translateY(10px); animation: fadeInUp 1.4s ease-out .3s forwards; }
+  .hero-content h1 { opacity: 0; transform: translateY(20px); animation: fadeInUp 1.4s ease-out .8s forwards; }
+  .hero-content .subtitle { opacity: 0; transform: translateY(20px); animation: fadeInUp 1.4s ease-out 1.3s forwards; }
 
   /* === HERO LAYERS === */
   .hero-video { position: relative; z-index: 2; overflow: hidden; }
@@ -37,83 +24,50 @@ full_bleed: true
   .hero-content { position: relative; z-index: 2; }
 
   /* === LOGO IMAGE + halo pulsé === */
-  .hero-logo-img {
-    position: absolute;
-    right: -4.0vw;
-    top: 20%;
-    transform: translateY(-34%);
-    z-index: 3;
-    width: min(13vw, 40vh);
-    height: auto;
-    opacity: 0;
+  .hero-logo-img{
+    position:absolute; right:-4.0vw; top:20%; transform:translateY(-34%); z-index:3;
+    width:min(13vw,40vh); height:auto; opacity:0;
     animation: fadeInLogo 1.2s ease-out 1.0s forwards, logoPulse 4s ease-in-out infinite;
-    pointer-events: none;
-    user-select: none;
-    filter: drop-shadow(0 0 6px rgba(44,140,255,.6));
+    pointer-events:none; user-select:none; filter: drop-shadow(0 0 6px rgba(44,140,255,.6));
   }
-  @keyframes fadeInLogo {
-    from { opacity: 0; transform: translateY(-34%) translateX(40px); }
-    to   { opacity: 1; transform: translateY(-34%) translateX(0); }
-  }
-  @keyframes logoPulse {
-    0%,100% { filter: drop-shadow(0 0 6px rgba(44,140,255,.6)); }
-    50%     { filter: drop-shadow(0 0 14px rgba(44,140,255,.95)); }
-  }
+  @keyframes fadeInLogo{ from{opacity:0; transform: translateY(-34%) translateX(40px);} to{opacity:1; transform: translateY(-34%) translateX(0);} }
+  @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
+  @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-  @media (max-width: 880px) {
-    .hero-logo-img {
-      right: -1.2vw;
-      top: 42%;
-      transform: translateY(-42%);
-      width: min(22vw, 34vh);
-    }
-  }
-
-  /* === SECONDARY VIDEO (raccourcie pour remonter horloges & statut) === */
-  .promo-video { position: relative; z-index: 0; width: 100%; margin: -1250px 0 0; }
-  @media (max-width: 1400px) { .promo-video { margin: -1450px 0 0; } }
-  @media (max-width: 1200px) { .promo-video { margin: -1350px 0 0; } }
-  @media (max-width: 1024px) { .promo-video { margin: -1250px 0 0; } }
-  @media (max-width: 768px)  { .promo-video { margin: -1150px 0 0; } }
-  @media (max-width: 560px)  { .promo-video { margin: -1050px 0 0; } }
-
-  .promo-video-frame {
-    position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #000;
-    border-top: 1px solid #222; border-bottom: 1px solid #222;
-  }
-  @supports not (aspect-ratio: 16/9) {
-    .promo-video-frame { padding-top: 56.25%; }
-    .promo-video-el { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
-  }
-  .promo-video-el { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.8) contrast(1.05) saturate(1.05); }
-  .promo-scrim {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%);
-    pointer-events: none;
-  }
+  /* === SECONDARY VIDEO === */
+  .promo-video{ position:relative; z-index:0; width:100%; margin:-1250px 0 0; }
+  @media (max-width:1400px){ .promo-video{ margin:-1450px 0 0; } }
+  @media (max-width:1200px){ .promo-video{ margin:-1350px 0 0; } }
+  @media (max-width:1024px){ .promo-video{ margin:-1250px 0 0; } }
+  @media (max-width:768px){ .promo-video{ margin:-1150px 0 0; } }
+  @media (max-width:560px){ .promo-video{ margin:-1050px 0 0; } }
+  .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
+  @supports not (aspect-ratio:16/9){ .promo-video-frame{ padding-top:56.25%; } .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; } }
+  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
+  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%); pointer-events:none; }
 
   /* === WORLD CLOCK BAR === */
   :root { --clock-speed: 120s; }
-  .world-clock-bar {
-    position: relative; overflow: hidden; background: #000;
-    border-top: 1px solid #333; border-bottom: 1px solid #333;
-    padding: 12px 0; margin-top: -6px; opacity: 1; z-index: 10; isolation: isolate;
-    -webkit-user-select: none; user-select: none; touch-action: pan-x;
+  .world-clock-bar{
+    position:relative; overflow:hidden; background:#000;
+    border-top:1px solid #333; border-bottom:1px solid #333;
+    padding:12px 0; margin-top:-6px; opacity:1; z-index:10; isolation:isolate;
+    -webkit-user-select:none; user-select:none; touch-action:pan-x;
   }
-  .world-clock-bar * { background: none !important; opacity: 1 !important; mix-blend-mode: normal !important; filter: none !important; }
-  .ticker-wrapper { position: relative; z-index: 1; display: flex; width: max-content; white-space: nowrap; animation: tickerMove var(--clock-speed) linear infinite; will-change: transform; }
-  @keyframes tickerMove { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
-  .ticker-wrapper.reverse { animation-name: tickerMoveReverse; }
-  @keyframes tickerMoveReverse { 0%{transform:translateX(-50%);} 100%{transform:translateX(0);} }
-  .ticker-wrapper.dragging { animation-play-state: paused; cursor: grabbing; }
-  .clock { display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:150px; margin:0 35px; text-align:center; }
-  .clock .city { font-weight:900; color:#7fb3ff; text-transform:uppercase; font-size:.92rem; letter-spacing:.05em; text-shadow:0 0 6px rgba(0,0,0,.85); animation: clockPulseCity 3.6s ease-in-out infinite; animation-delay:.6s; }
-  .clock .time { font-weight:900; font-size:1.28rem; color:#fff; margin-top:2px; text-shadow:0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000; animation: clockPulse 1.8s ease-in-out infinite; will-change: transform, text-shadow, opacity; transform: translateZ(0); }
-  @keyframes clockPulse { 0%,100% { transform: scale(1); text-shadow: 0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000; } 50% { transform: scale(1.03); text-shadow: 0 0 10px rgba(44,140,255,.9), 0 0 22px rgba(44,140,255,.6), 0 0 2px #000; } }
-  @keyframes clockPulseCity { 0%,100% { text-shadow: 0 0 6px rgba(0,0,0,.8); } 50% { text-shadow: 0 0 10px rgba(44,140,255,.7), 0 0 18px rgba(44,140,255,.35); } }
+  .world-clock-bar *{ background:none !important; opacity:1 !important; mix-blend-mode:normal !important; filter:none !important; }
+  .ticker-wrapper{ position:relative; z-index:1; display:flex; width:max-content; white-space:nowrap; animation:tickerMove var(--clock-speed) linear infinite; will-change:transform; }
+  @keyframes tickerMove{ 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+  .ticker-wrapper.reverse{ animation-name:tickerMoveReverse; }
+  @keyframes tickerMoveReverse{ 0%{transform:translateX(-50%);} 100%{transform:translateX(0);} }
+  .ticker-wrapper.dragging{ animation-play-state:paused; cursor:grabbing; }
+  .clock{ display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:150px; margin:0 35px; text-align:center; }
+  .clock .city{ font-weight:900; color:#7fb3ff; text-transform:uppercase; font-size:.92rem; letter-spacing:.05em; text-shadow:0 0 6px rgba(0,0,0,.85); animation:clockPulseCity 3.6s ease-in-out infinite; animation-delay:.6s; }
+  .clock .time{ font-weight:900; font-size:1.28rem; color:#fff; margin-top:2px; text-shadow:0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000; animation:clockPulse 1.8s ease-in-out infinite; will-change:transform, text-shadow, opacity; transform:translateZ(0); }
+  @keyframes clockPulse{ 0%,100%{ transform:scale(1); text-shadow:0 0 0 #000, 0 0 8px rgba(0,0,0,1), 0 0 1px #000; } 50%{ transform:scale(1.03); text-shadow:0 0 10px rgba(44,140,255,.9), 0 0 22px rgba(44,140,255,.6), 0 0 2px #000; } }
+  @keyframes clockPulseCity{ 0%,100%{ text-shadow:0 0 6px rgba(0,0,0,.8); } 50%{ text-shadow:0 0 10px rgba(44,140,255,.7), 0 0 18px rgba(44,140,255,.35); } }
 
   /* === MARKET STATUS === */
-  .market-status{ background:#0a0a0a; border-top:1px solid #222; color:#2c8cff; text-align:center; font-weight:800; letter-spacing:.08em; padding:8px 12px; position: relative; z-index: 50; }
+  .market-status{ background:#0a0a0a; border-top:1px solid #222; color:#2c8cff; text-align:center; font-weight:800; letter-spacing:.08em; padding:8px 12px; position:relative; z-index:50; }
   .market-status .badge{ display:inline-block; margin:0 .35rem; padding:.25rem .5rem; border-radius:.6rem; border:1px solid #1f3b66; background:#0c1220; color:#9ec8ff; font-weight:800; }
   .market-status .closed{ opacity:.7; color:#9aa3b2; border-color:#333; background:#0f0f0f; }
   .market-status a.badge{ text-decoration:none; cursor:pointer; pointer-events:auto; }
@@ -122,7 +76,11 @@ full_bleed: true
   /* ===== Bande "Latest Updates" ===== */
   .news-band{ background:#050505; border-top:1px solid #111; border-bottom:1px solid #111; padding:28px 20px; }
   .news-wrap{ max-width:1100px; margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
-  .update-card{ position:relative; background:#0d0d0d; border:1px solid #222; border-radius:14px; padding:18px 18px 16px; box-shadow:0 10px 30px rgba(0,0,0,.25); transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+  .update-card{
+    position:relative; background:#0d0d0d; border:1px solid #222; border-radius:14px;
+    padding:18px 18px 16px; box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
   .update-card::after{ content:""; position:absolute; inset:-1px; border-radius:14px; pointer-events:none; background:radial-gradient(600px 200px at 20% -20%, rgba(44,140,255,.15), transparent 70%); opacity:.7; }
   .update-card:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,0,0,.35); border-color:#2c8cff55; }
   .update-badge{ display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff; background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; margin-bottom:10px; font-weight:800; }
@@ -148,143 +106,76 @@ full_bleed: true
   .hub-selected-title{ margin:14px 0 6px; color:#fff; font-weight:900; letter-spacing:.06em; text-transform:uppercase; text-align:left; font-size:clamp(1.1rem,3vw,1.75rem); }
   .hub-panel{ margin-top:8px; color:#c9cbd1; line-height:1.65; text-align:justify; }
 
-  /* === LAYOUT: image à gauche (badge), texte à droite === */
-  .after-market .hub-inner{ max-width: none; width: 100%; margin: 0; padding: 0 24px; }
-  .hub-split{
-    display:grid; grid-template-columns: minmax(220px, 36%) 1fr;
-    gap: 26px; align-items: start; margin-top: 12px;
+  /* === LAYOUT: split éducation / expériences === */
+  .after-market .hub-inner{ max-width:none; width:100%; margin:0; padding:0 24px; }
+  .hub-split{ display:grid; grid-template-columns: minmax(320px, 42%) 1fr; gap:28px; align-items:start; margin-top:12px; }
+  .hub-split.no-media{ grid-template-columns:1fr; }
+  @media (max-width:1100px){ .hub-split{ grid-template-columns:1fr; } }
+
+  /* ===== EDUCATION CARD (gauche) ===== */
+  .edu-card{
+    position:relative; border-radius:18px; padding:16px 16px 18px;
+    background: linear-gradient(180deg, rgba(14,18,34,.85), rgba(8,10,20,.9));
+    border:1px solid rgba(76,139,255,.28);
+    box-shadow: 0 10px 28px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
+    overflow:hidden;
   }
-  .hub-split.no-media{ grid-template-columns: 1fr; }
+  .edu-card::after{
+    content:""; position:absolute; inset:-25% -25% -25% -25%;
+    background: radial-gradient(50% 40% at 20% 0%, rgba(44,140,255,.18), transparent 60%),
+                radial-gradient(60% 50% at 80% 100%, rgba(159,122,255,.12), transparent 65%);
+    filter: blur(18px); opacity:.6; pointer-events:none;
+  }
+  .edu-header{ display:flex; align-items:center; gap:14px; position:relative; z-index:1; }
+  .edu-title-wrap h4{ margin:0; font-size:1.05rem; font-weight:900; color:#e7efff; letter-spacing:.04em; text-transform:uppercase; }
+  .edu-sub{ margin:.15rem 0 0; color:#9ec8ff; font-weight:700; font-size:.9rem; }
+  .edu-body{ position:relative; z-index:1; margin-top:10px; color:#cfe3ff; line-height:1.6; font-size:.98rem; }
 
-  /* === BADGE CY TECH “HOLO” (rond, flip, tilt, anneau animé, particules) === */
-  .hub-media{ position: relative; }
-  .hub-gallery{ position: relative; width: 100%; display: grid; grid-template-columns: 1fr; gap: 0; perspective: 1200px; }
-
+  /* BADGE CY Tech “holo” compact + bien aligné */
+  .hub-gallery{ perspective:1200px; }
   .cy-holo.figure-tilt{
-    --size: 150px;               /* taille compacte */
-    width: var(--size); height: var(--size);
-    margin: 10px auto 0;
-    position: relative; transform-style: preserve-3d;
-    transition: transform .25s ease;
-    border-radius: 50%;
-    cursor: pointer;
+    --size: 90px;           /* compacité */
+    width:var(--size); height:var(--size); min-width:var(--size);
+    border-radius:50%; position:relative; transform-style:preserve-3d;
+    transition: transform .25s ease; cursor:pointer; flex:0 0 auto;
   }
-
-  /* Anneau conique animé */
   .cy-holo::before{
-    content:""; position:absolute; inset:-6px;
-    border-radius: 50%;
+    content:""; position:absolute; inset:-5px; border-radius:50%;
     background: conic-gradient(from var(--a,0deg), #2c8cff, #7ad2ff, #9f7aff, #2c8cff);
-    filter: blur(6px); opacity:.75;
-    animation: ringSpin 8s linear infinite;
+    filter: blur(5px); opacity:.7; animation:ringSpin 8s linear infinite;
   }
   @keyframes ringSpin{ to{ --a:360deg; } }
-
-  /* Halo externe doux */
   .cy-holo::after{
-    content:""; position:absolute; inset:-18px; border-radius:50%;
+    content:""; position:absolute; inset:-14px; border-radius:50%;
     background: radial-gradient(60% 60% at 30% 10%, rgba(44,140,255,.22), transparent 55%),
                 radial-gradient(80% 80% at 70% 90%, rgba(159,122,255,.14), transparent 60%);
-    filter: blur(10px); opacity:.6; pointer-events:none;
+    filter: blur(10px); opacity:.55; pointer-events:none;
   }
-
-  /* Inner 3D flip container */
   .cy-holo .flip-inner{
     position:absolute; inset:0; border-radius:50%; overflow:hidden;
-    transform-style: preserve-3d; transition: transform .7s cubic-bezier(.2,.65,.2,1);
+    transform-style:preserve-3d; transition: transform .7s cubic-bezier(.2,.65,.2,1);
     background: radial-gradient(120% 120% at 50% 10%, rgba(255,255,255,.08), rgba(13,16,30,.9));
-    box-shadow: inset 0 0 0 2px rgba(76,139,255,.35), 0 8px 26px rgba(0,0,0,.35);
+    box-shadow: inset 0 0 0 2px rgba(76,139,255,.35), 0 6px 18px rgba(0,0,0,.35);
     backdrop-filter: blur(2px);
   }
   .cy-holo.is-flipped .flip-inner{ transform: rotateY(180deg); }
+  .cy-holo .flip-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:50%; overflow:hidden; }
+  .cy-holo .flip-front{ display:grid; place-items:center; }
+  .cy-holo .flip-front .logo{ width:78%; height:78%; border-radius:50%; overflow:hidden; box-shadow:0 0 0 1px rgba(255,255,255,.06) inset; position:relative; }
+  .cy-holo .flip-front .logo img{ width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.06) saturate(1.05) brightness(1.02); }
+  .cy-holo .gloss{ position:absolute; inset:0; background: radial-gradient(60% 35% at 30% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.06), transparent 35%), radial-gradient(50% 60% at 70% 85%, rgba(44,140,255,.12), transparent 60%); mix-blend-mode:screen; pointer-events:none; }
+  .cy-holo .flip-back{ transform: rotateY(180deg); display:flex; align-items:center; justify-content:center; padding:12px; background:#0b0f1a; color:#cfe3ff; text-align:center; }
+  .cy-holo .flip-back .edu-text{ font-size:.78rem; line-height:1.25; }
+  .cy-holo:hover::before{ filter: blur(7px) brightness(1.12); }
 
-  /* Face avant (logo) */
-  .cy-holo .flip-face{
-    position:absolute; inset:0; backface-visibility:hidden; border-radius:50%; overflow:hidden;
-  }
-  .cy-holo .flip-front{
-    display:grid; place-items:center;
-  }
-  .cy-holo .flip-front .logo{
-    width: 78%; height: 78%; border-radius:50%; overflow:hidden;
-    box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset;
-    position: relative;
-  }
-  .cy-holo .flip-front .logo img{
-    width:100%; height:100%; object-fit:cover; display:block;
-    transform: translateZ(0);
-    filter: contrast(1.06) saturate(1.05) brightness(1.02);
-  }
-  /* reflets verre */
-  .cy-holo .gloss{
-    position:absolute; inset:0; pointer-events:none;
-    background:
-      radial-gradient(60% 35% at 30% 10%, rgba(255,255,255,.18), transparent 60%),
-      linear-gradient(180deg, rgba(255,255,255,.06), transparent 35%),
-      radial-gradient(50% 60% at 70% 85%, rgba(44,140,255,.12), transparent 60%);
-    mix-blend-mode: screen;
-  }
-  /* scanline discrète */
-  .cy-holo .scan{
-    position:absolute; left:-30%; top:-20%; width:160%; height:40%;
-    background: linear-gradient( to bottom, rgba(255,255,255,.18), rgba(255,255,255,0) );
-    transform: rotate(15deg); filter: blur(8px); opacity:.0;
-    animation: scanMove 4.8s ease-in-out infinite;
-  }
-  @keyframes scanMove{
-    0%{ transform: translateY(-120%) rotate(15deg); opacity:0; }
-    15%{ opacity:.55; }
-    50%{ transform: translateY(180%) rotate(15deg); opacity:0; }
-    100%{ opacity:0; }
-  }
-
-  /* Face arrière (texte education) */
-  .cy-holo .flip-back{
-    transform: rotateY(180deg);
-    display:flex; align-items:center; justify-content:center; padding:14px;
-    background:
-      radial-gradient(65% 45% at 25% 15%, rgba(44,140,255,.18), transparent 60%),
-      radial-gradient(70% 70% at 75% 85%, rgba(159,122,255,.12), transparent 65%),
-      #0b0f1a;
-    color:#cfe3ff; text-align:center;
-  }
-  .cy-holo .flip-back .edu-text{
-    font-size:.78rem; line-height:1.25;
-  }
-  .cy-holo .flip-back .edu-text strong{ display:block; color:#e7efff; margin-bottom:6px; }
-
-  /* Orbite de particules */
-  .cy-holo .orbit, .cy-holo .orbit::before, .cy-holo .orbit::after{
-    position:absolute; content:""; border-radius:50%;
-  }
-  .cy-holo .orbit{
-    inset:-8px; border:1px dashed rgba(76,139,255,.25); animation: orbitSpin 12s linear infinite;
-  }
-  .cy-holo .orbit::before{
-    width:6px; height:6px; background:#9f7aff; top:-3px; left:50%; transform: translateX(-50%); box-shadow:0 0 10px #9f7aff;
-  }
-  .cy-holo .orbit::after{
-    width:5px; height:5px; background:#7ad2ff; bottom:-2px; left:22%; box-shadow:0 0 10px #7ad2ff;
-  }
-  @keyframes orbitSpin{ to{ transform: rotate(360deg); } }
-
-  /* Tilt hover renforce le glow */
-  .cy-holo:hover::before{ filter: blur(8px) brightness(1.15); }
-  .cy-holo:hover .flip-front .logo img{ filter: contrast(1.1) saturate(1.08) brightness(1.05); }
-
-  @media (max-width:1100px){
-    .hub-split{ grid-template-columns: 1fr; }
-  }
-
-  /* === Liste expériences : logos + dates/lieux à droite === */
-  .xp-section{ margin-top: 18px; }
-  .xp-title{ font-weight: 800; color:#e7efff; margin: 18px 0 8px; }
+  /* ===== EXPERIENCES (droite) ===== */
+  .xp-section{ margin-top: 0; }
+  .xp-title{ font-weight:800; color:#e7efff; margin: 0 0 10px; }
   .xp-list{ display:flex; flex-direction:column; gap:12px; }
   .xp-item{
-    display:grid; grid-template-columns: 52px 1fr auto;
-    gap:14px; align-items:center;
+    display:grid; grid-template-columns:52px 1fr auto; gap:14px; align-items:center;
     padding:12px 14px; border:1px solid #1f2333; border-radius:14px; background:#0b0f1a;
-    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
   }
   .xp-item:hover{ border-color:#2c8cff55; box-shadow:0 10px 30px rgba(0,0,0,.35); transform: translateY(-1px); }
   .xp-logo{ width:52px; height:52px; border-radius:50%; overflow:hidden; position:relative; box-shadow: 0 0 0 1px rgba(76,139,255,.35) inset, 0 6px 18px rgba(0,0,0,.35); }
@@ -297,12 +188,11 @@ full_bleed: true
   .xp-meta{ margin-left:auto; color:#9aa3b2; text-align:right; white-space:nowrap; }
 
   /* au-dessus du footer */
-  .news-band, .after-market { position: relative; z-index: 3; }
+  .news-band, .after-market{ position:relative; z-index:3; }
 </style>
 
 <section class="hero-video">
-  <video class="hero-bg" autoplay muted loop playsinline preload="auto"
-         poster="{{ '/assets/images/hero-poster.jpg' | relative_url }}">
+  <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{{ '/assets/images/hero-poster.jpg' | relative_url }}">
     <source src="{{ '/assets/videos/trading-hero.mp4' | relative_url }}" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
@@ -328,8 +218,7 @@ full_bleed: true
 <!-- ===== Full-width secondary video ===== -->
 <section class="promo-video">
   <div class="promo-video-frame">
-    <video class="promo-video-el" autoplay muted loop playsinline preload="auto"
-           poster="/assets/images/trading-broll-poster.jpg">
+    <video class="promo-video-el" autoplay muted loop playsinline preload="auto" poster="/assets/images/trading-broll-poster.jpg">
       <source src="/assets/videos/trading-broll.mp4" type="video/mp4">
     </video>
     <div class="promo-scrim"></div>
@@ -418,46 +307,47 @@ full_bleed: true
     <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
-    <!-- ===== Badge “holo” à gauche + contenu à droite ===== -->
+    <!-- ===== SPLIT (Education à gauche / Experiences à droite) ===== -->
     <div class="hub-split" id="hubSplit">
-      <div class="hub-media">
-        <div class="hub-gallery" id="hubGallery">
-          <figure class="cy-holo figure-tilt" id="eduBadge" role="button" aria-pressed="false" tabindex="0">
+      <!-- LEFT: Education card -->
+      <div class="edu-card">
+        <div class="edu-header">
+          <figure class="cy-holo figure-tilt" id="eduBadge" role="button" aria-pressed="false" tabindex="0" title="Click to flip">
             <div class="flip-inner">
               <div class="flip-face flip-front" aria-hidden="false">
                 <div class="logo">
                   <img src="/assets/images/image7.png" alt="CY Tech logo">
                   <span class="gloss"></span>
-                  <span class="scan"></span>
                 </div>
               </div>
               <div class="flip-face flip-back" aria-hidden="true">
                 <div class="edu-text">
                   <strong>Education</strong>
-                  I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
+                  Integrated preparatory program (Math/Physics/CS) → Engineering in Applied Mathematics for Finance + dual Master’s in Mathematics at CY Tech.
                 </div>
               </div>
             </div>
-            <span class="orbit"></span>
           </figure>
+
+          <div class="edu-title-wrap">
+            <h4>Education</h4>
+            <p class="edu-sub">CY Tech — Applied Mathematics for Finance</p>
+          </div>
+        </div>
+
+        <div class="edu-body">
+          I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
         </div>
       </div>
 
-      <!-- Contenu -->
-      <div class="hub-panel" id="hubPanel" role="region" aria-live="polite">
-        <p><strong>Education</strong></p>
-        <p>
-          I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
-        </p>
-
+      <!-- RIGHT: Professional experiences (identique) -->
+      <div>
         <div class="xp-section">
           <p class="xp-title"><strong>Professional Experiences</strong></p>
           <div class="xp-list">
             <!-- Natixis -->
             <div class="xp-item">
-              <div class="xp-logo">
-                <img src="/assets/images/image10.png" alt="Natixis CIB logo">
-              </div>
+              <div class="xp-logo"><img src="/assets/images/image10.png" alt="Natixis CIB logo"></div>
               <div>
                 <div class="xp-role">Quantitative Trading Analyst</div>
                 <div class="xp-company">Natixis Corporate &amp; Investment Banking</div>
@@ -468,9 +358,7 @@ full_bleed: true
 
             <!-- Spread Research -->
             <div class="xp-item">
-              <div class="xp-logo">
-                <img src="/assets/images/image12.png" alt="Spread Research logo">
-              </div>
+              <div class="xp-logo"><img src="/assets/images/image12.png" alt="Spread Research logo"></div>
               <div>
                 <div class="xp-role">Quantitative Analyst Intern (Equity Derivatives)</div>
                 <div class="xp-company">Spread Research</div>
@@ -481,9 +369,7 @@ full_bleed: true
 
             <!-- Société Générale -->
             <div class="xp-item">
-              <div class="xp-logo">
-                <img src="/assets/images/image11.png" alt="Société Générale CIB logo">
-              </div>
+              <div class="xp-logo"><img src="/assets/images/image11.png" alt="Société Générale CIB logo"></div>
               <div>
                 <div class="xp-role">Portfolio Valuation / Quant Intern</div>
                 <div class="xp-company">Société Générale CIB</div>
@@ -494,7 +380,10 @@ full_bleed: true
           </div>
         </div>
       </div>
-    </div> <!-- /hub-split -->
+    </div>
+
+    <!-- ===== Panneau générique (affiché pour les autres onglets) ===== -->
+    <div class="hub-panel" id="hubPanelGeneric" style="display:none;" role="region" aria-live="polite"></div>
   </div>
 </section>
 
@@ -504,9 +393,7 @@ function updateClocks(){
   document.querySelectorAll('.clock').forEach(el=>{
     const city = el.dataset.city;
     const tz = el.dataset.tz;
-    const now = new Date().toLocaleTimeString('en-GB', {
-      timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false
-    });
+    const now = new Date().toLocaleTimeString('en-GB', { timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false });
     el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
   });
 }
@@ -536,7 +423,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   window.addEventListener('touchend', onPointerUp);
 })();
 
-/* === Market Status === */
+/* === Market Status (Tokyo / London / Paris / New York) === */
 (function(){
   const el = document.getElementById('marketStatus');
   if(!el) return;
@@ -563,60 +450,17 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs: switch + layout (image gauche / texte droite) === */
+/* === Tabs: show split on WHAT, generic panel otherwise === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
-  const panel = document.getElementById('hubPanel');
   const titleEl = document.getElementById('hubSelectedTitle');
-  const gallery = document.getElementById('hubGallery');
   const split = document.getElementById('hubSplit');
-  if(!tabs.length || !panel || !titleEl) return;
+  const panelGeneric = document.getElementById('hubPanelGeneric');
 
   const copy = {
-    what: `
-      <p><strong>Education</strong></p>
-      <p>
-        I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
-      </p>
-
-      <div class="xp-section">
-        <p class="xp-title"><strong>Professional Experiences</strong></p>
-        <div class="xp-list">
-          <div class="xp-item">
-            <div class="xp-logo"><img src="/assets/images/image10.png" alt="Natixis CIB logo"></div>
-            <div>
-              <div class="xp-role">Quantitative Trading Analyst</div>
-              <div class="xp-company">Natixis Corporate &amp; Investment Banking</div>
-              <div class="xp-desc">CVA/XVA development under LGM-1F, exposure simulation, sensitivities (Delta, Gamma, Vega, Theta, Cega) with GPR/BQ, multi-currency frameworks and analytics dashboards.</div>
-            </div>
-            <div class="xp-meta">Paris · 2024–Present</div>
-          </div>
-
-          <div class="xp-item">
-            <div class="xp-logo"><img src="/assets/images/image12.png" alt="Spread Research logo"></div>
-            <div>
-              <div class="xp-role">Quantitative Analyst Intern (Equity Derivatives)</div>
-              <div class="xp-company">Spread Research</div>
-              <div class="xp-desc">Volatility surface calibration, Monte Carlo &amp; finite-difference pricing, hedging strategies (gamma scalping, delta-neutral), smile/skew dynamics.</div>
-            </div>
-            <div class="xp-meta">Lyon · 2023</div>
-          </div>
-
-          <div class="xp-item">
-            <div class="xp-logo"><img src="/assets/images/image11.png" alt="Société Générale CIB logo"></div>
-            <div>
-              <div class="xp-role">Portfolio Valuation / Quant Intern</div>
-              <div class="xp-company">Société Générale CIB</div>
-              <div class="xp-desc">Automation of fund &amp; derivative pricing, Monte Carlo tools, daily PnL explainability, systematic stress testing, model reliability and auditability.</div>
-            </div>
-            <div class="xp-meta">La Défense · 2022</div>
-          </div>
-        </div>
-      </div>
-    `,
     courses: `Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.`,
     projects: `Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.`,
-    reading: `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`
+    reading:  `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`
   };
 
   function activate(key, labelUpper){
@@ -626,12 +470,15 @@ updateClocks(); setInterval(updateClocks, 1000);
       t.setAttribute('aria-selected', isActive ? 'true' : 'false');
     });
     titleEl.textContent = labelUpper;
-    panel.innerHTML = copy[key] || '';
 
-    if (gallery && split){
-      const showMedia = (key === 'what');
-      gallery.style.display = showMedia ? 'grid' : 'none';
-      split.classList.toggle('no-media', !showMedia);
+    if (key === 'what'){
+      split.style.display = '';
+      panelGeneric.style.display = 'none';
+      panelGeneric.innerHTML = '';
+    } else {
+      split.style.display = 'none';
+      panelGeneric.style.display = '';
+      panelGeneric.innerHTML = copy[key] || '';
     }
   }
 
@@ -642,11 +489,10 @@ updateClocks(); setInterval(updateClocks, 1000);
   }));
 })();
 
-/* === Tilt 3D + Flip sur le badge (image ronde) === */
+/* === Tilt 3D + Flip sur le badge === */
 (function(){
   const card = document.getElementById('eduBadge');
   if (!card) return;
-  const inner = card.querySelector('.flip-inner');
   const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
   let rAF;
 
@@ -663,7 +509,6 @@ updateClocks(); setInterval(updateClocks, 1000);
     rAF = requestAnimationFrame(()=>{ card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
   }
   function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
-
   function toggleFlip(){
     const flipped = card.classList.toggle('is-flipped');
     card.setAttribute('aria-pressed', flipped ? 'true' : 'false');
@@ -674,8 +519,6 @@ updateClocks(); setInterval(updateClocks, 1000);
   card.addEventListener('touchmove', onMove, {passive:true});
   card.addEventListener('touchend', reset);
   card.addEventListener('click', toggleFlip);
-  card.addEventListener('keydown', (e)=>{
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFlip(); }
-  });
+  card.addEventListener('keydown', (e)=>{ if (e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleFlip(); }});
 })();
 </script>
