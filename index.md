@@ -273,21 +273,33 @@ full_bleed: true
   }
   .hub-split.no-media{ grid-template-columns: 1fr; }
 
-  /* === MEDIA: Badge rond CY Tech (tilt + halo, aucun rectangle) === */
+  /* === MEDIA: Badge rond CY Tech (tilt + halo, aucun rectangle) + FLIP === */
   .hub-media{ position: relative; }
   .hub-gallery{
     position: relative; width: 100%;
     display: grid; grid-template-columns: 1fr; gap: 0;
     perspective: 900px;
   }
-  .hub-gallery figure.figure-tilt{
+
+  /* Flip badge */
+  .flip-badge.figure-tilt{
     position:relative; width: 100%; max-width: 150px; margin: 6px auto 0;
-    aspect-ratio: 1 / 1;         /* rond */
+    aspect-ratio: 1 / 1;
     transform-style: preserve-3d;
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    background: transparent; border: none; box-shadow: none;
+    transition: transform .25s ease;
   }
-  .hub-gallery figure.figure-tilt img{
+  .flip-badge .flip-inner{
+    width:100%; height:100%;
+    transform-style: preserve-3d;
+    transition: transform .6s cubic-bezier(.2,.65,.2,1);
+  }
+  .flip-badge.is-flipped .flip-inner{ transform: rotateY(180deg); }
+
+  .flip-badge .flip-face{
+    position:absolute; inset:0; border-radius:50%; overflow:hidden;
+    backface-visibility:hidden;
+  }
+  .flip-badge .flip-front img{
     width: 100%; height: 100%; object-fit: cover; display: block;
     border-radius: 50%;
     clip-path: circle(50% at 50% 50%);
@@ -295,18 +307,30 @@ full_bleed: true
       0 0 0 2px rgba(76,139,255,.45) inset,
       0 8px 28px rgba(0,0,0,.35),
       0 0 36px rgba(44,140,255,.15);
-    transition: transform .6s ease, filter .6s ease, box-shadow .35s ease;
     filter: brightness(.98) contrast(1.06) saturate(1.05);
     transform: translateZ(0);
+    transition: transform .6s ease, filter .6s ease, box-shadow .35s ease;
   }
-  .hub-gallery figure.figure-tilt::after{
+  .flip-badge .flip-back{
+    transform: rotateY(180deg);
+    background: radial-gradient(60% 60% at 25% 15%, rgba(44,140,255,.18), transparent 55%), #0b0f1a;
+    display:flex; align-items:center; justify-content:center;
+    padding:14px;
+  }
+  .flip-badge .flip-back .edu-text{
+    text-align:center; color:#cfe3ff; font-size:.78rem; line-height:1.25; padding:4px 8px;
+  }
+  .flip-badge .flip-back .edu-text strong{ display:block; color:#e7efff; margin-bottom:6px; }
+
+  /* Halo au hover (autour du badge) */
+  .flip-badge::after{
     content:""; position:absolute; inset:-6%;
     border-radius: 50%;
     background: radial-gradient(420px 220px at 24% -12%, rgba(44,140,255,.18), transparent 70%);
-    pointer-events:none; opacity: .0; transition: opacity .35s ease;
+    pointer-events:none; opacity: 0; transition: opacity .35s ease;
   }
-  .hub-gallery figure.figure-tilt:hover::after{ opacity: .9; }
-  .hub-gallery figure.figure-tilt:hover img{
+  .flip-badge:hover::after{ opacity: .9; }
+  .flip-badge:hover .flip-front img{
     transform: scale(1.04);
     filter: brightness(1.05) contrast(1.08) saturate(1.08);
     box-shadow:
@@ -314,7 +338,8 @@ full_bleed: true
       0 12px 42px rgba(0,0,0,.45),
       0 0 48px rgba(44,140,255,.25);
   }
-  .hub-gallery figcaption{ display:none; }
+
+  .hub-gallery figcaption{ display:none; } /* pas de caption sur le badge */
 
   @media (max-width:1100px){
     .hub-split{ grid-template-columns: 1fr; }
@@ -472,13 +497,22 @@ full_bleed: true
     <!-- Titre dynamique sous les onglets -->
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
-    <!-- ===== Image (badge rond) à gauche + Texte à droite ===== -->
+    <!-- ===== Image (badge rond flip) à gauche + Texte à droite ===== -->
     <div class="hub-split" id="hubSplit">
       <div class="hub-media">
         <div class="hub-gallery" id="hubGallery">
-          <figure class="figure-tilt">
-            <img src="/assets/images/image7.png" alt="CY Tech round badge">
-            <figcaption><div class="caption-inner">CY Tech</div></figcaption>
+          <figure class="figure-tilt flip-badge" id="eduBadge" role="button" aria-pressed="false" tabindex="0">
+            <div class="flip-inner">
+              <div class="flip-face flip-front" aria-hidden="false">
+                <img src="/assets/images/image7.png" alt="CY Tech round badge">
+              </div>
+              <div class="flip-face flip-back" aria-hidden="true">
+                <div class="edu-text">
+                  <strong>Education</strong>
+                  I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
+                </div>
+              </div>
+            </div>
           </figure>
         </div>
       </div>
@@ -686,31 +720,40 @@ updateClocks(); setInterval(updateClocks, 1000);
   }));
 })();
 
-/* === Effet tilt 3D léger sur le badge (image ronde) === */
+/* === Tilt 3D + Flip sur le badge (image ronde) === */
 (function(){
-  const cards = document.querySelectorAll('.figure-tilt');
+  const card = document.getElementById('eduBadge');
+  if (!card) return;
+  const inner = card.querySelector('.flip-inner');
   const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
-  cards.forEach(card=>{
-    let rAF;
-    function onMove(e){
-      const rect = card.getBoundingClientRect();
-      const clientX = (e.clientX ?? (e.touches&&e.touches[0].clientX));
-      const clientY = (e.clientY ?? (e.touches&&e.touches[0].clientY));
-      if (clientX==null || clientY==null) return;
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
-      const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
-      const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
-      cancelAnimationFrame(rAF);
-      rAF = requestAnimationFrame(()=>{
-        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
-    }
-    function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
-    card.addEventListener('mousemove', onMove, {passive:true});
-    card.addEventListener('mouseleave', reset);
-    card.addEventListener('touchmove', onMove, {passive:true});
-    card.addEventListener('touchend', reset);
+  let rAF;
+
+  function onMove(e){
+    const rect = card.getBoundingClientRect();
+    const clientX = (e.clientX ?? (e.touches&&e.touches[0].clientX));
+    const clientY = (e.clientY ?? (e.touches&&e.touches[0].clientY));
+    if (clientX==null || clientY==null) return;
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
+    const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
+    cancelAnimationFrame(rAF);
+    rAF = requestAnimationFrame(()=>{ card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
+  }
+  function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
+
+  function toggleFlip(){
+    const flipped = card.classList.toggle('is-flipped');
+    card.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+  }
+
+  card.addEventListener('mousemove', onMove, {passive:true});
+  card.addEventListener('mouseleave', reset);
+  card.addEventListener('touchmove', onMove, {passive:true});
+  card.addEventListener('touchend', reset);
+  card.addEventListener('click', toggleFlip);
+  card.addEventListener('keydown', (e)=>{
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFlip(); }
   });
 })();
 </script>
