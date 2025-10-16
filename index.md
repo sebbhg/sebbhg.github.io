@@ -373,7 +373,7 @@ full_bleed: true
                 <div class="xp-company">Natixis Corporate &amp; Investment Banking</div>
                 <div class="xp-desc">CVA/XVA development under LGM-1F, exposure simulation, sensitivities (Delta, Gamma, Vega, Theta, Cega) with GPR/BQ, multi-currency frameworks and analytics dashboards.</div>
               </div>
-              <div class="xp-meta">Paris · 2024–Present</div>
+              <div class="xp-meta">Paris · 2024</div>
             </div>
 
             <!-- Spread Research -->
@@ -384,7 +384,7 @@ full_bleed: true
                 <div class="xp-company">Spread Research</div>
                 <div class="xp-desc">Volatility surface calibration, Monte Carlo &amp; finite-difference pricing, hedging strategies (gamma scalping, delta-neutral), smile/skew dynamics.</div>
               </div>
-              <div class="xp-meta">Lyon · 2023</div>
+              <div class="xp-meta">Paris · 2023</div>
             </div>
 
             <!-- Société Générale -->
