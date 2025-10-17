@@ -815,7 +815,7 @@ full_bleed: true
           <div class="board-header">
             <div class="board-title">Reading — Selection in progress</div>
             <div class="board-actions">
-              <span class="btn-chip" aria-disabled="true" title="Bientôt">View all</span>
+              <span class="btn-chip" aria-disabled="true" title="Bientôt">All readings</span>
             </div>
           </div>
 
@@ -882,11 +882,11 @@ full_bleed: true
 <!-- ===== BANDEAU LECTURES (FR) ===== -->
 <section class="reading-band">
   <div class="reading-inner">
-    <p class="reading-eyebrow">LECTURES — SUR MON BUREAU</p>
+    <p class="reading-eyebrow">READINGS — ON MY DESK</p>
     <div class="reading-track" aria-label="Lectures en cours">
-      <div class="reading-chip"><span class="reading-badge">LIVRE</span> Paul Wilmott on Quantitative Finance — Calcul stochastique, volatilité, pricing, risque</div>
-      <div class="reading-chip"><span class="reading-badge">GUIDE</span> Guide Ultime Bloomberg — Navigation terminal, fonctions marchés, Fixed Income analytics</div>
-      <div class="reading-chip"><span class="reading-badge">LIVRE</span> Options, Futures & Other Derivatives (Hull) — BSM, exotiques, VaR, risque de crédit</div>
+      <div class="reading-chip"><span class="reading-badge">BOOK</span> Paul Wilmott on Quantitative Finance — Stochastic calculus, volatility, pricing, risk</div>
+      <div class="reading-chip"><span class="reading-badge">GUIDE</span> Ultimate Bloomberg Guide — Terminal navigation, market functions, Fixed Income analytics</div>
+      <div class="reading-chip"><span class="reading-badge">BOOK</span> Options, Futures & Other Derivatives (Hull) — BSM, exotics, VaR, credit risk</div>
 
       <!-- duplication pour boucle fluide -->
       <div class="reading-chip"><span class="reading-badge">LIVRE</span> Paul Wilmott on Quantitative Finance — Calcul stochastique, volatilité, pricing, risque</div>
