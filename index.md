@@ -109,7 +109,7 @@ full_bleed: true
   @media (max-width:820px){ .news-wrap{ grid-template-columns: 1fr; } }
 
   /* === SECTION HUB === */
-  .after-market{ background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111; }
+  .after-market{ position:relative; z-index:4; /* au-dessus du bandeau lectures */ background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111; }
   .hub-inner{ max-width:1100px; margin:0 auto; }
   .hub-eyebrow{ color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px; text-align:left; }
   .hub-title{ color:#fff; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; line-height:1.1; margin:0 0 16px; text-align:left; text-shadow:0 0 10px rgba(0,0,0,.35); }
@@ -269,7 +269,7 @@ full_bleed: true
   .col-title{ color:#ffffff; font-weight:900; letter-spacing:.02em; }
   .col-sub{ color:#9aa3b2; font-size:.92rem; }
 
-  .row{ display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center; padding:12px 14px; border-top:1px solid #171a28; cursor:pointer; transition: background .18s ease, transform .18s ease, border-color .18s ease; }
+  .row{ display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center; padding:12px 14px; border-top:1px solid #171a28; transition: background .18s ease, transform .18s ease, border-color .18s ease; }
   .row:first-child{ border-top:0; }
   .row:hover{ background:linear-gradient(180deg, rgba(32,42,72,.18), rgba(16,20,36,.18)); border-color:#2c8cff55; transform: translateY(-1px); }
   .row-title{ color:#e7efff; font-weight:800; }
@@ -277,50 +277,45 @@ full_bleed: true
   .row-meta{ color:#9aa3b2; font-size:.9rem; margin-top:4px; }
   .row-cta{ color:#9ec8ff; font-weight:800; white-space:nowrap; }
 
+  /* Désactivation des clics (pas de consultation / téléchargement) */
+  .board-col .row{ cursor:default; }
+  .board-col .row:hover{ transform:none; }
+
   /* Subtle floating particles inside the board */
   .particles{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
   .dot{ position:absolute; width:4px; height:4px; border-radius:50%; background: radial-gradient(circle, #9ec8ff 0%, rgba(158,200,255,.0) 70%); opacity:.45; animation: drift 12s linear infinite; }
   @keyframes drift{ 0%{ transform: translateY(0) translateX(0); opacity:.15;} 50%{ transform: translateY(-40px) translateX(20px); opacity:.5;} 100%{ transform: translateY(-80px) translateX(0); opacity:.15;} }
 
-  /* === READING MARQUEE (nouveau bandeau déroulant) === */
+  /* ===== Bandeau Lectures ===== */
   .reading-band{
-    background:#04050a; border-top:1px solid #0f1424; border-bottom:1px solid #0f1424;
-    padding:18px 0; position:relative; overflow:hidden; isolation:isolate;
+    position:relative;
+    z-index:3; /* sous la section after-market */
+    background:#050505;
+    border-top:1px solid #111;
+    border-bottom:1px solid #111;
+    padding:18px 0 22px;
+    overflow:hidden;
   }
-  .reading-inner{ max-width:1100px; margin:0 auto; padding:0 20px; }
+  .reading-inner{ max-width:1100px; margin:0 auto; padding:0 24px; }
   .reading-eyebrow{ color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px; }
-  .reading-rail{ display:flex; width:200%; }
   .reading-track{
-    display:flex; gap:14px; width:50%; white-space:nowrap;
-    animation:readScroll 55s linear infinite;
+    display:flex; gap:16px; width:max-content; white-space:nowrap;
+    animation: readingScroll 52s linear infinite;
   }
-  @keyframes readScroll{ from{ transform:translateX(0);} to{ transform:translateX(-100%);} }
-  .reading-band:hover .reading-track{ animation-play-state:paused; }
-
-  .reading-item{
+  @keyframes readingScroll{ 0%{ transform:translateX(0); } 100%{ transform:translateX(-50%); } }
+  .reading-chip{
     display:flex; align-items:center; gap:10px;
-    padding:10px 12px; border:1px solid #1f2333; border-radius:12px;
-    background:linear-gradient(180deg, rgba(14,18,34,.9), rgba(8,10,20,.95));
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+    padding:10px 16px; border-radius:12px;
+    background:#0b0f1a; border:1px solid #1f2333; color:#cfe3ff; font-weight:700;
+    box-shadow:0 8px 18px rgba(0,0,0,.35);
   }
   .reading-badge{
-    font-size:.72rem; font-weight:900; letter-spacing:.06em; color:#9ec8ff;
-    background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; flex:0 0 auto;
-  }
-  .reading-title{ color:#e7efff; font-weight:800; }
-  .reading-meta{ color:#9aa3b2; font-weight:700; margin-left:6px; }
-  .reading-desc{ color:#c9cbd1; margin-left:10px; opacity:.9; }
-
-  @media (max-width:900px){
-    .reading-track{ animation-duration:68s; }
-    .reading-desc{ display:none; }
-  }
-  @media (prefers-reduced-motion: reduce){
-    .reading-track{ animation:none; }
+    font-size:.75rem; background:#0c1220; border:1px solid #1f3b66;
+    padding:4px 8px; border-radius:8px; color:#9ec8ff; font-weight:800;
   }
 
   /* au-dessus du footer */
-  .news-band, .after-market{ position:relative; z-index:3; }
+  .news-band, .after-market{ position:relative; z-index:4; }
 </style>
 
 <section class="hero-video">
@@ -579,7 +574,7 @@ full_bleed: true
           <div class="board-header">
             <div class="board-title">Courses — Live & On-site / Online</div>
             <div class="board-actions">
-              <a class="btn-chip" href="{{ '/cours' | relative_url }}">All courses</a>
+              <span class="btn-chip" aria-disabled="true" title="Coming soon">All courses</span>
             </div>
           </div>
 
@@ -594,21 +589,21 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="location.href='{{ '/cours/portfolio-theory' | relative_url }}'">
+              <div class="row">
                 <div>
                   <div class="row-title">Portfolio Theory & Risk Metrics</div>
                   <div class="row-desc">Mean–Variance, VaR/ES (MC), Cornish–Fisher, drawdowns, factor models.</div>
                 </div>
               </div>
 
-              <div class="row" onclick="location.href='{{ '/cours/ir-models' | relative_url }}'">
+              <div class="row">
                 <div>
                   <div class="row-title">Interest Rate Modelling (LGM-1F)</div>
                   <div class="row-desc">ZC bootstrapping, DF/forwards, swap pricing, exposures, sensitivities.</div>
                 </div>
               </div>
 
-              <div class="row" onclick="location.href='{{ '/cours/cva-xva' | relative_url }}'">
+              <div class="row">
                 <div>
                   <div class="row-title">CVA & XVA Modelling</div>
                   <div class="row-desc">EE/EPE, default modeling, CSA, wrong-way risk, fast Greeks (GPR/BQ).</div>
@@ -626,21 +621,21 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="location.href='{{ '/cours/gpr' | relative_url }}'">
+              <div class="row">
                 <div>
                   <div class="row-title">Gaussian Process Regression</div>
                   <div class="row-desc">Kernels, training, uncertainty, surrogates for pricing, Greeks smoothing.</div>
                 </div>
               </div>
 
-              <div class="row" onclick="location.href='{{ '/cours/bayesian-quadrature' | relative_url }}'">
+              <div class="row">
                 <div>
                   <div class="row-title">Bayesian Quadrature</div>
                   <div class="row-desc">Probabilistic integration for exposure & Greeks estimation, variance control.</div>
                 </div>
               </div>
 
-              <div class="row" onclick="location.href='{{ '/cours/deep-derivatives' | relative_url }}'">
+              <div class="row">
                 <div>
                   <div class="row-title">Neural Nets for Derivatives</div>
                   <div class="row-desc">Calibration surrogates, PDE-to-NN, stability & monotonicity constraints.</div>
@@ -658,21 +653,21 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="location.href='{{ '/cours/options-hedging' | relative_url }}'">
+              <div class="row">
                 <div>
                   <div class="row-title">Options Hedging Simulation</div>
                   <div class="row-desc">Delta/Gamma/Theta management, transaction costs, P&L explainability.</div>
                 </div>
               </div>
 
-              <div class="row" onclick="location.href='{{ '/cours/quant-backtesting' | relative_url }}'">
+              <div class="row">
                 <div>
                   <div class="row-title">Quant Backtesting with Python</div>
                   <div class="row-desc">Event-driven engine, slippage/latency models, robust metrics & pitfalls.</div>
                 </div>
               </div>
 
-              <div class="row" onclick="location.href='{{ '/cours/vol-surface' | relative_url }}'">
+              <div class="row">
                 <div>
                   <div class="row-title">Volatility Surface Analysis</div>
                   <div class="row-desc">Smile/skew dynamics, arbitrage checks, interpolation & extrapolation.</div>
@@ -701,7 +696,7 @@ full_bleed: true
           <div class="board-header">
             <div class="board-title">Projects — Academic & Research</div>
             <div class="board-actions">
-              <a class="btn-chip" href="{{ '/projects' | relative_url }}">All projects</a>
+              <span class="btn-chip" aria-disabled="true" title="Coming soon">All projects</span>
             </div>
           </div>
 
@@ -716,7 +711,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Bayesian Quadrature for Efficient CVA Computation</div>
                   <div class="row-meta">May 2025</div>
@@ -724,7 +719,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Advanced Statistical & ML Techniques for Pricing & Risk</div>
                   <div class="row-meta">Mar–May 2025</div>
@@ -732,10 +727,10 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Calibration of the Heston Model</div>
-                  <div class="row-meta">In progress · No PDF</div>
+                  <div class="row-meta">In progress</div>
                   <div class="row-desc">Levenberg–Marquardt calibration; fit implied vol surfaces; fast convergence on real market data.</div>
                 </div>
               </div>
@@ -751,7 +746,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Risk Management & Extreme Values</div>
                   <div class="row-meta">Oct–Dec 2024</div>
@@ -759,7 +754,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Systemic Risks & Contagion in Financial Networks</div>
                   <div class="row-meta">Jan–Apr 2024</div>
@@ -767,7 +762,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Climate Risk and Institutional Investors</div>
                   <div class="row-meta">Feb 2024</div>
@@ -786,7 +781,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Autocallable Options: Mechanisms & Applications</div>
                   <div class="row-meta">Jan–May 2023</div>
@@ -794,10 +789,10 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Pricing American Options (Longstaff–Schwartz)</div>
-                  <div class="row-meta">In progress · No PDF</div>
+                  <div class="row-meta">In progress</div>
                   <div class="row-desc">LSMC for early exercise; optimal stopping in high-dimensional settings; equity & exotic Americans.</div>
                 </div>
               </div>
@@ -809,44 +804,23 @@ full_bleed: true
         </div>
       </div>
     </div>
+
+    <!-- ===== Panneau générique (fallback) ===== -->
+    <div class="hub-panel" id="hubPanelGeneric" style="display:none;" role="region" aria-live="polite"></div>
   </div>
 </section>
 
-<!-- ===== READING SCROLLING BANNER (nouveau) ===== -->
-<section class="reading-band" aria-label="Reading highlights">
+<!-- ===== BANDEAU LECTURES (FR) ===== -->
+<section class="reading-band">
   <div class="reading-inner">
-    <p class="reading-eyebrow">Reading — currently on my desk</p>
-    <div class="reading-rail" aria-hidden="true">
-      <!-- Rail 1 -->
-      <div class="reading-track">
-        <div class="reading-item">
-          <span class="reading-badge">BOOK</span>
-          <span class="reading-title">Paul Wilmott on Quantitative Finance</span>
-          <span class="reading-meta">Core models</span>
-          <span class="reading-desc">Stochastic calculus, volatility, pricing, risk</span>
-        </div>
-        <div class="reading-item">
-          <span class="reading-badge">GUIDE</span>
-          <span class="reading-title">Guide Ultime Bloomberg (Terminal)</span>
-          <span class="reading-meta">Cheatsheets</span>
-          <span class="reading-desc">Fonctions marché, data, graphes & export</span>
-        </div>
-      </div>
-      <!-- Rail 2 (duplicate for infinite loop) -->
-      <div class="reading-track">
-        <div class="reading-item">
-          <span class="reading-badge">BOOK</span>
-          <span class="reading-title">Paul Wilmott on Quantitative Finance</span>
-          <span class="reading-meta">Core models</span>
-          <span class="reading-desc">Stochastic calculus, volatility, pricing, risk</span>
-        </div>
-        <div class="reading-item">
-          <span class="reading-badge">GUIDE</span>
-          <span class="reading-title">Guide Ultime Bloomberg (Terminal)</span>
-          <span class="reading-meta">Cheatsheets</span>
-          <span class="reading-desc">Fonctions marché, data, graphes & export</span>
-        </div>
-      </div>
+    <p class="reading-eyebrow">LECTURES — SUR MON BUREAU</p>
+    <div class="reading-track" aria-label="Lectures en cours">
+      <div class="reading-chip"><span class="reading-badge">LIVRE</span> Paul Wilmott on Quantitative Finance — Calcul stochastique, volatilité, pricing, risque</div>
+      <div class="reading-chip"><span class="reading-badge">GUIDE</span> Guide Ultime Bloomberg — Navigation terminal, fonctions marchés, Fixed Income analytics</div>
+
+      <!-- duplication pour boucle fluide -->
+      <div class="reading-chip"><span class="reading-badge">LIVRE</span> Paul Wilmott on Quantitative Finance — Calcul stochastique, volatilité, pricing, risque</div>
+      <div class="reading-chip"><span class="reading-badge">GUIDE</span> Guide Ultime Bloomberg — Navigation terminal, fonctions marchés, Fixed Income analytics</div>
     </div>
   </div>
 </section>
@@ -1079,29 +1053,16 @@ updateClocks(); setInterval(updateClocks, 1000);
     const particles = board?.querySelector('.particles');
     if (!board) return;
 
-    // spawn dots if container exists (courses)
-    if(particles){
-      for(let i=0;i<28;i++){
-        const d=document.createElement('div'); d.className='dot';
-        d.style.left = (Math.random()*100)+'%';
-        d.style.top  = (Math.random()*100)+'%';
-        d.style.animationDelay = (Math.random()*10).toFixed(2)+'s';
-        d.style.opacity = (0.15+Math.random()*0.45).toFixed(2);
-        particles.appendChild(d);
-      }
-    } else {
-      // create particles container for projects too
-      const p = document.createElement('div');
-      p.className = 'particles';
-      board.appendChild(p);
-      for(let i=0;i<24;i++){
-        const d=document.createElement('div'); d.className='dot';
-        d.style.left = (Math.random()*100)+'%';
-        d.style.top  = (Math.random()*100)+'%';
-        d.style.animationDelay = (Math.random()*8).toFixed(2)+'s';
-        d.style.opacity = (0.15+Math.random()*0.45).toFixed(2);
-        p.appendChild(d);
-      }
+    // spawn dots (courses / projects)
+    const p = particles || (()=>{ const el=document.createElement('div'); el.className='particles'; board.appendChild(el); return el; })();
+    const n = 26;
+    for(let i=0;i<n;i++){
+      const d=document.createElement('div'); d.className='dot';
+      d.style.left = (Math.random()*100)+'%';
+      d.style.top  = (Math.random()*100)+'%';
+      d.style.animationDelay = (Math.random()*10).toFixed(2)+'s';
+      d.style.opacity = (0.15+Math.random()*0.45).toFixed(2);
+      p.appendChild(d);
     }
 
     const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
