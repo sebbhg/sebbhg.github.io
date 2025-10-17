@@ -7,6 +7,12 @@ full_bleed: true
 ---
 
 <style>
+  /* ===== Root vars (incl. adjustable spacing) ===== */
+  :root{
+    --hero-spacing: 60px; /* valeur par défaut, ajustable via la poignée */
+    --clock-speed: 120s;
+  }
+
   /* === Fade-in global === */
   @keyframes fadeInUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
 
@@ -44,40 +50,25 @@ full_bleed: true
   .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
   .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%); pointer-events:none; }
 
-  /* === WORLD CLOCK BAR === */
-  :root{
-    --clock-speed: 120s;
-    --hero-spacing: 60px; /* espace réglable entre le hero et les horloges */
-  }
-
-  /* poignée de réglage au-dessus des horloges */
+  /* === SPACING HANDLE (draggable) === */
   .clock-resizer{
-    position: relative;
-    height: 12px;
-    margin-top: 8px;
-    cursor: row-resize;
-    user-select: none;
-    touch-action: none;
-    background: linear-gradient(to bottom, rgba(255,255,255,.06), rgba(255,255,255,0));
-    border-top: 1px dashed rgba(255,255,255,.08);
-    border-bottom: 1px solid rgba(0,0,0,.65);
+    width:100%; height:16px;
+    display:grid; place-items:center;
+    cursor:row-resize; user-select:none;
+    position:relative; z-index:11;
   }
   .clock-resizer::before{
-    content:"";
-    position:absolute; left:50%; top:50%;
-    width:56px; height:4px; transform: translate(-50%,-50%);
-    border-radius:999px;
-    background: rgba(255,255,255,.18);
-    box-shadow: 0 1px 0 rgba(0,0,0,.35) inset;
-    pointer-events:none;
+    content:""; width:86px; height:6px; border-radius:6px;
+    border:1px dashed rgba(158,200,255,.35); background:rgba(15,18,34,.6);
+    box-shadow:0 4px 18px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
   }
-  .clock-resizer:hover::before{ background: rgba(255,255,255,.28); }
-  .clock-resizer.is-dragging{ cursor: row-resize; }
+  .clock-resizer.is-dragging::before{ border-color:#4da0ff; background:rgba(20,24,40,.8); }
 
+  /* === WORLD CLOCK BAR === */
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
     border-top:1px solid #333; border-bottom:1px solid #333;
-    padding:12px 0; margin-top: var(--hero-spacing); opacity:1; z-index:10; isolation:isolate;
+    padding:12px 0; margin-top:var(--hero-spacing); opacity:1; z-index:10; isolation:isolate;
     -webkit-user-select:none; user-select:none; touch-action:pan-x;
   }
   .world-clock-bar *{ background:none !important; opacity:1 !important; mix-blend-mode:normal !important; filter:none !important; }
@@ -263,65 +254,29 @@ full_bleed: true
       radial-gradient(70% 60% at 85% 100%, rgba(159,122,255,.12), transparent 65%);
     filter: blur(22px); opacity:.7; transform: translateZ(-40px);
   }
-  .board-header{
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:16px 18px; border-bottom:1px solid rgba(255,255,255,.06);
-  }
+  .board-header{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; border-bottom:1px solid rgba(255,255,255,.06); }
   .board-title{ color:#e7efff; font-weight:900; letter-spacing:.06em; text-transform:uppercase; }
   .board-actions{ display:flex; gap:10px; }
-  .btn-chip{
-    padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.16);
-    background:#0f1222; color:#cfe3ff; font-weight:800; text-decoration:none;
-  }
+  .btn-chip{ padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.16); background:#0f1222; color:#cfe3ff; font-weight:800; text-decoration:none; }
   .btn-chip:hover{ border-color:#4da0ff; }
-
-  .board-grid{
-    display:grid; grid-template-columns: 1.2fr 1.2fr 1.2fr; gap:12px; padding:14px; position:relative;
-  }
+  .board-grid{ display:grid; grid-template-columns: 1.2fr 1.2fr 1.2fr; gap:12px; padding:14px; position:relative; }
   @media (max-width:980px){ .board-grid{ grid-template-columns:1fr; } }
-
-  .board-col{
-    background:#0b0f1a; border:1px solid #1f2333; border-radius:16px; overflow:hidden;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
-  }
-  .col-head{
-    display:flex; align-items:center; gap:10px; padding:12px 14px; border-bottom:1px solid #171a28;
-  }
-  .col-icon{
-    width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
-    background: radial-gradient(100% 100% at 30% 10%, rgba(44,140,255,.18), rgba(44,140,255,.05));
-    box-shadow: inset 0 0 0 1px rgba(76,139,255,.35);
-    font-weight:900; color:#9ec8ff;
-  }
+  .board-col{ background:#0b0f1a; border:1px solid #1f2333; border-radius:16px; overflow:hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.02); }
+  .col-head{ display:flex; align-items:center; gap:10px; padding:12px 14px; border-bottom:1px solid #171a28; }
+  .col-icon{ width:34px; height:34px; border-radius:50%; display:grid; place-items:center; background: radial-gradient(100% 100% at 30% 10%, rgba(44,140,255,.18), rgba(44,140,255,.05)); box-shadow: inset 0 0 0 1px rgba(76,139,255,.35); font-weight:900; color:#9ec8ff; }
   .col-title{ color:#ffffff; font-weight:900; letter-spacing:.02em; }
   .col-sub{ color:#9aa3b2; font-size:.92rem; }
-
-  .row{
-    display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center;
-    padding:12px 14px; border-top:1px solid #171a28; cursor:pointer;
-    transition: background .18s ease, transform .18s ease, border-color .18s ease;
-  }
+  .row{ display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center; padding:12px 14px; border-top:1px solid #171a28; cursor:pointer; transition: background .18s ease, transform .18s ease, border-color .18s ease; }
   .row:first-child{ border-top:0; }
-  .row:hover{
-    background:linear-gradient(180deg, rgba(32,42,72,.18), rgba(16,20,36,.18));
-    border-color:#2c8cff55; transform: translateY(-1px);
-  }
+  .row:hover{ background:linear-gradient(180deg, rgba(32,42,72,.18), rgba(16,20,36,.18)); border-color:#2c8cff55; transform: translateY(-1px); }
   .row-title{ color:#e7efff; font-weight:800; }
   .row-desc{ color:#c9cbd1; font-size:.95rem; margin-top:2px; }
   .row-cta{ color:#9ec8ff; font-weight:800; white-space:nowrap; }
 
   /* Subtle floating particles inside the board */
   .particles{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
-  .dot{
-    position:absolute; width:4px; height:4px; border-radius:50%;
-    background: radial-gradient(circle, #9ec8ff 0%, rgba(158,200,255,.0) 70%);
-    opacity:.45; animation: drift 12s linear infinite;
-  }
-  @keyframes drift{
-    0%{ transform: translateY(0) translateX(0); opacity:.15;}
-    50%{ transform: translateY(-40px) translateX(20px); opacity:.5;}
-    100%{ transform: translateY(-80px) translateX(0); opacity:.15;}
-  }
+  .dot{ position:absolute; width:4px; height:4px; border-radius:50%; background: radial-gradient(circle, #9ec8ff 0%, rgba(158,200,255,.0) 70%); opacity:.45; animation: drift 12s linear infinite; }
+  @keyframes drift{ 0%{ transform: translateY(0) translateX(0); opacity:.15;} 50%{ transform: translateY(-40px) translateX(20px); opacity:.5;} 100%{ transform: translateY(-80px) translateX(0); opacity:.15;} }
 
   /* au-dessus du footer */
   .news-band, .after-market{ position:relative; z-index:3; }
@@ -361,8 +316,8 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== Poignée de réglage (hero <-> clocks) ===== -->
-<div class="clock-resizer" id="clockResizer" title="Drag to adjust spacing • Double-click to reset"></div>
+<!-- ===== Spacing handle (drag to adjust, double-click to reset) ===== -->
+<div class="clock-resizer" id="clockResizer" title="Drag to adjust spacing (double-click to reset)"></div>
 
 <!-- ===== World Clocks ===== -->
 <div class="world-clock-bar" id="clockBar">
@@ -718,7 +673,7 @@ function updateClocks(){
 }
 updateClocks(); setInterval(updateClocks, 1000);
 
-/* === Drag ticker === */
+/* === Drag ticker (défilement horizontal) === */
 (function(){
   const bar  = document.getElementById('clockBar');
   const wrap = document.getElementById('clockTicker');
@@ -740,6 +695,67 @@ updateClocks(); setInterval(updateClocks, 1000);
   bar.addEventListener('touchstart', onPointerDown, { passive:true });
   window.addEventListener('touchmove', onPointerMove, { passive:false });
   window.addEventListener('touchend', onPointerUp);
+})();
+
+/* === Spacing Resizer (hero <-> clocks) === */
+(function(){
+  const ROOT = document.documentElement;
+  const HANDLE = document.getElementById('clockResizer');
+  if(!HANDLE) return;
+
+  const KEY = 'heroSpacingPx';
+  const DEFAULT = parseInt(getComputedStyle(ROOT).getPropertyValue('--hero-spacing')) || 60;
+  const MIN = 0;
+  const MAX = 240;
+
+  const saved = parseInt(localStorage.getItem(KEY));
+  if(!Number.isNaN(saved)) ROOT.style.setProperty('--hero-spacing', saved + 'px');
+
+  let startY = 0, startSpacing = 0, dragging = false;
+
+  const getSpacing = () => {
+    const v = getComputedStyle(ROOT).getPropertyValue('--hero-spacing').trim();
+    return parseInt(v, 10) || 0;
+  };
+
+  function onDown(e){
+    dragging = true;
+    HANDLE.classList.add('is-dragging');
+    startY = (e.touches ? e.touches[0].clientY : e.clientY);
+    startSpacing = getSpacing();
+    e.preventDefault();
+  }
+
+  function onMove(e){
+    if(!dragging) return;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY);
+    const dy = y - startY;
+    const next = Math.min(MAX, Math.max(MIN, startSpacing + dy));
+    ROOT.style.setProperty('--hero-spacing', next + 'px');
+  }
+
+  function onUp(){
+    if(!dragging) return;
+    dragging = false;
+    HANDLE.classList.remove('is-dragging');
+    const current = getSpacing();
+    localStorage.setItem(KEY, String(current));
+  }
+
+  function onDblClick(){
+    ROOT.style.setProperty('--hero-spacing', DEFAULT + 'px');
+    localStorage.setItem(KEY, String(DEFAULT));
+  }
+
+  HANDLE.addEventListener('mousedown', onDown);
+  window.addEventListener('mousemove', onMove, { passive:false });
+  window.addEventListener('mouseup', onUp);
+
+  HANDLE.addEventListener('touchstart', onDown, { passive:false });
+  window.addEventListener('touchmove', onMove, { passive:false });
+  window.addEventListener('touchend', onUp);
+
+  HANDLE.addEventListener('dblclick', onDblClick);
 })();
 
 /* === Market Status (Tokyo / London / Paris / New York) === */
@@ -811,9 +827,9 @@ updateClocks(); setInterval(updateClocks, 1000);
     });
     titleEl.textContent = labelUpper;
 
-    if (key === 'what')      showWhat();
+    if (key === 'what')        showWhat();
     else if (key === 'courses') showCourses();
-    else                      showGeneric(key);
+    else                        showGeneric(key);
   }
 
   activate('what', 'WHAT I DO');
@@ -892,63 +908,5 @@ updateClocks(); setInterval(updateClocks, 1000);
   board.addEventListener('mouseleave', reset);
   board.addEventListener('touchmove', onMove, {passive:true});
   board.addEventListener('touchend', reset);
-})();
-
-/* === Spacing Resizer (hero <-> clocks) === */
-(function(){
-  const ROOT = document.documentElement;
-  const HANDLE = document.getElementById('clockResizer');
-  if(!HANDLE) return;
-
-  const KEY = 'heroSpacingPx';
-  const DEFAULT = parseInt(getComputedStyle(ROOT).getPropertyValue('--hero-spacing')) || 60;
-  const MIN = 0;
-  const MAX = 240;
-
-  const saved = parseInt(localStorage.getItem(KEY));
-  if(!Number.isNaN(saved)) ROOT.style.setProperty('--hero-spacing', saved + 'px');
-
-  let startY = 0, startSpacing = 0, dragging = false;
-
-  const getSpacing = () => {
-    const v = getComputedStyle(ROOT).getPropertyValue('--hero-spacing').trim();
-    return parseInt(v, 10) || 0;
-  };
-
-  function onDown(e){
-    dragging = true;
-    HANDLE.classList.add('is-dragging');
-    startY = (e.touches ? e.touches[0].clientY : e.clientY);
-    startSpacing = getSpacing();
-    e.preventDefault();
-  }
-  function onMove(e){
-    if(!dragging) return;
-    const y = (e.touches ? e.touches[0].clientY : e.clientY);
-    const dy = y - startY;
-    const next = Math.min(MAX, Math.max(MIN, startSpacing + dy));
-    ROOT.style.setProperty('--hero-spacing', next + 'px');
-  }
-  function onUp(){
-    if(!dragging) return;
-    dragging = false;
-    HANDLE.classList.remove('is-dragging');
-    const current = getSpacing();
-    localStorage.setItem(KEY, String(current));
-  }
-  function onDblClick(){
-    ROOT.style.setProperty('--hero-spacing', DEFAULT + 'px');
-    localStorage.setItem(KEY, String(DEFAULT));
-  }
-
-  HANDLE.addEventListener('mousedown', onDown);
-  window.addEventListener('mousemove', onMove, { passive:false });
-  window.addEventListener('mouseup', onUp);
-
-  HANDLE.addEventListener('touchstart', onDown, { passive:false });
-  window.addEventListener('touchmove', onMove, { passive:false });
-  window.addEventListener('touchend', onUp);
-
-  HANDLE.addEventListener('dblclick', onDblClick);
 })();
 </script>
