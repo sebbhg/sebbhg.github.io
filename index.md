@@ -154,7 +154,6 @@ full_bleed: true
   .card-sub{ margin:.15rem 0 0; color:#9ec8ff; font-weight:700; font-size:.9rem; position:relative; z-index:1; }
 
   /* ===== EDUCATION ===== */
-  .edu-card{ }
   .edu-header{ display:flex; align-items:center; gap:14px; position:relative; z-index:1; }
   .edu-body{ position:relative; z-index:1; margin-top:10px; color:#cfe3ff; line-height:1.6; font-size:.98rem; }
 
@@ -203,7 +202,6 @@ full_bleed: true
   .cy-holo .flip-back .edu-text{ font-size:.78rem; line-height:1.25; }
 
   /* ===== EXPERIENCES ===== */
-  .xp-card{ }
   .xp-section{ margin-top: 8px; }
   .xp-list{ display:flex; flex-direction:column; gap:12px; position:relative; z-index:1; }
   .xp-item{
@@ -222,7 +220,6 @@ full_bleed: true
   .xp-meta{ margin-left:auto; color:#9aa3b2; text-align:right; white-space:nowrap; }
 
   /* ===== CERTIFICATIONS ===== */
-  .cert-card{ }
   .cert-list{ display:flex; flex-direction:column; gap:12px; margin-top:8px; }
   .cert-item{
     display:grid; grid-template-columns:52px 1fr; gap:14px; align-items:center;
@@ -236,10 +233,10 @@ full_bleed: true
   .cert-issuer{ color:#9ec8ff; font-weight:800; }
   .cert-desc{ color:#c9cbd1; margin-top:4px; font-size:.95rem; }
 
-  /* === SHARED: Glass Board (Courses & Projects) === */
-  .courses-panel, .projects-panel{ display:none; }
-  .courses-lede, .projects-lede{ color:#cfe3ff; max-width:960px; line-height:1.65; margin:8px 0 16px; }
-  .courses-stage, .projects-stage{ perspective:1400px; margin-top:14px; display:grid; place-items:center; }
+  /* === SHARED: Glass Board (Courses, Projects, Reading) === */
+  .courses-panel, .projects-panel, .reading-panel{ display:none; }
+  .courses-lede, .projects-lede, .reading-lede{ color:#cfe3ff; max-width:960px; line-height:1.65; margin:8px 0 16px; }
+  .courses-stage, .projects-stage, .reading-stage{ perspective:1400px; margin-top:14px; display:grid; place-items:center; }
   .glass-board{
     position:relative; width:min(1100px, 96%); border-radius:22px;
     background: linear-gradient(180deg, rgba(13,16,30,.92), rgba(8,10,20,.96));
@@ -805,6 +802,82 @@ full_bleed: true
       </div>
     </div>
 
+    <!-- ===== READING PANEL (nouveau) ===== -->
+    <div class="reading-panel" id="readingPanel" role="region" aria-live="polite">
+      <p class="reading-lede">
+        📚 Lectures techniques en finance quantitative. Pour chaque ouvrage, je prépare un résumé structuré orienté
+        application (pricing, risk, ingénierie financière). Aucun téléchargement public pour l’instant.
+      </p>
+
+      <div class="reading-stage">
+        <div class="glass-board" id="readingBoard" aria-label="Reading board" tabindex="0">
+          <div class="board-halo"></div>
+
+          <div class="board-header">
+            <div class="board-title">Reading — Sélection en cours</div>
+            <div class="board-actions">
+              <span class="btn-chip" aria-disabled="true" title="Bientôt">Voir tout</span>
+            </div>
+          </div>
+
+          <div class="board-grid">
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">📘</div>
+                <div><div class="col-title">Derivatives</div><div class="col-sub">Hull · Fondamentaux</div></div>
+              </div>
+              <div class="row">
+                <div>
+                  <div class="row-title">Options, Futures and Other Derivatives — John C. Hull</div>
+                  <div class="row-meta">Résumé en préparation</div>
+                  <div class="row-desc">
+                    Marchés à terme & options, Black–Scholes–Merton, stratégies de couverture (Greeks),
+                    produits exotiques & structurés, Value-at-Risk et risque de crédit.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">📗</div>
+                <div><div class="col-title">Quantitative Finance</div><div class="col-sub">Wilmott · Modèles</div></div>
+              </div>
+              <div class="row">
+                <div>
+                  <div class="row-title">Paul Wilmott on Quantitative Finance</div>
+                  <div class="row-meta">Lecture en cours</div>
+                  <div class="row-desc">
+                    Calcul stochastique, dynamiques de volatilité, calibration, pricing & gestion du risque,
+                    méthodologies robustes pour produits dérivés.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">🅑</div>
+                <div><div class="col-title">Marchés & Données</div><div class="col-sub">Bloomberg</div></div>
+              </div>
+              <div class="row">
+                <div>
+                  <div class="row-title">Guide Ultime Bloomberg (Terminal)</div>
+                  <div class="row-meta">Notes personnelles</div>
+                  <div class="row-desc">
+                    Navigation du Terminal, fonctions clés (actions, FI, FX), extraction de données,
+                    analytics Fixed Income, workflows de pricing & risk.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="particles" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- ===== Panneau générique (fallback) ===== -->
     <div class="hub-panel" id="hubPanelGeneric" style="display:none;" role="region" aria-live="polite"></div>
   </div>
@@ -817,10 +890,12 @@ full_bleed: true
     <div class="reading-track" aria-label="Lectures en cours">
       <div class="reading-chip"><span class="reading-badge">LIVRE</span> Paul Wilmott on Quantitative Finance — Calcul stochastique, volatilité, pricing, risque</div>
       <div class="reading-chip"><span class="reading-badge">GUIDE</span> Guide Ultime Bloomberg — Navigation terminal, fonctions marchés, Fixed Income analytics</div>
+      <div class="reading-chip"><span class="reading-badge">LIVRE</span> Options, Futures & Other Derivatives (Hull) — BSM, exotiques, VaR, risque de crédit</div>
 
       <!-- duplication pour boucle fluide -->
       <div class="reading-chip"><span class="reading-badge">LIVRE</span> Paul Wilmott on Quantitative Finance — Calcul stochastique, volatilité, pricing, risque</div>
       <div class="reading-chip"><span class="reading-badge">GUIDE</span> Guide Ultime Bloomberg — Navigation terminal, fonctions marchés, Fixed Income analytics</div>
+      <div class="reading-chip"><span class="reading-badge">LIVRE</span> Options, Futures & Other Derivatives (Hull) — BSM, exotiques, VaR, risque de crédit</div>
     </div>
   </div>
 </section>
@@ -952,7 +1027,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs: WHAT / COURSES / PROJECTS / others === */
+/* === Tabs: WHAT / COURSES / PROJECTS / READING / others === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const titleEl = document.getElementById('hubSelectedTitle');
@@ -960,6 +1035,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   const panelGeneric = document.getElementById('hubPanelGeneric');
   const panelCourses = document.getElementById('coursesPanel');
   const panelProjects = document.getElementById('projectsPanel');
+  const panelReading = document.getElementById('readingPanel');
 
   const copy = {
     reading:  `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`,
@@ -971,23 +1047,34 @@ updateClocks(); setInterval(updateClocks, 1000);
     panelGeneric.innerHTML = '';
     panelCourses.style.display = 'none';
     panelProjects.style.display = 'none';
+    panelReading.style.display = 'none';
   }
   function showCourses(){
     split.style.display = 'none';
     panelGeneric.style.display = 'none';
     panelProjects.style.display = 'none';
+    panelReading.style.display = 'none';
     panelCourses.style.display = 'block';
   }
   function showProjects(){
     split.style.display = 'none';
     panelGeneric.style.display = 'none';
     panelCourses.style.display = 'none';
+    panelReading.style.display = 'none';
     panelProjects.style.display = 'block';
+  }
+  function showReading(){
+    split.style.display = 'none';
+    panelGeneric.style.display = 'none';
+    panelCourses.style.display = 'none';
+    panelProjects.style.display = 'none';
+    panelReading.style.display = 'block';
   }
   function showGeneric(key){
     split.style.display = 'none';
     panelCourses.style.display = 'none';
     panelProjects.style.display = 'none';
+    panelReading.style.display = 'none';
     panelGeneric.style.display = '';
     panelGeneric.innerHTML = copy[key] || '';
   }
@@ -1003,6 +1090,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     if (key === 'what')         showWhat();
     else if (key === 'courses') showCourses();
     else if (key === 'projects')showProjects();
+    else if (key === 'reading') showReading();
     else                        showGeneric(key);
   }
 
@@ -1053,7 +1141,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     const particles = board?.querySelector('.particles');
     if (!board) return;
 
-    // spawn dots (courses / projects)
+    // spawn dots (courses / projects / reading)
     const p = particles || (()=>{ const el=document.createElement('div'); el.className='particles'; board.appendChild(el); return el; })();
     const n = 26;
     for(let i=0;i<n;i++){
@@ -1089,5 +1177,6 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   enhanceBoard('glassBoard');     // Courses
   enhanceBoard('projectsBoard');  // Projects
+  enhanceBoard('readingBoard');   // Reading
 })();
 </script>
