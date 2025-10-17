@@ -539,7 +539,6 @@ full_bleed: true
             <div class="board-title">Courses — Live & On-site / Online</div>
             <div class="board-actions">
               <a class="btn-chip" href="{{ '/cours' | relative_url }}">All courses</a>
-              <a class="btn-chip" href="{{ '/projects' | relative_url }}">Labs</a>
             </div>
           </div>
 
