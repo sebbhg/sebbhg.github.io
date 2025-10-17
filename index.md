@@ -313,6 +313,30 @@ full_bleed: true
 
   /* au-dessus du footer */
   .news-band, .after-market{ position:relative; z-index:4; }
+
+  /* ===== HERO SOCIAL ICON BUTTONS ===== */
+  .social-actions{
+    margin-top:14px; display:flex; gap:12px;
+  }
+  .icon-btn{
+    width:46px; height:46px; display:grid; place-items:center;
+    border-radius:50%;
+    background: radial-gradient(120% 120% at 30% 10%, rgba(44,140,255,.18), rgba(8,12,24,.9));
+    border:1px solid rgba(76,139,255,.45);
+    box-shadow: 0 8px 20px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
+    transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+    text-decoration:none; outline:none;
+  }
+  .icon-btn:hover{
+    transform: translateY(-1px);
+    border-color:#6bb0ff;
+    box-shadow: 0 12px 30px rgba(0,0,0,.45), 0 0 18px rgba(44,140,255,.25) inset;
+    background: radial-gradient(120% 120% at 30% 10%, rgba(44,140,255,.28), rgba(10,14,28,.95));
+  }
+  .icon-btn:focus-visible{ box-shadow: 0 0 0 3px rgba(76,139,255,.35); }
+  .icon-btn svg{ width:22px; height:22px; fill:#9ec8ff; }
+  .icon-btn:hover svg{ fill:#ffffff; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
 </style>
 
 <section class="hero-video">
@@ -327,12 +351,25 @@ full_bleed: true
     <p class="subtitle">
       Quantitative Finance Engineer — <strong>CFA Level I Holder</strong>.<br/>
     </p>
-    <div class="hero-actions">
-      <a class="btn primary" href="{{ '/resumes' | relative_url }}">View CV</a>
-      <a class="btn" href="{{ '/theses' | relative_url }}">Theses</a>
-      <a class="btn" href="{{ '/cours' | relative_url }}">Courses</a>
-      <a class="btn" href="{{ '/reading' | relative_url }}">Reading</a>
-      <a class="btn" href="{{ '/what-i-do' | relative_url }}">What I do</a>
+
+    <!-- ==== Social / Contact (remplace les 5 boutons) ==== -->
+    <div class="social-actions" aria-label="Contact links">
+      <!-- LinkedIn -->
+      <a class="icon-btn" href="https://www.linkedin.com/in/s%C3%A9bastien-haag/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile" title="LinkedIn">
+        <span class="sr-only">LinkedIn</span>
+        <!-- LinkedIn SVG -->
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+          <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0H12v2.2h.06c.63-1.2 2.16-2.46 4.45-2.46 4.76 0 5.64 3.13 5.64 7.2V24h-5v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V24h-5V8z"/>
+        </svg>
+      </a>
+      <!-- Email -->
+      <a class="icon-btn" href="mailto:sbthaag@gmail.com" aria-label="Send me an email" title="Email">
+        <span class="sr-only">Email</span>
+        <!-- Envelope SVG -->
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+      </a>
     </div>
   </div>
 
@@ -802,7 +839,7 @@ full_bleed: true
       </div>
     </div>
 
-    <!-- ===== READING PANEL (nouveau) ===== -->
+    <!-- ===== READING PANEL ===== -->
     <div class="reading-panel" id="readingPanel" role="region" aria-live="polite">
       <p class="reading-lede">
         Technical readings in quantitative finance. For each book, I prepare a structured, application-oriented summary (pricing, risk, financial engineering). No public downloads available at the moment.
@@ -879,7 +916,7 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== BANDEAU LECTURES (FR) ===== -->
+<!-- ===== BANDEAU LECTURES ===== -->
 <section class="reading-band">
   <div class="reading-inner">
     <p class="reading-eyebrow">READINGS — ON MY DESK</p>
