@@ -763,9 +763,13 @@ updateClocks(); setInterval(updateClocks, 1000);
     panelCourses.style.display = 'none';
   }
   function showCourses(){
+    const split = document.getElementById('hubSplit');
+    const panelGeneric = document.getElementById('hubPanelGeneric');
+    const panelCourses = document.getElementById('coursesPanel');
+
     split.style.display = 'none';
     panelGeneric.style.display = 'none';
-    panelCourses.style.display = '';
+    panelCourses.style.display = 'block'; // <<< forcer l'affichage
   }
   function showGeneric(key){
     split.style.display = 'none';
