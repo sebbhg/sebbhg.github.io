@@ -217,6 +217,86 @@ full_bleed: true
   .cert-issuer{ color:#9ec8ff; font-weight:800; }
   .cert-desc{ color:#c9cbd1; margin-top:4px; font-size:.95rem; }
 
+  /* === COURSES — Glass Board 3D === */
+  .courses-panel{ display:none; }
+  .courses-lede{ color:#cfe3ff; max-width:960px; line-height:1.65; margin:8px 0 16px; }
+  .courses-stage{
+    perspective:1400px; margin-top:14px; display:grid; place-items:center;
+  }
+  .glass-board{
+    position:relative; width:min(1100px, 96%); border-radius:22px;
+    background: linear-gradient(180deg, rgba(13,16,30,.92), rgba(8,10,20,.96));
+    border:1px solid rgba(76,139,255,.35);
+    box-shadow: 0 18px 40px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.04);
+    transform-style:preserve-3d; transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .glass-board:hover{ box-shadow: 0 20px 54px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.04); }
+  .board-halo{ content:""; position:absolute; inset:-20%; border-radius:26px; pointer-events:none;
+    background:
+      radial-gradient(60% 50% at 15% 0%, rgba(44,140,255,.18), transparent 60%),
+      radial-gradient(70% 60% at 85% 100%, rgba(159,122,255,.12), transparent 65%);
+    filter: blur(22px); opacity:.7; transform: translateZ(-40px);
+  }
+  .board-header{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:16px 18px; border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .board-title{ color:#e7efff; font-weight:900; letter-spacing:.06em; text-transform:uppercase; }
+  .board-actions{ display:flex; gap:10px; }
+  .btn-chip{
+    padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.16);
+    background:#0f1222; color:#cfe3ff; font-weight:800; text-decoration:none;
+  }
+  .btn-chip:hover{ border-color:#4da0ff; }
+
+  .board-grid{
+    display:grid; grid-template-columns: 1.2fr 1.2fr 1.2fr; gap:12px; padding:14px; position:relative;
+  }
+  @media (max-width:980px){ .board-grid{ grid-template-columns:1fr; } }
+
+  .board-col{
+    background:#0b0f1a; border:1px solid #1f2333; border-radius:16px; overflow:hidden;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+  }
+  .col-head{
+    display:flex; align-items:center; gap:10px; padding:12px 14px; border-bottom:1px solid #171a28;
+  }
+  .col-icon{
+    width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
+    background: radial-gradient(100% 100% at 30% 10%, rgba(44,140,255,.18), rgba(44,140,255,.05));
+    box-shadow: inset 0 0 0 1px rgba(76,139,255,.35);
+    font-weight:900; color:#9ec8ff;
+  }
+  .col-title{ color:#ffffff; font-weight:900; letter-spacing:.02em; }
+  .col-sub{ color:#9aa3b2; font-size:.92rem; }
+
+  .row{
+    display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center;
+    padding:12px 14px; border-top:1px solid #171a28; cursor:pointer;
+    transition: background .18s ease, transform .18s ease, border-color .18s ease;
+  }
+  .row:first-child{ border-top:0; }
+  .row:hover{
+    background:linear-gradient(180deg, rgba(32,42,72,.18), rgba(16,20,36,.18));
+    border-color:#2c8cff55; transform: translateY(-1px);
+  }
+  .row-title{ color:#e7efff; font-weight:800; }
+  .row-desc{ color:#c9cbd1; font-size:.95rem; margin-top:2px; }
+  .row-cta{ color:#9ec8ff; font-weight:800; white-space:nowrap; }
+
+  /* Subtle floating particles inside the board */
+  .particles{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+  .dot{
+    position:absolute; width:4px; height:4px; border-radius:50%;
+    background: radial-gradient(circle, #9ec8ff 0%, rgba(158,200,255,.0) 70%);
+    opacity:.45; animation: drift 12s linear infinite;
+  }
+  @keyframes drift{
+    0%{ transform: translateY(0) translateX(0); opacity:.15;}
+    50%{ transform: translateY(-40px) translateX(20px); opacity:.5;}
+    100%{ transform: translateY(-80px) translateX(0); opacity:.15;}
+  }
+
   /* au-dessus du footer */
   .news-band, .after-market{ position:relative; z-index:3; }
 </style>
@@ -460,7 +540,139 @@ full_bleed: true
       </div>
     </div><!-- /hub-split -->
 
-    <!-- ===== Panneau générique (autres onglets) ===== -->
+    <!-- ===== COURSES PANEL (custom) ===== -->
+    <div class="courses-panel" id="coursesPanel" role="region" aria-live="polite">
+      <p class="courses-lede">
+        A collection of **focused, practitioner-grade** courses in Quantitative Finance, Machine Learning and Trading.
+        Each course will come with concise notes, code notebooks, and applied exercises.
+      </p>
+
+      <div class="courses-stage">
+        <div class="glass-board" id="glassBoard" aria-label="Courses board" tabindex="0">
+          <div class="board-halo"></div>
+
+          <div class="board-header">
+            <div class="board-title">Courses — Live & On-site / Online</div>
+            <div class="board-actions">
+              <a class="btn-chip" href="{{ '/cours' | relative_url }}">All courses</a>
+              <a class="btn-chip" href="{{ '/projects' | relative_url }}">Labs</a>
+            </div>
+          </div>
+
+          <div class="board-grid">
+            <!-- Column 1: Quantitative Finance -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">𝛴</div>
+                <div>
+                  <div class="col-title">Quantitative Finance</div>
+                  <div class="col-sub">Risk, rates, derivatives</div>
+                </div>
+              </div>
+
+              <div class="row" onclick="location.href='{{ '/cours/portfolio-theory' | relative_url }}'">
+                <div>
+                  <div class="row-title">Portfolio Theory & Risk Metrics</div>
+                  <div class="row-desc">Mean–Variance, VaR/ES (MC), Cornish–Fisher, drawdowns, factor models.</div>
+                </div>
+                <div class="row-cta">Open →</div>
+              </div>
+
+              <div class="row" onclick="location.href='{{ '/cours/ir-models' | relative_url }}'">
+                <div>
+                  <div class="row-title">Interest Rate Modelling (LGM-1F)</div>
+                  <div class="row-desc">ZC bootstrapping, DF/forwards, swap pricing, exposures, sensitivities.</div>
+                </div>
+                <div class="row-cta">Open →</div>
+              </div>
+
+              <div class="row" onclick="location.href='{{ '/cours/cva-xva' | relative_url }}'">
+                <div>
+                  <div class="row-title">CVA & XVA Modelling</div>
+                  <div class="row-desc">EE/EPE, default modeling, CSA, wrong-way risk, fast Greeks (GPR/BQ).</div>
+                </div>
+                <div class="row-cta">Open →</div>
+              </div>
+            </div>
+
+            <!-- Column 2: Machine Learning -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">ML</div>
+                <div>
+                  <div class="col-title">Machine Learning</div>
+                  <div class="col-sub">For pricing & risk</div>
+                </div>
+              </div>
+
+              <div class="row" onclick="location.href='{{ '/cours/gpr' | relative_url }}'">
+                <div>
+                  <div class="row-title">Gaussian Process Regression</div>
+                  <div class="row-desc">Kernels, training, uncertainty, surrogates for pricing, Greeks smoothing.</div>
+                </div>
+                <div class="row-cta">Open →</div>
+              </div>
+
+              <div class="row" onclick="location.href='{{ '/cours/bayesian-quadrature' | relative_url }}'">
+                <div>
+                  <div class="row-title">Bayesian Quadrature</div>
+                  <div class="row-desc">Probabilistic integration for exposure & Greeks estimation, variance control.</div>
+                </div>
+                <div class="row-cta">Open →</div>
+              </div>
+
+              <div class="row" onclick="location.href='{{ '/cours/deep-derivatives' | relative_url }}'">
+                <div>
+                  <div class="row-title">Neural Nets for Derivatives</div>
+                  <div class="row-desc">Calibration surrogates, PDE-to-NN, stability & monotonicity constraints.</div>
+                </div>
+                <div class="row-cta">Open →</div>
+              </div>
+            </div>
+
+            <!-- Column 3: Trading Strategies -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">α</div>
+                <div>
+                  <div class="col-title">Trading Strategies</div>
+                  <div class="col-sub">Backtesting & microstructure</div>
+                </div>
+              </div>
+
+              <div class="row" onclick="location.href='{{ '/cours/options-hedging' | relative_url }}'">
+                <div>
+                  <div class="row-title">Options Hedging Simulation</div>
+                  <div class="row-desc">Delta/Gamma/Theta management, transaction costs, P&L explainability.</div>
+                </div>
+                <div class="row-cta">Open →</div>
+              </div>
+
+              <div class="row" onclick="location.href='{{ '/cours/quant-backtesting' | relative_url }}'">
+                <div>
+                  <div class="row-title">Quant Backtesting with Python</div>
+                  <div class="row-desc">Event-driven engine, slippage/latency models, robust metrics & pitfalls.</div>
+                </div>
+                <div class="row-cta">Open →</div>
+              </div>
+
+              <div class="row" onclick="location.href='{{ '/cours/vol-surface' | relative_url }}'">
+                <div>
+                  <div class="row-title">Volatility Surface Analysis</div>
+                  <div class="row-desc">Smile/skew dynamics, arbitrage checks, interpolation & extrapolation.</div>
+                </div>
+                <div class="row-cta">Open →</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- floating particles -->
+          <div class="particles" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Panneau générique (Projects / Reading) ===== -->
     <div class="hub-panel" id="hubPanelGeneric" style="display:none;" role="region" aria-live="polite"></div>
   </div>
 </section>
@@ -531,18 +743,36 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs: show split on WHAT, generic panel otherwise === */
+/* === Tabs: WHAT / COURSES / others === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const titleEl = document.getElementById('hubSelectedTitle');
   const split = document.getElementById('hubSplit');
   const panelGeneric = document.getElementById('hubPanelGeneric');
+  const panelCourses = document.getElementById('coursesPanel');
 
   const copy = {
-    courses: `Courses and notes that structure the core of my quantitative toolkit: probability, stochastic processes, optimization, numerical methods, derivatives, and machine learning — with short summaries and exercises.`,
     projects: `Hands-on projects that combine data, models and code: pricing prototypes, risk analytics, portfolio research and microstructure experiments. Each project highlights the problem, approach and results.`,
     reading:  `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`,
   };
+
+  function showWhat(){
+    split.style.display = '';
+    panelGeneric.style.display = 'none';
+    panelGeneric.innerHTML = '';
+    panelCourses.style.display = 'none';
+  }
+  function showCourses(){
+    split.style.display = 'none';
+    panelGeneric.style.display = 'none';
+    panelCourses.style.display = '';
+  }
+  function showGeneric(key){
+    split.style.display = 'none';
+    panelCourses.style.display = 'none';
+    panelGeneric.style.display = '';
+    panelGeneric.innerHTML = copy[key] || '';
+  }
 
   function activate(key, labelUpper){
     tabs.forEach(t=>{
@@ -552,15 +782,9 @@ updateClocks(); setInterval(updateClocks, 1000);
     });
     titleEl.textContent = labelUpper;
 
-    if (key === 'what'){
-      split.style.display = '';
-      panelGeneric.style.display = 'none';
-      panelGeneric.innerHTML = '';
-    } else {
-      split.style.display = 'none';
-      panelGeneric.style.display = '';
-      panelGeneric.innerHTML = copy[key] || '';
-    }
+    if (key === 'what')      showWhat();
+    else if (key === 'courses') showCourses();
+    else                      showGeneric(key);
   }
 
   activate('what', 'WHAT I DO');
@@ -570,7 +794,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   }));
 })();
 
-/* === Tilt 3D + Flip sur le badge === */
+/* === Tilt 3D + Flip sur le badge Education === */
 (function(){
   const card = document.getElementById('eduBadge');
   if (!card) return;
@@ -601,5 +825,43 @@ updateClocks(); setInterval(updateClocks, 1000);
   card.addEventListener('touchend', reset);
   card.addEventListener('click', toggleFlip);
   card.addEventListener('keydown', (e)=>{ if (e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleFlip(); }});
+})();
+
+/* === Tilt 3D sur la Glass Board (Courses) + Particles spawn === */
+(function(){
+  const board = document.getElementById('glassBoard');
+  const particles = board?.querySelector('.particles');
+  if (!board || !particles) return;
+
+  // spawn a few drifting dots
+  for(let i=0;i<28;i++){
+    const d=document.createElement('div'); d.className='dot';
+    d.style.left = (Math.random()*100)+'%';
+    d.style.top  = (Math.random()*100)+'%';
+    d.style.animationDelay = (Math.random()*10).toFixed(2)+'s';
+    d.style.opacity = (0.15+Math.random()*0.45).toFixed(2);
+    particles.appendChild(d);
+  }
+
+  const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
+  let rAF;
+  function onMove(e){
+    const rect = board.getBoundingClientRect();
+    const clientX = (e.clientX ?? (e.touches&&e.touches[0].clientX));
+    const clientY = (e.clientY ?? (e.touches&&e.touches[0].clientY));
+    if (clientX==null || clientY==null) return;
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
+    const ry = clamp(((x/rect.width)-0.5)*-8,-8,8);
+    cancelAnimationFrame(rAF);
+    rAF = requestAnimationFrame(()=>{ board.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
+  }
+  function reset(){ board.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
+
+  board.addEventListener('mousemove', onMove, {passive:true});
+  board.addEventListener('mouseleave', reset);
+  board.addEventListener('touchmove', onMove, {passive:true});
+  board.addEventListener('touchend', reset);
 })();
 </script>
