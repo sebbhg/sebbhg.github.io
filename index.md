@@ -45,11 +45,39 @@ full_bleed: true
   .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%); pointer-events:none; }
 
   /* === WORLD CLOCK BAR === */
-  :root { --clock-speed: 120s; }
+  :root{
+    --clock-speed: 120s;
+    --hero-spacing: 60px; /* espace réglable entre le hero et les horloges */
+  }
+
+  /* poignée de réglage au-dessus des horloges */
+  .clock-resizer{
+    position: relative;
+    height: 12px;
+    margin-top: 8px;
+    cursor: row-resize;
+    user-select: none;
+    touch-action: none;
+    background: linear-gradient(to bottom, rgba(255,255,255,.06), rgba(255,255,255,0));
+    border-top: 1px dashed rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(0,0,0,.65);
+  }
+  .clock-resizer::before{
+    content:"";
+    position:absolute; left:50%; top:50%;
+    width:56px; height:4px; transform: translate(-50%,-50%);
+    border-radius:999px;
+    background: rgba(255,255,255,.18);
+    box-shadow: 0 1px 0 rgba(0,0,0,.35) inset;
+    pointer-events:none;
+  }
+  .clock-resizer:hover::before{ background: rgba(255,255,255,.28); }
+  .clock-resizer.is-dragging{ cursor: row-resize; }
+
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
     border-top:1px solid #333; border-bottom:1px solid #333;
-    padding:12px 0; margin-top:-6px; opacity:1; z-index:10; isolation:isolate;
+    padding:12px 0; margin-top: var(--hero-spacing); opacity:1; z-index:10; isolation:isolate;
     -webkit-user-select:none; user-select:none; touch-action:pan-x;
   }
   .world-clock-bar *{ background:none !important; opacity:1 !important; mix-blend-mode:normal !important; filter:none !important; }
@@ -220,9 +248,7 @@ full_bleed: true
   /* === COURSES — Glass Board 3D === */
   .courses-panel{ display:none; }
   .courses-lede{ color:#cfe3ff; max-width:960px; line-height:1.65; margin:8px 0 16px; }
-  .courses-stage{
-    perspective:1400px; margin-top:14px; display:grid; place-items:center;
-  }
+  .courses-stage{ perspective:1400px; margin-top:14px; display:grid; place-items:center; }
   .glass-board{
     position:relative; width:min(1100px, 96%); border-radius:22px;
     background: linear-gradient(180deg, rgba(13,16,30,.92), rgba(8,10,20,.96));
@@ -334,6 +360,9 @@ full_bleed: true
     <div class="promo-scrim"></div>
   </div>
 </section>
+
+<!-- ===== Poignée de réglage (hero <-> clocks) ===== -->
+<div class="clock-resizer" id="clockResizer" title="Drag to adjust spacing • Double-click to reset"></div>
 
 <!-- ===== World Clocks ===== -->
 <div class="world-clock-bar" id="clockBar">
@@ -763,13 +792,9 @@ updateClocks(); setInterval(updateClocks, 1000);
     panelCourses.style.display = 'none';
   }
   function showCourses(){
-    const split = document.getElementById('hubSplit');
-    const panelGeneric = document.getElementById('hubPanelGeneric');
-    const panelCourses = document.getElementById('coursesPanel');
-
     split.style.display = 'none';
     panelGeneric.style.display = 'none';
-    panelCourses.style.display = 'block'; // <<< forcer l'affichage
+    panelCourses.style.display = 'block';
   }
   function showGeneric(key){
     split.style.display = 'none';
@@ -867,5 +892,63 @@ updateClocks(); setInterval(updateClocks, 1000);
   board.addEventListener('mouseleave', reset);
   board.addEventListener('touchmove', onMove, {passive:true});
   board.addEventListener('touchend', reset);
+})();
+
+/* === Spacing Resizer (hero <-> clocks) === */
+(function(){
+  const ROOT = document.documentElement;
+  const HANDLE = document.getElementById('clockResizer');
+  if(!HANDLE) return;
+
+  const KEY = 'heroSpacingPx';
+  const DEFAULT = parseInt(getComputedStyle(ROOT).getPropertyValue('--hero-spacing')) || 60;
+  const MIN = 0;
+  const MAX = 240;
+
+  const saved = parseInt(localStorage.getItem(KEY));
+  if(!Number.isNaN(saved)) ROOT.style.setProperty('--hero-spacing', saved + 'px');
+
+  let startY = 0, startSpacing = 0, dragging = false;
+
+  const getSpacing = () => {
+    const v = getComputedStyle(ROOT).getPropertyValue('--hero-spacing').trim();
+    return parseInt(v, 10) || 0;
+  };
+
+  function onDown(e){
+    dragging = true;
+    HANDLE.classList.add('is-dragging');
+    startY = (e.touches ? e.touches[0].clientY : e.clientY);
+    startSpacing = getSpacing();
+    e.preventDefault();
+  }
+  function onMove(e){
+    if(!dragging) return;
+    const y = (e.touches ? e.touches[0].clientY : e.clientY);
+    const dy = y - startY;
+    const next = Math.min(MAX, Math.max(MIN, startSpacing + dy));
+    ROOT.style.setProperty('--hero-spacing', next + 'px');
+  }
+  function onUp(){
+    if(!dragging) return;
+    dragging = false;
+    HANDLE.classList.remove('is-dragging');
+    const current = getSpacing();
+    localStorage.setItem(KEY, String(current));
+  }
+  function onDblClick(){
+    ROOT.style.setProperty('--hero-spacing', DEFAULT + 'px');
+    localStorage.setItem(KEY, String(DEFAULT));
+  }
+
+  HANDLE.addEventListener('mousedown', onDown);
+  window.addEventListener('mousemove', onMove, { passive:false });
+  window.addEventListener('mouseup', onUp);
+
+  HANDLE.addEventListener('touchstart', onDown, { passive:false });
+  window.addEventListener('touchmove', onMove, { passive:false });
+  window.addEventListener('touchend', onUp);
+
+  HANDLE.addEventListener('dblclick', onDblClick);
 })();
 </script>
