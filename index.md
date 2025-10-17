@@ -236,10 +236,10 @@ full_bleed: true
   .cert-issuer{ color:#9ec8ff; font-weight:800; }
   .cert-desc{ color:#c9cbd1; margin-top:4px; font-size:.95rem; }
 
-  /* === SHARED: Glass Board (Courses & Projects) === */
-  .courses-panel, .projects-panel{ display:none; }
-  .courses-lede, .projects-lede{ color:#cfe3ff; max-width:960px; line-height:1.65; margin:8px 0 16px; }
-  .courses-stage, .projects-stage{ perspective:1400px; margin-top:14px; display:grid; place-items:center; }
+  /* === SHARED: Glass Board (Courses & Projects & Reading) === */
+  .courses-panel, .projects-panel, .reading-panel{ display:none; }
+  .courses-lede, .projects-lede, .reading-lede{ color:#cfe3ff; max-width:960px; line-height:1.65; margin:8px 0 16px; }
+  .courses-stage, .projects-stage, .reading-stage{ perspective:1400px; margin-top:14px; display:grid; place-items:center; }
   .glass-board{
     position:relative; width:min(1100px, 96%); border-radius:22px;
     background: linear-gradient(180deg, rgba(13,16,30,.92), rgba(8,10,20,.96));
@@ -269,13 +269,17 @@ full_bleed: true
   .col-title{ color:#ffffff; font-weight:900; letter-spacing:.02em; }
   .col-sub{ color:#9aa3b2; font-size:.92rem; }
 
-  .row{ display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center; padding:12px 14px; border-top:1px solid #171a28; cursor:pointer; transition: background .18s ease, transform .18s ease, border-color .18s ease; }
+  .row{ display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center; padding:12px 14px; border-top:1px solid #171a28; transition: background .18s ease, transform .18s ease, border-color .18s ease; }
   .row:first-child{ border-top:0; }
   .row:hover{ background:linear-gradient(180deg, rgba(32,42,72,.18), rgba(16,20,36,.18)); border-color:#2c8cff55; transform: translateY(-1px); }
   .row-title{ color:#e7efff; font-weight:800; }
-  .row-desc{ color:#c9cbd1; font-size:.95rem; margin-top:2px; }
+  .row-desc{ color:#c9cbd1; font-size:.95rem; margin-top:6px; }
   .row-meta{ color:#9aa3b2; font-size:.9rem; margin-top:4px; }
   .row-cta{ color:#9ec8ff; font-weight:800; white-space:nowrap; }
+
+  /* Simple list for reading bullets */
+  .reading-points{ margin:8px 0 0 18px; }
+  .reading-points li{ margin:4px 0; }
 
   /* Subtle floating particles inside the board */
   .particles{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
@@ -650,7 +654,7 @@ full_bleed: true
       </div>
     </div>
 
-    <!-- ===== PROJECTS PANEL (nouveau liserai bleu) ===== -->
+    <!-- ===== PROJECTS PANEL ===== -->
     <div class="projects-panel" id="projectsPanel" role="region" aria-live="polite">
       <p class="projects-lede">
         Selection of academic and applied research on credit risk, derivatives, extremes and market microstructure.
@@ -679,7 +683,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Bayesian Quadrature for Efficient CVA Computation</div>
                   <div class="row-meta">May 2025</div>
@@ -687,7 +691,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Advanced Statistical & ML Techniques for Pricing & Risk</div>
                   <div class="row-meta">Mar–May 2025</div>
@@ -695,7 +699,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Calibration of the Heston Model</div>
                   <div class="row-meta">In progress · No PDF</div>
@@ -714,7 +718,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Risk Management & Extreme Values</div>
                   <div class="row-meta">Oct–Dec 2024</div>
@@ -722,7 +726,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Systemic Risks & Contagion in Financial Networks</div>
                   <div class="row-meta">Jan–Apr 2024</div>
@@ -730,7 +734,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Climate Risk and Institutional Investors</div>
                   <div class="row-meta">Feb 2024</div>
@@ -749,7 +753,7 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Autocallable Options: Mechanisms & Applications</div>
                   <div class="row-meta">Jan–May 2023</div>
@@ -757,11 +761,64 @@ full_bleed: true
                 </div>
               </div>
 
-              <div class="row" onclick="window.open('#','_self')">
+              <div class="row">
                 <div>
                   <div class="row-title">Pricing American Options (Longstaff–Schwartz)</div>
                   <div class="row-meta">In progress · No PDF</div>
                   <div class="row-desc">LSMC for early exercise; optimal stopping in high-dimensional settings; equity & exotic Americans.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- floating particles -->
+          <div class="particles" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== READING PANEL (liserai bleu) ===== -->
+    <div class="reading-panel" id="readingPanel" role="region" aria-live="polite">
+      <p class="reading-lede">
+        📚 <strong>Selected Readings in Quantitative Finance</strong><br/>
+        I regularly study technical books in quantitative finance to sharpen my skills, deepen my understanding, and stay at the forefront of financial innovation.
+        For every book I read, I produce a concise and structured summary that captures the key concepts, models, and methodologies — with a focus on practical application in trading, risk management, and financial engineering.
+        These summaries are designed to be both accessible and highly informative, serving as quick references for myself and other professionals in the field.
+      </p>
+
+      <div class="reading-stage">
+        <div class="glass-board" id="readingBoard" aria-label="Reading board" tabindex="0">
+          <div class="board-halo"></div>
+
+          <div class="board-header">
+            <div class="board-title">Reading — Selected Books</div>
+            <div class="board-actions"><!-- intentionally no links --></div>
+          </div>
+
+          <div class="board-grid">
+            <!-- Single column for books -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">📘</div>
+                <div>
+                  <div class="col-title">Options, Futures and Other Derivatives — John C. Hull</div>
+                  <div class="col-sub">Foundational reference for derivatives pricing & risk</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-desc">
+                    A foundational book for anyone in derivatives pricing and risk management. This reading covers:
+                    <ul class="reading-points">
+                      <li>Mechanics of futures and options markets</li>
+                      <li>Black–Scholes–Merton framework</li>
+                      <li>Hedging strategies using Greeks</li>
+                      <li>Exotic options and structured products</li>
+                      <li>Value-at-Risk and credit risk modeling</li>
+                    </ul>
+                    <em>Summary PDF coming soon – currently in progress.</em>
+                  </div>
                 </div>
               </div>
             </div>
@@ -905,45 +962,33 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs: WHAT / COURSES / PROJECTS / others === */
+/* === Tabs: WHAT / COURSES / PROJECTS / READING / others === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const titleEl = document.getElementById('hubSelectedTitle');
   const split = document.getElementById('hubSplit');
-  const panelGeneric = document.getElementById('hubPanelGeneric');
-  const panelCourses = document.getElementById('coursesPanel');
+  const panelGeneric  = document.getElementById('hubPanelGeneric');
+  const panelCourses  = document.getElementById('coursesPanel');
   const panelProjects = document.getElementById('projectsPanel');
+  const panelReading  = document.getElementById('readingPanel');
 
   const copy = {
-    reading:  `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`,
+    // fallback copy if needed for other tabs
   };
 
-  function showWhat(){
-    split.style.display = '';
-    panelGeneric.style.display = 'none';
-    panelGeneric.innerHTML = '';
-    panelCourses.style.display = 'none';
-    panelProjects.style.display = 'none';
-  }
-  function showCourses(){
-    split.style.display = 'none';
-    panelGeneric.style.display = 'none';
-    panelProjects.style.display = 'none';
-    panelCourses.style.display = 'block';
-  }
-  function showProjects(){
+  function hideAll(){
     split.style.display = 'none';
     panelGeneric.style.display = 'none';
     panelCourses.style.display = 'none';
-    panelProjects.style.display = 'block';
-  }
-  function showGeneric(key){
-    split.style.display = 'none';
-    panelCourses.style.display = 'none';
     panelProjects.style.display = 'none';
-    panelGeneric.style.display = '';
-    panelGeneric.innerHTML = copy[key] || '';
+    panelReading.style.display = 'none';
   }
+
+  function showWhat(){ hideAll(); split.style.display = ''; panelGeneric.innerHTML=''; }
+  function showCourses(){ hideAll(); panelCourses.style.display='block'; }
+  function showProjects(){ hideAll(); panelProjects.style.display='block'; }
+  function showReading(){ hideAll(); panelReading.style.display='block'; }
+  function showGeneric(key){ hideAll(); panelGeneric.style.display=''; panelGeneric.innerHTML = copy[key] || ''; }
 
   function activate(key, labelUpper){
     tabs.forEach(t=>{
@@ -956,6 +1001,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     if (key === 'what')         showWhat();
     else if (key === 'courses') showCourses();
     else if (key === 'projects')showProjects();
+    else if (key === 'reading') showReading();
     else                        showGeneric(key);
   }
 
@@ -1006,7 +1052,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     const particles = board?.querySelector('.particles');
     if (!board) return;
 
-    // spawn dots if container exists (courses)
+    // spawn dots if container exists
     if(particles){
       for(let i=0;i<28;i++){
         const d=document.createElement('div'); d.className='dot';
@@ -1017,7 +1063,6 @@ updateClocks(); setInterval(updateClocks, 1000);
         particles.appendChild(d);
       }
     } else {
-      // create particles container for projects too
       const p = document.createElement('div');
       p.className = 'particles';
       board.appendChild(p);
@@ -1055,5 +1100,6 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   enhanceBoard('glassBoard');     // Courses
   enhanceBoard('projectsBoard');  // Projects
+  enhanceBoard('readingBoard');   // Reading
 })();
 </script>
