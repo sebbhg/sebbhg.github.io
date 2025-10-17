@@ -701,7 +701,6 @@ full_bleed: true
                   <div class="row-meta">In progress · No PDF</div>
                   <div class="row-desc">Levenberg–Marquardt calibration; fit implied vol surfaces; fast convergence on real market data.</div>
                 </div>
-                <div class="row-cta">Details →</div>
               </div>
             </div>
 
@@ -764,7 +763,6 @@ full_bleed: true
                   <div class="row-meta">In progress · No PDF</div>
                   <div class="row-desc">LSMC for early exercise; optimal stopping in high-dimensional settings; equity & exotic Americans.</div>
                 </div>
-                <div class="row-cta">Details →</div>
               </div>
             </div>
           </div>
