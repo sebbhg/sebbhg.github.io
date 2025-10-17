@@ -124,7 +124,7 @@ full_bleed: true
   .hub-panel{ margin-top:8px; color:#c9cbd1; line-height:1.65; text-align:justify; }
 
   /* === LAYOUT: split éducation / expériences === */
-  .after-market .hub-inner{ max-width:none; width:100%; margin:0; padding:0 24px; }
+  .after-market .hub-inner{ max_width:none; width:100%; margin:0; padding:0 24px; }
   .hub-split{
     display:grid;
     grid-template-columns: minmax(320px, 42%) 1fr;
@@ -562,7 +562,6 @@ full_bleed: true
                   <div class="row-title">Portfolio Theory & Risk Metrics</div>
                   <div class="row-desc">Mean–Variance, VaR/ES (MC), Cornish–Fisher, drawdowns, factor models.</div>
                 </div>
-                <div class="row-cta">Open →</div>
               </div>
 
               <div class="row" onclick="location.href='{{ '/cours/ir-models' | relative_url }}'">
@@ -570,7 +569,6 @@ full_bleed: true
                   <div class="row-title">Interest Rate Modelling (LGM-1F)</div>
                   <div class="row-desc">ZC bootstrapping, DF/forwards, swap pricing, exposures, sensitivities.</div>
                 </div>
-                <div class="row-cta">Open →</div>
               </div>
 
               <div class="row" onclick="location.href='{{ '/cours/cva-xva' | relative_url }}'">
@@ -578,7 +576,6 @@ full_bleed: true
                   <div class="row-title">CVA & XVA Modelling</div>
                   <div class="row-desc">EE/EPE, default modeling, CSA, wrong-way risk, fast Greeks (GPR/BQ).</div>
                 </div>
-                <div class="row-cta">Open →</div>
               </div>
             </div>
 
@@ -597,7 +594,6 @@ full_bleed: true
                   <div class="row-title">Gaussian Process Regression</div>
                   <div class="row-desc">Kernels, training, uncertainty, surrogates for pricing, Greeks smoothing.</div>
                 </div>
-                <div class="row-cta">Open →</div>
               </div>
 
               <div class="row" onclick="location.href='{{ '/cours/bayesian-quadrature' | relative_url }}'">
@@ -605,7 +601,6 @@ full_bleed: true
                   <div class="row-title">Bayesian Quadrature</div>
                   <div class="row-desc">Probabilistic integration for exposure & Greeks estimation, variance control.</div>
                 </div>
-                <div class="row-cta">Open →</div>
               </div>
 
               <div class="row" onclick="location.href='{{ '/cours/deep-derivatives' | relative_url }}'">
@@ -613,7 +608,6 @@ full_bleed: true
                   <div class="row-title">Neural Nets for Derivatives</div>
                   <div class="row-desc">Calibration surrogates, PDE-to-NN, stability & monotonicity constraints.</div>
                 </div>
-                <div class="row-cta">Open →</div>
               </div>
             </div>
 
@@ -632,7 +626,6 @@ full_bleed: true
                   <div class="row-title">Options Hedging Simulation</div>
                   <div class="row-desc">Delta/Gamma/Theta management, transaction costs, P&L explainability.</div>
                 </div>
-                <div class="row-cta">Open →</div>
               </div>
 
               <div class="row" onclick="location.href='{{ '/cours/quant-backtesting' | relative_url }}'">
@@ -640,7 +633,6 @@ full_bleed: true
                   <div class="row-title">Quant Backtesting with Python</div>
                   <div class="row-desc">Event-driven engine, slippage/latency models, robust metrics & pitfalls.</div>
                 </div>
-                <div class="row-cta">Open →</div>
               </div>
 
               <div class="row" onclick="location.href='{{ '/cours/vol-surface' | relative_url }}'">
@@ -648,7 +640,6 @@ full_bleed: true
                   <div class="row-title">Volatility Surface Analysis</div>
                   <div class="row-desc">Smile/skew dynamics, arbitrage checks, interpolation & extrapolation.</div>
                 </div>
-                <div class="row-cta">Open →</div>
               </div>
             </div>
           </div>
@@ -691,19 +682,17 @@ full_bleed: true
               <div class="row" onclick="window.open('#','_self')">
                 <div>
                   <div class="row-title">Bayesian Quadrature for Efficient CVA Computation</div>
-                  <div class="row-meta">May 2025 · <a href="#" class="update-link" style="padding:2px 8px; font-size:.85rem;">Download PDF</a></div>
+                  <div class="row-meta">May 2025</div>
                   <div class="row-desc">GPR surrogates + Bayesian Quadrature to accelerate CVA under LGM-1F; Monte Carlo + analytical hybrids; Basel/FRTB compliant.</div>
                 </div>
-                <div class="row-cta">PDF ↗</div>
               </div>
 
               <div class="row" onclick="window.open('#','_self')">
                 <div>
                   <div class="row-title">Advanced Statistical & ML Techniques for Pricing & Risk</div>
-                  <div class="row-meta">Mar–May 2025 · <a href="#" class="update-link" style="padding:2px 8px; font-size:.85rem;">Download PDF</a></div>
+                  <div class="row-meta">Mar–May 2025</div>
                   <div class="row-desc">GPR-accelerated VaR/ES with Monte Carlo; portfolio risk pipelines aligned with FRTB/Basel IV.</div>
                 </div>
-                <div class="row-cta">PDF ↗</div>
               </div>
 
               <div class="row" onclick="window.open('#','_self')">
@@ -729,28 +718,25 @@ full_bleed: true
               <div class="row" onclick="window.open('#','_self')">
                 <div>
                   <div class="row-title">Risk Management & Extreme Values</div>
-                  <div class="row-meta">Oct–Dec 2024 · <a href="#" class="update-link" style="padding:2px 8px; font-size:.85rem;">Download PDF</a></div>
+                  <div class="row-meta">Oct–Dec 2024</div>
                   <div class="row-desc">GEV/GPD tail modeling, Gaussian/t/Gumbel copulas for dependence; joint Sims for 200-year losses & aggregate exposure.</div>
                 </div>
-                <div class="row-cta">PDF ↗</div>
               </div>
 
               <div class="row" onclick="window.open('#','_self')">
                 <div>
                   <div class="row-title">Systemic Risks & Contagion in Financial Networks</div>
-                  <div class="row-meta">Jan–Apr 2024 · <a href="#" class="update-link" style="padding:2px 8px; font-size:.85rem;">Download PDF</a></div>
+                  <div class="row-meta">Jan–Apr 2024</div>
                   <div class="row-desc">Interbank Monte Carlo stress, cascade thresholds, contagion chains and critical nodes.</div>
                 </div>
-                <div class="row-cta">PDF ↗</div>
               </div>
 
               <div class="row" onclick="window.open('#','_self')">
                 <div>
                   <div class="row-title">Climate Risk and Institutional Investors</div>
-                  <div class="row-meta">Feb 2024 · <a href="#" class="update-link" style="padding:2px 8px; font-size:.85rem;">Download PDF</a></div>
+                  <div class="row-meta">Feb 2024</div>
                   <div class="row-desc">Physical vs transition risks; ESG policy adaptation, risk disclosure and capital allocation.</div>
                 </div>
-                <div class="row-cta">PDF ↗</div>
               </div>
             </div>
 
@@ -767,10 +753,9 @@ full_bleed: true
               <div class="row" onclick="window.open('#','_self')">
                 <div>
                   <div class="row-title">Autocallable Options: Mechanisms & Applications</div>
-                  <div class="row-meta">Jan–May 2023 · <a href="#" class="update-link" style="padding:2px 8px; font-size:.85rem;">Download PDF</a></div>
+                  <div class="row-meta">Jan–May 2023</div>
                   <div class="row-desc">Pricing of autocallable structures; post-2008 design patterns; activation & payoff path modeling.</div>
                 </div>
-                <div class="row-cta">PDF ↗</div>
               </div>
 
               <div class="row" onclick="window.open('#','_self')">
