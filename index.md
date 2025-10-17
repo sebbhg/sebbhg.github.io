@@ -780,9 +780,9 @@ full_bleed: true
     <!-- ===== READING PANEL (liserai bleu) ===== -->
     <div class="reading-panel" id="readingPanel" role="region" aria-live="polite">
       <p class="reading-lede">
-        📚 <strong>Selected Readings in Quantitative Finance</strong><br/>
+        <strong>Selected Readings in Quantitative Finance</strong><br/>
         I regularly study technical books in quantitative finance to sharpen my skills, deepen my understanding, and stay at the forefront of financial innovation.
-        For every book I read, I produce a concise and structured summary that captures the key concepts, models, and methodologies — with a focus on practical application in trading, risk management, and financial engineering.
+        For every book I read, I produce a concise and structured summary that captures the key concepts, models, and methodologies with a focus on practical application in trading, risk management, and financial engineering.
         These summaries are designed to be both accessible and highly informative, serving as quick references for myself and other professionals in the field.
       </p>
 
