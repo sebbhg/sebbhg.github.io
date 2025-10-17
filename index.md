@@ -8,21 +8,18 @@ full_bleed: true
 
 <style>
   /* === Fade-in global === */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeInUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
 
   /* === Hero titles fade-in === */
-  .eyebrow.shifted { margin-top: -25px; opacity: 0; transform: translateY(10px); animation: fadeInUp 1.4s ease-out .3s forwards; }
-  .hero-content h1 { opacity: 0; transform: translateY(20px); animation: fadeInUp 1.4s ease-out .8s forwards; }
-  .hero-content .subtitle { opacity: 0; transform: translateY(20px); animation: fadeInUp 1.4s ease-out 1.3s forwards; }
+  .eyebrow.shifted{ margin-top:-25px; opacity:0; transform:translateY(10px); animation:fadeInUp 1.4s ease-out .3s forwards; }
+  .hero-content h1{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out .8s forwards; }
+  .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
 
   /* === HERO LAYERS === */
-  .hero-video { position: relative; z-index: 2; overflow: hidden; }
-  .hero-overlay { position: absolute; inset: 0; z-index: 1; }
-  .hero-content { position: relative; z-index: 2; }
-  .hero-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .hero-video{ position:relative; z-index:2; overflow:hidden; }
+  .hero-overlay{ position:absolute; inset:0; z-index:1; }
+  .hero-content{ position:relative; z-index:2; }
+  .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
@@ -109,9 +106,16 @@ full_bleed: true
 
   /* === LAYOUT: split éducation / expériences === */
   .after-market .hub-inner{ max-width:none; width:100%; margin:0; padding:0 24px; }
-  .hub-split{ display:grid; grid-template-columns: minmax(320px, 42%) 1fr; gap:28px; align-items:start; margin-top:12px; }
+  .hub-split{
+    display:grid;
+    grid-template-columns: minmax(320px, 42%) 1fr;
+    gap:28px; align-items:start; margin-top:12px;
+  }
   .hub-split.no-media{ grid-template-columns:1fr; }
   @media (max-width:1100px){ .hub-split{ grid-template-columns:1fr; } }
+
+  /* ===== Stack gauche (Education + Certifications) ===== */
+  .left-stack{ display:flex; flex-direction:column; gap:16px; }
 
   /* ===== CARTE GÉNÉRIQUE (verre + halo) ===== */
   .card-glass{
@@ -135,11 +139,10 @@ full_bleed: true
   .edu-header{ display:flex; align-items:center; gap:14px; position:relative; z-index:1; }
   .edu-body{ position:relative; z-index:1; margin-top:10px; color:#cfe3ff; line-height:1.6; font-size:.98rem; }
 
-  /* BADGE CY Tech holo + centrage parfait + pas de “carré dans le rond” */
+  /* BADGE CY Tech (rond + flip + halo) */
   .hub-gallery{ perspective:1200px; }
   .cy-holo.figure-tilt{
-    --size: 90px;
-    width:var(--size); height:var(--size); min-width:var(--size);
+    --size: 90px; width:var(--size); height:var(--size); min-width:var(--size);
     border-radius:50%; position:relative; transform-style:preserve-3d;
     transition: transform .25s ease; cursor:pointer; flex:0 0 auto;
   }
@@ -165,20 +168,16 @@ full_bleed: true
   .cy-holo.is-flipped .flip-inner{ transform: rotateY(180deg); }
   .cy-holo .flip-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:50%; overflow:hidden; }
   .cy-holo .flip-front{ display:grid; place-items:center; }
-  .cy-holo .flip-front .logo {
-    width: 100%; height: 100%; border-radius: 50%; overflow: hidden;
-    display:flex; align-items:center; justify-content:center; background: transparent;
-    box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset;
+  .cy-holo .flip-front .logo{
+    width:100%; height:100%; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; background:transparent;
+    box-shadow:0 0 0 1px rgba(255,255,255,.08) inset;
   }
-  .cy-holo .flip-front .logo img {
-    width: 120%; height: 120%;
-    object-fit: cover; object-position: 43% 35%;
-    border-radius: 50%; background: transparent;
-    clip-path: circle(50% at 50% 50%);
+  .cy-holo .flip-front .logo img{
+    width:120%; height:120%; object-fit:cover; object-position:43% 35%;
+    border-radius:50%; clip-path:circle(50% at 50% 50%);
     -webkit-mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
     mask-image: radial-gradient(closest-side, #000 99%, transparent 100%);
-    filter: contrast(1.05) saturate(1.05) brightness(1.02);
-    transform: scale(1.1);
+    filter:contrast(1.05) saturate(1.05) brightness(1.02); transform:scale(1.1);
   }
   .cy-holo .gloss{ position:absolute; inset:0; background: radial-gradient(60% 35% at 30% 10%, rgba(255,255,255,.18), transparent 60%), linear-gradient(180deg, rgba(255,255,255,.06), transparent 35%), radial-gradient(50% 60% at 70% 85%, rgba(44,140,255,.12), transparent 60%); mix-blend-mode:screen; pointer-events:none; }
   .cy-holo .flip-back{ transform: rotateY(180deg); display:flex; align-items:center; justify-content:center; padding:12px; background:#0b0f1a; color:#cfe3ff; text-align:center; }
@@ -202,6 +201,21 @@ full_bleed: true
   .xp-company{ color:#9ec8ff; font-weight:800; }
   .xp-desc{ color:#c9cbd1; margin-top:4px; }
   .xp-meta{ margin-left:auto; color:#9aa3b2; text-align:right; white-space:nowrap; }
+
+  /* ===== CERTIFICATIONS (gauche, sous Education) ===== */
+  .cert-card{ /* hérite de .card-glass */ }
+  .cert-list{ display:flex; flex-direction:column; gap:12px; margin-top:8px; }
+  .cert-item{
+    display:grid; grid-template-columns:52px 1fr; gap:14px; align-items:center;
+    padding:12px 14px; border:1px solid #1f2333; border-radius:14px; background:#0b0f1a;
+    transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  }
+  .cert-item:hover{ border-color:#2c8cff55; box-shadow:0 10px 30px rgba(0,0,0,.35); transform: translateY(-1px); }
+  .cert-logo{ width:52px; height:52px; border-radius:50%; overflow:hidden; position:relative; box-shadow: 0 0 0 1px rgba(76,139,255,.35) inset, 0 6px 18px rgba(0,0,0,.35); }
+  .cert-logo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .cert-title{ font-weight:800; color:#fff; line-height:1.25; }
+  .cert-issuer{ color:#9ec8ff; font-weight:800; }
+  .cert-desc{ color:#c9cbd1; margin-top:4px; font-size:.95rem; }
 
   /* au-dessus du footer */
   .news-band, .after-market{ position:relative; z-index:3; }
@@ -322,40 +336,87 @@ full_bleed: true
 
     <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
 
-    <!-- ===== SPLIT (Education à gauche / Experiences à droite) ===== -->
+    <!-- ===== SPLIT (left = stack, right = experiences) ===== -->
     <div class="hub-split" id="hubSplit">
-      <!-- LEFT: Education card -->
-      <div class="edu-card card-glass">
-        <div class="edu-header">
-          <figure class="cy-holo figure-tilt" id="eduBadge" role="button" aria-pressed="false" tabindex="0" title="Click to flip">
-            <div class="flip-inner">
-              <div class="flip-face flip-front" aria-hidden="false">
-                <div class="logo">
-                  <img src="/assets/images/image13.png" alt="CY Tech logo">
-                  <span class="gloss"></span>
+      <!-- LEFT STACK: Education + Certifications -->
+      <div class="left-stack">
+        <!-- Education card -->
+        <div class="edu-card card-glass">
+          <div class="edu-header">
+            <figure class="cy-holo figure-tilt" id="eduBadge" role="button" aria-pressed="false" tabindex="0" title="Click to flip">
+              <div class="flip-inner">
+                <div class="flip-face flip-front" aria-hidden="false">
+                  <div class="logo">
+                    <img src="/assets/images/image13.png" alt="CY Tech logo">
+                    <span class="gloss"></span>
+                  </div>
+                </div>
+                <div class="flip-face flip-back" aria-hidden="true">
+                  <div class="edu-text">
+                    <strong>Education</strong>
+                    Integrated preparatory program (Math/Physics/CS) → Engineering in Applied Mathematics for Finance + dual Master’s in Mathematics at CY Tech.
+                  </div>
                 </div>
               </div>
-              <div class="flip-face flip-back" aria-hidden="true">
-                <div class="edu-text">
-                  <strong>Education</strong>
-                  Integrated preparatory program (Math/Physics/CS) → Engineering in Applied Mathematics for Finance + dual Master’s in Mathematics at CY Tech.
-                </div>
-              </div>
-            </div>
-          </figure>
+            </figure>
 
-          <div class="edu-title-wrap">
-            <h4 class="card-title">Education</h4>
-            <p class="card-sub">CY Tech — Applied Mathematics for Finance</p>
+            <div class="edu-title-wrap">
+              <h4 class="card-title">Education</h4>
+              <p class="card-sub">CY Tech — Applied Mathematics for Finance</p>
+            </div>
+          </div>
+
+          <div class="edu-body">
+            I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
           </div>
         </div>
 
-        <div class="edu-body">
-          I completed an integrated preparatory program specialized in mathematics, physics, and computer science, followed by an engineering degree in applied mathematics for finance and a dual master’s degree in mathematics at CY Tech.
-        </div>
-      </div>
+        <!-- Certifications card -->
+        <div class="cert-card card-glass">
+          <h4 class="card-title">Certifications</h4>
+          <p class="card-sub">Selected credentials</p>
 
-      <!-- RIGHT: Professional experiences in a matching card -->
+          <div class="cert-list">
+            <!-- Bloomberg -->
+            <div class="cert-item">
+              <div class="cert-logo"><img src="/assets/images/image20.png" alt="Bloomberg logo"></div>
+              <div>
+                <div class="cert-title">Bloomberg Market Concepts (BMC)</div>
+                <div class="cert-issuer">Bloomberg</div>
+                <div class="cert-desc">
+                  Core modules across Economics, Equities, Fixed Income and FX with hands-on Terminal functions and market data navigation.
+                </div>
+              </div>
+            </div>
+
+            <!-- AMF -->
+            <div class="cert-item">
+              <div class="cert-logo"><img src="/assets/images/image21.png" alt="AMF logo"></div>
+              <div>
+                <div class="cert-title">AMF General Regulation Exam</div>
+                <div class="cert-issuer">Autorité des Marchés Financiers (France)</div>
+                <div class="cert-desc">
+                  Knowledge requirements for French markets: financial instruments, conduct of business, client protection, market abuse and compliance.
+                </div>
+              </div>
+            </div>
+
+            <!-- CFA -->
+            <div class="cert-item">
+              <div class="cert-logo"><img src="/assets/images/image22.png" alt="CFA logo"></div>
+              <div>
+                <div class="cert-title">CFA® Program — Level I</div>
+                <div class="cert-issuer">CFA Institute</div>
+                <div class="cert-desc">
+                  Ethics and professional standards, quantitative methods, economics, financial reporting & analysis, corporate finance, equity, fixed income and derivatives.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /left-stack -->
+
+      <!-- RIGHT: Professional experiences -->
       <div class="xp-card card-glass">
         <h4 class="card-title">Professional Experiences</h4>
         <p class="card-sub">Recent roles & internships</p>
@@ -397,9 +458,9 @@ full_bleed: true
           </div>
         </div>
       </div>
-    </div>
+    </div><!-- /hub-split -->
 
-    <!-- ===== Panneau générique (affiché pour les autres onglets) ===== -->
+    <!-- ===== Panneau générique (autres onglets) ===== -->
     <div class="hub-panel" id="hubPanelGeneric" style="display:none;" role="region" aria-live="polite"></div>
   </div>
 </section>
