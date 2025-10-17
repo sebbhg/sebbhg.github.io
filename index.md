@@ -543,7 +543,7 @@ full_bleed: true
     <!-- ===== COURSES PANEL (custom) ===== -->
     <div class="courses-panel" id="coursesPanel" role="region" aria-live="polite">
       <p class="courses-lede">
-        A collection of **focused, practitioner-grade** courses in Quantitative Finance, Machine Learning and Trading.
+        A collection of focused, practitioner-grade courses in Quantitative Finance, Machine Learning and Trading.
         Each course will come with concise notes, code notebooks, and applied exercises.
       </p>
 
