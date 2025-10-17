@@ -805,8 +805,7 @@ full_bleed: true
     <!-- ===== READING PANEL (nouveau) ===== -->
     <div class="reading-panel" id="readingPanel" role="region" aria-live="polite">
       <p class="reading-lede">
-        📚 Lectures techniques en finance quantitative. Pour chaque ouvrage, je prépare un résumé structuré orienté
-        application (pricing, risk, ingénierie financière). Aucun téléchargement public pour l’instant.
+        Technical readings in quantitative finance. For each book, I prepare a structured, application-oriented summary (pricing, risk, financial engineering). No public downloads available at the moment.
       </p>
 
       <div class="reading-stage">
@@ -814,9 +813,9 @@ full_bleed: true
           <div class="board-halo"></div>
 
           <div class="board-header">
-            <div class="board-title">Reading — Sélection en cours</div>
+            <div class="board-title">Reading — Selection in progress</div>
             <div class="board-actions">
-              <span class="btn-chip" aria-disabled="true" title="Bientôt">Voir tout</span>
+              <span class="btn-chip" aria-disabled="true" title="Bientôt">View all</span>
             </div>
           </div>
 
@@ -824,15 +823,14 @@ full_bleed: true
             <div class="board-col">
               <div class="col-head">
                 <div class="col-icon">📘</div>
-                <div><div class="col-title">Derivatives</div><div class="col-sub">Hull · Fondamentaux</div></div>
+                <div><div class="col-title">Derivatives</div><div class="col-sub">Hull · Fundamentals</div></div>
               </div>
               <div class="row">
                 <div>
                   <div class="row-title">Options, Futures and Other Derivatives — John C. Hull</div>
-                  <div class="row-meta">Résumé en préparation</div>
+                  <div class="row-meta">Summary in progress</div>
                   <div class="row-desc">
-                    Marchés à terme & options, Black–Scholes–Merton, stratégies de couverture (Greeks),
-                    produits exotiques & structurés, Value-at-Risk et risque de crédit.
+                    Futures & options markets, Black–Scholes–Merton framework, hedging strategies (Greeks), exotic & structured products, Value-at-Risk and credit risk.
                   </div>
                 </div>
               </div>
@@ -841,15 +839,14 @@ full_bleed: true
             <div class="board-col">
               <div class="col-head">
                 <div class="col-icon">📗</div>
-                <div><div class="col-title">Quantitative Finance</div><div class="col-sub">Wilmott · Modèles</div></div>
+                <div><div class="col-title">Quantitative Finance</div><div class="col-sub">Wilmott · Models</div></div>
               </div>
               <div class="row">
                 <div>
                   <div class="row-title">Paul Wilmott on Quantitative Finance</div>
-                  <div class="row-meta">Lecture en cours</div>
+                  <div class="row-meta">Currently reading</div>
                   <div class="row-desc">
-                    Calcul stochastique, dynamiques de volatilité, calibration, pricing & gestion du risque,
-                    méthodologies robustes pour produits dérivés.
+                    Stochastic calculus, volatility dynamics, calibration, pricing & risk management, robust methodologies for derivative products.
                   </div>
                 </div>
               </div>
@@ -858,15 +855,14 @@ full_bleed: true
             <div class="board-col">
               <div class="col-head">
                 <div class="col-icon">🅑</div>
-                <div><div class="col-title">Marchés & Données</div><div class="col-sub">Bloomberg</div></div>
+                <div><div class="col-title">Market & Data</div><div class="col-sub">Bloomberg</div></div>
               </div>
               <div class="row">
                 <div>
-                  <div class="row-title">Guide Ultime Bloomberg (Terminal)</div>
-                  <div class="row-meta">Notes personnelles</div>
+                  <div class="row-title">Bloomberg Ultimate Guide (Terminal)</div>
+                  <div class="row-meta">Personal notes</div>
                   <div class="row-desc">
-                    Navigation du Terminal, fonctions clés (actions, FI, FX), extraction de données,
-                    analytics Fixed Income, workflows de pricing & risk.
+                    Terminal navigation, key functions (Equities, FI, FX), data extraction, Fixed Income analytics, pricing & risk workflows.
                   </div>
                 </div>
               </div>
