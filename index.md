@@ -8,10 +8,12 @@ full_bleed: true
 
 <style>
   /* ===== Root vars ===== */
-  :root{
-    --hero-h: 62vh;            /* hauteur du hero RÉGLABLE */
-    --clock-speed: 120s;
-  }
+:root{
+  --promo-h: 56vh;           /* hauteur de la vidéo secondaire */
+  --promo-h-min: 36;         /* en vh */
+  --promo-h-max: 92;         /* en vh */
+  --clock-speed: 120s;
+}
 
   /* === Fade-in global === */
   @keyframes fadeInUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
@@ -39,23 +41,28 @@ full_bleed: true
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
   /* === SECONDARY VIDEO === */
-  .promo-video{ position:relative; z-index:0; width:100%; margin:-1250px 0 0; }
+  .promo-video{ position:relative; z-index:0; width:100%; background:#000; }
   @media (max-width:1400px){ .promo-video{ margin:-1450px 0 0; } }
   @media (max-width:1200px){ .promo-video{ margin:-1350px 0 0; } }
   @media (max-width:1024px){ .promo-video{ margin:-1250px 0 0; } }
   @media (max-width:768px){ .promo-video{ margin:-1150px 0 0; } }
   @media (max-width:560px){ .promo-video{ margin:-1050px 0 0; } }
-  .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
+  .promo-video-frame{
+  position:relative; width:100%;
+  height:var(--promo-h);          /* 👈 hauteur dynamique */
+  overflow:hidden; background:#000;
+  border-top:1px solid #222; border-bottom:1px solid #222;
+}
   @supports not (aspect-ratio:16/9){ .promo-video-frame{ padding-top:56.25%; } .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; } }
-  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
-  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%); pointer-events:none; }
+  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.85) contrast(1.05) saturate(1.05); }
+  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.75) 95%); pointer-events:none; }
 
   /* === HANDLE (draggable) === */
   .clock-resizer{
-    width:100%; height:16px;
+    width:100%; height:18px; background:#000;
     display:grid; place-items:center;
     cursor:row-resize; user-select:none;
-    position:relative; z-index:11; background:#000;
+    position:relative; z-index:5;
   }
   .clock-resizer::before{
     content:""; width:86px; height:6px; border-radius:6px;
@@ -374,7 +381,7 @@ full_bleed: true
 </section>
 
 <!-- ===== Handle (drag to resize hero; double-click to reset) ===== -->
-<div class="clock-resizer" id="clockResizer" title="Drag to resize hero height (double-click to reset)"></div>
+<div class="clock-resizer" id="clockResizer" title="Drag to resize promo video (double-click to reset)"></div>
 
 <!-- ===== World Clocks ===== -->
 <div class="world-clock-bar" id="clockBar">
@@ -937,61 +944,58 @@ updateClocks(); setInterval(updateClocks, 1000);
   window.addEventListener('touchend', onPointerUp);
 })();
 
-/* === Hero Height Resizer (drag handle) === */
+/* === Poignée : redimensionner la vidéo secondaire === */
 (function(){
   const ROOT = document.documentElement;
   const HANDLE = document.getElementById('clockResizer');
   if(!HANDLE) return;
 
-  const KEY = 'heroHeightVh';
-  const DEFAULT = parseFloat(getComputedStyle(ROOT).getPropertyValue('--hero-h')) || 62; // vh
-  const MIN = 40;   // 40vh min
-  const MAX = 92;   // 92vh max
+  const KEY = 'promoVideoVh';
+  const DEF = parseFloat(getComputedStyle(ROOT).getPropertyValue('--promo-h')) || 56;
+  const MIN = parseFloat(getComputedStyle(ROOT).getPropertyValue('--promo-h-min')) || 36;
+  const MAX = parseFloat(getComputedStyle(ROOT).getPropertyValue('--promo-h-max')) || 92;
 
   const saved = parseFloat(localStorage.getItem(KEY));
-  if(!Number.isNaN(saved)) ROOT.style.setProperty('--hero-h', saved + 'vh');
+  if(!Number.isNaN(saved)) ROOT.style.setProperty('--promo-h', saved + 'vh');
 
-  let startY = 0, startH = 0, dragging = false;
-
-  const getH = () => parseFloat(getComputedStyle(ROOT).getPropertyValue('--hero-h')) || DEFAULT;
+  let startY = 0, startVh = 0, dragging = false;
+  const getVh = () => parseFloat(getComputedStyle(ROOT).getPropertyValue('--promo-h')) || DEF;
 
   function onDown(e){
     dragging = true;
     HANDLE.classList.add('is-dragging');
     startY = (e.touches ? e.touches[0].clientY : e.clientY);
-    startH = getH();
+    startVh = getVh();
     e.preventDefault();
   }
 
   function onMove(e){
     if(!dragging) return;
     const y = (e.touches ? e.touches[0].clientY : e.clientY);
-    const dyPx = y - startY;                     // vers le bas => plus grand
+    const dyPx = y - startY;
     const dyVh = (dyPx / window.innerHeight) * 100;
-    const next = Math.min(MAX, Math.max(MIN, startH + dyVh));
-    ROOT.style.setProperty('--hero-h', next.toFixed(1) + 'vh');
+    const next = Math.min(MAX, Math.max(MIN, startVh + dyVh));
+    ROOT.style.setProperty('--promo-h', next.toFixed(1) + 'vh');
   }
 
   function onUp(){
     if(!dragging) return;
     dragging = false;
     HANDLE.classList.remove('is-dragging');
-    localStorage.setItem(KEY, String(getH()));
+    localStorage.setItem(KEY, String(getVh()));
   }
 
   function onDblClick(){
-    ROOT.style.setProperty('--hero-h', DEFAULT + 'vh');
-    localStorage.setItem(KEY, String(DEFAULT));
+    ROOT.style.setProperty('--promo-h', DEF + 'vh');
+    localStorage.setItem(KEY, String(DEF));
   }
 
   HANDLE.addEventListener('mousedown', onDown);
   window.addEventListener('mousemove', onMove, { passive:false });
   window.addEventListener('mouseup', onUp);
-
   HANDLE.addEventListener('touchstart', onDown, { passive:false });
   window.addEventListener('touchmove', onMove, { passive:false });
   window.addEventListener('touchend', onUp);
-
   HANDLE.addEventListener('dblclick', onDblClick);
 })();
 
