@@ -8,8 +8,8 @@ full_bleed: true
 
 <style>
   /* ===== Root vars (incl. adjustable spacing) ===== */
-    :root{
-    --hero-h: 62vh;          /* NEW: hauteur du hero */
+  :root{
+    --hero-spacing: 60px; /* valeur par défaut, ajustable via la poignée */
     --clock-speed: 120s;
   }
 
@@ -22,20 +22,10 @@ full_bleed: true
   .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
 
   /* === HERO LAYERS === */
-  .hero-video{
-    position:relative; z-index:2; overflow:hidden;
-    height:var(--hero-h,62vh); min-height:40vh;
-    background:#000; /* pour éviter tout flash derrière */
-  }
-  .hero-overlay{
-    position:absolute; inset:0; z-index:1;
-    background:linear-gradient(180deg,rgba(0,0,0,.0) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.55) 100%);
-  }
+  .hero-video{ position:relative; z-index:2; overflow:hidden; }
+  .hero-overlay{ position:absolute; inset:0; z-index:1; }
   .hero-content{ position:relative; z-index:2; }
-  .hero-bg{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; display:block; z-index:0;
-  }
+  .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
@@ -49,9 +39,7 @@ full_bleed: true
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
   /* === SECONDARY VIDEO === */
-  .promo-video{ position:relative; z-index:0; width:100%;
-    margin-top: calc(var(--hero-h,62vh) * -1 + 6vh);
-  }
+  .promo-video{ position:relative; z-index:0; width:100%; margin:-1250px 0 0; }
   @media (max-width:1400px){ .promo-video{ margin:-1450px 0 0; } }
   @media (max-width:1200px){ .promo-video{ margin:-1350px 0 0; } }
   @media (max-width:1024px){ .promo-video{ margin:-1250px 0 0; } }
@@ -80,7 +68,7 @@ full_bleed: true
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
     border-top:1px solid #333; border-bottom:1px solid #333;
-    padding:12px 0; margin-top:8px; opacity:1; z-index:10; isolation:isolate;
+    padding:12px 0; margin-top:var(--hero-spacing); opacity:1; z-index:10; isolation:isolate;
     -webkit-user-select:none; user-select:none; touch-action:pan-x;
   }
   .world-clock-bar *{ background:none !important; opacity:1 !important; mix-blend-mode:normal !important; filter:none !important; }
@@ -306,11 +294,7 @@ full_bleed: true
     overflow:hidden;
   }
   .reading-inner{ max-width:1100px; margin:0 auto; padding:0 24px; }
-  /* Bandeau Lectures */
-  .reading-eyebrow{
-    color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px;
-    text-align:left;
-  }
+  .reading-eyebrow{ color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px; }
   .reading-track{
     display:flex; gap:16px; width:max-content; white-space:nowrap;
     animation: readingScroll 52s linear infinite;
@@ -402,8 +386,8 @@ full_bleed: true
   </div>
 </section>
 
-<!-- ===== Spacing handle (drag to resize hero height; double-click to reset) ===== -->
-<div class="clock-resizer" id="clockResizer" title="Drag to resize hero height (double-click to reset)"></div>
+<!-- ===== Spacing handle (drag to adjust, double-click to reset) ===== -->
+<div class="clock-resizer" id="clockResizer" title="Drag to adjust spacing (double-click to reset)"></div>
 
 <!-- ===== World Clocks ===== -->
 <div class="world-clock-bar" id="clockBar">
@@ -985,51 +969,53 @@ updateClocks(); setInterval(updateClocks, 1000);
   window.addEventListener('touchend', onPointerUp);
 })();
 
-/* === Hero Height Resizer (drag handle) === */
+/* === Spacing Resizer (hero <-> clocks) === */
 (function(){
   const ROOT = document.documentElement;
   const HANDLE = document.getElementById('clockResizer');
   if(!HANDLE) return;
 
-  const KEY = 'heroHeightVh';
-  const DEFAULT = parseFloat(getComputedStyle(ROOT).getPropertyValue('--hero-h')) || 62; // vh
-  const MIN = 40;   // 40vh min
-  const MAX = 92;   // 92vh max
+  const KEY = 'heroSpacingPx';
+  const DEFAULT = parseInt(getComputedStyle(ROOT).getPropertyValue('--hero-spacing')) || 60;
+  const MIN = 0;
+  const MAX = 240;
 
-  // charge valeur sauvegardée
-  const saved = parseFloat(localStorage.getItem(KEY));
-  if(!Number.isNaN(saved)) ROOT.style.setProperty('--hero-h', saved + 'vh');
+  const saved = parseInt(localStorage.getItem(KEY));
+  if(!Number.isNaN(saved)) ROOT.style.setProperty('--hero-spacing', saved + 'px');
 
-  let startY = 0, startH = 0, dragging = false;
+  let startY = 0, startSpacing = 0, dragging = false;
 
-  const getH = () => parseFloat(getComputedStyle(ROOT).getPropertyValue('--hero-h')) || DEFAULT;
+  const getSpacing = () => {
+    const v = getComputedStyle(ROOT).getPropertyValue('--hero-spacing').trim();
+    return parseInt(v, 10) || 0;
+  };
 
   function onDown(e){
     dragging = true;
     HANDLE.classList.add('is-dragging');
     startY = (e.touches ? e.touches[0].clientY : e.clientY);
-    startH = getH();
+    startSpacing = getSpacing();
     e.preventDefault();
   }
 
   function onMove(e){
     if(!dragging) return;
     const y = (e.touches ? e.touches[0].clientY : e.clientY);
-    const dyPx = y - startY;                     // vers le bas => plus grand
-    const dyVh = (dyPx / window.innerHeight) * 100;
-    const next = Math.min(MAX, Math.max(MIN, startH + dyVh));
-    ROOT.style.setProperty('--hero-h', next.toFixed(1) + 'vh');
+    const dy = y - startY;
+    const next = Math.min(MAX, Math.max(MIN, startSpacing + dy));
+    ROOT.style.setProperty('--hero-spacing', next + 'px');
   }
 
   function onUp(){
     if(!dragging) return;
     dragging = false;
     HANDLE.classList.remove('is-dragging');
-    localStorage.setItem(KEY, String(getH()));
+    const current = getSpacing();
+    localStorage.setItem(KEY, String(current));
   }
 
   function onDblClick(){
-    ROOT.style.setProperty('--hero-h', DEFAULT + 'vh');
+    ROOT.style.setProperty('--hero-spacing', DEFAULT + 'px');
     localStorage.setItem(KEY, String(DEFAULT));
   }
 
