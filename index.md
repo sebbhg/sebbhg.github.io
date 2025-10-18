@@ -7,13 +7,11 @@ full_bleed: true
 ---
 
 <style>
-  /* ===== Root vars ===== */
-:root{
-  --promo-h: 56vh;           /* hauteur de la vidéo secondaire */
-  --promo-h-min: 36;         /* en vh */
-  --promo-h-max: 92;         /* en vh */
-  --clock-speed: 120s;
-}
+  /* ===== Root vars (incl. adjustable spacing) ===== */
+  :root{
+    --hero-spacing: 60px; /* valeur par défaut, ajustable via la poignée */
+    --clock-speed: 120s;
+  }
 
   /* === Fade-in global === */
   @keyframes fadeInUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
@@ -24,9 +22,9 @@ full_bleed: true
   .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
 
   /* === HERO LAYERS === */
-  .hero-video{ position:relative; z-index:2; overflow:hidden; height:var(--hero-h); background:#000; }
+  .hero-video{ position:relative; z-index:2; overflow:hidden; }
   .hero-overlay{ position:absolute; inset:0; z-index:1; }
-  .hero-content{ position:relative; z-index:2; padding:20px 24px; }
+  .hero-content{ position:relative; z-index:2; }
   .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
   /* === LOGO IMAGE + halo pulsé === */
@@ -41,28 +39,23 @@ full_bleed: true
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
   /* === SECONDARY VIDEO === */
-  .promo-video{ position:relative; z-index:0; width:100%; background:#000; }
+  .promo-video{ position:relative; z-index:0; width:100%; margin:-1250px 0 0; }
   @media (max-width:1400px){ .promo-video{ margin:-1450px 0 0; } }
   @media (max-width:1200px){ .promo-video{ margin:-1350px 0 0; } }
   @media (max-width:1024px){ .promo-video{ margin:-1250px 0 0; } }
   @media (max-width:768px){ .promo-video{ margin:-1150px 0 0; } }
   @media (max-width:560px){ .promo-video{ margin:-1050px 0 0; } }
-  .promo-video-frame{
-  position:relative; width:100%;
-  height:var(--promo-h);          /* 👈 hauteur dynamique */
-  overflow:hidden; background:#000;
-  border-top:1px solid #222; border-bottom:1px solid #222;
-}
+  .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
   @supports not (aspect-ratio:16/9){ .promo-video-frame{ padding-top:56.25%; } .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; } }
-  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.85) contrast(1.05) saturate(1.05); }
-  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.75) 95%); pointer-events:none; }
+  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
+  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%); pointer-events:none; }
 
-  /* === HANDLE (draggable) === */
+  /* === SPACING HANDLE (draggable) === */
   .clock-resizer{
-    width:100%; height:18px; background:#000;
+    width:100%; height:16px;
     display:grid; place-items:center;
     cursor:row-resize; user-select:none;
-    position:relative; z-index:5;
+    position:relative; z-index:11;
   }
   .clock-resizer::before{
     content:""; width:86px; height:6px; border-radius:6px;
@@ -75,7 +68,7 @@ full_bleed: true
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
     border-top:1px solid #333; border-bottom:1px solid #333;
-    padding:12px 0; margin-top:8px; opacity:1; z-index:10; isolation:isolate;
+    padding:12px 0; margin-top:var(--hero-spacing); opacity:1; z-index:10; isolation:isolate;
     -webkit-user-select:none; user-select:none; touch-action:pan-x;
   }
   .world-clock-bar *{ background:none !important; opacity:1 !important; mix-blend-mode:normal !important; filter:none !important; }
@@ -116,7 +109,7 @@ full_bleed: true
   @media (max-width:820px){ .news-wrap{ grid-template-columns: 1fr; } }
 
   /* === SECTION HUB === */
-  .after-market{ position:relative; z-index:4; background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111; }
+  .after-market{ position:relative; z-index:4; /* au-dessus du bandeau lectures */ background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111; }
   .hub-inner{ max-width:1100px; margin:0 auto; }
   .hub-eyebrow{ color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px; text-align:left; }
   .hub-title{ color:#fff; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; line-height:1.1; margin:0 0 16px; text-align:left; text-shadow:0 0 10px rgba(0,0,0,.35); }
@@ -140,10 +133,10 @@ full_bleed: true
   .hub-split.no-media{ grid-template-columns:1fr; }
   @media (max-width:1100px){ .hub-split{ grid-template-columns:1fr; } }
 
-  /* ===== Stack gauche ===== */
+  /* ===== Stack gauche (Education + Certifications) ===== */
   .left-stack{ display:flex; flex-direction:column; gap:16px; }
 
-  /* ===== CARTE GÉNÉRIQUE ===== */
+  /* ===== CARTE GÉNÉRIQUE (verre + halo) ===== */
   .card-glass{
     position:relative; border-radius:18px; padding:16px 16px 18px;
     background: linear-gradient(180deg, rgba(14,18,34,.85), rgba(8,10,20,.9));
@@ -164,7 +157,7 @@ full_bleed: true
   .edu-header{ display:flex; align-items:center; gap:14px; position:relative; z-index:1; }
   .edu-body{ position:relative; z-index:1; margin-top:10px; color:#cfe3ff; line-height:1.6; font-size:.98rem; }
 
-  /* BADGE CY Tech */
+  /* BADGE CY Tech (rond + flip + halo) */
   .hub-gallery{ perspective:1200px; }
   .cy-holo.figure-tilt{
     --size: 90px; width:var(--size); height:var(--size); min-width:var(--size);
@@ -240,7 +233,7 @@ full_bleed: true
   .cert-issuer{ color:#9ec8ff; font-weight:800; }
   .cert-desc{ color:#c9cbd1; margin-top:4px; font-size:.95rem; }
 
-  /* === SHARED: Glass Boards === */
+  /* === SHARED: Glass Board (Courses, Projects, Reading) === */
   .courses-panel, .projects-panel, .reading-panel{ display:none; }
   .courses-lede, .projects-lede, .reading-lede{ color:#cfe3ff; max-width:960px; line-height:1.65; margin:8px 0 16px; }
   .courses-stage, .projects-stage, .reading-stage{ perspective:1400px; margin-top:14px; display:grid; place-items:center; }
@@ -281,6 +274,7 @@ full_bleed: true
   .row-meta{ color:#9aa3b2; font-size:.9rem; margin-top:4px; }
   .row-cta{ color:#9ec8ff; font-weight:800; white-space:nowrap; }
 
+  /* Désactivation des clics (pas de consultation / téléchargement) */
   .board-col .row{ cursor:default; }
   .board-col .row:hover{ transform:none; }
 
@@ -292,7 +286,7 @@ full_bleed: true
   /* ===== Bandeau Lectures ===== */
   .reading-band{
     position:relative;
-    z-index:3;
+    z-index:3; /* sous la section after-market */
     background:#050505;
     border-top:1px solid #111;
     border-bottom:1px solid #111;
@@ -300,7 +294,7 @@ full_bleed: true
     overflow:hidden;
   }
   .reading-inner{ max-width:1100px; margin:0 auto; padding:0 24px; }
-  .reading-eyebrow{ color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px; text-align:left; } /* LEFT */
+  .reading-eyebrow{ color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px; }
   .reading-track{
     display:flex; gap:16px; width:max-content; white-space:nowrap;
     animation: readingScroll 52s linear infinite;
@@ -363,6 +357,7 @@ full_bleed: true
       <!-- LinkedIn -->
       <a class="icon-btn" href="https://www.linkedin.com/in/s%C3%A9bastien-haag/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile" title="LinkedIn">
         <span class="sr-only">LinkedIn</span>
+        <!-- LinkedIn SVG -->
         <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
           <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0H12v2.2h.06c.63-1.2 2.16-2.46 4.45-2.46 4.76 0 5.64 3.13 5.64 7.2V24h-5v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V24h-5V8z"/>
         </svg>
@@ -370,6 +365,7 @@ full_bleed: true
       <!-- Email -->
       <a class="icon-btn" href="mailto:sbthaag@gmail.com" aria-label="Send me an email" title="Email">
         <span class="sr-only">Email</span>
+        <!-- Envelope SVG -->
         <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
           <path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
         </svg>
@@ -380,8 +376,18 @@ full_bleed: true
   <img class="hero-logo-img" src="/assets/images/sh-logo.png" alt="SH monogram">
 </section>
 
-<!-- ===== Handle (drag to resize hero; double-click to reset) ===== -->
-<div class="clock-resizer" id="clockResizer" title="Drag to resize promo video (double-click to reset)"></div>
+<!-- ===== Full-width secondary video ===== -->
+<section class="promo-video">
+  <div class="promo-video-frame">
+    <video class="promo-video-el" autoplay muted loop playsinline preload="auto" poster="/assets/images/trading-broll-poster.jpg">
+      <source src="/assets/videos/trading-broll.mp4" type="video/mp4">
+    </video>
+    <div class="promo-scrim"></div>
+  </div>
+</section>
+
+<!-- ===== Spacing handle (drag to adjust, double-click to reset) ===== -->
+<div class="clock-resizer" id="clockResizer" title="Drag to adjust spacing (double-click to reset)"></div>
 
 <!-- ===== World Clocks ===== -->
 <div class="world-clock-bar" id="clockBar">
@@ -422,13 +428,30 @@ full_bleed: true
 <!-- ===== Market Status ===== -->
 <div class="market-status" id="marketStatus">Loading market status…</div>
 
-<!-- ===== Full-width secondary video ===== -->
-<section class="promo-video">
-  <div class="promo-video-frame">
-    <video class="promo-video-el" autoplay muted loop playsinline preload="auto" poster="/assets/images/trading-broll-poster.jpg">
-      <source src="/assets/videos/trading-broll.mp4" type="video/mp4">
-    </video>
-    <div class="promo-scrim"></div>
+<!-- ===== Latest Updates ===== -->
+<section class="news-band">
+  <div class="news-wrap">
+    <article class="update-card">
+      <span class="update-badge">INFO</span>
+      <h3 class="update-title">Website under construction 🚧</h3>
+      <p class="update-meta">Oct 2025 · Ongoing</p>
+      <p class="update-desc">
+        This website is currently being enhanced — new pages, animations, and live data integrations are coming soon.
+        Stay tuned for the full Quantitative Finance & Trading experience.
+      </p>
+      <a class="update-link" href="{{ '/' | relative_url }}">Learn more →</a>
+    </article>
+
+    <article class="update-card">
+      <span class="update-badge">UPDATE</span>
+      <h3 class="update-title">What I do — Quant Engineering</h3>
+      <p class="update-meta">Oct 2025 · Labs</p>
+      <p class="update-desc">
+        New “What I do” page: pricing engines, risk aggregation, intraday analytics and
+        research notes. Coming next: CVA dashboard & volatility surface explorer.
+      </p>
+      <a class="update-link" href="{{ '/what-i-do' | relative_url }}">Open page →</a>
+    </article>
   </div>
 </section>
 
@@ -687,6 +710,7 @@ full_bleed: true
             </div>
           </div>
 
+          <!-- floating particles -->
           <div class="particles" aria-hidden="true"></div>
         </div>
       </div>
@@ -809,6 +833,7 @@ full_bleed: true
             </div>
           </div>
 
+          <!-- floating particles -->
           <div class="particles" aria-hidden="true"></div>
         </div>
       </div>
@@ -944,58 +969,64 @@ updateClocks(); setInterval(updateClocks, 1000);
   window.addEventListener('touchend', onPointerUp);
 })();
 
-/* === Poignée : redimensionner la vidéo secondaire === */
+/* === Spacing Resizer (hero <-> clocks) === */
 (function(){
   const ROOT = document.documentElement;
   const HANDLE = document.getElementById('clockResizer');
   if(!HANDLE) return;
 
-  const KEY = 'promoVideoVh';
-  const DEF = parseFloat(getComputedStyle(ROOT).getPropertyValue('--promo-h')) || 56;
-  const MIN = parseFloat(getComputedStyle(ROOT).getPropertyValue('--promo-h-min')) || 36;
-  const MAX = parseFloat(getComputedStyle(ROOT).getPropertyValue('--promo-h-max')) || 92;
+  const KEY = 'heroSpacingPx';
+  const DEFAULT = parseInt(getComputedStyle(ROOT).getPropertyValue('--hero-spacing')) || 60;
+  const MIN = 0;
+  const MAX = 240;
 
-  const saved = parseFloat(localStorage.getItem(KEY));
-  if(!Number.isNaN(saved)) ROOT.style.setProperty('--promo-h', saved + 'vh');
+  const saved = parseInt(localStorage.getItem(KEY));
+  if(!Number.isNaN(saved)) ROOT.style.setProperty('--hero-spacing', saved + 'px');
 
-  let startY = 0, startVh = 0, dragging = false;
-  const getVh = () => parseFloat(getComputedStyle(ROOT).getPropertyValue('--promo-h')) || DEF;
+  let startY = 0, startSpacing = 0, dragging = false;
+
+  const getSpacing = () => {
+    const v = getComputedStyle(ROOT).getPropertyValue('--hero-spacing').trim();
+    return parseInt(v, 10) || 0;
+  };
 
   function onDown(e){
     dragging = true;
     HANDLE.classList.add('is-dragging');
     startY = (e.touches ? e.touches[0].clientY : e.clientY);
-    startVh = getVh();
+    startSpacing = getSpacing();
     e.preventDefault();
   }
 
   function onMove(e){
     if(!dragging) return;
     const y = (e.touches ? e.touches[0].clientY : e.clientY);
-    const dyPx = y - startY;
-    const dyVh = (dyPx / window.innerHeight) * 100;
-    const next = Math.min(MAX, Math.max(MIN, startVh + dyVh));
-    ROOT.style.setProperty('--promo-h', next.toFixed(1) + 'vh');
+    const dy = y - startY;
+    const next = Math.min(MAX, Math.max(MIN, startSpacing + dy));
+    ROOT.style.setProperty('--hero-spacing', next + 'px');
   }
 
   function onUp(){
     if(!dragging) return;
     dragging = false;
     HANDLE.classList.remove('is-dragging');
-    localStorage.setItem(KEY, String(getVh()));
+    const current = getSpacing();
+    localStorage.setItem(KEY, String(current));
   }
 
   function onDblClick(){
-    ROOT.style.setProperty('--promo-h', DEF + 'vh');
-    localStorage.setItem(KEY, String(DEF));
+    ROOT.style.setProperty('--hero-spacing', DEFAULT + 'px');
+    localStorage.setItem(KEY, String(DEFAULT));
   }
 
   HANDLE.addEventListener('mousedown', onDown);
   window.addEventListener('mousemove', onMove, { passive:false });
   window.addEventListener('mouseup', onUp);
+
   HANDLE.addEventListener('touchstart', onDown, { passive:false });
   window.addEventListener('touchmove', onMove, { passive:false });
   window.addEventListener('touchend', onUp);
+
   HANDLE.addEventListener('dblclick', onDblClick);
 })();
 
@@ -1029,7 +1060,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   refresh(); setInterval(refresh, 60_000);
 })();
 
-/* === Tabs === */
+/* === Tabs: WHAT / COURSES / PROJECTS / READING / others === */
 (function(){
   const tabs = document.querySelectorAll('.hub-tab');
   const titleEl = document.getElementById('hubSelectedTitle');
@@ -1143,6 +1174,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     const particles = board?.querySelector('.particles');
     if (!board) return;
 
+    // spawn dots (courses / projects / reading)
     const p = particles || (()=>{ const el=document.createElement('div'); el.className='particles'; board.appendChild(el); return el; })();
     const n = 26;
     for(let i=0;i<n;i++){
