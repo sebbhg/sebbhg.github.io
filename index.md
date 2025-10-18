@@ -22,10 +22,20 @@ full_bleed: true
   .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
 
   /* === HERO LAYERS === */
-  .hero-video{ position:relative; z-index:2; overflow:hidden; height:var(--hero-h); background:#000; }  /* height + fond */
-  .hero-overlay{ position:absolute; inset:0; z-index:1; }
+  .hero-video{
+    position:relative; z-index:2; overflow:hidden;
+    height:var(--hero-h,62vh); min-height:40vh;
+    background:#000; /* pour éviter tout flash derrière */
+  }
+  .hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(180deg,rgba(0,0,0,.0) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.55) 100%);
+  }
   .hero-content{ position:relative; z-index:2; }
-  .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .hero-bg{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; display:block; z-index:0;
+  }
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
@@ -39,7 +49,9 @@ full_bleed: true
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
   /* === SECONDARY VIDEO === */
-  .promo-video{ position:relative; z-index:0; width:100%; margin:-1250px 0 0; }
+  .promo-video{ position:relative; z-index:0; width:100%;
+    margin-top: calc(var(--hero-h,62vh) * -1 + 6vh);
+  }
   @media (max-width:1400px){ .promo-video{ margin:-1450px 0 0; } }
   @media (max-width:1200px){ .promo-video{ margin:-1350px 0 0; } }
   @media (max-width:1024px){ .promo-video{ margin:-1250px 0 0; } }
@@ -297,7 +309,7 @@ full_bleed: true
   /* Bandeau Lectures */
   .reading-eyebrow{
     color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px;
-    text-align:left;                 /* NEW */
+    text-align:left;
   }
   .reading-track{
     display:flex; gap:16px; width:max-content; white-space:nowrap;
