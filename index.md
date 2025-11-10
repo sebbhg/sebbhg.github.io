@@ -65,22 +65,29 @@ full_bleed: true
     pointer-events:none;
   }
 
-  /* === LOGO IMAGE + halo pulsé === */
+  /* === LOGO SH : fixé en bas à droite du hero === */
   .hero-logo-img{
     position: fixed;
-    right: max(8px, env(safe-area-inset-right));
-    top: 12px;                 /* sera réajusté par le JS ci-dessous */
-    width: clamp(90px, 12vw, 200px);
+    right: max(20px, env(safe-area-inset-right)); /* collé à droite */
+    bottom: 80px; /* ↓ ajuste la hauteur : 60–120px selon ton goût */
+    width: clamp(100px, 13vw, 200px);
     height: auto;
     z-index: 1000;
     opacity: 0;
-    transform: none;           /* on supprime l'ancien translateY */
     pointer-events: none;
+    transform: none;
     animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
   }
-  @keyframes fadeInLogo{ from{opacity:0; transform: translateY(-34%) translateX(40px);} to{opacity:1; transform: translateY(-34%) translateX(0);} }
-  @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
-  @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
+  
+  /* Mobile : on le garde en haut à droite */
+  @media (max-width: 600px){
+    .hero-logo-img{
+      top: max(10px, env(safe-area-inset-top));
+      bottom: auto;
+      right: max(10px, env(safe-area-inset-right));
+      width: clamp(80px, 20vw, 120px);
+    }
+  }
 
   /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO (FINAL ADJUSTMENTS) === */
   
