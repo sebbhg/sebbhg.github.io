@@ -17,36 +17,38 @@ full_bleed: true
   @keyframes fadeInUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
 
   /* === Hero titles fade-in === */
-  .eyebrow.shifted{
-    margin-top:-25px;
-    opacity:0;
-    transform:translateY(10px);
-    animation:fadeInUp 1.4s ease-out .3s forwards;
-
-    /* >>> Version ajustée <<< */
-    font-size:clamp(1.8rem, 3.2vw, 3.2rem); /* taille légèrement réduite */
-    font-weight:300;                        /* finesse conservée */
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:#bcd9ff;
-    text-shadow:0 0 6px rgba(44,140,255,.35);
-    font-family:'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
-  }
+    .eyebrow.shifted{
+      margin-top:-25px;
+      opacity:0;
+      transform:translateY(10px);
+      animation:fadeInUp 1.4s ease-out .3s forwards;
+    
+      /* Style responsive propre */
+      font-size:clamp(1.6rem, 3vw, 3rem);
+      font-weight:300;                 /* lettres fines */
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+      color:#bcd9ff;
+      text-shadow:0 0 6px rgba(44,140,255,.35);
+      font-family:'Helvetica Neue','Segoe UI',Roboto,sans-serif;
+    }
   
-  /* >>> AJOUTS POUR LA TAILLE ET LE STYLE <<< */
-  font-size:clamp(1.8rem, 3vw, 3.2rem);  /* responsive et grand */
-  font-weight:900;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:#9ec8ff;
-  text-shadow:0 0 10px rgba(44,140,255,.6);
-}
   .hero-content h1{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out .8s forwards; }
   .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
 
   /* === HERO LAYERS === */
-  .hero-video{ position:relative; z-index:2; overflow:hidden; }
-  .hero-overlay{ position:absolute; inset:0; z-index:1; }
+  .hero-video{
+    position:relative; z-index:2; overflow:hidden;
+    min-height:clamp(520px, 52vw, 820px);
+  }
+  .hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:linear-gradient(to bottom,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.25) 70%,
+      rgba(0,0,0,.55) 86%,
+      rgba(0,0,0,.85) 100%);
+  }
   .hero-content{ position:relative; z-index:2; }
   .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
