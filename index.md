@@ -214,11 +214,8 @@ full_bleed: true
   .updates-stage{
     position:relative; overflow:visible;
   }
-  .updates-fade{
-    pointer-events:none; position:absolute; inset:0;
-    background: linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,.0) 12%, rgba(5,5,5,.0) 88%, rgba(5,5,5,1) 100%);
-    z-index:2;
-  }
+  
+  .updates-fade{ display:none; }
   .updates-track{
     display:flex; gap:18px; align-items:stretch;
     will-change:transform; transform:translate3d(0,0,0);
@@ -231,8 +228,14 @@ full_bleed: true
     width:min(540px, 86vw); flex:0 0 auto;
     transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, filter .25s ease, opacity .25s ease;
     transform-origin:center center;
-    opacity:.7; filter:blur(1.2px) saturate(.9) brightness(.95);
+    opacity:.78; filter:saturate(.95) brightness(.95);
+    transform:scale(.985)
   }
+  
+  .update-card.is-center{
+    transform:scale(1.02);
+  }
+  
   .update-card::after{ content:""; position:absolute; inset:-1px; border-radius:14px; pointer-events:none; background:radial-gradient(600px 200px at 20% -20%, rgba(44,140,255,.15), transparent 70%); opacity:.7; }
   .update-card.is-center{
     transform:scale(1.02);
