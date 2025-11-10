@@ -159,7 +159,7 @@ full_bleed: true
 .hero-logo{
   position: absolute;
   top: clamp(120px, 14vh, 190px);
-  right: clamp(-20px, 0vw, 10px); 
+  right: clamp(-30px, 0vw, 10px); 
   width: clamp(90px, 10vw, 160px);
   height: auto;
   z-index: 5;                 /* au-dessus de la vidéo et de la scrim */
