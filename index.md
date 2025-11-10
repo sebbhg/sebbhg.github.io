@@ -82,18 +82,28 @@ full_bleed: true
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-  /* === SECONDARY VIDEO === */
+  /* === SECONDARY VIDEO — FULL HERO BACKGROUND === */
   .promo-video{
     position: relative;
     z-index: 0;
     width: 100%;
-    margin-top: -220px;   /* remonte la vidéo pour qu’elle s’aligne visuellement sous le hero */
+    margin-top: -980px;   /* recouvre le hero (ajuste ici si besoin ±20px) */
+  }
+  
+  @media (min-width: 1600px){
+    .promo-video{ margin-top: -1080px; }  /* grands écrans ultra-wide */
+  }
+  @media (max-width: 1200px){
+    .promo-video{ margin-top: -820px; }
   }
   @media (max-width: 1024px){
-    .promo-video{ margin-top: -90px; }
+    .promo-video{ margin-top: -700px; }
   }
   @media (max-width: 768px){
-    .promo-video{ margin-top: -60px; }
+    .promo-video{ margin-top: -520px; }
+  }
+  @media (max-width: 480px){
+    .promo-video{ margin-top: -420px; }
   }
   
   .promo-video-frame{
@@ -102,14 +112,12 @@ full_bleed: true
     aspect-ratio: 16/9;
     overflow: hidden;
     background: #000;
-    border-top: 0;                  /* supprime la ligne visible entre hero et vidéo */
+    border-top: 0;
     border-bottom: 1px solid #222;
   }
   
   @supports not (aspect-ratio:16/9){
-    .promo-video-frame{
-      padding-top:56.25%;
-    }
+    .promo-video-frame{ padding-top:56.25%; }
     .promo-video-el{
       position:absolute;
       left:0;
@@ -125,7 +133,7 @@ full_bleed: true
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 35%;     /* ajuste le cadrage pour voir le visuel plus haut */
+    object-position: center 38%;   /* cadre un peu plus haut */
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
