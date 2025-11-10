@@ -50,25 +50,11 @@ full_bleed: true
   .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
   .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%); pointer-events:none; }
 
-  /* === SPACING HANDLE (draggable) === */
-  .clock-resizer{
-    width:100%; height:16px;
-    display:grid; place-items:center;
-    cursor:row-resize; user-select:none;
-    position:relative; z-index:11;
-  }
-  .clock-resizer::before{
-    content:""; width:86px; height:6px; border-radius:6px;
-    border:1px dashed rgba(158,200,255,.35); background:rgba(15,18,34,.6);
-    box-shadow:0 4px 18px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
-  }
-  .clock-resizer.is-dragging::before{ border-color:#4da0ff; background:rgba(20,24,40,.8); }
-
   /* === WORLD CLOCK BAR === */
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
     border-top:1px solid #333; border-bottom:1px solid #333;
-    padding:12px 0; margin-top:var(--hero-spacing); opacity:1; z-index:10; isolation:isolate;
+    padding:12px 0; margin-top:60px; opacity:1; z-index:10; isolation:isolate;
     -webkit-user-select:none; user-select:none; touch-action:pan-x;
   }
   .world-clock-bar *{ background:none !important; opacity:1 !important; mix-blend-mode:normal !important; filter:none !important; }
@@ -385,9 +371,6 @@ full_bleed: true
     <div class="promo-scrim"></div>
   </div>
 </section>
-
-<!-- ===== Spacing handle (drag to adjust, double-click to reset) ===== -->
-<div class="clock-resizer" id="clockResizer" title="Drag to adjust spacing (double-click to reset)"></div>
 
 <!-- ===== World Clocks ===== -->
 <div class="world-clock-bar" id="clockBar">
