@@ -358,10 +358,10 @@ full_bleed: true
   <div class="hero-content">
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
     <h1>Turning Models into Market Impact</h1>
-    <p class="subtitle">
-      Welcome to the website of <strong>Sébastien HAAG</strong>.<br/>
-      Here, I share my <strong>courses</strong>, <strong>projects</strong> and <strong>summaries</strong> in quantitative finance — 
-      with a simple ambition: <em>to bring scientific rigor to financial performance</em>.
+    <p class="subtitle" style="text-align: justify;">
+      Welcome to the website of Sébastien Haag.  
+      Here, I share my courses, projects and summaries in quantitative finance,  
+      with a simple ambition: to bring scientific rigor to financial performance.
     </p>
 
     <!-- ==== Social / Contact (remplace les 5 boutons) ==== -->
