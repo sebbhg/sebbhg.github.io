@@ -65,42 +65,37 @@ full_bleed: true
     pointer-events:none;
   }
 
-  /* === LOGO SH : fixé en bas à droite du hero === */
-  .hero-logo-img{
-    position: fixed;
-    right: 24px;               /* bien collé à droite */
-    bottom: 120px;             /* visible au-dessus du bas de l’écran */
-    width: clamp(100px, 14vw, 220px);
+  /* === LOGO SH : en haut à droite du hub === */
+  .after-market .hub-inner{
+    position: relative; /* ancre locale pour le positionnement absolu */
+  }
+  
+  .sh-logo{
+    position: absolute;
+    top: -8px; /* ajuste finement (essaie entre -12px et +8px) */
+    right: max(12px, env(safe-area-inset-right));
+    width: clamp(90px, 10vw, 150px);
     height: auto;
-    z-index: 9999;             /* au-dessus de tout */
-    opacity: 0;
-    animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
-    pointer-events: none;
-    transform: none;
+    z-index: 6;
+    pointer-events: none; /* évite de gêner les clics sur les onglets */
+    filter: drop-shadow(0 0 6px rgba(44,140,255,.7));
+    animation: logoPulse 4s ease-in-out infinite; /* optionnel si tu gardes la keyframe */
   }
   
-  /* Petit halo animé */
-  @keyframes fadeInLogo{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
-  }
-  @keyframes logoPulse{
-    0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));}
-    50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));}
+  /* Évite que les onglets passent sous le logo */
+  .hub-tabs{
+    padding-right: calc(clamp(90px, 10vw, 150px) + 24px);
   }
   
-  /* Mobile : logo en haut à droite pour éviter de cacher le texte */
+  /* Sur mobile : un peu plus petit et légèrement plus bas */
   @media (max-width: 600px){
-    .hero-logo-img{
-      position: absolute;
-      top: 20px;
-      bottom: auto;
-      right: 16px;
-      width: clamp(80px, 20vw, 120px);
-      z-index: 1000;
+    .sh-logo{
+      top: 6px;
+      right: 8px;
+      width: clamp(70px, 18vw, 110px);
     }
   }
-
+  
   /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO (FINAL ADJUSTMENTS) === */
   
   /* Vidéo plein écran derrière le hero */
