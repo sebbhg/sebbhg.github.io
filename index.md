@@ -72,7 +72,7 @@ full_bleed: true
   
   .sh-logo{
     position: absolute;
-    top: -230px; /* ajuste finement (essaie entre -12px et +8px) */
+    top: -530px; /* ajuste finement (essaie entre -12px et +8px) */
     right: max(12px, env(safe-area-inset-right));
     width: clamp(90px, 10vw, 150px);
     height: auto;
