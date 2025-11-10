@@ -82,12 +82,12 @@ full_bleed: true
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-  /* === SECONDARY VIDEO — RESPONSIVE OVERLAP === */
+  /* === SECONDARY VIDEO — STRONG RESPONSIVE OVERLAP === */
   
-  /* 1) Un seul réglage central pour l’overlap :
-     - min 260px, typiquement 40vh, max 900px selon la hauteur d’écran */
+  /* Paramètre central : plus grand chevauchement */
   :root{
-    --promo-overlap: clamp(260px, 40vh, 900px);
+    /* min: 420px (petits écrans), typique: 55vh, max: 1100px (grands écrans) */
+    --promo-overlap: clamp(420px, 55vh, 1100px);
   }
   
   .promo-video{
@@ -122,7 +122,7 @@ full_bleed: true
     height: 100%;
     object-fit: cover;
     /* on cadre un peu plus haut pour que les chiffres soient visibles plus tôt */
-    object-position: center 38%;
+    object-position: center 32%;
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
