@@ -82,7 +82,7 @@ full_bleed: true
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-  /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO (OVERRIDES) === */
+  /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO (FINAL ADJUSTMENTS) === */
   
   /* Vidéo plein écran derrière le hero */
   :root{
@@ -123,35 +123,50 @@ full_bleed: true
   .promo-scrim{
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.2) 20%, rgba(0,0,0,.4) 50%, rgba(0,0,0,.7) 90%);
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,.05) 0%,
+      rgba(0,0,0,.2) 20%,
+      rgba(0,0,0,.4) 50%,
+      rgba(0,0,0,.7) 90%
+    );
     pointer-events: none;
   }
   
-  /* === MOBILE (≤600px) : vidéo tout en haut + horloges PLUS BAS === */
+  /* === MOBILE (≤600px) : vidéo tout en haut + horloges BEAUCOUP PLUS BAS === */
   @media (max-width: 600px){
     :root{
       --promo-overlap: clamp(420px, 72svh, 820px);
     }
   
-    .promo-video{ margin-top: -520px !important; }   /* vidéo collée en haut */
-    .promo-video-el{ object-position: center 30%; }
+    .promo-video{ 
+      margin-top: -520px !important; /* la vidéo démarre tout en haut */
+    }
   
-    /* ✅ Force la descente des horloges malgré la règle globale */
+    .promo-video-el{
+      object-position: center 30%;
+    }
+  
+    /* ✅ On descend franchement les horloges pour libérer le texte + boutons */
     .world-clock-bar{
-      margin-top: 120px !important;                  /* ajuste si besoin: 100–160px */
+      margin-top: 260px !important;  /* essaie entre 240 et 300px selon ton iPhone */
     }
   }
   
   /* === Écrans à faible hauteur === */
   @media (max-height: 720px){
-    :root{ --promo-overlap: clamp(280px, 48svh, 560px); }
-    .hero-video{ min-height: clamp(320px, 54svh, 640px); }
+    :root{
+      --promo-overlap: clamp(280px, 48svh, 560px);
+    }
+    .hero-video{
+      min-height: clamp(320px, 54svh, 640px);
+    }
   }
   
-  /* === Desktop (≥1025px) : horloges un peu plus haut qu’avant === */
+  /* === Desktop (≥1025px) : horloges bien remontées === */
   @media (min-width: 1025px){
     .world-clock-bar{
-      margin-top: -360px !important;                 /* remonte sur Mac/écran */
+      margin-top: -360px !important; /* remonte sur Mac et écran externe */
     }
   }
     
