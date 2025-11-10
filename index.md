@@ -38,26 +38,45 @@ full_bleed: true
 
   /* === HERO LAYERS === */
   .hero-video{
-    position:relative; z-index:2; overflow:hidden;
-    min-height:clamp(520px, 52vw, 820px);
+    position: relative;
+    z-index: 2;
+    background: radial-gradient(ellipse at 50% 20%, #0a0f20, #03050c 80%);
+    min-height: clamp(500px, 60vh, 900px);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    padding: clamp(32px, 6vw, 80px) clamp(20px, 6vw, 60px);
+    overflow: hidden;
   }
-  .hero-overlay{
-    position:absolute; inset:0; z-index:1;
-    background:linear-gradient(to bottom,
-      rgba(0,0,0,0) 0%,
-      rgba(0,0,0,.25) 70%,
-      rgba(0,0,0,.55) 86%,
-      rgba(0,0,0,.85) 100%);
+  .hero-content{
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    width: 100%;
+    text-align: left;
   }
-  .hero-content{ position:relative; z-index:2; }
-  .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .hero-video::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: radial-gradient(60% 60% at 20% 10%, rgba(44,140,255,.15), transparent 70%),
+                radial-gradient(80% 80% at 80% 90%, rgba(159,122,255,.12), transparent 65%);
+    opacity:.35;
+    pointer-events:none;
+  }
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
-    position:absolute; right:-4.0vw; top:6%; transform:translateY(-34%); z-index:3;
-    width:min(13vw,40vh); height:auto; opacity:0;
-    animation: fadeInLogo 1.2s ease-out 1.0s forwards, logoPulse 4s ease-in-out infinite;
-    pointer-events:none; user-select:none; filter: drop-shadow(0 0 6px rgba(44,140,255,.6));
+    position:absolute;
+    right:clamp(10px,3vw,40px);
+    top:14%;
+    transform:translateY(-34%);
+    width:clamp(90px,14vw,220px);
+    height:auto;
+    z-index:3;
+    opacity:0;
+    animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
+    pointer-events:none;
   }
   @keyframes fadeInLogo{ from{opacity:0; transform: translateY(-34%) translateX(40px);} to{opacity:1; transform: translateY(-34%) translateX(0);} }
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
@@ -350,12 +369,6 @@ full_bleed: true
   .icon-btn:hover svg{ fill:#ffffff; }
   .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
 </style>
-
-<section class="hero-video">
-  <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{{ '/assets/images/hero-poster.jpg' | relative_url }}">
-    <source src="{{ '/assets/videos/trading-hero.mp4' | relative_url }}" type="video/mp4">
-  </video>
-  <div class="hero-overlay"></div>
 
   <div class="hero-content">
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
