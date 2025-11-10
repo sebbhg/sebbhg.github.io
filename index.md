@@ -22,113 +22,33 @@ full_bleed: true
   .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
 
   /* === HERO LAYERS === */
-  .hero-video{
-    position: relative;
-    z-index: 2;
-    /* vraie hauteur de viewport (corrigée par --vh ci-dessous) */
-    min-height: calc(var(--vh, 1vh) * 100);
-    display: grid;
-    align-items: center;
-    padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 24px);
-    overflow: hidden; /* coupe ce qui dépasse */
-  }
-
-  .hero-video::before{
-    content:"";
-    position:absolute; inset:0;
-    background: radial-gradient(60% 60% at 20% 10%, rgba(44,140,255,.15), transparent 70%),
-                radial-gradient(80% 80% at 80% 90%, rgba(159,122,255,.12), transparent 65%);
-    opacity:.35; pointer-events:none;
-  }
-
-  .hero-content{
-    position: relative;
-    z-index: 2;
-    text-align: left;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .hero-bg{
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    /* ajuste le cadrage si besoin (ex.: centre un peu haut) */
-    object-position: center 40%;
-    transform: translateZ(0); will-change: transform;
-  }
+  .hero-video{ position:relative; z-index:2; overflow:hidden; }
+  .hero-overlay{ position:absolute; inset:0; z-index:1; }
+  .hero-content{ position:relative; z-index:2; }
+  .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
-    position:absolute;
-    right: clamp(10px, 3vw, 40px);
-    top: 30%;
-    transform: translateY(-34%);
-    width: clamp(90px, 14vw, 220px);
-    height:auto;
-    z-index:3;
-    opacity:0;
-    animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
-    pointer-events:none;
+    position:absolute; right:-4.0vw; top:20%; transform:translateY(-34%); z-index:3;
+    width:min(13vw,40vh); height:auto; opacity:0;
+    animation: fadeInLogo 1.2s ease-out 1.0s forwards, logoPulse 4s ease-in-out infinite;
+    pointer-events:none; user-select:none; filter: drop-shadow(0 0 6px rgba(44,140,255,.6));
   }
-
-  @keyframes fadeInLogo{
-    from{opacity:0; transform: translateY(-34%) translateX(40px);}
-    to{opacity:1; transform: translateY(-34%) translateX(0);}
-  }
-
-  @keyframes logoPulse{
-    0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));}
-    50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));}
-  }
-
-  @media (max-width:880px){
-    .hero-logo-img{
-      right:-1.2vw;
-      top:42%;
-      transform:translateY(-42%);
-      width:min(22vw,34vh);
-    }
-  }
+  @keyframes fadeInLogo{ from{opacity:0; transform: translateY(-34%) translateX(40px);} to{opacity:1; transform: translateY(-34%) translateX(0);} }
+  @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
+  @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
   /* === SECONDARY VIDEO === */
-  .promo-video{
-  position: relative;
-  z-index: 2;                 /* au-dessus du fond */
-  width: 100%;
-  margin: clamp(24px, 4vw, 48px) 0 0;  /* plus de marges négatives */
-}
+  .promo-video{ position:relative; z-index:0; width:100%; margin:-1250px 0 0; }
   @media (max-width:1400px){ .promo-video{ margin:-1450px 0 0; } }
   @media (max-width:1200px){ .promo-video{ margin:-1350px 0 0; } }
   @media (max-width:1024px){ .promo-video{ margin:-1250px 0 0; } }
   @media (max-width:768px){ .promo-video{ margin:-1150px 0 0; } }
   @media (max-width:560px){ .promo-video{ margin:-1050px 0 0; } }
-  .promo-video-frame{
-  position: relative;
-  width: min(1200px, 96%);    /* centrée et bornée */
-  margin: 0 auto;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: #000;
-  border: 1px solid #222;
-  border-radius: 16px;
-  box-shadow: 0 12px 28px rgba(0,0,0,.35);
-}
-  @supports not (aspect-ratio: 16/9){
-  .promo-video-frame{ padding-top:56.25%; }
-  .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; }
-}
-  .promo-video-el{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: brightness(.9) contrast(1.05) saturate(1.05);
-}
-  .promo-scrim{
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 70%, rgba(0,0,0,.55) 100%);
-  pointer-events: none;
-}
+  .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
+  @supports not (aspect-ratio:16/9){ .promo-video-frame{ padding-top:56.25%; } .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; } }
+  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
+  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%); pointer-events:none; }
 
   /* === SPACING HANDLE (draggable) === */
   .clock-resizer{
@@ -420,6 +340,10 @@ full_bleed: true
 </style>
 
 <section class="hero-video">
+  <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{{ '/assets/images/hero-poster.jpg' | relative_url }}">
+    <source src="{{ '/assets/videos/trading-hero.mp4' | relative_url }}" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
 
   <div class="hero-content">
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
@@ -1016,7 +940,7 @@ function updateClocks(){
     const city = el.dataset.city;
     const tz = el.dataset.tz;
     const now = new Date().toLocaleTimeString('en-GB', { timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false });
-    el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
+    el.innerHTML = <span class="city">${city}</span><span class="time">${now}</span>;
   });
 }
 updateClocks(); setInterval(updateClocks, 1000);
@@ -1129,9 +1053,9 @@ updateClocks(); setInterval(updateClocks, 1000);
     const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
     const urls={ tokyo:"https://www.jpx.co.jp/english/markets/", london:"https://www.londonstockexchange.com/", paris:"https://live.euronext.com/en/markets/paris", ny:"https://www.nyse.com/" };
     const badge=(open,label,url)=> open
-      ? `<a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>`
-      : `<span class="badge closed">${label} CLOSED</span>`;
-    el.innerHTML = `${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)}`;
+      ? <a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>
+      : <span class="badge closed">${label} CLOSED</span>;
+    el.innerHTML = ${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)};
   }
   refresh(); setInterval(refresh, 60_000);
 })();
@@ -1147,7 +1071,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   const panelReading = document.getElementById('readingPanel');
 
   const copy = {
-    reading:  `Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.`,
+    reading:  Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.,
   };
 
   function showWhat(){
@@ -1227,7 +1151,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
     const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
     cancelAnimationFrame(rAF);
-    rAF = requestAnimationFrame(()=>{ card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
+    rAF = requestAnimationFrame(()=>{ card.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
   }
   function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
   function toggleFlip(){
@@ -1274,7 +1198,7 @@ updateClocks(); setInterval(updateClocks, 1000);
       const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
       const ry = clamp(((x/rect.width)-0.5)*-8,-8,8);
       cancelAnimationFrame(rAF);
-      rAF = requestAnimationFrame(()=>{ board.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
+      rAF = requestAnimationFrame(()=>{ board.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
     }
     function reset(){ board.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
 
