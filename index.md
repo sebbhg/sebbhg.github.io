@@ -82,32 +82,32 @@ full_bleed: true
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-   /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO === */
+  /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO === */
   
-  /* La vidéo remonte très haut pour se fondre directement sous le hero */
+  /* Vidéo qui remonte entièrement derrière le hero */
   :root{
-    /* min: 720px (mobile compact) – typique: 90vh – max: 1600px (ultrawide) */
-    --promo-overlap: clamp(850px, 120vh, 1800px);
+    /* min: 850px (mobile paysage), typique: 110vh, max: 1800px (ultrawide) */
+    --promo-overlap: clamp(850px, 110vh, 1800px);
   }
   
   .promo-video{
     position: relative;
     z-index: 0;
     width: 100%;
-    margin-top: calc(var(--promo-overlap) * -1);  /* chevauchement géant et fluide */
+    margin-top: calc(var(--promo-overlap) * -1);  /* chevauchement maximal */
   }
   
-  /* Cadre vidéo */
+  /* Cadre de la vidéo */
   .promo-video-frame{
     position: relative;
     width: 100%;
     aspect-ratio: 16/9;
     overflow: hidden;
     background: #000;
-    border: 0; /* supprime toute bordure visible */
+    border: 0;
   }
   
-  /* fallback si aspect-ratio non supporté */
+  /* Fallback si aspect-ratio non supporté */
   @supports not (aspect-ratio:16/9){
     .promo-video-frame{ padding-top:56.25%; }
     .promo-video-el{
@@ -115,30 +115,60 @@ full_bleed: true
     }
   }
   
-  /* Vidéo ajustée visuellement */
+  /* Vidéo — cadrée plus haut */
   .promo-video-el{
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 28%;   /* cadre très haut (met les chiffres plus haut) */
+    object-position: center 25%;   /* on cadre plus haut pour placer l’action dès le début */
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
-  /* Dégradé supérieur pour fondre dans le hero */
+  /* Dégradé de transition */
   .promo-scrim{
     position: absolute;
     inset: 0;
     background: linear-gradient(
       180deg,
       rgba(0,0,0,.05) 0%,
-      rgba(0,0,0,.25) 25%,
-      rgba(0,0,0,.45) 55%,
+      rgba(0,0,0,.2) 20%,
+      rgba(0,0,0,.4) 50%,
       rgba(0,0,0,.7) 90%
     );
     pointer-events: none;
   }
+  
+  /* === Mobile/iPhone fixes: réduire l'overlap + raccourcir le hero === */
+  @media (max-width: 430px){
+    /* Hero plus court pour libérer de la place à la vidéo */
+    .hero-video{
+      min-height: clamp(360px, 58svh, 680px);
+      padding: clamp(20px, 5vw, 32px) clamp(14px, 5vw, 24px);
+    }
+  
+    /* Overlap moins fort: la vidéo redevient visible */
+    :root{
+      --promo-overlap: clamp(320px, 52svh, 640px);
+    }
+  
+    .promo-video{ margin-top: calc(var(--promo-overlap) * -1); }
+  
+    /* Cadrage vidéo légèrement relevé */
+    .promo-video-el{ object-position: center 28%; }
+  }
+  
+  /* Écrans courts (paysage / petits laptops) */
+  @media (max-height: 720px){
+    :root{
+      --promo-overlap: clamp(280px, 48svh, 560px);
+    }
+    .hero-video{
+      min-height: clamp(320px, 54svh, 640px);
+    }
+  }
+  
   /* === WORLD CLOCK BAR === */
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
