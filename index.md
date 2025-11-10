@@ -39,8 +39,13 @@ full_bleed: true
   /* === HERO LAYERS === */
   .hero-video::after{
     content:"";
-    position:absolute; left:0; right:0; bottom:-1px; height:80px;
-    background:linear-gradient(to bottom, rgba(5,8,16,0) 0%, rgba(5,8,16,.6) 60%, rgba(5,8,16,1) 100%);
+    position:absolute;
+    left:0; right:0; bottom:-1px;
+    height:100px;
+    background:linear-gradient(to bottom,
+      rgba(5,8,16,0) 0%,
+      rgba(5,8,16,0.4) 60%,
+      rgba(5,8,16,0.8) 100%);
     pointer-events:none;
   }
   .hero-content{
