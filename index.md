@@ -67,16 +67,43 @@ full_bleed: true
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
   /* === SECONDARY VIDEO === */
-  .promo-video{ position:relative; z-index:0; width:100%; margin:-1250px 0 0; }
+  .promo-video{
+  position: relative;
+  z-index: 2;                 /* au-dessus du fond */
+  width: 100%;
+  margin: clamp(24px, 4vw, 48px) 0 0;  /* plus de marges négatives */
+}
   @media (max-width:1400px){ .promo-video{ margin:-1450px 0 0; } }
   @media (max-width:1200px){ .promo-video{ margin:-1350px 0 0; } }
   @media (max-width:1024px){ .promo-video{ margin:-1250px 0 0; } }
   @media (max-width:768px){ .promo-video{ margin:-1150px 0 0; } }
   @media (max-width:560px){ .promo-video{ margin:-1050px 0 0; } }
-  .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
-  @supports not (aspect-ratio:16/9){ .promo-video-frame{ padding-top:56.25%; } .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; } }
-  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
-  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%); pointer-events:none; }
+  .promo-video-frame{
+  position: relative;
+  width: min(1200px, 96%);    /* centrée et bornée */
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid #222;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.35);
+}
+  @supports not (aspect-ratio: 16/9){
+  .promo-video-frame{ padding-top:56.25%; }
+  .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; }
+}
+  .promo-video-el{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(.9) contrast(1.05) saturate(1.05);
+}
+  .promo-scrim{
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.35) 70%, rgba(0,0,0,.55) 100%);
+  pointer-events: none;
+}
 
   /* === SPACING HANDLE (draggable) === */
   .clock-resizer{
