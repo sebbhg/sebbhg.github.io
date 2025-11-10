@@ -122,7 +122,7 @@ full_bleed: true
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 25%;   /* on cadre plus haut pour placer l’action dès le début */
+    object-position: center 25%;
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
@@ -142,20 +142,17 @@ full_bleed: true
   
   /* === Mobile/iPhone fixes: réduire l'overlap + raccourcir le hero === */
   @media (max-width: 430px){
-    /* Hero plus court pour libérer de la place à la vidéo */
     .hero-video{
       min-height: clamp(360px, 58svh, 680px);
       padding: clamp(20px, 5vw, 32px) clamp(14px, 5vw, 24px);
     }
   
-    /* Overlap moins fort: la vidéo redevient visible */
     :root{
       --promo-overlap: clamp(320px, 52svh, 640px);
     }
   
     .promo-video{ margin-top: calc(var(--promo-overlap) * -1); }
   
-    /* Cadrage vidéo légèrement relevé */
     .promo-video-el{ object-position: center 28%; }
   }
   
@@ -169,13 +166,12 @@ full_bleed: true
     }
   }
   
-  /* === Ajustement desktop : remonter légèrement les horloges === */
+  /* === Ajustement desktop : remonter davantage les horloges === */
   @media (min-width: 1025px){
-    /* ⚙️ adapte ce sélecteur selon ta structure réelle */
     section#horloges,
     section.horloges,
     .clock-section {
-      margin-top: -80px;  /* remonte la section de ~80px */
+      margin-top: -150px;  /* remonte plus fort (~150px) */
     }
   }
     
