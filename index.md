@@ -496,7 +496,6 @@ full_bleed: true
     </div>
   </div>
 
-  <img class="hero-logo-img" src="/assets/images/sh-logo.png" alt="SH monogram">
 </section>
 
 <!-- ===== Full-width secondary video ===== -->
@@ -578,6 +577,7 @@ full_bleed: true
 <!-- ===== SECTION HUB (tabs) ===== -->
 <section class="after-market">
   <div class="hub-inner">
+    <img class="sh-logo" src="/assets/images/sh-logo.png" alt="SH monogram">
     <p class="hub-eyebrow">The different sections</p>
     <h2 class="hub-title">Activities</h2>
 
