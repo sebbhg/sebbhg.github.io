@@ -1199,6 +1199,7 @@ updateClocks(); setInterval(updateClocks, 1000);
 (function(){
   const card = document.getElementById('eduBadge');
   if (!card) return;
+
   const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
   let rAF;
 
@@ -1207,16 +1208,22 @@ updateClocks(); setInterval(updateClocks, 1000);
     const clientX = (e.clientX ?? (e.touches&&e.touches[0].clientX));
     const clientY = (e.clientY ?? (e.touches&&e.touches[0].clientY));
     if (clientX==null || clientY==null) return;
+
     const x = clientX - rect.left;
     const y = clientY - rect.top;
     const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
     const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
+
     cancelAnimationFrame(rAF);
-    // Dans le bloc "Tilt 3D + Flip sur le badge Education"
     rAF = requestAnimationFrame(()=>{
       card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
     });
-  function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
+  } // <-- cette accolade manquait chez toi
+
+  function reset(){
+    card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+  }
+
   function toggleFlip(){
     const flipped = card.classList.toggle('is-flipped');
     card.setAttribute('aria-pressed', flipped ? 'true' : 'false');
@@ -1227,7 +1234,12 @@ updateClocks(); setInterval(updateClocks, 1000);
   card.addEventListener('touchmove', onMove, {passive:true});
   card.addEventListener('touchend', reset);
   card.addEventListener('click', toggleFlip);
-  card.addEventListener('keydown', (e)=>{ if (e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleFlip(); }});
+  card.addEventListener('keydown', (e)=>{
+    if (e.key==='Enter' || e.key===' '){
+      e.preventDefault();
+      toggleFlip();
+    }
+  });
 })();
 
 /* === Tilt 3D sur les Glass Boards + Particles spawn === */
