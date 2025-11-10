@@ -138,11 +138,6 @@ full_bleed: true
     :root{
       --promo-overlap: clamp(420px, 72svh, 820px);
     }
-
-    .hero-logo-img{
-    top: max(10px, env(safe-area-inset-top));
-    right: max(8px, env(safe-area-inset-right));
-    width: clamp(72px, 18vw, 120px);
       
     .promo-video{ 
       margin-top: -520px !important; /* la vidéo démarre tout en haut */
