@@ -29,7 +29,7 @@ full_bleed: true
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
-    position:absolute; right:-4.0vw; top:10%; transform:translateY(-34%); z-index:3;
+    position:absolute; right:-4.0vw; top:8%; transform:translateY(-34%); z-index:3;
     width:min(13vw,40vh); height:auto; opacity:0;
     animation: fadeInLogo 1.2s ease-out 1.0s forwards, logoPulse 4s ease-in-out infinite;
     pointer-events:none; user-select:none; filter: drop-shadow(0 0 6px rgba(44,140,255,.6));
