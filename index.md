@@ -171,7 +171,7 @@ full_bleed: true
     section#horloges,
     section.horloges,
     .clock-section {
-      margin-top: -230px;  /* remonte plus fort (~150px) */
+      margin-top: -430px;  /* remonte plus fort (~150px) */
     }
   }
     
