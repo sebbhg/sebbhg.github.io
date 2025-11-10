@@ -64,7 +64,24 @@ full_bleed: true
     opacity:.35;
     pointer-events:none;
   }
-  
+
+  /* === LOGO IMAGE + halo pulsé === */
+  .hero-logo-img{
+    position:absolute;
+    right:clamp(10px,3vw,40px);
+    top:10%;
+    transform:translateY(-34%);
+    width:clamp(90px,14vw,220px);
+    height:auto;
+    z-index:3;
+    opacity:0;
+    animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes fadeInLogo{ from{opacity:0; transform: translateY(-34%) translateX(40px);} to{opacity:1; transform: translateY(-34%) translateX(0);} }
+  @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
+  @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
+
   /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO (FINAL ADJUSTMENTS) === */
   
   /* Vidéo plein écran derrière le hero */
@@ -121,7 +138,7 @@ full_bleed: true
     :root{
       --promo-overlap: clamp(420px, 72svh, 820px);
     }
-      
+  
     .promo-video{ 
       margin-top: -520px !important; /* la vidéo démarre tout en haut */
     }
@@ -152,36 +169,7 @@ full_bleed: true
       margin-top: -360px !important; /* remonte sur Mac et écran externe */
     }
   }
-
-  /* === Logo calé sur la vidéo (coin haut-droit) === */
-.promo-video-frame{ position: relative; } /* (déjà présent, rappel) */
-
-.hero-logo{
-  position: absolute;
-  top: clamp(110px, 14vh, 190px);
-  right: clamp(-30px, -10vw, 0px); 
-  width: clamp(90px, 10vw, 160px);
-  height: auto;
-  z-index: 5;                 /* au-dessus de la vidéo et de la scrim */
-  pointer-events: none;
-  filter: drop-shadow(0 0 6px rgba(44,140,255,.8));
-  animation: logoPulse 4s ease-in-out infinite; /* optionnel : halo */
-}
-
-/* Grands écrans : un peu plus grand */
-@media (min-width: 1280px){
-  .hero-logo{ width: clamp(110px, 9vw, 190px); }
-}
-
-/* Mobile : on réduit un peu pour ne pas gêner le titre */
-@media (max-width: 600px){
-  .hero-logo{
-    top: 10px;
-    right: 10px;
-    width: clamp(70px, 18vw, 110px);
-  }
-}
-  
+    
   /* === WORLD CLOCK BAR === */
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
@@ -489,6 +477,7 @@ full_bleed: true
     </div>
   </div>
 
+  <img class="hero-logo-img" src="/assets/images/sh-logo.png" alt="SH monogram">
 </section>
 
 <!-- ===== Full-width secondary video ===== -->
@@ -498,9 +487,6 @@ full_bleed: true
       <source src="/assets/videos/trading-broll.mp4" type="video/mp4">
     </video>
     <div class="promo-scrim"></div>
-
-    <!-- LOGO en haut à droite de la vidéo -->
-    <img class="hero-logo" src="/assets/images/sh-logo.png" alt="SH monogram">
   </div>
 </section>
 
@@ -1055,7 +1041,7 @@ function updateClocks(){
     const city = el.dataset.city;
     const tz = el.dataset.tz;
     const now = new Date().toLocaleTimeString('en-GB', { timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false });
-    el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
+    el.innerHTML = <span class="city">${city}</span><span class="time">${now}</span>;
   });
 }
 updateClocks(); setInterval(updateClocks, 1000);
@@ -1088,7 +1074,6 @@ updateClocks(); setInterval(updateClocks, 1000);
 (function(){
   const el = document.getElementById('marketStatus');
   if(!el) return;
-
   function isWeekday(tz){
     const day = new Intl.DateTimeFormat('en-US', { weekday:'short', timeZone:tz }).format(new Date());
     return day !== 'Sat' && day !== 'Sun';
@@ -1099,25 +1084,25 @@ updateClocks(); setInterval(updateClocks, 1000);
     const m = parseInt(parts.find(p=>p.type==='minute').value,10);
     return { h, m, t: h*60+m };
   }
-  function isOpenTokyo(){ if(!isWeekday('Asia/Tokyo')) return false; const {t}=hmInTZ('Asia/Tokyo'); return t>=540 && t<900; }
-  function isOpenLondon(){ if(!isWeekday('Europe/London')) return false; const {t}=hmInTZ('Europe/London'); return t>=480 && t<960; }
-  function isOpenParis(){ if(!isWeekday('Europe/Paris')) return false; const {t}=hmInTZ('Europe/Paris'); return t>=540 && t<1020; }
-  function isOpenNewYork(){ if(!isWeekday('America/New_York')) return false; const {t}=hmInTZ('America/New_York'); return t>=(9*60+30) && t<960; }
+  function isOpenTokyo(){ if(!isWeekday('Asia/Tokyo')) return false; const {t}=hmInTZ('Asia/Tokyo'); return t>=540 && t<900; }     // 09:00–15:00
+  function isOpenLondon(){ if(!isWeekday('Europe/London')) return false; const {t}=hmInTZ('Europe/London'); return t>=480 && t<960; } // 08:00–16:00
+  function isOpenParis(){ if(!isWeekday('Europe/Paris')) return false; const {t}=hmInTZ('Europe/Paris'); return t>=540 && t<1020; }   // 09:00–17:00
+  function isOpenNewYork(){ if(!isWeekday('America/New_York')) return false; const {t}=hmInTZ('America/New_York'); return t>=(9*60+30) && t<960; } // 09:30–16:00
 
   function refresh(){
-    const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
-    const urls={
-      tokyo:"https://www.jpx.co.jp/english/markets/",
-      london:"https://www.londonstockexchange.com/",
-      paris:"https://live.euronext.com/en/markets/paris",
-      ny:"https://www.nyse.com/"
-    };
-    const badge=(open,label,url)=> open
-      ? `<a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>`
-      : `<span class="badge closed">${label} CLOSED</span>`;
-
-    el.innerHTML = `${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)}`;
-  }
+  const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
+  const urls={
+    tokyo:"https://www.jpx.co.jp/english/markets/",
+    london:"https://www.londonstockexchange.com/",
+    paris:"https://live.euronext.com/en/markets/paris",
+    ny:"https://www.nyse.com/"
+  };
+  const badge=(open,label,url)=> open
+    ? <a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>
+    : <span class="badge closed">${label} CLOSED</span>;
+  document.getElementById('marketStatus').innerHTML =
+    ${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)};
+}
   refresh(); setInterval(refresh, 60_000);
 })();
 
@@ -1199,7 +1184,6 @@ updateClocks(); setInterval(updateClocks, 1000);
 (function(){
   const card = document.getElementById('eduBadge');
   if (!card) return;
-
   const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
   let rAF;
 
@@ -1208,22 +1192,14 @@ updateClocks(); setInterval(updateClocks, 1000);
     const clientX = (e.clientX ?? (e.touches&&e.touches[0].clientX));
     const clientY = (e.clientY ?? (e.touches&&e.touches[0].clientY));
     if (clientX==null || clientY==null) return;
-
     const x = clientX - rect.left;
     const y = clientY - rect.top;
     const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
     const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
-
     cancelAnimationFrame(rAF);
-    rAF = requestAnimationFrame(()=>{
-      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-    });
-  } // <-- cette accolade manquait chez toi
-
-  function reset(){
-    card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    rAF = requestAnimationFrame(()=>{ card.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
   }
-
+  function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
   function toggleFlip(){
     const flipped = card.classList.toggle('is-flipped');
     card.setAttribute('aria-pressed', flipped ? 'true' : 'false');
@@ -1234,12 +1210,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   card.addEventListener('touchmove', onMove, {passive:true});
   card.addEventListener('touchend', reset);
   card.addEventListener('click', toggleFlip);
-  card.addEventListener('keydown', (e)=>{
-    if (e.key==='Enter' || e.key===' '){
-      e.preventDefault();
-      toggleFlip();
-    }
-  });
+  card.addEventListener('keydown', (e)=>{ if (e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleFlip(); }});
 })();
 
 /* === Tilt 3D sur les Glass Boards + Particles spawn === */
@@ -1273,10 +1244,8 @@ updateClocks(); setInterval(updateClocks, 1000);
       const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
       const ry = clamp(((x/rect.width)-0.5)*-8,-8,8);
       cancelAnimationFrame(rAF);
-      // Dans le bloc "enhanceBoard(...)"
-      rAF = requestAnimationFrame(()=>{
-        board.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
+      rAF = requestAnimationFrame(()=>{ board.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
+    }
     function reset(){ board.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
 
     board.addEventListener('mousemove', onMove, {passive:true});
