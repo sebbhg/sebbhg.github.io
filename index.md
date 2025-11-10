@@ -68,8 +68,8 @@ full_bleed: true
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
     position:absolute;
-    right:-16px;
-    top:-16px;
+    right:-100px;
+    top:20px;
     transform:translateY(-34%);
     width:clamp(90px,14vw,220px);
     height:auto;
