@@ -148,7 +148,7 @@ full_bleed: true
     }
   
     .world-clock-bar{
-      margin-top: 16px; /* libère les boutons LinkedIn / Email */
+      margin-top: 100px; /* libère les boutons LinkedIn / Email */
     }
   }
   
