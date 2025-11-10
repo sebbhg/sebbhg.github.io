@@ -82,28 +82,20 @@ full_bleed: true
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-  /* === SECONDARY VIDEO — FULL HERO BACKGROUND === */
+  /* === SECONDARY VIDEO — RESPONSIVE OVERLAP === */
+  
+  /* 1) Un seul réglage central pour l’overlap :
+     - min 260px, typiquement 40vh, max 900px selon la hauteur d’écran */
+  :root{
+    --promo-overlap: clamp(260px, 40vh, 900px);
+  }
+  
   .promo-video{
     position: relative;
     z-index: 0;
     width: 100%;
-    margin-top: -980px;   /* recouvre le hero (ajuste ici si besoin ±20px) */
-  }
-  
-  @media (min-width: 1600px){
-    .promo-video{ margin-top: -1080px; }  /* grands écrans ultra-wide */
-  }
-  @media (max-width: 1200px){
-    .promo-video{ margin-top: -820px; }
-  }
-  @media (max-width: 1024px){
-    .promo-video{ margin-top: -700px; }
-  }
-  @media (max-width: 768px){
-    .promo-video{ margin-top: -520px; }
-  }
-  @media (max-width: 480px){
-    .promo-video{ margin-top: -420px; }
+    /* On remonte la vidéo sous le hero de façon fluide */
+    margin-top: calc(var(--promo-overlap) * -1);
   }
   
   .promo-video-frame{
@@ -119,11 +111,7 @@ full_bleed: true
   @supports not (aspect-ratio:16/9){
     .promo-video-frame{ padding-top:56.25%; }
     .promo-video-el{
-      position:absolute;
-      left:0;
-      top:0;
-      width:100%;
-      height:100%;
+      position:absolute; left:0; top:0; width:100%; height:100%;
     }
   }
   
@@ -133,19 +121,18 @@ full_bleed: true
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 38%;   /* cadre un peu plus haut */
+    /* on cadre un peu plus haut pour que les chiffres soient visibles plus tôt */
+    object-position: center 38%;
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
   .promo-scrim{
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      180deg,
+    background: linear-gradient(180deg,
       rgba(0,0,0,.25) 0%,
       rgba(0,0,0,.45) 55%,
-      rgba(0,0,0,.7) 90%
-    );
+      rgba(0,0,0,.7) 90%);
     pointer-events: none;
   }
 
