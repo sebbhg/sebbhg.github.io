@@ -67,16 +67,16 @@ full_bleed: true
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
-    position:absolute;
-    right:clamp(10px,3vw,40px);
-    top:10%;
-    transform:translateY(-34%);
-    width:clamp(90px,14vw,220px);
-    height:auto;
-    z-index:3;
-    opacity:0;
+    position: fixed;
+    right: max(8px, env(safe-area-inset-right));
+    top: 12px;                 /* sera réajusté par le JS ci-dessous */
+    width: clamp(90px, 12vw, 200px);
+    height: auto;
+    z-index: 1000;
+    opacity: 0;
+    transform: none;           /* on supprime l'ancien translateY */
+    pointer-events: none;
     animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
-    pointer-events:none;
   }
   @keyframes fadeInLogo{ from{opacity:0; transform: translateY(-34%) translateX(40px);} to{opacity:1; transform: translateY(-34%) translateX(0);} }
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
@@ -138,7 +138,12 @@ full_bleed: true
     :root{
       --promo-overlap: clamp(420px, 72svh, 820px);
     }
-  
+
+    .hero-logo-img{
+    top: max(10px, env(safe-area-inset-top));
+    right: max(8px, env(safe-area-inset-right));
+    width: clamp(72px, 18vw, 120px);
+      
     .promo-video{ 
       margin-top: -520px !important; /* la vidéo démarre tout en haut */
     }
