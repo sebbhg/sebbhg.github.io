@@ -17,21 +17,21 @@ full_bleed: true
   @keyframes fadeInUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
 
   /* === Hero titles fade-in === */
-    .eyebrow.shifted{
-      margin-top:-25px;
-      opacity:0;
-      transform:translateY(10px);
-      animation:fadeInUp 1.4s ease-out .3s forwards;
-    
-      /* Style responsive propre */
-      font-size:clamp(1.6rem, 3vw, 3rem);
-      font-weight:300;                 /* lettres fines */
-      letter-spacing:0.1em;
-      text-transform:uppercase;
-      color:#bcd9ff;
-      text-shadow:0 0 6px rgba(44,140,255,.35);
-      font-family:'Helvetica Neue','Segoe UI',Roboto,sans-serif;
-    }
+  .eyebrow.shifted{
+    margin-top:-25px;
+    opacity:0;
+    transform:translateY(10px);
+    animation:fadeInUp 1.4s ease-out .3s forwards;
+
+    /* Style responsive propre */
+    font-size:clamp(1.6rem, 3vw, 3rem);
+    font-weight:300;                 /* lettres fines */
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:#bcd9ff;
+    text-shadow:0 0 6px rgba(44,140,255,.35);
+    font-family:'Helvetica Neue','Segoe UI',Roboto,sans-serif;
+  }
   
   .hero-content h1{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out .8s forwards; }
   .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
@@ -197,23 +197,54 @@ full_bleed: true
   .market-status a.badge{ text-decoration:none; cursor:pointer; pointer-events:auto; }
   .market-status a.badge:hover{ border-color:#2c8cff99; box-shadow:0 0 0 2px rgba(44,140,255,.12) inset; }
 
-  /* ===== Bande "Latest Updates" ===== */
-  .news-band{ background:#050505; border-top:1px solid #111; border-bottom:1px solid #111; padding:28px 20px; }
-  .news-wrap{ max-width:1100px; margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+  /* ====== UPDATES CAROUSEL (remplace l'ancien "news-band") ====== */
+  .news-band{ background:#050505; border-top:1px solid #111; border-bottom:1px solid #111; padding:28px 0 40px; }
+  .updates-wrap{ max-width:1100px; margin:0 auto; padding:0 20px; }
+  .updates-head{
+    display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;
+  }
+  .updates-title{ color:#e7efff; font-weight:900; letter-spacing:.06em; text-transform:uppercase; }
+  .updates-ctrls{ display:flex; gap:8px; }
+  .updates-btn{
+    width:42px; height:42px; border-radius:50%; display:grid; place-items:center;
+    border:1px solid rgba(255,255,255,.15); background:#0f0f0f; color:#cfe3ff; font-weight:900; cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.35);
+  }
+  .updates-btn:hover{ border-color:#4da0ff; }
+  .updates-stage{
+    position:relative; overflow:visible;
+  }
+  .updates-fade{
+    pointer-events:none; position:absolute; inset:0;
+    background: linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,.0) 12%, rgba(5,5,5,.0) 88%, rgba(5,5,5,1) 100%);
+    z-index:2;
+  }
+  .updates-track{
+    display:flex; gap:18px; align-items:stretch;
+    will-change:transform; transform:translate3d(0,0,0);
+    transition: transform .35s cubic-bezier(.2,.75,.2,1);
+    padding:8px 0;
+  }
   .update-card{
     position:relative; background:#0d0d0d; border:1px solid #222; border-radius:14px;
     padding:18px 18px 16px; box-shadow:0 10px 30px rgba(0,0,0,.25);
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    width:min(540px, 86vw); flex:0 0 auto;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, filter .25s ease, opacity .25s ease;
+    transform-origin:center center;
+    opacity:.7; filter:blur(1.2px) saturate(.9) brightness(.95);
   }
   .update-card::after{ content:""; position:absolute; inset:-1px; border-radius:14px; pointer-events:none; background:radial-gradient(600px 200px at 20% -20%, rgba(44,140,255,.15), transparent 70%); opacity:.7; }
-  .update-card:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,0,0,.35); border-color:#2c8cff55; }
+  .update-card.is-center{
+    transform:scale(1.02);
+    border-color:#2c8cff55; box-shadow:0 18px 46px rgba(0,0,0,.45);
+    opacity:1; filter:none;
+  }
   .update-badge{ display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff; background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; margin-bottom:10px; font-weight:800; }
   .update-title{ margin:0 0 6px; font-size:clamp(1.05rem,2.2vw,1.2rem); font-weight:800; }
   .update-meta{ color:#9aa3b2; font-size:.9rem; margin:0 0 10px; }
   .update-desc{ color:#c9cbd1; margin:0 0 12px; line-height:1.55; }
   .update-link{ display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:10px; background:#0f0f0f; color:#fff; font-weight:700; text-decoration:none; }
   .update-link:hover{ border-color:#4da0ff; background:#141414; }
-  @media (max-width:820px){ .news-wrap{ grid-template-columns: 1fr; } }
 
   /* === SECTION HUB === */
   .after-market{ position:relative; z-index:4; /* au-dessus du bandeau lectures */ background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111; }
@@ -529,30 +560,57 @@ full_bleed: true
 <!-- ===== Market Status ===== -->
 <div class="market-status" id="marketStatus">Loading market status…</div>
 
-<!-- ===== Latest Updates ===== -->
+<!-- ===== Latest Updates — CAROUSEL ===== -->
 <section class="news-band">
-  <div class="news-wrap">
-    <article class="update-card">
-      <span class="update-badge">INFO</span>
-      <h3 class="update-title">Website under construction 🚧</h3>
-      <p class="update-meta">Oct 2025 · Ongoing</p>
-      <p class="update-desc">
-        This website is currently being enhanced — new pages, animations, and live data integrations are coming soon.
-        Stay tuned for the full Quantitative Finance & Trading experience.
-      </p>
-      <a class="update-link" href="{{ '/' | relative_url }}">Learn more →</a>
-    </article>
+  <div class="updates-wrap">
+    <div class="updates-head">
+      <div class="updates-title">Latest updates</div>
+      <div class="updates-ctrls" role="group" aria-label="Carousel controls">
+        <button class="updates-btn" id="updPrev" aria-label="Previous update" title="Previous" type="button">‹</button>
+        <button class="updates-btn" id="updNext" aria-label="Next update" title="Next" type="button">›</button>
+      </div>
+    </div>
 
-    <article class="update-card">
-      <span class="update-badge">UPDATE</span>
-      <h3 class="update-title">What I do — Quant Engineering</h3>
-      <p class="update-meta">Oct 2025 · Labs</p>
-      <p class="update-desc">
-        New “What I do” page: pricing engines, risk aggregation, intraday analytics and
-        research notes. Coming next: CVA dashboard & volatility surface explorer.
-      </p>
-      <a class="update-link" href="{{ '/what-i-do' | relative_url }}">Open page →</a>
-    </article>
+    <div class="updates-stage" id="updatesStage" aria-live="polite">
+      <div class="updates-fade" aria-hidden="true"></div>
+      <div class="updates-track" id="updatesTrack">
+        <!-- Card 1 (ex-INFO) -->
+        <article class="update-card" data-card="0" tabindex="0">
+          <span class="update-badge">INFO</span>
+          <h3 class="update-title">Website under construction 🚧</h3>
+          <p class="update-meta">Oct 2025 · Ongoing</p>
+          <p class="update-desc">
+            This website is currently being enhanced — new pages, animations, and live data integrations are coming soon.
+            Stay tuned for the full Quantitative Finance & Trading experience.
+          </p>
+          <a class="update-link" href="{{ '/' | relative_url }}">Learn more →</a>
+        </article>
+
+        <!-- Card 2 (ex-UPDATE) -->
+        <article class="update-card" data-card="1" tabindex="0">
+          <span class="update-badge">UPDATE</span>
+          <h3 class="update-title">What I do — Quant Engineering</h3>
+          <p class="update-meta">Oct 2025 · Labs</p>
+          <p class="update-desc">
+            New “What I do” page: pricing engines, risk aggregation, intraday analytics and
+            research notes. Coming next: CVA dashboard & volatility surface explorer.
+          </p>
+          <a class="update-link" href="{{ '/what-i-do' | relative_url }}">Open page →</a>
+        </article>
+
+        <!-- Card 3 (nouvelle étiquette) -->
+        <article class="update-card" data-card="2" tabindex="0">
+          <span class="update-badge">INSIGHT</span>
+          <h3 class="update-title">CVA Dashboard — Preview</h3>
+          <p class="update-meta">Nov 2025 · Teaser</p>
+          <p class="update-desc">
+            Early look at an interactive CVA dashboard: exposures timeline, netting sets, and fast Greeks (GPR/BQ).
+            Public demo planned with anonymized data.
+          </p>
+          <a class="update-link" href="{{ '/projects' | relative_url }}">See projects →</a>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1256,5 +1314,102 @@ updateClocks(); setInterval(updateClocks, 1000);
   enhanceBoard('glassBoard');     // Courses
   enhanceBoard('projectsBoard');  // Projects
   enhanceBoard('readingBoard');   // Reading
+})();
+
+/* === Updates Carousel logic === */
+(function(){
+  const track = document.getElementById('updatesTrack');
+  const stage = document.getElementById('updatesStage');
+  const btnPrev = document.getElementById('updPrev');
+  const btnNext = document.getElementById('updNext');
+  const cards = Array.from(track.querySelectorAll('.update-card'));
+  let idx = 1; // démarre sur la carte du milieu (0,1,2)
+  let lastRect = null;
+
+  function centerOn(i, withAnim=true){
+    idx = (i + cards.length) % cards.length;
+    const target = cards[idx];
+    const stageRect = stage.getBoundingClientRect();
+    const cardRect  = target.getBoundingClientRect();
+    const offset = (stageRect.left + stageRect.right)/2 - (cardRect.left + cardRect.right)/2;
+    // Applique transform au track (ajuste relatif à sa position actuelle)
+    const trackX = getCurrentTranslateX(track);
+    const nextX = trackX + offset;
+    if(!withAnim){ track.style.transition = 'none'; }
+    track.style.transform = `translate3d(${nextX}px,0,0)`;
+    if(!withAnim){ requestAnimationFrame(()=>{ track.style.transition='transform .35s cubic-bezier(.2,.75,.2,1)'; }); }
+
+    // classes de focus visuel
+    cards.forEach(c => c.classList.remove('is-center'));
+    target.classList.add('is-center');
+    target.focus({preventScroll:true});
+  }
+
+  function getCurrentTranslateX(el){
+    const tr = getComputedStyle(el).transform;
+    if (tr && tr !== 'none'){
+      const m = new DOMMatrixReadOnly(tr);
+      return m.m41;
+    }
+    return 0;
+  }
+
+  function recalc(){
+    // remet le track à 0 puis recentre l’index courant pour tenir compte des tailles responsives
+    track.style.transition = 'none';
+    track.style.transform = 'translate3d(0,0,0)';
+    requestAnimationFrame(()=> centerOn(idx, false));
+  }
+
+  btnPrev.addEventListener('click', ()=> centerOn(idx-1));
+  btnNext.addEventListener('click', ()=> centerOn(idx+1));
+
+  // Keyboard (flèches)
+  stage.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); centerOn(idx-1); }
+    else if(e.key === 'ArrowRight'){ e.preventDefault(); centerOn(idx+1); }
+  });
+
+  // Swipe
+  let startX=0, dragging=false;
+  function onDown(e){ dragging=true; startX = (e.touches?e.touches[0].clientX:e.clientX); track.style.transition='none'; }
+  function onMove(e){
+    if(!dragging) return;
+    const x = (e.touches?e.touches[0].clientX:e.clientX);
+    const dx = x - startX;
+    const base = getCurrentTranslateX(track);
+    track.style.transform = `translate3d(${base + dx}px,0,0)`;
+    startX = x;
+  }
+  function onUp(){
+    if(!dragging) return; dragging=false;
+    // Choisit la carte la plus proche du centre
+    const center = (stage.getBoundingClientRect().left + stage.getBoundingClientRect().right)/2;
+    let best = 0, bestDist = Infinity;
+    cards.forEach((c,i)=>{
+      const r = c.getBoundingClientRect();
+      const mid = (r.left + r.right)/2;
+      const d = Math.abs(mid - center);
+      if(d < bestDist){ bestDist=d; best=i; }
+    });
+    track.style.transition='transform .35s cubic-bezier(.2,.75,.2,1)';
+    centerOn(best);
+  }
+
+  stage.addEventListener('mousedown', onDown);
+  window.addEventListener('mousemove', onMove, {passive:false});
+  window.addEventListener('mouseup', onUp);
+  stage.addEventListener('touchstart', onDown, {passive:true});
+  window.addEventListener('touchmove', onMove, {passive:false});
+  window.addEventListener('touchend', onUp);
+
+  // Reflow on resize/orientation change
+  window.addEventListener('resize', ()=>{
+    const r = stage.getBoundingClientRect().width;
+    if(!lastRect || Math.abs(r - lastRect) > 2){ lastRect = r; recalc(); }
+  });
+
+  // Initial center (sur la 2e carte)
+  requestAnimationFrame(()=> centerOn(idx, false));
 })();
 </script>
