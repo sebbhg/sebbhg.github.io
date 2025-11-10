@@ -82,32 +82,32 @@ full_bleed: true
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-  /* === SECONDARY VIDEO — STRONG RESPONSIVE OVERLAP === */
+   /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO === */
   
-  /* Paramètre central : plus grand chevauchement */
+  /* La vidéo remonte très haut pour se fondre directement sous le hero */
   :root{
-    /* min: 420px (petits écrans), typique: 55vh, max: 1100px (grands écrans) */
-    --promo-overlap: clamp(420px, 55vh, 1100px);
+    /* min: 720px (mobile compact) – typique: 90vh – max: 1600px (ultrawide) */
+    --promo-overlap: clamp(720px, 90vh, 1600px);
   }
   
   .promo-video{
     position: relative;
     z-index: 0;
     width: 100%;
-    /* On remonte la vidéo sous le hero de façon fluide */
-    margin-top: calc(var(--promo-overlap) * -1);
+    margin-top: calc(var(--promo-overlap) * -1);  /* chevauchement géant et fluide */
   }
   
+  /* Cadre vidéo */
   .promo-video-frame{
     position: relative;
     width: 100%;
     aspect-ratio: 16/9;
     overflow: hidden;
     background: #000;
-    border-top: 0;
-    border-bottom: 1px solid #222;
+    border: 0; /* supprime toute bordure visible */
   }
   
+  /* fallback si aspect-ratio non supporté */
   @supports not (aspect-ratio:16/9){
     .promo-video-frame{ padding-top:56.25%; }
     .promo-video-el{
@@ -115,27 +115,30 @@ full_bleed: true
     }
   }
   
+  /* Vidéo ajustée visuellement */
   .promo-video-el{
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* on cadre un peu plus haut pour que les chiffres soient visibles plus tôt */
-    object-position: center 32%;
+    object-position: center 28%;   /* cadre très haut (met les chiffres plus haut) */
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
+  /* Dégradé supérieur pour fondre dans le hero */
   .promo-scrim{
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg,
-      rgba(0,0,0,.25) 0%,
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,.05) 0%,
+      rgba(0,0,0,.25) 25%,
       rgba(0,0,0,.45) 55%,
-      rgba(0,0,0,.7) 90%);
+      rgba(0,0,0,.7) 90%
+    );
     pointer-events: none;
   }
-
   /* === WORLD CLOCK BAR === */
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
