@@ -149,7 +149,7 @@ full_bleed: true
   
     /* ✅ On descend franchement les horloges pour libérer le texte + boutons */
     .world-clock-bar{
-      margin-top: 260px !important;  /* essaie entre 240 et 300px selon ton iPhone */
+      margin-top: 300px !important;  /* essaie entre 240 et 300px selon ton iPhone */
     }
   }
   
