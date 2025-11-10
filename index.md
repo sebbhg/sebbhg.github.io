@@ -82,22 +82,21 @@ full_bleed: true
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-  /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO === */
+  /* === SECONDARY VIDEO — RESPONSIVE OVERLAY BEHIND HERO === */
   
-  /* Vidéo qui remonte entièrement derrière le hero */
+  /* Valeur de chevauchement globale (base desktop) */
   :root{
-    /* min: 850px (mobile paysage), typique: 110vh, max: 1800px (ultrawide) */
-    --promo-overlap: clamp(850px, 110vh, 1800px);
+    /* min: 850px (petit laptop), typique: 100vh, max: 1600px (ultrawide) */
+    --promo-overlap: clamp(850px, 100vh, 1600px);
   }
   
   .promo-video{
     position: relative;
     z-index: 0;
     width: 100%;
-    margin-top: calc(var(--promo-overlap) * -1);  /* chevauchement maximal */
+    margin-top: calc(var(--promo-overlap) * -1);
   }
   
-  /* Cadre de la vidéo */
   .promo-video-frame{
     position: relative;
     width: 100%;
@@ -107,7 +106,6 @@ full_bleed: true
     border: 0;
   }
   
-  /* Fallback si aspect-ratio non supporté */
   @supports not (aspect-ratio:16/9){
     .promo-video-frame{ padding-top:56.25%; }
     .promo-video-el{
@@ -115,18 +113,16 @@ full_bleed: true
     }
   }
   
-  /* Vidéo — cadrée plus haut */
   .promo-video-el{
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 25%;   /* on cadre plus haut pour placer l’action dès le début */
+    object-position: center 26%;   /* cadrage légèrement plus haut */
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
-  /* Dégradé de transition */
   .promo-scrim{
     position: absolute;
     inset: 0;
@@ -140,30 +136,34 @@ full_bleed: true
     pointer-events: none;
   }
   
-  /* === Mobile/iPhone fixes: réduire l'overlap + raccourcir le hero === */
-  @media (max-width: 430px){
-    /* Hero plus court pour libérer de la place à la vidéo */
-    .hero-video{
-      min-height: clamp(360px, 58svh, 680px);
-      padding: clamp(20px, 5vw, 32px) clamp(14px, 5vw, 24px);
-    }
+  /* --- Adaptations selon taille d’écran --- */
   
-    /* Overlap moins fort: la vidéo redevient visible */
-    :root{
-      --promo-overlap: clamp(320px, 52svh, 640px);
-    }
-  
-    .promo-video{ margin-top: calc(var(--promo-overlap) * -1); }
-  
-    /* Cadrage vidéo légèrement relevé */
-    .promo-video-el{ object-position: center 28%; }
+  /* 🖥️ Laptops 13–15" : horloges trop basses → on réduit l’overlap */
+  @media (max-width: 1440px){
+    :root{ --promo-overlap: clamp(740px, 88vh, 1300px); }
   }
   
-  /* Écrans courts (paysage / petits laptops) */
-  @media (max-height: 720px){
-    :root{
-      --promo-overlap: clamp(280px, 48svh, 560px);
+  /* 📱 Mobiles : vidéo trop basse → on réduit encore plus l’overlap
+     + on ajuste le cadrage pour qu’elle monte visuellement */
+  @media (max-width: 480px){
+    .hero-video{
+      min-height: clamp(360px, 56svh, 680px);
+      padding-bottom: clamp(16px, 4vw, 28px);
     }
+    :root{
+      --promo-overlap: clamp(380px, 68svh, 740px);
+    }
+    .promo-video{
+      margin-top: calc(var(--promo-overlap) * -1);
+    }
+    .promo-video-el{
+      object-position: center 22%;   /* remonte la vidéo */
+    }
+  }
+  
+  /* Petits écrans très plats (paysage mobile ou notebook fin) */
+  @media (max-height: 720px){
+    :root{ --promo-overlap: clamp(320px, 52svh, 600px); }
     .hero-video{
       min-height: clamp(320px, 54svh, 640px);
     }
