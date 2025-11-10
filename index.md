@@ -79,18 +79,62 @@ full_bleed: true
 
   /* === SECONDARY VIDEO === */
   .promo-video{
-    position:relative;
-    z-index:0;
-    width:100%;
-    margin-top:-28px;         /* petit overlap propre */
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    margin-top: -120px;   /* remonte la vidéo pour qu’elle s’aligne visuellement sous le hero */
   }
-  @media (max-width:768px){
-    .promo-video{ margin-top:-16px; }
+  @media (max-width: 1024px){
+    .promo-video{ margin-top: -90px; }
   }
-  .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
-  @supports not (aspect-ratio:16/9){ .promo-video-frame{ padding-top:56.25%; } .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; } }
-  .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
-  .promo-scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.7) 90%); pointer-events:none; }
+  @media (max-width: 768px){
+    .promo-video{ margin-top: -60px; }
+  }
+  
+  .promo-video-frame{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #000;
+    border-top: 0;                  /* supprime la ligne visible entre hero et vidéo */
+    border-bottom: 1px solid #222;
+  }
+  
+  @supports not (aspect-ratio:16/9){
+    .promo-video-frame{
+      padding-top:56.25%;
+    }
+    .promo-video-el{
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+    }
+  }
+  
+  .promo-video-el{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;     /* ajuste le cadrage pour voir le visuel plus haut */
+    filter: brightness(.82) contrast(1.05) saturate(1.05);
+  }
+  
+  .promo-scrim{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,.25) 0%,
+      rgba(0,0,0,.45) 55%,
+      rgba(0,0,0,.7) 90%
+    );
+    pointer-events: none;
+  }
 
   /* === WORLD CLOCK BAR === */
   .world-clock-bar{
