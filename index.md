@@ -952,27 +952,6 @@ updateClocks(); setInterval(updateClocks, 1000);
   window.addEventListener('touchend', onPointerUp);
 })();
 
-/* === Spacing Resizer (hero <-> clocks) === */
-(function(){
-  const ROOT = document.documentElement;
-  const HANDLE = document.getElementById('clockResizer');
-  if(!HANDLE) return;
-
-  const KEY = 'heroSpacingPx';
-  const DEFAULT = parseInt(getComputedStyle(ROOT).getPropertyValue('--hero-spacing')) || 60;
-  const MIN = 0;
-  const MAX = 240;
-
-  const saved = parseInt(localStorage.getItem(KEY));
-  if(!Number.isNaN(saved)) ROOT.style.setProperty('--hero-spacing', saved + 'px');
-
-  let startY = 0, startSpacing = 0, dragging = false;
-
-  const getSpacing = () => {
-    const v = getComputedStyle(ROOT).getPropertyValue('--hero-spacing').trim();
-    return parseInt(v, 10) || 0;
-  };
-
   function onDown(e){
     dragging = true;
     HANDLE.classList.add('is-dragging');
