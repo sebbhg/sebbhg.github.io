@@ -83,12 +83,12 @@ full_bleed: true
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
   /* === SECONDARY VIDEO === */
-  .promo-video{ position:relative; z-index:0; width:100%; margin:-1250px 0 0; }
-  @media (max-width:1400px){ .promo-video{ margin:-1450px 0 0; } }
-  @media (max-width:1200px){ .promo-video{ margin:-1350px 0 0; } }
-  @media (max-width:1024px){ .promo-video{ margin:-1250px 0 0; } }
-  @media (max-width:768px){ .promo-video{ margin:-1150px 0 0; } }
-  @media (max-width:560px){ .promo-video{ margin:-1050px 0 0; } }
+  .promo-video{
+    position:relative;
+    z-index:0;
+    width:100%;
+    margin:0;              /* <= plus de marges négatives */
+  }
   .promo-video-frame{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; background:#000; border-top:1px solid #222; border-bottom:1px solid #222; }
   @supports not (aspect-ratio:16/9){ .promo-video-frame{ padding-top:56.25%; } .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; } }
   .promo-video-el{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.8) contrast(1.05) saturate(1.05); }
@@ -370,6 +370,7 @@ full_bleed: true
   .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
 </style>
 
+<section class="hero-video">
   <div class="hero-content">
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
     <h1>Turning Models into Market Impact</h1>
