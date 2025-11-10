@@ -17,7 +17,20 @@ full_bleed: true
   @keyframes fadeInUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
 
   /* === Hero titles fade-in === */
-  .eyebrow.shifted{ margin-top:-25px; opacity:0; transform:translateY(10px); animation:fadeInUp 1.4s ease-out .3s forwards; }
+  .eyebrow.shifted{
+  margin-top:-25px;
+  opacity:0;
+  transform:translateY(10px);
+  animation:fadeInUp 1.4s ease-out .3s forwards;
+
+  /* >>> AJOUTS POUR LA TAILLE ET LE STYLE <<< */
+  font-size:clamp(1.8rem, 3vw, 3.2rem);  /* responsive et grand */
+  font-weight:900;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#9ec8ff;
+  text-shadow:0 0 10px rgba(44,140,255,.6);
+}
   .hero-content h1{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out .8s forwards; }
   .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
 
