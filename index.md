@@ -87,7 +87,7 @@ full_bleed: true
   /* La vidéo remonte très haut pour se fondre directement sous le hero */
   :root{
     /* min: 720px (mobile compact) – typique: 90vh – max: 1600px (ultrawide) */
-    --promo-overlap: clamp(720px, 90vh, 1600px);
+    --promo-overlap: clamp(850px, 120vh, 1800px);
   }
   
   .promo-video{
