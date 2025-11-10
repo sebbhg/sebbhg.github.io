@@ -17,22 +17,22 @@ full_bleed: true
   @keyframes fadeInUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
 
   /* === Hero titles fade-in === */
-  .eyebrow.shifted{
-    margin-top:-25px;
-    opacity:0;
-    transform:translateY(10px);
-    animation:fadeInUp 1.4s ease-out .3s forwards;
-
-    /* Style responsive propre */
-    font-size:clamp(1.6rem, 3vw, 3rem);
-    font-weight:300;                 /* lettres fines */
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:#bcd9ff;
-    text-shadow:0 0 6px rgba(44,140,255,.35);
-    font-family:'Helvetica Neue','Segoe UI',Roboto,sans-serif;
-  }
-
+    .eyebrow.shifted{
+      margin-top:-25px;
+      opacity:0;
+      transform:translateY(10px);
+      animation:fadeInUp 1.4s ease-out .3s forwards;
+    
+      /* Style responsive propre */
+      font-size:clamp(1.6rem, 3vw, 3rem);
+      font-weight:300;                 /* lettres fines */
+      letter-spacing:0.1em;
+      text-transform:uppercase;
+      color:#bcd9ff;
+      text-shadow:0 0 6px rgba(44,140,255,.35);
+      font-family:'Helvetica Neue','Segoe UI',Roboto,sans-serif;
+    }
+  
   .hero-content h1{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out .8s forwards; }
   .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
 
@@ -64,21 +64,21 @@ full_bleed: true
     opacity:.35;
     pointer-events:none;
   }
-
+  
   /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO (FINAL ADJUSTMENTS) === */
-
+  
   /* Vidéo plein écran derrière le hero */
   :root{
     --promo-overlap: clamp(850px, 110vh, 1800px);
   }
-
+  
   .promo-video{
     position: relative;
     z-index: 0;
     width: 100%;
     margin-top: calc(var(--promo-overlap) * -1);
   }
-
+  
   .promo-video-frame{
     position: relative;
     width: 100%;
@@ -87,12 +87,12 @@ full_bleed: true
     background: #000;
     border: 0;
   }
-
+  
   @supports not (aspect-ratio:16/9){
     .promo-video-frame{ padding-top:56.25%; }
     .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; }
   }
-
+  
   .promo-video-el{
     position: absolute;
     inset: 0;
@@ -102,7 +102,7 @@ full_bleed: true
     object-position: center 25%;
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
-
+  
   .promo-scrim{
     position: absolute;
     inset: 0;
@@ -115,27 +115,27 @@ full_bleed: true
     );
     pointer-events: none;
   }
-
+  
   /* === MOBILE (≤600px) : vidéo tout en haut + horloges BEAUCOUP PLUS BAS === */
   @media (max-width: 600px){
     :root{
       --promo-overlap: clamp(420px, 72svh, 820px);
     }
-
-    .promo-video{
+      
+    .promo-video{ 
       margin-top: -520px !important; /* la vidéo démarre tout en haut */
     }
-
+  
     .promo-video-el{
       object-position: center 30%;
     }
-
+  
     /* ✅ On descend franchement les horloges pour libérer le texte + boutons */
     .world-clock-bar{
       margin-top: 300px !important;  /* essaie entre 240 et 300px selon ton iPhone */
     }
   }
-
+  
   /* === Écrans à faible hauteur === */
   @media (max-height: 720px){
     :root{
@@ -145,7 +145,7 @@ full_bleed: true
       min-height: clamp(320px, 54svh, 640px);
     }
   }
-
+  
   /* === Desktop (≥1025px) : horloges bien remontées === */
   @media (min-width: 1025px){
     .world-clock-bar{
@@ -154,34 +154,34 @@ full_bleed: true
   }
 
   /* === Logo calé sur la vidéo (coin haut-droit) === */
-  .promo-video-frame{ position: relative; } /* (déjà présent, rappel) */
+.promo-video-frame{ position: relative; } /* (déjà présent, rappel) */
 
+.hero-logo{
+  position: absolute;
+  top: clamp(110px, 14vh, 190px);
+  right: clamp(-30px, -10vw, 0px); 
+  width: clamp(90px, 10vw, 160px);
+  height: auto;
+  z-index: 5;                 /* au-dessus de la vidéo et de la scrim */
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(44,140,255,.8));
+  animation: logoPulse 4s ease-in-out infinite; /* optionnel : halo */
+}
+
+/* Grands écrans : un peu plus grand */
+@media (min-width: 1280px){
+  .hero-logo{ width: clamp(110px, 9vw, 190px); }
+}
+
+/* Mobile : on réduit un peu pour ne pas gêner le titre */
+@media (max-width: 600px){
   .hero-logo{
-    position: absolute;
-    top: clamp(110px, 14vh, 190px);
-    right: clamp(-30px, -10vw, 0px);
-    width: clamp(90px, 10vw, 160px);
-    height: auto;
-    z-index: 5;                 /* au-dessus de la vidéo et de la scrim */
-    pointer-events: none;
-    filter: drop-shadow(0 0 6px rgba(44,140,255,.8));
-    animation: logoPulse 4s ease-in-out infinite; /* optionnel : halo */
+    top: 10px;
+    right: 10px;
+    width: clamp(70px, 18vw, 110px);
   }
-
-  /* Grands écrans : un peu plus grand */
-  @media (min-width: 1280px){
-    .hero-logo{ width: clamp(110px, 9vw, 190px); }
-  }
-
-  /* Mobile : on réduit un peu pour ne pas gêner le titre */
-  @media (max-width: 600px){
-    .hero-logo{
-      top: 10px;
-      right: 10px;
-      width: clamp(70px, 18vw, 110px);
-    }
-  }
-
+}
+  
   /* === WORLD CLOCK BAR === */
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
@@ -210,65 +210,25 @@ full_bleed: true
   .market-status a.badge:hover{ border-color:#2c8cff99; box-shadow:0 0 0 2px rgba(44,140,255,.12) inset; }
 
   /* ===== Bande "Latest Updates" ===== */
-  .news-band{ background:#050505; border-top:1px solid #111; border-bottom:1px solid #111; padding:36px 20px; }
-  .news-globe{
-    max-width:1100px; margin:0 auto;
-    display:grid; grid-template-columns:minmax(300px,52%) 1fr; gap:22px; align-items:stretch;
-  }
-  @media (max-width:980px){ .news-globe{ grid-template-columns:1fr; } }
-
-  .globe-wrap{
-    position:relative; background:#0b0f1a; border:1px solid #1f2333; border-radius:16px;
-    overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.03);
-  }
-  .globe-canvas{ display:block; width:100%; height:100%; aspect-ratio:1/1; }
-  .globe-halo{
-    position:absolute; inset:-15%; pointer-events:none;
-    background:
-      radial-gradient(60% 40% at 50% 0%, rgba(44,140,255,.18), transparent 60%),
-      radial-gradient(60% 40% at 50% 100%, rgba(159,122,255,.12), transparent 60%);
-    filter:blur(18px); opacity:.55;
-  }
-  .spin-cta{
-    position:absolute; right:12px; bottom:12px; z-index:2;
-    display:inline-flex; align-items:center; gap:8px;
-    padding:10px 14px; border-radius:12px; cursor:pointer;
-    background:#0f1222; color:#cfe3ff; font-weight:800; border:1px solid rgba(255,255,255,.16);
-  }
-  .spin-cta:hover{ border-color:#4da0ff; background:#14182b; transform:translateY(-1px); }
-  .spin-cta svg{ width:18px; height:18px; fill:#9ec8ff; }
-  .spin-cta:hover svg{ fill:#ffffff; }
-
-  /* CSS labels via CSS2DRenderer */
-  .label{
-    padding:6px 10px; border-radius:10px; font-weight:800; letter-spacing:.04em;
-    background:#0c1220; border:1px solid #1f3b66; color:#9ec8ff; white-space:nowrap;
-    box-shadow:0 8px 18px rgba(0,0,0,.45);
-    transform:translateZ(0);
-  }
-  .label .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:8px; background:#2c8cff; }
-
-  /* Right panel card */
-  .news-side{ display:flex; flex-direction:column; gap:12px; }
-  .news-card{
+  .news-band{ background:#050505; border-top:1px solid #111; border-bottom:1px solid #111; padding:28px 20px; }
+  .news-wrap{ max-width:1100px; margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+  .update-card{
     position:relative; background:#0d0d0d; border:1px solid #222; border-radius:14px;
-    padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.25);
+    padding:18px 18px 16px; box-shadow:0 10px 30px rgba(0,0,0,.25);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   }
-  .news-badge{ display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff; background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; margin-bottom:8px; font-weight:800; }
-  .news-title{ margin:0 0 6px; font-size:clamp(1.05rem,2.2vw,1.25rem); font-weight:900; color:#fff; }
-  .news-meta{ color:#9aa3b2; font-size:.9rem; margin:0 0 8px; }
-  .news-desc{ color:#c9cbd1; line-height:1.55; margin:0 0 10px; }
-  .news-ctrls{ display:flex; gap:8px; }
-  .btn-ghost{ padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:10px; background:#0f0f0f; color:#fff; font-weight:800; text-decoration:none; }
-  .btn-ghost:hover{ border-color:#4da0ff; background:#141414; }
-
-  /* Fallback (no WebGL) — hide globe area and show legacy grid */
-  .no-webgl .globe-wrap{ display:none; }
-  .no-webgl .fallback-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-  @media (max-width:820px){ .no-webgl .fallback-grid{ grid-template-columns:1fr; } }
+  .update-card::after{ content:""; position:absolute; inset:-1px; border-radius:14px; pointer-events:none; background:radial-gradient(600px 200px at 20% -20%, rgba(44,140,255,.15), transparent 70%); opacity:.7; }
+  .update-card:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,0,0,.35); border-color:#2c8cff55; }
+  .update-badge{ display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff; background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; margin-bottom:10px; font-weight:800; }
+  .update-title{ margin:0 0 6px; font-size:clamp(1.05rem,2.2vw,1.2rem); font-weight:800; }
+  .update-meta{ color:#9aa3b2; font-size:.9rem; margin:0 0 10px; }
+  .update-desc{ color:#c9cbd1; margin:0 0 12px; line-height:1.55; }
+  .update-link{ display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:10px; background:#0f0f0f; color:#fff; font-weight:700; text-decoration:none; }
+  .update-link:hover{ border-color:#4da0ff; background:#141414; }
+  @media (max-width:820px){ .news-wrap{ grid-template-columns: 1fr; } }
 
   /* === SECTION HUB === */
-  .after-market{ position:relative; z-index:4; background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111; }
+  .after-market{ position:relative; z-index:4; /* au-dessus du bandeau lectures */ background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111; }
   .hub-inner{ max-width:1100px; margin:0 auto; }
   .hub-eyebrow{ color:#9aa3b2; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px; text-align:left; }
   .hub-title{ color:#fff; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; line-height:1.1; margin:0 0 16px; text-align:left; text-shadow:0 0 10px rgba(0,0,0,.35); }
@@ -284,7 +244,11 @@ full_bleed: true
 
   /* === LAYOUT: split éducation / expériences === */
   .after-market .hub-inner{ max-width:none; width:100%; margin:0; padding:0 24px; }
-  .hub-split{ display:grid; grid-template-columns: minmax(320px, 42%) 1fr; gap:28px; align-items:start; margin-top:12px; }
+  .hub-split{
+    display:grid;
+    grid-template-columns: minmax(320px, 42%) 1fr;
+    gap:28px; align-items:start; margin-top:12px;
+  }
   .hub-split.no-media{ grid-template-columns:1fr; }
   @media (max-width:1100px){ .hub-split{ grid-template-columns:1fr; } }
 
@@ -470,7 +434,9 @@ full_bleed: true
   .news-band, .after-market{ position:relative; z-index:4; }
 
   /* ===== HERO SOCIAL ICON BUTTONS ===== */
-  .social-actions{ margin-top:14px; display:flex; gap:12px; }
+  .social-actions{
+    margin-top:14px; display:flex; gap:12px;
+  }
   .icon-btn{
     width:46px; height:46px; display:grid; place-items:center;
     border-radius:50%;
@@ -497,8 +463,8 @@ full_bleed: true
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
     <h1>Turning Models into Market Impact</h1>
     <p class="subtitle" style="text-align: justify;">
-      Welcome to the website of Sébastien Haag.<br>
-      Here, I share my courses, projects and summaries in quantitative finance,<br>
+      Welcome to the website of Sébastien Haag.  
+      Here, I share my courses, projects and summaries in quantitative finance,  
       with a simple ambition: to bring scientific rigor to financial performance.
     </p>
 
@@ -522,6 +488,7 @@ full_bleed: true
       </a>
     </div>
   </div>
+
 </section>
 
 <!-- ===== Full-width secondary video ===== -->
@@ -576,55 +543,30 @@ full_bleed: true
 <!-- ===== Market Status ===== -->
 <div class="market-status" id="marketStatus">Loading market status…</div>
 
-<!-- ===== Latest Updates (avec globe) ===== -->
-<section class="news-band" id="newsBand">
-  <div class="news-globe">
-    <!-- LEFT: Globe -->
-    <div class="globe-wrap">
-      <canvas id="newsGlobe" class="globe-canvas" aria-label="News globe"></canvas>
-      <div id="newsGlobeLabels"></div>
-      <button class="spin-cta" id="spinBtn" type="button" aria-label="Spin to next update">
-        <!-- rotate icon -->
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6V3L8 7l4 4V8c2.76 0 5 2.24 5 5a5 5 0 0 1-9.9 1H5.03A7 7 0 1 0 12 6z"/></svg>
-        Spin
-      </button>
-      <span class="globe-halo" aria-hidden="true"></span>
-    </div>
+<!-- ===== Latest Updates ===== -->
+<section class="news-band">
+  <div class="news-wrap">
+    <article class="update-card">
+      <span class="update-badge">INFO</span>
+      <h3 class="update-title">Website under construction 🚧</h3>
+      <p class="update-meta">Oct 2025 · Ongoing</p>
+      <p class="update-desc">
+        This website is currently being enhanced — new pages, animations, and live data integrations are coming soon.
+        Stay tuned for the full Quantitative Finance & Trading experience.
+      </p>
+      <a class="update-link" href="{{ '/' | relative_url }}">Learn more →</a>
+    </article>
 
-    <!-- RIGHT: Live card -->
-    <div class="news-side">
-      <article class="news-card" id="newsCard">
-        <span class="news-badge" id="newsBadge">INFO</span>
-        <h3 class="news-title" id="newsTitle">Website under construction 🚧</h3>
-        <p class="news-meta" id="newsMeta">Oct 2025 · Ongoing</p>
-        <p class="news-desc" id="newsDesc">
-          This website is currently being enhanced — new pages, animations, and live data integrations are coming soon.
-          Stay tuned for the full Quantitative Finance & Trading experience.
-        </p>
-        <div class="news-ctrls">
-          <a class="btn-ghost" id="newsLink" href="{{ '/' | relative_url }}">Learn more →</a>
-          <a class="btn-ghost" id="newsAll" href="{{ '/' | relative_url }}">All updates</a>
-        </div>
-      </article>
-
-      <!-- Fallback legacy cards si pas de WebGL -->
-      <div class="fallback-grid" id="fallbackGrid" style="display:none;">
-        <article class="update-card">
-          <span class="update-badge">INFO</span>
-          <h3 class="update-title">Website under construction 🚧</h3>
-          <p class="update-meta">Oct 2025 · Ongoing</p>
-          <p class="update-desc">This website is currently being enhanced — new pages, animations, and live data integrations are coming soon. Stay tuned for the full Quantitative Finance & Trading experience.</p>
-          <a class="update-link" href="{{ '/' | relative_url }}">Learn more →</a>
-        </article>
-        <article class="update-card">
-          <span class="update-badge">UPDATE</span>
-          <h3 class="update-title">What I do — Quant Engineering</h3>
-          <p class="update-meta">Oct 2025 · Labs</p>
-          <p class="update-desc">New “What I do” page: pricing engines, risk aggregation, intraday analytics and research notes. Coming next: CVA dashboard & volatility surface explorer.</p>
-          <a class="update-link" href="{{ '/what-i-do' | relative_url }}">Open page →</a>
-        </article>
-      </div>
-    </div>
+    <article class="update-card">
+      <span class="update-badge">UPDATE</span>
+      <h3 class="update-title">What I do — Quant Engineering</h3>
+      <p class="update-meta">Oct 2025 · Labs</p>
+      <p class="update-desc">
+        New “What I do” page: pricing engines, risk aggregation, intraday analytics and
+        research notes. Coming next: CVA dashboard & volatility surface explorer.
+      </p>
+      <a class="update-link" href="{{ '/what-i-do' | relative_url }}">Open page →</a>
+    </article>
   </div>
 </section>
 
@@ -1113,7 +1055,7 @@ function updateClocks(){
     const city = el.dataset.city;
     const tz = el.dataset.tz;
     const now = new Date().toLocaleTimeString('en-GB', { timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false });
-    el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
+    el.innerHTML = <span class="city">${city}</span><span class="time">${now}</span>;
   });
 }
 updateClocks(); setInterval(updateClocks, 1000);
@@ -1162,18 +1104,19 @@ updateClocks(); setInterval(updateClocks, 1000);
   function isOpenNewYork(){ if(!isWeekday('America/New_York')) return false; const {t}=hmInTZ('America/New_York'); return t>=(9*60+30) && t<960; } // 09:30–16:00
 
   function refresh(){
-    const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
-    const urls={
-      tokyo:"https://www.jpx.co.jp/english/markets/",
-      london:"https://www.londonstockexchange.com/",
-      paris:"https://live.euronext.com/en/markets/paris",
-      ny:"https://www.nyse.com/"
-    };
-    const badge=(open,label,url)=> open
-      ? `<a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>`
-      : `<span class="badge closed">${label} CLOSED</span>`;
-    el.innerHTML = `${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)}`;
-  }
+  const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
+  const urls={
+    tokyo:"https://www.jpx.co.jp/english/markets/",
+    london:"https://www.londonstockexchange.com/",
+    paris:"https://live.euronext.com/en/markets/paris",
+    ny:"https://www.nyse.com/"
+  };
+  const badge=(open,label,url)=> open
+    ? <a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>
+    : <span class="badge closed">${label} CLOSED</span>;
+  document.getElementById('marketStatus').innerHTML =
+    ${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)};
+}
   refresh(); setInterval(refresh, 60_000);
 })();
 
@@ -1268,7 +1211,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
     const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
     cancelAnimationFrame(rAF);
-    rAF = requestAnimationFrame(()=>{ card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
+    rAF = requestAnimationFrame(()=>{ card.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
   }
   function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
   function toggleFlip(){
@@ -1315,7 +1258,7 @@ updateClocks(); setInterval(updateClocks, 1000);
       const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
       const ry = clamp(((x/rect.width)-0.5)*-8,-8,8);
       cancelAnimationFrame(rAF);
-      rAF = requestAnimationFrame(()=>{ board.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
+      rAF = requestAnimationFrame(()=>{ board.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
     }
     function reset(){ board.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
 
@@ -1328,198 +1271,5 @@ updateClocks(); setInterval(updateClocks, 1000);
   enhanceBoard('glassBoard');     // Courses
   enhanceBoard('projectsBoard');  // Projects
   enhanceBoard('readingBoard');   // Reading
-})();
-</script>
-
-<!-- Three.js + CSS2DRenderer (CDN) — utiliser la version non-module pour exposer THREE.CSS2DRenderer -->
-<script defer src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<script defer src="https://unpkg.com/three@0.160.0/examples/js/renderers/CSS2DRenderer.js"></script>
-
-<script>
-/* === GLOBE 3D — Three.js + CSS2DRenderer === */
-(function(){
-  const band = document.getElementById('newsBand');
-  const canvas = document.getElementById('newsGlobe');
-  const labelsHost = document.getElementById('newsGlobeLabels');
-  const spinBtn = document.getElementById('spinBtn');
-  const fallback = document.getElementById('fallbackGrid');
-
-  if (!band || !canvas || !labelsHost || !spinBtn || !fallback){
-    console.warn('Globe: required elements missing.');
-    return;
-  }
-
-  // Simple feature check
-  const hasWebGL = (()=>{
-    try{ const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl'); return !!gl; }
-    catch(e){ return false; }
-  })();
-
-  // Data: rotating “news satellites”
-  const NEWS = [
-    {
-      id:'info', badge:'INFO', title:'Website under construction 🚧',
-      meta:'Oct 2025 · Ongoing',
-      desc:'This website is currently being enhanced — new pages, animations, and live data integrations are coming soon. Stay tuned for the full Quantitative Finance & Trading experience.',
-      href:"{{ '/' | relative_url }}",
-      lat: 12, lon: -20
-    },
-    {
-      id:'update', badge:'UPDATE', title:'What I do — Quant Engineering',
-      meta:'Oct 2025 · Labs',
-      desc:'New “What I do” page: pricing engines, risk aggregation, intraday analytics and research notes. Coming next: CVA dashboard & volatility surface explorer.',
-      href:"{{ '/what-i-do' | relative_url }}",
-      lat: -8, lon: 60
-    }
-    // 👉 ajoute d’autres news ici
-  ];
-
-  // Right card binders
-  const card = {
-    badge: document.getElementById('newsBadge'),
-    title: document.getElementById('newsTitle'),
-    meta:  document.getElementById('newsMeta'),
-    desc:  document.getElementById('newsDesc'),
-    link:  document.getElementById('newsLink')
-  };
-  function setCard(i){
-    const n = NEWS[i % NEWS.length];
-    card.badge.textContent = n.badge;
-    card.title.textContent = n.title;
-    card.meta.textContent  = n.meta;
-    card.desc.textContent  = n.desc;
-    card.link.href         = n.href;
-  }
-
-  // If no WebGL or THREE not loaded → fallback
-  function enableFallback(){
-    band.classList.add('no-webgl');
-    fallback.style.display = 'grid';
-  }
-  if (!hasWebGL){
-    enableFallback(); return;
-  }
-
-  function ready(){
-    if (!window.THREE || !THREE.CSS2DRenderer){
-      // CSS2DRenderer non chargé (réseau lent) → fallback discret
-      enableFallback();
-      console.warn('Globe: THREE or CSS2DRenderer missing, showing fallback.');
-      return false;
-    }
-    return true;
-  }
-  if (!ready()) return;
-
-  // ===== Three.js scene
-  const scene = new THREE.Scene();
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-  const labelRenderer = new THREE.CSS2DRenderer();
-  labelRenderer.setSize(0,0); // will be sized in onResize
-  labelsHost.appendChild(labelRenderer.domElement);
-
-  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-  camera.position.set(0, 0, 3.2);
-
-  // Lights
-  scene.add(new THREE.AmbientLight(0x7aa0ff, 0.6));
-  const dir = new THREE.DirectionalLight(0xffffff, 0.7);
-  dir.position.set(3, 2, 1.5);
-  scene.add(dir);
-
-  // Globe (solid)
-  const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(1, 64, 64),
-    new THREE.MeshStandardMaterial({
-      color: 0x0f1930, roughness:0.9, metalness:0.15,
-      wireframe:false
-    })
-  );
-  scene.add(sphere);
-
-  // Overlay grid/wire
-  const wire = new THREE.LineSegments(
-    new THREE.WireframeGeometry(new THREE.SphereGeometry(1.002, 24, 16)),
-    new THREE.LineBasicMaterial({ color:0x2c8cff, transparent:true, opacity:0.18 })
-  );
-  scene.add(wire);
-
-  // Labels as CSS2D
-  const labels = [];
-  NEWS.forEach((n, idx)=>{
-    const el = document.createElement('div');
-    el.className = 'label';
-    el.innerHTML = `<span class="dot"></span>${n.badge}`;
-    const obj = new THREE.CSS2DObject(el);
-    const pos = latLonToVector3(n.lat, n.lon, 1.05);
-    obj.position.copy(pos);
-    obj.userData = { index: idx, lat:n.lat, lon:n.lon };
-    labels.push(obj);
-    sphere.add(obj);
-
-    // click → jump to this news
-    el.style.cursor = 'pointer';
-    el.addEventListener('click', ()=> spinTo(idx));
-  });
-
-  // Helpers
-  function latLonToVector3(lat, lon, r){
-    const phi = THREE.MathUtils.degToRad(90 - lat);
-    const theta = THREE.MathUtils.degToRad(lon + 180);
-    return new THREE.Vector3(
-      -r * Math.sin(phi) * Math.cos(theta),
-      r * Math.cos(phi),
-      r * Math.sin(phi) * Math.sin(theta)
-    );
-  }
-
-  // Resize
-  function onResize(){
-    const rect = canvas.getBoundingClientRect();
-    const size = Math.min(rect.width, rect.height || rect.width);
-    renderer.setSize(size, size, false);
-    labelRenderer.setSize(size, size);
-    camera.aspect = 1;
-    camera.updateProjectionMatrix();
-  }
-  new ResizeObserver(onResize).observe(canvas);
-  onResize();
-
-  // Spin animation
-  let current = 0, anim = null;
-  function spinTo(targetIndex){
-    if (anim) cancelAnimationFrame(anim);
-    const start = sphere.rotation.y;
-    const targetNews = NEWS[targetIndex % NEWS.length];
-    const targetLon = targetNews.lon;
-    const end = start + THREE.MathUtils.degToRad(targetLon) * -1; // rotate opposite of lon
-    const dur = 1200; const t0 = performance.now();
-
-    function tick(now){
-      const p = Math.min(1, (now - t0)/dur);
-      const e = 1 - Math.pow(1 - p, 3); // easeOutCubic
-      sphere.rotation.y = THREE.MathUtils.lerp(start, end, e);
-      wire.rotation.y   = sphere.rotation.y;
-      render();
-      if (p < 1){ anim = requestAnimationFrame(tick); }
-      else {
-        current = targetIndex % NEWS.length;
-        setCard(current);
-      }
-    }
-    anim = requestAnimationFrame(tick);
-  }
-
-  // Spin button → next
-  spinBtn.addEventListener('click', ()=> spinTo((current+1)%NEWS.length));
-
-  // Initial state
-  setCard(0);
-  render();
-  function render(){
-    renderer.render(scene, camera);
-    labelRenderer.render(scene, camera);
-  }
-  (function loop(){ requestAnimationFrame(loop); render(); })();
 })();
 </script>
