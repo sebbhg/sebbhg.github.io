@@ -87,7 +87,7 @@ full_bleed: true
     position: relative;
     z-index: 0;
     width: 100%;
-    margin-top: -120px;   /* remonte la vidéo pour qu’elle s’aligne visuellement sous le hero */
+    margin-top: -220px;   /* remonte la vidéo pour qu’elle s’aligne visuellement sous le hero */
   }
   @media (max-width: 1024px){
     .promo-video{ margin-top: -90px; }
