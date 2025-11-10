@@ -952,46 +952,6 @@ updateClocks(); setInterval(updateClocks, 1000);
   window.addEventListener('touchend', onPointerUp);
 })();
 
-  function onDown(e){
-    dragging = true;
-    HANDLE.classList.add('is-dragging');
-    startY = (e.touches ? e.touches[0].clientY : e.clientY);
-    startSpacing = getSpacing();
-    e.preventDefault();
-  }
-
-  function onMove(e){
-    if(!dragging) return;
-    const y = (e.touches ? e.touches[0].clientY : e.clientY);
-    const dy = y - startY;
-    const next = Math.min(MAX, Math.max(MIN, startSpacing + dy));
-    ROOT.style.setProperty('--hero-spacing', next + 'px');
-  }
-
-  function onUp(){
-    if(!dragging) return;
-    dragging = false;
-    HANDLE.classList.remove('is-dragging');
-    const current = getSpacing();
-    localStorage.setItem(KEY, String(current));
-  }
-
-  function onDblClick(){
-    ROOT.style.setProperty('--hero-spacing', DEFAULT + 'px');
-    localStorage.setItem(KEY, String(DEFAULT));
-  }
-
-  HANDLE.addEventListener('mousedown', onDown);
-  window.addEventListener('mousemove', onMove, { passive:false });
-  window.addEventListener('mouseup', onUp);
-
-  HANDLE.addEventListener('touchstart', onDown, { passive:false });
-  window.addEventListener('touchmove', onMove, { passive:false });
-  window.addEventListener('touchend', onUp);
-
-  HANDLE.addEventListener('dblclick', onDblClick);
-})();
-
 /* === Market Status (Tokyo / London / Paris / New York) === */
 (function(){
   const el = document.getElementById('marketStatus');
@@ -1039,7 +999,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   const panelReading = document.getElementById('readingPanel');
 
   const copy = {
-    reading:  Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.,
+    reading:  'Curated reading lists and annotations across papers, textbooks and articles that influenced my thinking on modeling, risk, markets and systems design.',
   };
 
   function showWhat(){
