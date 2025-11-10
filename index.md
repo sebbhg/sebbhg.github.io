@@ -340,10 +340,6 @@ full_bleed: true
 </style>
 
 <section class="hero-video">
-  <video class="hero-bg" autoplay muted loop playsinline preload="auto" poster="{{ '/assets/images/hero-poster.jpg' | relative_url }}">
-    <source src="{{ '/assets/videos/trading-hero.mp4' | relative_url }}" type="video/mp4">
-  </video>
-  <div class="hero-overlay"></div>
 
   <div class="hero-content">
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
