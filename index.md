@@ -359,7 +359,9 @@ full_bleed: true
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
     <h1>Turning Models into Market Impact</h1>
     <p class="subtitle">
-      Quantitative Finance Engineer — <strong>CFA Level I Holder</strong>.<br/>
+      Welcome to the website of <strong>Sébastien HAAG</strong>.<br/>
+      Here, I share my <strong>courses</strong>, <strong>projects</strong> and <strong>summaries</strong> in quantitative finance — 
+      with a simple ambition: <em>to bring scientific rigor to financial performance</em>.
     </p>
 
     <!-- ==== Social / Contact (remplace les 5 boutons) ==== -->
