@@ -23,48 +23,73 @@ full_bleed: true
 
   /* === HERO LAYERS === */
   .hero-video{
-  position: relative;
-  z-index: 2;
-  background: radial-gradient(ellipse at 50% 20%, #0a0f20, #03050c 80%);
-  min-height: 75vh;
-  display: grid;
-  place-items: center;
-  padding: clamp(24px, 5vw, 80px) clamp(20px, 6vw, 60px);
-  overflow: hidden;
-}
+    position: relative;
+    z-index: 2;
+    /* vraie hauteur de viewport (corrigée par --vh ci-dessous) */
+    min-height: calc(var(--vh, 1vh) * 100);
+    display: grid;
+    align-items: center;
+    padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 24px);
+    overflow: hidden; /* coupe ce qui dépasse */
+  }
+
   .hero-video::before{
-  content:"";
-  position:absolute; inset:0;
-  background: radial-gradient(60% 60% at 20% 10%, rgba(44,140,255,.15), transparent 70%),
-              radial-gradient(80% 80% at 80% 90%, rgba(159,122,255,.12), transparent 65%);
-  opacity:.35; pointer-events:none;
-}
+    content:"";
+    position:absolute; inset:0;
+    background: radial-gradient(60% 60% at 20% 10%, rgba(44,140,255,.15), transparent 70%),
+                radial-gradient(80% 80% at 80% 90%, rgba(159,122,255,.12), transparent 65%);
+    opacity:.35; pointer-events:none;
+  }
 
   .hero-content{
-  position: relative;
-  z-index: 2;
-  text-align: left;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-  .hero-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-bg{
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    /* ajuste le cadrage si besoin (ex.: centre un peu haut) */
+    object-position: center 40%;
+    transform: translateZ(0); will-change: transform;
+  }
 
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
-  position:absolute;
-  right: clamp(10px, 3vw, 40px);
-  top: 30%;
-  transform: translateY(-34%);
-  width: clamp(90px, 14vw, 220px);
-  height:auto;
-  z-index:3;
-  opacity:0;
-  animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
-  pointer-events:none;
-}
-  @keyframes fadeInLogo{ from{opacity:0; transform: translateY(-34%) translateX(40px);} to{opacity:1; transform: translateY(-34%) translateX(0);} }
-  @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
-  @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
+    position:absolute;
+    right: clamp(10px, 3vw, 40px);
+    top: 30%;
+    transform: translateY(-34%);
+    width: clamp(90px, 14vw, 220px);
+    height:auto;
+    z-index:3;
+    opacity:0;
+    animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
+    pointer-events:none;
+  }
+
+  @keyframes fadeInLogo{
+    from{opacity:0; transform: translateY(-34%) translateX(40px);}
+    to{opacity:1; transform: translateY(-34%) translateX(0);}
+  }
+
+  @keyframes logoPulse{
+    0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));}
+    50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));}
+  }
+
+  @media (max-width:880px){
+    .hero-logo-img{
+      right:-1.2vw;
+      top:42%;
+      transform:translateY(-42%);
+      width:min(22vw,34vh);
+    }
+  }
 
   /* === SECONDARY VIDEO === */
   .promo-video{
