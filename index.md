@@ -16,6 +16,10 @@ full_bleed: true
   /* === Fade-in global === */
   @keyframes fadeInUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
 
+  .globe-wrap{ position:relative; }              /* s'assure que le conteneur est un contexte */
+  #newsGlobeLabels{ position:absolute; inset:0; pointer-events:none; }  /* superpose les labels */
+  #newsGlobeLabels .label{ pointer-events:auto; }                        /* clics sur les labels OK */
+  
   /* === Hero titles fade-in === */
   .eyebrow.shifted{
     margin-top:-25px;
@@ -1331,9 +1335,8 @@ updateClocks(); setInterval(updateClocks, 1000);
 })();
 </script>
 
-<!-- Three.js + CSS2DRenderer (CDN) — utiliser la version non-module pour exposer THREE.CSS2DRenderer -->
-<script defer src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<script defer src="https://unpkg.com/three@0.160.0/examples/js/renderers/CSS2DRenderer.js"></script>
+<script defer src="{{ '/assets/js/three/three.min.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/three/CSS2DRenderer.min.js' | relative_url }}"></script>
 
 <script>
 /* === GLOBE 3D — Three.js + CSS2DRenderer === */
