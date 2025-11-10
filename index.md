@@ -82,22 +82,22 @@ full_bleed: true
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-  /* === SECONDARY VIDEO — RESPONSIVE ALIGNMENT TUNED === */
+  /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO === */
   
-  /* Valeur de chevauchement par défaut (desktop) */
+  /* Vidéo qui remonte entièrement derrière le hero */
   :root{
-    /* min: 700px (laptop), typique: 85vh, max: 1300px (ultrawide) */
-    --promo-overlap: clamp(700px, 85vh, 1300px);
+    /* min: 850px (mobile paysage), typique: 110vh, max: 1800px (ultrawide) */
+    --promo-overlap: clamp(850px, 110vh, 1800px);
   }
   
   .promo-video{
     position: relative;
     z-index: 0;
     width: 100%;
-    margin-top: calc(var(--promo-overlap) * -1);
+    margin-top: calc(var(--promo-overlap) * -1);  /* chevauchement maximal */
   }
   
-  /* Cadre et vidéo */
+  /* Cadre de la vidéo */
   .promo-video-frame{
     position: relative;
     width: 100%;
@@ -107,6 +107,7 @@ full_bleed: true
     border: 0;
   }
   
+  /* Fallback si aspect-ratio non supporté */
   @supports not (aspect-ratio:16/9){
     .promo-video-frame{ padding-top:56.25%; }
     .promo-video-el{
@@ -114,16 +115,18 @@ full_bleed: true
     }
   }
   
+  /* Vidéo — cadrée plus haut */
   .promo-video-el{
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 28%;   /* focus légèrement plus haut */
+    object-position: center 25%;   /* on cadre plus haut pour placer l’action dès le début */
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
+  /* Dégradé de transition */
   .promo-scrim{
     position: absolute;
     inset: 0;
@@ -137,50 +140,45 @@ full_bleed: true
     pointer-events: none;
   }
   
-  /* --- Ajustements spécifiques --- */
-  
-  /* 🖥️ Grand écran / laptop : remonte les horloges (donc moins d’overlap) */
-  @media (min-width: 1200px){
-    :root{
-      --promo-overlap: clamp(600px, 72vh, 1100px);
-    }
-  }
-  
-  /* 📱 iPhone et petits écrans : remonte la vidéo + descend les horloges */
-  @media (max-width: 480px){
+  /* === Mobile/iPhone fixes: réduire l'overlap + raccourcir le hero === */
+  @media (max-width: 430px){
+    /* Hero plus court pour libérer de la place à la vidéo */
     .hero-video{
-      min-height: clamp(340px, 52svh, 640px);
-      padding-bottom: clamp(10px, 3vw, 20px);
+      min-height: clamp(360px, 58svh, 680px);
+      padding: clamp(20px, 5vw, 32px) clamp(14px, 5vw, 24px);
     }
   
+    /* Overlap moins fort: la vidéo redevient visible */
     :root{
-      --promo-overlap: clamp(460px, 80svh, 860px);
+      --promo-overlap: clamp(320px, 52svh, 640px);
     }
   
-    .promo-video{
-      margin-top: calc(var(--promo-overlap) * -1);
-    }
+    .promo-video{ margin-top: calc(var(--promo-overlap) * -1); }
   
-    .promo-video-el{
-      object-position: center 18%;  /* vidéo cadrée plus haut encore */
-    }
-  
-    /* petite marge pour descendre les horloges */
-    .promo-video + section{
-      margin-top: clamp(24px, 6vw, 48px);
-    }
+    /* Cadrage vidéo légèrement relevé */
+    .promo-video-el{ object-position: center 28%; }
   }
   
-  /* 📺 Hauteurs faibles (paysage, notebooks fins) */
+  /* Écrans courts (paysage / petits laptops) */
   @media (max-height: 720px){
     :root{
-      --promo-overlap: clamp(300px, 48svh, 600px);
+      --promo-overlap: clamp(280px, 48svh, 560px);
     }
     .hero-video{
       min-height: clamp(320px, 54svh, 640px);
     }
   }
   
+  /* === Ajustement desktop : remonter légèrement les horloges === */
+  @media (min-width: 1025px){
+    /* ⚙️ adapte ce sélecteur selon ta structure réelle */
+    section#horloges,
+    section.horloges,
+    .clock-section {
+      margin-top: -80px;  /* remonte la section de ~80px */
+    }
+  }
+    
   /* === WORLD CLOCK BAR === */
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
