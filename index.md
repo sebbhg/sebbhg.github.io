@@ -84,9 +84,8 @@ full_bleed: true
 
   /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO === */
   
-  /* Vidéo qui remonte entièrement derrière le hero */
+  /* Vidéo en plein écran derrière le hero */
   :root{
-    /* min: 850px (mobile paysage), typique: 110vh, max: 1800px (ultrawide) */
     --promo-overlap: clamp(850px, 110vh, 1800px);
   }
   
@@ -94,10 +93,9 @@ full_bleed: true
     position: relative;
     z-index: 0;
     width: 100%;
-    margin-top: calc(var(--promo-overlap) * -1);  /* chevauchement maximal */
+    margin-top: calc(var(--promo-overlap) * -1);
   }
   
-  /* Cadre de la vidéo */
   .promo-video-frame{
     position: relative;
     width: 100%;
@@ -107,15 +105,11 @@ full_bleed: true
     border: 0;
   }
   
-  /* Fallback si aspect-ratio non supporté */
   @supports not (aspect-ratio:16/9){
     .promo-video-frame{ padding-top:56.25%; }
-    .promo-video-el{
-      position:absolute; left:0; top:0; width:100%; height:100%;
-    }
+    .promo-video-el{ position:absolute; left:0; top:0; width:100%; height:100%; }
   }
   
-  /* Vidéo — cadrée plus haut */
   .promo-video-el{
     position: absolute;
     inset: 0;
@@ -126,7 +120,6 @@ full_bleed: true
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
-  /* Dégradé de transition */
   .promo-scrim{
     position: absolute;
     inset: 0;
@@ -140,23 +133,26 @@ full_bleed: true
     pointer-events: none;
   }
   
-  /* === Mobile/iPhone fixes: réduire l'overlap + raccourcir le hero === */
-  @media (max-width: 430px){
-    .hero-video{
-      min-height: clamp(360px, 58svh, 680px);
-      padding: clamp(20px, 5vw, 32px) clamp(14px, 5vw, 24px);
-    }
-  
+  /* === MOBILE (≤ 600px) : vidéo tout en haut + horloges plus basses === */
+  @media (max-width: 600px){
     :root{
-      --promo-overlap: clamp(320px, 52svh, 640px);
+      --promo-overlap: clamp(420px, 72svh, 820px);
     }
   
-    .promo-video{ margin-top: calc(var(--promo-overlap) * -1); }
+    .promo-video{
+      margin-top: -520px; /* la vidéo commence tout en haut */
+    }
   
-    .promo-video-el{ object-position: center 28%; }
+    .promo-video-el{
+      object-position: center 30%;
+    }
+  
+    .world-clock-bar{
+      margin-top: 16px; /* libère les boutons LinkedIn / Email */
+    }
   }
   
-  /* Écrans courts (paysage / petits laptops) */
+  /* === Écrans plus courts (hauteur réduite) === */
   @media (max-height: 720px){
     :root{
       --promo-overlap: clamp(280px, 48svh, 560px);
@@ -166,12 +162,10 @@ full_bleed: true
     }
   }
   
-  /* === Ajustement desktop : remonter davantage les horloges === */
+  /* === Desktop (≥ 1025px) : horloges plus haut === */
   @media (min-width: 1025px){
-    section#horloges,
-    section.horloges,
-    .clock-section {
-      margin-top: -430px;  /* remonte plus fort (~150px) */
+    .world-clock-bar{
+      margin-top: -300px; /* remonte les horloges sous le hero */
     }
   }
     
