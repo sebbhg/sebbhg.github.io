@@ -68,24 +68,36 @@ full_bleed: true
   /* === LOGO SH : fixé en bas à droite du hero === */
   .hero-logo-img{
     position: fixed;
-    right: max(20px, env(safe-area-inset-right)); /* collé à droite */
-    bottom: 80px; /* ↓ ajuste la hauteur : 60–120px selon ton goût */
-    width: clamp(100px, 13vw, 200px);
+    right: 24px;               /* bien collé à droite */
+    bottom: 120px;             /* visible au-dessus du bas de l’écran */
+    width: clamp(100px, 14vw, 220px);
     height: auto;
-    z-index: 1000;
+    z-index: 9999;             /* au-dessus de tout */
     opacity: 0;
+    animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
     pointer-events: none;
     transform: none;
-    animation: fadeInLogo 1s ease-out .5s forwards, logoPulse 4s ease-in-out infinite;
   }
   
-  /* Mobile : on le garde en haut à droite */
+  /* Petit halo animé */
+  @keyframes fadeInLogo{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  @keyframes logoPulse{
+    0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));}
+    50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));}
+  }
+  
+  /* Mobile : logo en haut à droite pour éviter de cacher le texte */
   @media (max-width: 600px){
     .hero-logo-img{
-      top: max(10px, env(safe-area-inset-top));
+      position: absolute;
+      top: 20px;
       bottom: auto;
-      right: max(10px, env(safe-area-inset-right));
+      right: 16px;
       width: clamp(80px, 20vw, 120px);
+      z-index: 1000;
     }
   }
 
