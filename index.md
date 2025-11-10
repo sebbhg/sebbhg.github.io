@@ -1041,7 +1041,7 @@ function updateClocks(){
     const city = el.dataset.city;
     const tz = el.dataset.tz;
     const now = new Date().toLocaleTimeString('en-GB', { timeZone: tz, hour:'2-digit', minute:'2-digit', hour12:false });
-    el.innerHTML = <span class="city">${city}</span><span class="time">${now}</span>;
+    el.innerHTML = `<span class="city">${city}</span><span class="time">${now}</span>`;
   });
 }
 updateClocks(); setInterval(updateClocks, 1000);
@@ -1090,19 +1090,18 @@ updateClocks(); setInterval(updateClocks, 1000);
   function isOpenNewYork(){ if(!isWeekday('America/New_York')) return false; const {t}=hmInTZ('America/New_York'); return t>=(9*60+30) && t<960; } // 09:30–16:00
 
   function refresh(){
-  const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
-  const urls={
-    tokyo:"https://www.jpx.co.jp/english/markets/",
-    london:"https://www.londonstockexchange.com/",
-    paris:"https://live.euronext.com/en/markets/paris",
-    ny:"https://www.nyse.com/"
-  };
-  const badge=(open,label,url)=> open
-    ? <a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>
-    : <span class="badge closed">${label} CLOSED</span>;
-  document.getElementById('marketStatus').innerHTML =
-    ${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)};
-}
+    const tokyo=isOpenTokyo(), london=isOpenLondon(), paris=isOpenParis(), ny=isOpenNewYork();
+    const urls={
+      tokyo:"https://www.jpx.co.jp/english/markets/",
+      london:"https://www.londonstockexchange.com/",
+      paris:"https://live.euronext.com/en/markets/paris",
+      ny:"https://www.nyse.com/"
+    };
+    const badge=(open,label,url)=> open
+      ? `<a class="badge" href="${url}" target="_blank" rel="noopener noreferrer">${label} LIVE</a>`
+      : `<span class="badge closed">${label} CLOSED</span>`;
+    el.innerHTML = `${badge(tokyo,'TOKYO',urls.tokyo)} ${badge(london,'LONDON',urls.london)} ${badge(paris,'PARIS',urls.paris)} ${badge(ny,'NEW YORK',urls.ny)}`;
+  }
   refresh(); setInterval(refresh, 60_000);
 })();
 
@@ -1197,7 +1196,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
     const ry = clamp(((x/rect.width)-0.5)*-9,-9,9);
     cancelAnimationFrame(rAF);
-    rAF = requestAnimationFrame(()=>{ card.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
+    rAF = requestAnimationFrame(()=>{ card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
   }
   function reset(){ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
   function toggleFlip(){
@@ -1244,7 +1243,7 @@ updateClocks(); setInterval(updateClocks, 1000);
       const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
       const ry = clamp(((x/rect.width)-0.5)*-8,-8,8);
       cancelAnimationFrame(rAF);
-      rAF = requestAnimationFrame(()=>{ board.style.transform = rotateX(${rx}deg) rotateY(${ry}deg); });
+      rAF = requestAnimationFrame(()=>{ board.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
     }
     function reset(){ board.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
 
