@@ -158,7 +158,7 @@ full_bleed: true
 
 .hero-logo{
   position: absolute;
-  top: max(14px, env(safe-area-inset-top));
+  top: clamp(60px, 8vh, 100px);
   right: max(16px, env(safe-area-inset-right));
   width: clamp(90px, 10vw, 160px);
   height: auto;
