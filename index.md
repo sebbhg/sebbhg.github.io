@@ -64,37 +64,6 @@ full_bleed: true
     opacity:.35;
     pointer-events:none;
   }
-
-  /* === LOGO SH : en haut à droite du hub === */
-  .after-market .hub-inner{
-    position: relative; /* ancre locale pour le positionnement absolu */
-  }
-  
-  .sh-logo{
-    position: absolute;
-    top: -430px; /* ajuste finement (essaie entre -12px et +8px) */
-    right: max(12px, env(safe-area-inset-right));
-    width: clamp(90px, 10vw, 150px);
-    height: auto;
-    z-index: 6;
-    pointer-events: none; /* évite de gêner les clics sur les onglets */
-    filter: drop-shadow(0 0 6px rgba(44,140,255,.7));
-    animation: logoPulse 4s ease-in-out infinite; /* optionnel si tu gardes la keyframe */
-  }
-  
-  /* Évite que les onglets passent sous le logo */
-  .hub-tabs{
-    padding-right: calc(clamp(90px, 10vw, 150px) + 24px);
-  }
-  
-  /* Sur mobile : un peu plus petit et légèrement plus bas */
-  @media (max-width: 600px){
-    .sh-logo{
-      top: 6px;
-      right: 8px;
-      width: clamp(70px, 18vw, 110px);
-    }
-  }
   
   /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO (FINAL ADJUSTMENTS) === */
   
@@ -183,7 +152,36 @@ full_bleed: true
       margin-top: -360px !important; /* remonte sur Mac et écran externe */
     }
   }
-    
+
+  /* === Logo calé sur la vidéo (coin haut-droit) === */
+.promo-video-frame{ position: relative; } /* (déjà présent, rappel) */
+
+.hero-logo{
+  position: absolute;
+  top: max(14px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  width: clamp(90px, 10vw, 160px);
+  height: auto;
+  z-index: 5;                 /* au-dessus de la vidéo et de la scrim */
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(44,140,255,.8));
+  animation: logoPulse 4s ease-in-out infinite; /* optionnel : halo */
+}
+
+/* Grands écrans : un peu plus grand */
+@media (min-width: 1280px){
+  .hero-logo{ width: clamp(110px, 9vw, 190px); }
+}
+
+/* Mobile : on réduit un peu pour ne pas gêner le titre */
+@media (max-width: 600px){
+  .hero-logo{
+    top: 10px;
+    right: 10px;
+    width: clamp(70px, 18vw, 110px);
+  }
+}
+  
   /* === WORLD CLOCK BAR === */
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
@@ -500,6 +498,9 @@ full_bleed: true
       <source src="/assets/videos/trading-broll.mp4" type="video/mp4">
     </video>
     <div class="promo-scrim"></div>
+
+    <!-- LOGO en haut à droite de la vidéo -->
+    <img class="hero-logo" src="/assets/images/sh-logo.png" alt="SH monogram">
   </div>
 </section>
 
@@ -572,7 +573,6 @@ full_bleed: true
 <!-- ===== SECTION HUB (tabs) ===== -->
 <section class="after-market">
   <div class="hub-inner">
-    <img class="sh-logo" src="/assets/images/sh-logo.png" alt="SH monogram">
     <p class="hub-eyebrow">The different sections</p>
     <h2 class="hub-title">Activities</h2>
 
