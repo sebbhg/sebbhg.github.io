@@ -54,8 +54,9 @@ full_bleed: true
   .world-clock-bar{
     position:relative; overflow:hidden; background:#000;
     border-top:1px solid #333; border-bottom:1px solid #333;
-    padding:12px 0; margin-top:60px; opacity:1; z-index:10; isolation:isolate;
-    -webkit-user-select:none; user-select:none; touch-action:pan-x;
+    padding:12px 0;
+    margin-top:-1px;
+    opacity:1; z-index:10; isolation:isolate;
   }
   .world-clock-bar *{ background:none !important; opacity:1 !important; mix-blend-mode:normal !important; filter:none !important; }
   .ticker-wrapper{ position:relative; z-index:1; display:flex; width:max-content; white-space:nowrap; animation:tickerMove var(--clock-speed) linear infinite; will-change:transform; }
