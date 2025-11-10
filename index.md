@@ -18,10 +18,20 @@ full_bleed: true
 
   /* === Hero titles fade-in === */
   .eyebrow.shifted{
-  margin-top:-25px;
-  opacity:0;
-  transform:translateY(10px);
-  animation:fadeInUp 1.4s ease-out .3s forwards;
+    margin-top:-25px;
+    opacity:0;
+    transform:translateY(10px);
+    animation:fadeInUp 1.4s ease-out .3s forwards;
+
+    /* >>> Nouveau style épuré et fin <<< */
+    font-size:clamp(2.2rem, 4vw, 4.2rem); /* grand, fluide */
+    font-weight:300;                      /* lettres fines */
+    letter-spacing:0.12em;                /* plus d’espace entre les lettres */
+    text-transform:uppercase;
+    color:#bcd9ff;                        /* bleu plus doux */
+    text-shadow:0 0 6px rgba(44,140,255,.35);
+    font-family:'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
+  }
 
   /* >>> AJOUTS POUR LA TAILLE ET LE STYLE <<< */
   font-size:clamp(1.8rem, 3vw, 3.2rem);  /* responsive et grand */
