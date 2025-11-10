@@ -82,12 +82,12 @@ full_bleed: true
   @keyframes logoPulse{ 0%,100%{filter: drop-shadow(0 0 6px rgba(44,140,255,.6));} 50%{filter: drop-shadow(0 0 14px rgba(44,140,255,.95));} }
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
-  /* === SECONDARY VIDEO — RESPONSIVE OVERLAY BEHIND HERO === */
+  /* === SECONDARY VIDEO — RESPONSIVE ALIGNMENT TUNED === */
   
-  /* Valeur de chevauchement globale (base desktop) */
+  /* Valeur de chevauchement par défaut (desktop) */
   :root{
-    /* min: 850px (petit laptop), typique: 100vh, max: 1600px (ultrawide) */
-    --promo-overlap: clamp(850px, 100vh, 1600px);
+    /* min: 700px (laptop), typique: 85vh, max: 1300px (ultrawide) */
+    --promo-overlap: clamp(700px, 85vh, 1300px);
   }
   
   .promo-video{
@@ -97,6 +97,7 @@ full_bleed: true
     margin-top: calc(var(--promo-overlap) * -1);
   }
   
+  /* Cadre et vidéo */
   .promo-video-frame{
     position: relative;
     width: 100%;
@@ -119,7 +120,7 @@ full_bleed: true
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 26%;   /* cadrage légèrement plus haut */
+    object-position: center 28%;   /* focus légèrement plus haut */
     filter: brightness(.82) contrast(1.05) saturate(1.05);
   }
   
@@ -136,34 +137,45 @@ full_bleed: true
     pointer-events: none;
   }
   
-  /* --- Adaptations selon taille d’écran --- */
+  /* --- Ajustements spécifiques --- */
   
-  /* 🖥️ Laptops 13–15" : horloges trop basses → on réduit l’overlap */
-  @media (max-width: 1440px){
-    :root{ --promo-overlap: clamp(740px, 88vh, 1300px); }
+  /* 🖥️ Grand écran / laptop : remonte les horloges (donc moins d’overlap) */
+  @media (min-width: 1200px){
+    :root{
+      --promo-overlap: clamp(600px, 72vh, 1100px);
+    }
   }
   
-  /* 📱 Mobiles : vidéo trop basse → on réduit encore plus l’overlap
-     + on ajuste le cadrage pour qu’elle monte visuellement */
+  /* 📱 iPhone et petits écrans : remonte la vidéo + descend les horloges */
   @media (max-width: 480px){
     .hero-video{
-      min-height: clamp(360px, 56svh, 680px);
-      padding-bottom: clamp(16px, 4vw, 28px);
+      min-height: clamp(340px, 52svh, 640px);
+      padding-bottom: clamp(10px, 3vw, 20px);
     }
+  
     :root{
-      --promo-overlap: clamp(380px, 68svh, 740px);
+      --promo-overlap: clamp(460px, 80svh, 860px);
     }
+  
     .promo-video{
       margin-top: calc(var(--promo-overlap) * -1);
     }
+  
     .promo-video-el{
-      object-position: center 22%;   /* remonte la vidéo */
+      object-position: center 18%;  /* vidéo cadrée plus haut encore */
+    }
+  
+    /* petite marge pour descendre les horloges */
+    .promo-video + section{
+      margin-top: clamp(24px, 6vw, 48px);
     }
   }
   
-  /* Petits écrans très plats (paysage mobile ou notebook fin) */
+  /* 📺 Hauteurs faibles (paysage, notebooks fins) */
   @media (max-height: 720px){
-    :root{ --promo-overlap: clamp(320px, 52svh, 600px); }
+    :root{
+      --promo-overlap: clamp(300px, 48svh, 600px);
+    }
     .hero-video{
       min-height: clamp(320px, 54svh, 640px);
     }
