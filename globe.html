@@ -1,178 +1,257 @@
----
-layout: default
-title: Globe 3D (test)
-permalink: /globe/
----
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Globe 3D — Test</title>
+<title>Globe 3D — Sans CSS2DRenderer</title>
 <style>
   :root { color-scheme: dark; }
-  body{ margin:0; background:#0b0f1a; color:#fff; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
-  .wrap{ min-height:100svh; display:grid; place-items:center; padding:24px; }
-  .globe{ display:grid; grid-template-columns:minmax(320px,52%) 1fr; gap:24px; width:min(1100px,92vw); align-items:stretch; }
-  .panel{ background:#0f1320; border:1px solid #222; border-radius:14px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.25);}
-  .globe-wrap{ position:relative; border-radius:16px; overflow:hidden; background:#0d1220; border:1px solid #1f2333; box-shadow:0 18px 40px rgba(0,0,0,.45); }
+  body{
+    margin:0; background:#0b0f1a; color:#fff;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    min-height:100svh; display:grid; place-items:center;
+  }
+  .news-globe{
+    display:grid; grid-template-columns:minmax(320px,52%) 1fr; gap:24px;
+    width:min(1200px,92vw); height:clamp(520px,72svh,780px); align-items:stretch;
+  }
+  .globe-wrap{
+    position:relative; border-radius:16px; overflow:hidden;
+    background:#0d1220; border:1px solid #1f2333;
+    box-shadow:0 18px 40px rgba(0,0,0,.45);
+  }
+  /* Canvas plein conteneur */
   #newsGlobe{ display:block; width:100%; height:100%; }
-  #newsGlobeLabels{ position:absolute; inset:0; pointer-events:none; }
-  #newsGlobeLabels > div { pointer-events:auto; }
-  .label{ padding:6px 10px; border-radius:10px; font-weight:800; letter-spacing:.04em; background:#0c1220; border:1px solid #1f3b66; color:#9ec8ff; white-space:nowrap; box-shadow:0 8px 18px rgba(0,0,0,.45); transform:translateZ(0); }
+  /* Overlay HTML pour labels */
+  #newsGlobeLabels { position:absolute; inset:0; pointer-events:none; }
+  #newsGlobeLabels .label { pointer-events:auto; position:absolute; transform:translate(-50%,-50%); }
+
+  .globe-halo{
+    position:absolute; inset:-15%;
+    background:
+      radial-gradient(60% 40% at 50% 0%, rgba(44,140,255,.18), transparent 60%),
+      radial-gradient(60% 40% at 50% 100%, rgba(159,122,255,.12), transparent 60%);
+    filter:blur(18px); opacity:.55; pointer-events:none;
+  }
+  .label{
+    padding:6px 10px; border-radius:10px; font-weight:800; letter-spacing:.04em;
+    background:#0c1220; border:1px solid #1f3b66; color:#9ec8ff; white-space:nowrap;
+    box-shadow:0 8px 18px rgba(0,0,0,.45);
+  }
   .label .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:8px; background:#2c8cff; }
-  .spin{ position:absolute; right:12px; bottom:12px; z-index:3; display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; cursor:pointer; background:#0f1222; color:#cfe3ff; font-weight:800; border:1px solid rgba(255,255,255,.16);}
-  .spin:hover{ border-color:#4da0ff; background:#14182b; transform:translateY(-1px); }
-  @media (max-width:900px){ .globe{ grid-template-columns:1fr; } .globe-wrap{ aspect-ratio:1/1; } }
+  .spin-cta{
+    position:absolute; right:12px; bottom:12px; z-index:3;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 14px; border-radius:12px; cursor:pointer;
+    background:#0f1222; color:#cfe3ff; font-weight:800; border:1px solid rgba(255,255,255,.16);
+  }
+  .spin-cta:hover{ border-color:#4da0ff; background:#14182b; transform:translateY(-1px); }
+
+  .news-card{
+    background:#0f1320; border:1px solid #222; border-radius:14px;
+    padding:20px; box-shadow:0 10px 30px rgba(0,0,0,.25);
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .news-badge{ display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff;
+    background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; font-weight:800; }
+  .news-title{ margin:0; font-size:1.25rem; font-weight:900; color:#fff; }
+  .news-meta{ color:#9aa3b2; font-size:.9rem; margin:0; }
+  .news-desc{ color:#c9cbd1; line-height:1.55; margin:0; }
+  a.btn{ width:fit-content; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:10px;
+    background:#0f0f0f; color:#fff; font-weight:800; text-decoration:none; }
+  a.btn:hover{ border-color:#4da0ff; background:#141414; }
+
+  @media (max-width: 900px){
+    .news-globe{ grid-template-columns:1fr; height:auto; }
+    .globe-wrap{ aspect-ratio: 1 / 1; }
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="globe">
-      <div class="globe-wrap">
-        <canvas id="newsGlobe" aria-label="News globe"></canvas>
-        <div id="newsGlobeLabels"></div>
-        <button class="spin" id="spinBtn" type="button">⟳ Spin</button>
-      </div>
 
-      <article class="panel">
-        <span id="newsBadge" style="display:inline-block;font-size:.72rem;letter-spacing:.08em;color:#9ec8ff;background:#0c1220;border:1px solid #1f3b66;border-radius:999px;padding:4px 8px;font-weight:800;">INFO</span>
-        <h3 id="newsTitle" style="margin:.6rem 0 0;font-size:1.25rem;">Website under construction 🚧</h3>
-        <p id="newsMeta" style="color:#9aa3b2;margin:.25rem 0 .5rem;">Oct 2025 · Ongoing</p>
-        <p id="newsDesc" style="color:#c9cbd1;line-height:1.55;">
-          This website is being enhanced — new pages, animations, and live data integrations are coming soon.
-        </p>
-        <p><a id="newsLink" href="{{ '/' | relative_url }}" style="display:inline-block;padding:8px 10px;border:1px solid rgba(255,255,255,.16);border-radius:10px;background:#0f0f0f;color:#fff;font-weight:800;text-decoration:none;">Learn more →</a></p>
-      </article>
+  <div class="news-globe" id="newsBand">
+    <div class="globe-wrap">
+      <canvas id="newsGlobe" aria-label="News globe"></canvas>
+      <div id="newsGlobeLabels"></div>
+      <button class="spin-cta" id="spinBtn" type="button" aria-label="Spin to next update">⟳ Spin</button>
+      <span class="globe-halo" aria-hidden="true"></span>
     </div>
+
+    <article class="news-card">
+      <span class="news-badge" id="newsBadge">INFO</span>
+      <h3 class="news-title" id="newsTitle">Website under construction 🚧</h3>
+      <p class="news-meta" id="newsMeta">Oct 2025 · Ongoing</p>
+      <p class="news-desc" id="newsDesc">
+        This website is currently being enhanced — new pages, animations, and live data integrations are coming soon.
+      </p>
+      <a class="btn" id="newsLink" href="#">Learn more →</a>
+    </article>
   </div>
 
-  <!-- Scripts locaux (PAS de CDN) -->
-  <script defer src="{{ '/assets/js/three/three.min.js' | relative_url }}"></script>
-  <script defer src="{{ '/assets/js/three/CSS2DRenderer.js' | relative_url }}"></script>
+  <!-- Juste THREE (une seule lib) -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
   <script>
   (function(){
-    function ready(fn){ document.readyState!=='loading' ? fn() : document.addEventListener('DOMContentLoaded', fn); }
-    ready(()=>{
-      if (!window.THREE || !THREE.CSS2DRenderer){
-        console.error('Three.js/CSS2DRenderer non chargés'); return;
+    if (!window.THREE || !THREE.WebGLRenderer){
+      const wrap = document.querySelector('.globe-wrap');
+      if (wrap){
+        wrap.innerHTML = '<div style="padding:20px;font-weight:700;color:#9ec8ff">Impossible de charger Three.js</div>';
       }
-      const canvas = document.getElementById('newsGlobe');
-      const labelsHost = document.getElementById('newsGlobeLabels');
-      const spinBtn = document.getElementById('spinBtn');
+      return;
+    }
 
-      const scene = new THREE.Scene();
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    const canvas = document.getElementById('newsGlobe');
+    const labelsLayer = document.getElementById('newsGlobeLabels');
+    const spinBtn = document.getElementById('spinBtn');
 
-      const labelRenderer = new THREE.CSS2DRenderer();
-      labelRenderer.domElement.style.position='absolute';
-      labelRenderer.domElement.style.inset='0';
-      labelsHost.appendChild(labelRenderer.domElement);
+    // Scene / renderer
+    const scene = new THREE.Scene();
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-      const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-      camera.position.set(0,0,3.2);
+    const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+    camera.position.set(0, 0, 3.2);
 
-      scene.add(new THREE.AmbientLight(0x7aa0ff, .6));
-      const dir = new THREE.DirectionalLight(0xffffff, .7);
-      dir.position.set(3,2,1.5); scene.add(dir);
+    // Lights
+    scene.add(new THREE.AmbientLight(0x7aa0ff, 0.6));
+    const dir = new THREE.DirectionalLight(0xffffff, 0.7);
+    dir.position.set(3, 2, 1.5);
+    scene.add(dir);
 
-      const sphere = new THREE.Mesh(
-        new THREE.SphereGeometry(1, 64, 64),
-        new THREE.MeshStandardMaterial({ color:0x0f1930, roughness:.9, metalness:.15 })
-      );
-      scene.add(sphere);
+    // Globe mesh
+    const sphere = new THREE.Mesh(
+      new THREE.SphereGeometry(1, 64, 64),
+      new THREE.MeshStandardMaterial({ color: 0x0f1930, roughness:0.9, metalness:0.15 })
+    );
+    scene.add(sphere);
 
-      const wire = new THREE.LineSegments(
-        new THREE.WireframeGeometry(new THREE.SphereGeometry(1.002, 24, 16)),
-        new THREE.LineBasicMaterial({ color:0x2c8cff, transparent:true, opacity:.18 })
-      );
-      scene.add(wire);
+    // Wire overlay
+    const wire = new THREE.LineSegments(
+      new THREE.WireframeGeometry(new THREE.SphereGeometry(1.002, 24, 16)),
+      new THREE.LineBasicMaterial({ color:0x2c8cff, transparent:true, opacity:0.18 })
+    );
+    scene.add(wire);
 
-      const NEWS = [
-        { badge:'INFO',   title:'Website under construction 🚧', meta:'Oct 2025 · Ongoing',
-          desc:'This website is being enhanced — new pages, animations, and live data integrations are coming soon.',
-          href:"{{ '/' | relative_url }}", lat:12, lon:-20 },
-        { badge:'UPDATE', title:'What I do — Quant Engineering', meta:'Oct 2025 · Labs',
-          desc:'Pricing engines, risk aggregation, intraday analytics and research notes.',
-          href:"{{ '/what-i-do' | relative_url }}", lat:-8, lon:60 },
-      ];
-      const card = {
-        badge:document.getElementById('newsBadge'),
-        title:document.getElementById('newsTitle'),
-        meta: document.getElementById('newsMeta'),
-        desc: document.getElementById('newsDesc'),
-        link: document.getElementById('newsLink')
-      };
-      function setCard(i){
-        const n = NEWS[i % NEWS.length];
-        card.badge.textContent = n.badge;
-        card.title.textContent = n.title;
-        card.meta.textContent  = n.meta;
-        card.desc.textContent  = n.desc;
-        card.link.href         = n.href;
-      }
+    // Données + carte de droite
+    const NEWS = [
+      { badge:'INFO',   title:'Website under construction 🚧', meta:'Oct 2025 · Ongoing',
+        desc:'This website is being enhanced — new pages, animations, and live data integrations are coming soon.',
+        href:'#', lat:12, lon:-20 },
+      { badge:'UPDATE', title:'What I do — Quant Engineering', meta:'Oct 2025 · Labs',
+        desc:'Pricing engines, risk aggregation, intraday analytics and research notes.',
+        href:'#', lat:-8, lon:60 }
+    ];
+    const card = {
+      badge:document.getElementById('newsBadge'),
+      title:document.getElementById('newsTitle'),
+      meta: document.getElementById('newsMeta'),
+      desc: document.getElementById('newsDesc'),
+      link: document.getElementById('newsLink')
+    };
+    function setCard(i){
+      const n = NEWS[i % NEWS.length];
+      card.badge.textContent = n.badge;
+      card.title.textContent = n.title;
+      card.meta.textContent  = n.meta;
+      card.desc.textContent  = n.desc;
+      card.link.href         = n.href;
+    }
+    setCard(0);
 
-      const toVec = (lat,lon,r)=>{
-        const phi = THREE.MathUtils.degToRad(90 - lat);
-        const theta = THREE.MathUtils.degToRad(lon + 180);
-        return new THREE.Vector3(
-          -r * Math.sin(phi) * Math.cos(theta),
-           r * Math.cos(phi),
-           r * Math.sin(phi) * Math.sin(theta)
-        );
-      };
-      NEWS.forEach((n, idx)=>{
-        const el = document.createElement('div');
-        el.className = 'label';
-        el.innerHTML = '<span class="dot"></span>'+n.badge;
-        const obj = new THREE.CSS2DObject(el);
-        obj.position.copy(toVec(n.lat, n.lon, 1.05));
-        sphere.add(obj);
-        el.addEventListener('click', ()=> spinTo(idx));
-      });
-
-      function resize(){
-        const rect = canvas.getBoundingClientRect();
-        const size = Math.min(rect.width, rect.height || rect.width);
-        renderer.setSize(size, size, false);
-        labelRenderer.setSize(size, size);
-        camera.aspect = 1; camera.updateProjectionMatrix();
-      }
-      new ResizeObserver(resize).observe(canvas);
-      window.addEventListener('orientationchange', resize);
-      resize();
-
-      let current = 0, spinAnim = null, autorotate = 0.003;
-      function spinTo(targetIndex){
-        if (spinAnim) cancelAnimationFrame(spinAnim);
-        const start = sphere.rotation.y;
-        const end   = start + THREE.MathUtils.degToRad(NEWS[targetIndex].lon) * -1;
-        const dur = 900; const t0 = performance.now();
-        function tick(now){
-          const p = Math.min(1, (now - t0)/dur);
-          const e = 1 - Math.pow(1 - p, 3);
-          sphere.rotation.y = THREE.MathUtils.lerp(start, end, e);
-          wire.rotation.y   = sphere.rotation.y;
-          render();
-          if (p < 1) spinAnim = requestAnimationFrame(tick);
-          else { current = targetIndex; setCard(current); }
-        }
-        spinAnim = requestAnimationFrame(tick);
-      }
-      document.getElementById('spinBtn').addEventListener('click', ()=> spinTo((current+1)%NEWS.length));
-      setCard(0);
-
-      function render(){
-        sphere.rotation.y += autorotate;
-        wire.rotation.y = sphere.rotation.y;
-        renderer.render(scene, camera);
-        labelRenderer.render(scene, camera);
-      }
-      (function loop(){ requestAnimationFrame(loop); render(); })();
+    // ===== Labels HTML sans CSS2DRenderer =====
+    // 1) crée les éléments
+    const labels = NEWS.map((n, idx) => {
+      const el = document.createElement('div');
+      el.className = 'label';
+      el.innerHTML = `<span class="dot"></span>${n.badge}`;
+      el.style.zIndex = 1;
+      el.addEventListener('click', ()=> spinTo(idx));
+      labelsLayer.appendChild(el);
+      return { el, lat:n.lat, lon:n.lon, r:1.05, world:new THREE.Vector3(), screen:new THREE.Vector3() };
     });
+
+    // 2) convertit lat/lon → position locale sur la sphère
+    function latLonToVector3(lat, lon, r){
+      const phi = THREE.MathUtils.degToRad(90 - lat);
+      const theta = THREE.MathUtils.degToRad(lon + 180);
+      return new THREE.Vector3(
+        -r * Math.sin(phi) * Math.cos(theta),
+         r * Math.cos(phi),
+         r * Math.sin(phi) * Math.sin(theta)
+      );
+    }
+
+    // 3) resize
+    function resize(){
+      const rect = canvas.getBoundingClientRect();
+      const size = Math.min(rect.width, rect.height || rect.width);
+      renderer.setSize(size, size, false);
+      camera.aspect = 1;
+      camera.updateProjectionMatrix();
+    }
+    new ResizeObserver(resize).observe(canvas);
+    window.addEventListener('orientationchange', resize);
+    resize();
+
+    // 4) spin + autorotate
+    let current = 0, spinAnim = null, autorotate = 0.003;
+    function spinTo(targetIndex){
+      if (spinAnim) cancelAnimationFrame(spinAnim);
+      const start = sphere.rotation.y;
+      const end   = start + THREE.MathUtils.degToRad(NEWS[targetIndex].lon) * -1;
+      const dur = 900; const t0 = performance.now();
+      function tick(now){
+        const p = Math.min(1, (now - t0)/dur);
+        const e = 1 - Math.pow(1 - p, 3);
+        sphere.rotation.y = THREE.MathUtils.lerp(start, end, e);
+        wire.rotation.y   = sphere.rotation.y;
+        render();
+        if (p < 1) spinAnim = requestAnimationFrame(tick);
+        else { current = targetIndex; setCard(current); }
+      }
+      spinAnim = requestAnimationFrame(tick);
+    }
+    spinBtn.addEventListener('click', ()=> spinTo((current+1)%NEWS.length));
+
+    // 5) rendu + projection manuelle des labels
+    function render(){
+      sphere.rotation.y += autorotate;
+      wire.rotation.y = sphere.rotation.y;
+
+      renderer.render(scene, camera);
+
+      // positionne chaque label
+      const w = renderer.domElement.clientWidth;
+      const h = renderer.domElement.clientHeight;
+
+      labels.forEach(L=>{
+        // position locale sur la sphère (avec son rayon)
+        const local = latLonToVector3(L.lat, L.lon, L.r);
+        // transforme en coordonnées monde (en tenant compte de la rotation du globe)
+        L.world.copy(local).applyMatrix4(sphere.matrixWorld);
+        // projette en écran
+        L.screen.copy(L.world).project(camera);
+
+        // si derrière la caméra → masquer
+        const facing = L.world.clone().sub(sphere.position).dot(camera.position.clone().sub(sphere.position)) < 0;
+        L.el.style.display = facing ? 'none' : 'block';
+
+        // conversion NDC → pixels
+        const x = (L.screen.x *  0.5 + 0.5) * w;
+        const y = (L.screen.y * -0.5 + 0.5) * h;
+
+        L.el.style.left = x + 'px';
+        L.el.style.top  = y + 'px';
+
+        // z-index plus faible quand proche du bord (petit effet de profondeur)
+        const depth = (1 - Math.abs(L.screen.z)) * 100 | 0;
+        L.el.style.zIndex = String(10 + depth);
+        // opacité un peu réduite quand proche du bord
+        L.el.style.opacity = String(0.35 + 0.65 * (1 - Math.abs(L.screen.x*0.9) - Math.abs(L.screen.y*0.7)));
+      });
+    }
+    (function loop(){ requestAnimationFrame(loop); render(); })();
   })();
   </script>
 </body>
