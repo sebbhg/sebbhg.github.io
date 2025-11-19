@@ -662,6 +662,11 @@ full_bleed: true
 <section class="news-band">
   <div class="updates-wrap">
     <div class="updates-head">
+      <div class="updates-label">
+        <span class="updates-title">LATEST UPDATES</span>
+        <span class="updates-counter" id="updatesCounter">3</span>
+      </div>
+    
       <div class="updates-ctrls" role="group" aria-label="Carousel controls">
         <button class="updates-btn" id="updPrev" aria-label="Previous update" title="Previous" type="button">‹</button>
         <button class="updates-btn" id="updNext" aria-label="Next update" title="Next" type="button">›</button>
@@ -1416,6 +1421,8 @@ updateClocks(); setInterval(updateClocks, 1000);
   const btnPrev = document.getElementById('updPrev');
   const btnNext = document.getElementById('updNext');
   const cards = Array.from(track.querySelectorAll('.update-card'));
+  const counterEl = document.getElementById('updatesCounter');
+  if (counterEl) counterEl.textContent = String(cards.length);
   let idx = 1; // démarre sur la carte du milieu (0,1,2)
   let lastRect = null;
 
