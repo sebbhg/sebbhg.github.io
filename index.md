@@ -738,7 +738,7 @@ full_bleed: true
           <h3 class="update-title">Website under construction</h3>
           <p class="update-meta">Dec 2025 · Ongoing</p>
           <p class="update-desc">
-            This website is currently being enhanced — new pages, animations, and live data integrations are coming soon.
+            This website is currently being enhanced, new pages, animations, and live data integrations are coming soon.
             Stay tuned for the full Quantitative Finance & Trading experience.
           </p>
         </article>
@@ -747,7 +747,7 @@ full_bleed: true
         <article class="update-card" data-card="1" tabindex="0">
           <span class="update-badge">NOTE</span>
           <h3 class="update-title">What I do - Quant Engineering</h3>
-          <p class="update-meta">Oct 2025 · Labs</p>
+          <p class="update-meta">Oct 2025 · My professional background</p>
           <p class="update-desc">
             You will find below all the information about my background and my past professional experiences.
           </p>
@@ -756,7 +756,7 @@ full_bleed: true
         <!-- Card 3 (nouvelle étiquette) -->
         <article class="update-card" data-card="2" tabindex="0">
           <span class="update-badge">COMING SOON</span>
-          <h3 class="update-title">My first book — Preview</h3>
+          <h3 class="update-title">My first book - Preview</h3>
           <p class="update-meta">March 2026 · Teaser</p>
           <p class="update-desc">
             This first book outlines a modern, structured approach to modelling, pricing, and risk analysis, providing a clear foundation for understanding how today’s markets operate.
