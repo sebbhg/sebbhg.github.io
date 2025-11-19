@@ -198,7 +198,6 @@ full_bleed: true
     .world-clock-bar{
       margin-top: 300px !important;  /* essaie entre 240 et 300px selon ton iPhone */
     }
-  }
   
   /* === Écrans à faible hauteur === */
   @media (max-height: 720px){
