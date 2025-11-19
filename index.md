@@ -1398,14 +1398,16 @@ updateClocks(); setInterval(updateClocks, 1000);
     const stageRect = stage.getBoundingClientRect();
     const cardRect  = target.getBoundingClientRect();
     const offset = (stageRect.left + stageRect.right)/2 - (cardRect.left + cardRect.right)/2;
-    // Applique transform au track (ajuste relatif à sa position actuelle)
+
     const trackX = getCurrentTranslateX(track);
     const nextX = trackX + offset;
+
     if(!withAnim){ track.style.transition = 'none'; }
     track.style.transform = `translate3d(${nextX}px,0,0)`;
-    if(!withAnim){ requestAnimationFrame(()=>{ track.style.transition='transform .35s cubic-bezier(.2,.75,.2,1)'; }); }
+    if(!withAnim){
+      requestAnimationFrame(()=>{ track.style.transition='transform .35s cubic-bezier(.2,.75,.2,1)'; });
+    }
 
-    // classes de focus visuel
     cards.forEach(c => c.classList.remove('is-center'));
     target.classList.add('is-center');
     target.focus({preventScroll:true});
@@ -1425,6 +1427,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     track.style.transition = 'none';
     track.style.transform = 'translate3d(0,0,0)';
     requestAnimationFrame(()=> centerOn(idx, false));
+  }
 
   btnPrev.addEventListener('click', ()=> centerOn(idx-1));
   btnNext.addEventListener('click', ()=> centerOn(idx+1));
@@ -1437,7 +1440,11 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   // Swipe
   let startX=0, dragging=false;
-  function onDown(e){ dragging=true; startX = (e.touches?e.touches[0].clientX:e.clientX); track.style.transition='none'; }
+  function onDown(e){
+    dragging=true;
+    startX = (e.touches?e.touches[0].clientX:e.clientX);
+    track.style.transition='none';
+  }
   function onMove(e){
     if(!dragging) return;
     const x = (e.touches?e.touches[0].clientX:e.clientX);
@@ -1447,8 +1454,8 @@ updateClocks(); setInterval(updateClocks, 1000);
     startX = x;
   }
   function onUp(){
-    if(!dragging) return; dragging=false;
-    // Choisit la carte la plus proche du centre
+    if(!dragging) return;
+    dragging=false;
     const center = (stage.getBoundingClientRect().left + stage.getBoundingClientRect().right)/2;
     let best = 0, bestDist = Infinity;
     cards.forEach((c,i)=>{
@@ -1471,58 +1478,13 @@ updateClocks(); setInterval(updateClocks, 1000);
   // Reflow on resize/orientation change
   window.addEventListener('resize', ()=>{
     const r = stage.getBoundingClientRect().width;
-    if(!lastRect || Math.abs(r - lastRect) > 2){ lastRect = r; recalc(); }
+    if(!lastRect || Math.abs(r - lastRect) > 2){
+      lastRect = r;
+      recalc();
+    }
   });
 
   // Initial center (sur la 2e carte)
   requestAnimationFrame(()=> centerOn(idx, false));
-})();
-
-/* === Play / Pause sur la vidéo promo === */
-(function(){
-  const video  = document.getElementById('promoVideo');
-  const toggle = document.getElementById('promoVideoToggle');
-  if (!video || !toggle) return;
-
-  const iconSpan = toggle.querySelector('.promo-video-toggle-icon');
-
-  function updateUI(){
-    if (video.paused){
-      iconSpan.textContent = '▶';
-      toggle.setAttribute('aria-label', 'Play background video');
-      toggle.setAttribute('title', 'Play background video');
-    } else {
-      iconSpan.textContent = '❚❚';
-      toggle.setAttribute('aria-label', 'Pause background video');
-      toggle.setAttribute('title', 'Pause background video');
-    }
-  }
-
-  function togglePlay(){
-    if (video.paused){
-      video.play();
-    } else {
-      video.pause();
-    }
-    updateUI();
-  }
-
-  toggle.addEventListener('click', togglePlay);
-
-  // Support clavier (Enter / espace)
-  toggle.addEventListener('keydown', (e)=>{
-    if (e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      togglePlay();
-    }
-  });
-
-  // Initialise l'état du bouton en fonction de l'état réel de la vidéo
-  if (video.autoplay && !video.paused){
-    updateUI();
-  } else {
-    video.pause();
-    updateUI();
-  }
 })();
 </script>
