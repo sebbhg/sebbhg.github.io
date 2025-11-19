@@ -521,9 +521,11 @@ full_bleed: true
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
     <h1>Turning Models into Market Impact</h1>
     <p class="subtitle" style="text-align: justify;">
-      Welcome to the website of Sébastien Haag.  
-      Here, I share my courses, projects and summaries in quantitative finance,  
-      with a simple ambition: to bring scientific rigor to financial performance.
+      Welcome to Haagerton, my quantitative finance and trading lab.  
+      I explore the mechanics of modern markets through stochastic calculus and SDEs, 
+      term-structure and volatility-surface models, Monte Carlo engines and PDE solvers, 
+      as well as high-frequency order book dynamics and optimal execution.  
+      On this site, I will only publish books — long-form, highly technical volumes in quantitative finance.
     </p>
 
     <!-- ==== Social / Contact + Play/Pause vidéo ==== -->
