@@ -490,13 +490,10 @@ full_bleed: true
     display:flex;
     align-items:center;
     gap:12px;
-    width:100%;
-    flex-wrap:nowrap;
   }
   .social-actions-left{
     display:flex;
     gap:12px;
-    flex-shrink:0;
   }
   .icon-btn{
     width:46px; height:46px; display:grid; place-items:center;
