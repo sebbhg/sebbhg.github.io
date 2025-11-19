@@ -1425,7 +1425,6 @@ updateClocks(); setInterval(updateClocks, 1000);
     track.style.transition = 'none';
     track.style.transform = 'translate3d(0,0,0)';
     requestAnimationFrame(()=> centerOn(idx, false));
-  }
 
   btnPrev.addEventListener('click', ()=> centerOn(idx-1));
   btnNext.addEventListener('click', ()=> centerOn(idx+1));
@@ -1477,6 +1476,7 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   // Initial center (sur la 2e carte)
   requestAnimationFrame(()=> centerOn(idx, false));
+})();
 
 /* === Play / Pause sur la vidéo promo === */
 (function(){
