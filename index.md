@@ -525,7 +525,7 @@ full_bleed: true
       I explore the mechanics of modern markets through stochastic calculus and SDEs, 
       term-structure and volatility-surface models, Monte Carlo engines and PDE solvers, 
       as well as high-frequency order book dynamics and optimal execution.  
-      On this site, I will only publish books — long-form, highly technical volumes in quantitative finance.
+      On this site, I will publish books, long-form, highly technical volumes in quantitative finance.
     </p>
 
     <!-- ==== Social / Contact + Play/Pause vidéo ==== -->
