@@ -490,6 +490,7 @@ full_bleed: true
     display:flex;
     align-items:center;
     gap:12px;
+   justify-content:space-between;
   }
   .social-actions-left{
     display:flex;
