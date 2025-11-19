@@ -320,9 +320,9 @@ full_bleed: true
 
   /* Toutes les cartes NON sélectionnées (gauche, droite, hors écran) */
   .update-card:not(.is-center){
-    opacity:0.45;
-    filter:blur(1.2px) saturate(.85) brightness(.78);
-    box-shadow:0 12px 40px rgba(0,0,0,.55);
+    opacity:0.38;
+    filter:blur(2.5px) saturate(.85) brightness(.72);
+    box-shadow:0 12px 50px rgba(0,0,0,.6);
   }
   
   /* Dégradé sur les bords pour toutes les cartes floutées */
