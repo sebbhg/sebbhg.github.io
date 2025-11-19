@@ -230,9 +230,45 @@ full_bleed: true
   .news-band{ background:#050505; border-top:1px solid #111; border-bottom:1px solid #111; padding:28px 0 40px; }
   .updates-wrap{ max-width:1100px; margin:0 auto; padding:0 20px; }
   .updates-head{
-    display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
   }
-  .updates-title{ color:#e7efff; font-weight:900; letter-spacing:.06em; text-transform:uppercase; }
+  /* Conteneur du label + badge */
+  .updates-label{
+    position:relative;
+    display:inline-block;
+  }
+  /* Texte "LATEST UPDATES" (tu peux adapter si tu veux plus gros) */
+  .updates-title{
+    color:#e7efff;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:.9rem;
+  }
+  /* Badge type notification iPhone */
+  .updates-counter{
+    position:absolute;
+    top:-10px;
+    right:-14px;
+    min-width:22px;
+    height:22px;
+    padding:0 6px;
+    border-radius:999px;
+    background:#ff3b30; /* rouge notif */
+    color:#fff;
+    font-size:.75rem;
+    font-weight:800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:
+      0 0 0 2px #050505,      /* anneau foncé autour */
+      0 4px 10px rgba(0,0,0,.7);
+  }
   .updates-ctrls{ display:flex; gap:8px; }
   .updates-btn{
     width:42px; height:42px; border-radius:50%; display:grid; place-items:center;
