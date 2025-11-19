@@ -137,7 +137,7 @@ full_bleed: true
   .promo-video-toggle{
     position:absolute;
     right:16px;
-    bottom:16px;
+    bottom:64px;
     z-index:5; /* au-dessus de la scrim */
     width:42px;
     height:42px;
@@ -1415,13 +1415,36 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   function getCurrentTranslateX(el){
     const tr = getComputedStyle(el).transform;
-    if (tr && tr !== 'none'){
-      const m = new DOMMatrixReadOnly(tr);
-      return m.m41;
+    if (!tr || tr === 'none') return 0;
+
+    try{
+      // Si DOMMatrixReadOnly est dispo
+      if (typeof DOMMatrixReadOnly !== 'undefined'){
+        const m = new DOMMatrixReadOnly(tr);
+        return m.m41;
+      }
+      // Fallback plus large (DOMMatrix ou WebKitCSSMatrix)
+      if (typeof DOMMatrix !== 'undefined'){
+        const m = new DOMMatrix(tr);
+        return m.m41;
+      }
+      if (typeof WebKitCSSMatrix !== 'undefined'){
+        const m = new WebKitCSSMatrix(tr);
+        return m.m41;
+      }
+
+      // Fallback ultra simple si vraiment rien n’est supporté
+      const match = tr.match(/matrix\(([^)]+)\)/);
+      if (match){
+        const parts = match[1].split(',');
+        return parseFloat(parts[4] || '0'); // composante tx
+      }
+    }catch(e){
+      console.warn('getCurrentTranslateX fallback', e);
     }
     return 0;
   }
-
+  
   function recalc(){
     // remet le track à 0 puis recentre l’index courant pour tenir compte des tailles responsives
     track.style.transition = 'none';
