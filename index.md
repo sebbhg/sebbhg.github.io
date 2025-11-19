@@ -37,6 +37,17 @@ full_bleed: true
   .hero-content .subtitle{ opacity:0; transform:translateY(20px); animation:fadeInUp 1.4s ease-out 1.3s forwards; }
 
   /* === HERO LAYERS === */
+  .hero-video{
+    position:relative;
+    padding:var(--hero-spacing) 24px calc(var(--hero-spacing) * 1.2);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    min-height:clamp(420px, 78vh, 720px);
+    color:#fff;
+    overflow:hidden;
+    background:#050814;
+  }
   .hero-video::after{
     content:"";
     position:absolute;
@@ -133,14 +144,11 @@ full_bleed: true
     pointer-events: none;
   }
 
-  /* === Bouton play / pause de la vidéo promo === */
+  /* === Bouton play / pause pour la vidéo promo (dans la barre social-actions) === */
   .promo-video-toggle{
-    position:absolute;
-    right:16px;
-    bottom:140px;          /* 🔼 VRAIMENT plus haut dans la vidéo */
-    z-index:50;            /* 🔼 Passe AU-DESSUS des horloges (z-index:10) */
-    width:42px;
-    height:42px;
+    margin-left:auto;
+    width:46px;
+    height:46px;
     border-radius:50%;
     border:1px solid rgba(255,255,255,.35);
     background: radial-gradient(120% 120% at 30% 10%, rgba(44,140,255,.35), rgba(5,8,16,.92));
@@ -170,10 +178,8 @@ full_bleed: true
 
   @media (max-width:600px){
     .promo-video-toggle{
-      right:12px;
-      bottom:110px;    /* 🔼 bien remonté aussi sur iPhone / tél */
-      width:38px;
-      height:38px;
+      width:40px;
+      height:40px;
       font-size:.9rem;
     }
   }
@@ -500,9 +506,16 @@ full_bleed: true
   /* au-dessus du footer */
   .news-band, .after-market{ position:relative; z-index:4; }
 
-  /* ===== HERO SOCIAL ICON BUTTONS ===== */
+  /* ===== HERO SOCIAL ICON BUTTONS + Play/Pause à droite ===== */
   .social-actions{
-    margin-top:14px; display:flex; gap:12px;
+    margin-top:14px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .social-actions-left{
+    display:flex;
+    gap:12px;
   }
   .icon-btn{
     width:46px; height:46px; display:grid; place-items:center;
@@ -535,24 +548,37 @@ full_bleed: true
       with a simple ambition: to bring scientific rigor to financial performance.
     </p>
 
-    <!-- ==== Social / Contact (remplace les 5 boutons) ==== -->
-    <div class="social-actions" aria-label="Contact links">
-      <!-- LinkedIn -->
-      <a class="icon-btn" href="https://www.linkedin.com/in/s%C3%A9bastien-haag/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile" title="LinkedIn">
-        <span class="sr-only">LinkedIn</span>
-        <!-- LinkedIn SVG -->
-        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
-          <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0H12v2.2h.06c.63-1.2 2.16-2.46 4.45-2.46 4.76 0 5.64 3.13 5.64 7.2V24h-5v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V24h-5V8z"/>
-        </svg>
-      </a>
-      <!-- Email -->
-      <a class="icon-btn" href="mailto:sbthaag@gmail.com" aria-label="Send me an email" title="Email">
-        <span class="sr-only">Email</span>
-        <!-- Envelope SVG -->
-        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
-          <path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
-        </svg>
-      </a>
+    <!-- ==== Social / Contact + Play/Pause vidéo ==== -->
+    <div class="social-actions" aria-label="Contact links and video controls">
+      <div class="social-actions-left">
+        <!-- LinkedIn -->
+        <a class="icon-btn" href="https://www.linkedin.com/in/s%C3%A9bastien-haag/" target="_blank" rel="noopener noreferrer" aria-label="Open LinkedIn profile" title="LinkedIn">
+          <span class="sr-only">LinkedIn</span>
+          <!-- LinkedIn SVG -->
+          <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0H12v2.2h.06c.63-1.2 2.16-2.46 4.45-2.46 4.76 0 5.64 3.13 5.64 7.2V24h-5v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.65 1.8-2.65 3.65V24h-5V8z"/>
+          </svg>
+        </a>
+        <!-- Email -->
+        <a class="icon-btn" href="mailto:sbthaag@gmail.com" aria-label="Send me an email" title="Email">
+          <span class="sr-only">Email</span>
+          <!-- Envelope SVG -->
+          <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Bouton play / pause (contrôle la vidéo promo) -->
+      <button
+        class="promo-video-toggle"
+        id="promoVideoToggle"
+        type="button"
+        aria-label="Pause background video"
+        title="Pause background video">
+        <span class="sr-only">Toggle background video</span>
+        <span class="promo-video-toggle-icon">❚❚</span>
+      </button>
     </div>
   </div>
 
@@ -574,16 +600,6 @@ full_bleed: true
       <source src="/assets/videos/trading-broll.mp4" type="video/mp4">
     </video>
     <div class="promo-scrim"></div>
-
-    <!-- Bouton play / pause -->
-    <button
-      class="promo-video-toggle"
-      id="promoVideoToggle"
-      type="button"
-      aria-label="Pause background video"
-      title="Pause background video">
-      <span class="promo-video-toggle-icon">❚❚</span>
-    </button>
   </div>
 </section>
 
