@@ -626,7 +626,6 @@ full_bleed: true
 <section class="news-band">
   <div class="updates-wrap">
     <div class="updates-head">
-      <div class="updates-title">Latest updates</div>
       <div class="updates-ctrls" role="group" aria-label="Carousel controls">
         <button class="updates-btn" id="updPrev" aria-label="Previous update" title="Previous" type="button">‹</button>
         <button class="updates-btn" id="updNext" aria-label="Next update" title="Next" type="button">›</button>
