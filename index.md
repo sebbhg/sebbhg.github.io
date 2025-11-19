@@ -186,19 +186,6 @@ full_bleed: true
     }
   }
   
-    .promo-video{ 
-      margin-top: -720px !important; /* la vidéo démarre tout en haut */
-    }
-  
-    .promo-video-el{
-      object-position: center 30%;
-    }
-  
-    /* ✅ On descend franchement les horloges pour libérer le texte + boutons */
-    .world-clock-bar{
-      margin-top: 300px !important;  /* essaie entre 240 et 300px selon ton iPhone */
-    }
-  
   /* === Écrans à faible hauteur === */
   @media (max-height: 720px){
     :root{
@@ -217,7 +204,10 @@ full_bleed: true
     border-top:1px solid #333;
     border-bottom:1px solid #333;
     padding:12px 0;
-    margin-top:0;            /* ⬅ plus de margin négatif */
+  
+    /* on remonte la barre d’horloges sous la vidéo */
+    margin-top: clamp(-80px, -8vh, -40px);
+  
     opacity:1;
     z-index:10;
     isolation:isolate;
