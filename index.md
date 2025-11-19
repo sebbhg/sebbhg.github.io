@@ -95,14 +95,6 @@ full_bleed: true
   @media (max-width:880px){ .hero-logo-img{ right:-1.2vw; top:42%; transform:translateY(-42%); width:min(22vw,34vh); } }
 
   /* === SECONDARY VIDEO — FULL OVERLAY BEHIND HERO (FINAL ADJUSTMENTS) === */
-  
-  /* Vidéo plein écran derrière le hero */
-  :root{
-    --hero-spacing: 60px;   /* tu peux garder ici si tu fusionnes tout */
-    --clock-speed: 120s;
-    --promo-overlap: clamp(1500px, 150vh, 2600px);  /* ⬅ vidéo plus haute */
-  }
-  
   .promo-video{
     position: relative;
     z-index: 0;
