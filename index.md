@@ -11,6 +11,7 @@ full_bleed: true
   :root{
     --hero-spacing: 60px; /* valeur par défaut, ajustable via la poignée */
     --clock-speed: 120s; 
+    --promo-overlap: clamp(1500px, 150vh, 2600px);
   }
 
   /* === Fade-in global === */
