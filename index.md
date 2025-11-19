@@ -489,13 +489,14 @@ full_bleed: true
     margin-top:14px;
     display:flex;
     align-items:center;
+    gap:12px;
+    width:100%;
+    flex-wrap:nowrap;
   }
-  
   .social-actions-left{
     display:flex;
-    align-items:center;
-    gap:12px;            /* espace entre LinkedIn / Email / Play */
-    flex-wrap:nowrap;    /* empêche les éléments de passer à la ligne */
+    gap:12px;
+    flex-shrink:0;
   }
   .icon-btn{
     width:46px; height:46px; display:grid; place-items:center;
