@@ -97,7 +97,9 @@ full_bleed: true
   
   /* Vidéo plein écran derrière le hero */
   :root{
-    --promo-overlap: clamp(850px, 110vh, 1800px);
+    --hero-spacing: 60px;   /* tu peux garder ici si tu fusionnes tout */
+    --clock-speed: 120s;
+    --promo-overlap: clamp(980px, 115vh, 1900px);  /* ⬅ vidéo plus haute */
   }
   
   .promo-video{
