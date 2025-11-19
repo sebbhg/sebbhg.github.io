@@ -137,8 +137,8 @@ full_bleed: true
   .promo-video-toggle{
     position:absolute;
     right:16px;
-    bottom:64px;
-    z-index:5; /* au-dessus de la scrim */
+    bottom:140px;          /* 🔼 VRAIMENT plus haut dans la vidéo */
+    z-index:50;            /* 🔼 Passe AU-DESSUS des horloges (z-index:10) */
     width:42px;
     height:42px;
     border-radius:50%;
@@ -171,7 +171,7 @@ full_bleed: true
   @media (max-width:600px){
     .promo-video-toggle{
       right:12px;
-      bottom:12px;
+      bottom:110px;    /* 🔼 bien remonté aussi sur iPhone / tél */
       width:38px;
       height:38px;
       font-size:.9rem;
@@ -1509,5 +1509,39 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   // Initial center (sur la 2e carte)
   requestAnimationFrame(()=> centerOn(idx, false));
+})();
+
+/* === Play / Pause de la vidéo promo === */
+(function(){
+  const video = document.getElementById('promoVideo');
+  const btn   = document.getElementById('promoVideoToggle');
+  if (!video || !btn) return;
+
+  const iconSpan = btn.querySelector('.promo-video-toggle-icon');
+
+  function syncLabel(){
+    if (video.paused){
+      if (iconSpan) iconSpan.textContent = '▶';
+      btn.setAttribute('aria-label','Play background video');
+      btn.title = 'Play background video';
+    } else {
+      if (iconSpan) iconSpan.textContent = '❚❚';
+      btn.setAttribute('aria-label','Pause background video');
+      btn.title = 'Pause background video';
+    }
+  }
+
+  btn.addEventListener('click', ()=>{
+    if (video.paused){
+      // certains navigateurs peuvent bloquer le play, on ignore juste l’erreur
+      video.play().catch(()=>{});
+    } else {
+      video.pause();
+    }
+    syncLabel();
+  });
+
+  // synchro initiale (au cas où la vidéo ne démarre pas en autoplay)
+  syncLabel();
 })();
 </script>
