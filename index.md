@@ -287,26 +287,85 @@ full_bleed: true
     transition: transform .35s cubic-bezier(.2,.75,.2,1);
     padding:8px 0;
   }
+  /* État par défaut (déjà présent, tu peux juste vérifier que tu as bien ça) */
   .update-card{
-    position:relative; background:#0d0d0d; border:1px solid #222; border-radius:14px;
-    padding:18px 18px 16px; box-shadow:0 10px 30px rgba(0,0,0,.25);
-    width:min(540px, 86vw); flex:0 0 auto;
-    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, filter .25s ease, opacity .25s ease;
+    position:relative;
+    background:#0d0d0d;
+    border:1px solid #222;
+    border-radius:14px;
+    padding:18px 18px 16px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    width:min(540px, 86vw);
+    flex:0 0 auto;
+    transition:
+      transform .25s ease,
+      box-shadow .25s ease,
+      border-color .25s ease,
+      filter .25s ease,
+      opacity .25s ease;
     transform-origin:center center;
-    opacity:.78; filter:saturate(.95) brightness(.95);
-    transform:scale(.985)
+    opacity:.78;
+    filter:saturate(.95) brightness(.95);
+    transform:scale(.985);
   }
   
+  /* Carte au centre (déjà présent, on garde) */
   .update-card.is-center{
     transform:scale(1.02);
+    border-color:#2c8cff55;
+    box-shadow:0 18px 46px rgba(0,0,0,.45);
+    opacity:1;
+    filter:none;
+  }
+
+  /* Effet pour les cartes latérales (gauche / droite) */
+  .update-card.is-left,
+  .update-card.is-right{
+    opacity:0.55;
+    filter:blur(1px) saturate(.9) brightness(.8);
+    box-shadow:0 12px 40px rgba(0,0,0,.55);
   }
   
-  .update-card::after{ content:""; position:absolute; inset:-1px; border-radius:14px; pointer-events:none; background:radial-gradient(600px 200px at 20% -20%, rgba(44,140,255,.15), transparent 70%); opacity:.7; }
-  .update-card.is-center{
-    transform:scale(1.02);
-    border-color:#2c8cff55; box-shadow:0 18px 46px rgba(0,0,0,.45);
-    opacity:1; filter:none;
+  /* Un léger dégradé sur les bords pour accentuer l’effet “hors focus” */
+  .update-card.is-left::before,
+  .update-card.is-right::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    pointer-events:none;
+    background:linear-gradient(
+      to right,
+      rgba(0,0,0,.6),
+      transparent 40%,
+      transparent 60%,
+      rgba(0,0,0,.4)
+    );
+    opacity:.85;
   }
+  
+  /* On garde la carte centrale parfaitement nette et “au-dessus” visuellement */
+  .update-card.is-center::before{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:inherit;
+    pointer-events:none;
+    background:radial-gradient(80% 120% at 50% -10%, rgba(44,140,255,.16), transparent 70%);
+    opacity:.9;
+  }
+ 
+  /* Halo global déjà présent, on laisse tel quel */
+  .update-card::after{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:14px;
+    pointer-events:none;
+    background:radial-gradient(600px 200px at 20% -20%, rgba(44,140,255,.15), transparent 70%);
+    opacity:.7;
+  }
+
   .update-badge{ display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff; background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; margin-bottom:10px; font-weight:800; }
   .update-title{ margin:0 0 6px; font-size:clamp(1.05rem,2.2vw,1.2rem); font-weight:800; }
   .update-meta{ color:#9aa3b2; font-size:.9rem; margin:0 0 10px; }
