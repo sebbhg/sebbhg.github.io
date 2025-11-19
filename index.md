@@ -63,7 +63,7 @@ full_bleed: true
   .hero-content{
     position: relative;
     top: -80px;  
-    margin-left: -60px;
+    margin-left: -200px;
     z-index: 2;
     max-width: 1100px;
     width: 100%;
