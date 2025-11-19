@@ -183,12 +183,6 @@ full_bleed: true
       font-size:.9rem;
     }
   }
-
-  /* === MOBILE (≤600px) : vidéo tout en haut + horloges BEAUCOUP PLUS BAS === */
-  @media (max-width: 600px){
-    :root{
-      --promo-overlap: clamp(420px, 72svh, 820px);
-    }
   
     .promo-video{ 
       margin-top: -520px !important; /* la vidéo démarre tout en haut */
@@ -213,21 +207,19 @@ full_bleed: true
       min-height: clamp(320px, 54svh, 640px);
     }
   }
-  
-  /* === Desktop (≥1025px) : horloges bien remontées === */
-  @media (min-width: 1025px){
-    .world-clock-bar{
-      margin-top: -360px !important; /* remonte sur Mac et écran externe */
-    }
-  }
     
   /* === WORLD CLOCK BAR === */
   .world-clock-bar{
-    position:relative; overflow:hidden; background:#000;
-    border-top:1px solid #333; border-bottom:1px solid #333;
+    position:relative;
+    overflow:hidden;
+    background:#000;
+    border-top:1px solid #333;
+    border-bottom:1px solid #333;
     padding:12px 0;
-    margin-top:-1px;
-    opacity:1; z-index:10; isolation:isolate;
+    margin-top:0;            /* ⬅ plus de margin négatif */
+    opacity:1;
+    z-index:10;
+    isolation:isolate;
   }
   .world-clock-bar *{ background:none !important; opacity:1 !important; mix-blend-mode:normal !important; filter:none !important; }
   .ticker-wrapper{ position:relative; z-index:1; display:flex; width:max-content; white-space:nowrap; animation:tickerMove var(--clock-speed) linear infinite; will-change:transform; }
