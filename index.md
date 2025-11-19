@@ -318,17 +318,15 @@ full_bleed: true
     filter:none;
   }
 
-  /* Effet pour les cartes latérales (gauche / droite) */
-  .update-card.is-left,
-  .update-card.is-right{
-    opacity:0.55;
-    filter:blur(1px) saturate(.9) brightness(.8);
+  /* Toutes les cartes NON sélectionnées (gauche, droite, hors écran) */
+  .update-card:not(.is-center){
+    opacity:0.45;
+    filter:blur(1.2px) saturate(.85) brightness(.78);
     box-shadow:0 12px 40px rgba(0,0,0,.55);
   }
   
-  /* Un léger dégradé sur les bords pour accentuer l’effet “hors focus” */
-  .update-card.is-left::before,
-  .update-card.is-right::before{
+  /* Dégradé sur les bords pour toutes les cartes floutées */
+  .update-card:not(.is-center)::before{
     content:"";
     position:absolute;
     inset:0;
@@ -336,14 +334,13 @@ full_bleed: true
     pointer-events:none;
     background:linear-gradient(
       to right,
-      rgba(0,0,0,.6),
+      rgba(0,0,0,.65),
       transparent 40%,
       transparent 60%,
-      rgba(0,0,0,.4)
+      rgba(0,0,0,.45)
     );
-    opacity:.85;
+    opacity:.9;
   }
-  
   /* On garde la carte centrale parfaitement nette et “au-dessus” visuellement */
   .update-card.is-center::before{
     content:"";
