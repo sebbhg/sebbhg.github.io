@@ -638,37 +638,33 @@ full_bleed: true
         <!-- Card 1 (ex-INFO) -->
         <article class="update-card" data-card="0" tabindex="0">
           <span class="update-badge">INFO</span>
-          <h3 class="update-title">Website under construction 🚧</h3>
-          <p class="update-meta">Oct 2025 · Ongoing</p>
+          <h3 class="update-title">Website under construction</h3>
+          <p class="update-meta">Dec 2025 · Ongoing</p>
           <p class="update-desc">
             This website is currently being enhanced — new pages, animations, and live data integrations are coming soon.
             Stay tuned for the full Quantitative Finance & Trading experience.
           </p>
-          <a class="update-link" href="{{ '/' | relative_url }}">Learn more →</a>
         </article>
 
         <!-- Card 2 (ex-UPDATE) -->
         <article class="update-card" data-card="1" tabindex="0">
-          <span class="update-badge">UPDATE</span>
-          <h3 class="update-title">What I do — Quant Engineering</h3>
+          <span class="update-badge">NOTE</span>
+          <h3 class="update-title">What I do - Quant Engineering</h3>
           <p class="update-meta">Oct 2025 · Labs</p>
           <p class="update-desc">
-            New “What I do” page: pricing engines, risk aggregation, intraday analytics and
-            research notes. Coming next: CVA dashboard & volatility surface explorer.
+            You will find below all the information about my background and my past professional experiences.
           </p>
-          <a class="update-link" href="{{ '/what-i-do' | relative_url }}">Open page →</a>
         </article>
 
         <!-- Card 3 (nouvelle étiquette) -->
         <article class="update-card" data-card="2" tabindex="0">
-          <span class="update-badge">INSIGHT</span>
-          <h3 class="update-title">CVA Dashboard — Preview</h3>
-          <p class="update-meta">Nov 2025 · Teaser</p>
+          <span class="update-badge">COMING SOON</span>
+          <h3 class="update-title">My first book — Preview</h3>
+          <p class="update-meta">March 2026 · Teaser</p>
           <p class="update-desc">
-            Early look at an interactive CVA dashboard: exposures timeline, netting sets, and fast Greeks (GPR/BQ).
-            Public demo planned with anonymized data.
+            This first book outlines a modern, structured approach to modelling, pricing, and risk analysis, providing a clear foundation for understanding how today’s markets operate.
           </p>
-          <a class="update-link" href="{{ '/projects' | relative_url }}">See projects →</a>
+          <a class="update-link" href="#">Watch the teaser →</a>
         </article>
       </div>
     </div>
