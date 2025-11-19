@@ -1535,7 +1535,5 @@ updateClocks(); setInterval(updateClocks, 1000);
     syncLabel();
   });
 
-  // synchro initiale (au cas où la vidéo ne démarre pas en autoplay)
-  syncLabel();
 })();
 </script>
