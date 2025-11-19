@@ -199,7 +199,7 @@ full_bleed: true
     padding:12px 0;
   
     /* on remonte la barre d’horloges sous la vidéo */
-    margin-top: clamp(0px, 6vh, 80px);
+    margin-top: clamp(0px, 3vh, 40px);
   
     opacity:1;
     z-index:10;
