@@ -132,7 +132,52 @@ full_bleed: true
     );
     pointer-events: none;
   }
-  
+
+  /* === Bouton play / pause de la vidéo promo === */
+  .promo-video-toggle{
+    position:absolute;
+    right:16px;
+    bottom:16px;
+    z-index:5; /* au-dessus de la scrim */
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.35);
+    background: radial-gradient(120% 120% at 30% 10%, rgba(44,140,255,.35), rgba(5,8,16,.92));
+    box-shadow:0 8px 20px rgba(0,0,0,.6), inset 0 0 0 1px rgba(0,0,0,.4);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    color:#e7efff;
+    font-size:1rem;
+    font-weight:800;
+    transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .promo-video-toggle:hover{
+    transform:translateY(-1px);
+    border-color:#6bb0ff;
+    box-shadow:0 12px 30px rgba(0,0,0,.7), 0 0 18px rgba(44,140,255,.35) inset;
+    background: radial-gradient(120% 120% at 30% 10%, rgba(44,140,255,.5), rgba(8,12,24,.98));
+  }
+  .promo-video-toggle:focus-visible{
+    outline:none;
+    box-shadow:0 0 0 3px rgba(76,139,255,.7);
+  }
+  .promo-video-toggle-icon{
+    line-height:1;
+    transform:translateY(1px); /* pour centrer visuellement les icônes ❚❚ / ▶ */
+  }
+
+  @media (max-width:600px){
+    .promo-video-toggle{
+      right:12px;
+      bottom:12px;
+      width:38px;
+      height:38px;
+      font-size:.9rem;
+    }
+  }
+
   /* === MOBILE (≤600px) : vidéo tout en haut + horloges BEAUCOUP PLUS BAS === */
   @media (max-width: 600px){
     :root{
@@ -517,10 +562,28 @@ full_bleed: true
 <!-- ===== Full-width secondary video ===== -->
 <section class="promo-video">
   <div class="promo-video-frame">
-    <video class="promo-video-el" autoplay muted loop playsinline preload="auto" poster="/assets/images/trading-broll-poster.jpg">
+    <video
+      id="promoVideo"
+      class="promo-video-el"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+      poster="/assets/images/trading-broll-poster.jpg">
       <source src="/assets/videos/trading-broll.mp4" type="video/mp4">
     </video>
     <div class="promo-scrim"></div>
+
+    <!-- Bouton play / pause -->
+    <button
+      class="promo-video-toggle"
+      id="promoVideoToggle"
+      type="button"
+      aria-label="Pause background video"
+      title="Pause background video">
+      <span class="promo-video-toggle-icon">❚❚</span>
+    </button>
   </div>
 </section>
 
@@ -1414,5 +1477,52 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   // Initial center (sur la 2e carte)
   requestAnimationFrame(()=> centerOn(idx, false));
+
+/* === Play / Pause sur la vidéo promo === */
+(function(){
+  const video  = document.getElementById('promoVideo');
+  const toggle = document.getElementById('promoVideoToggle');
+  if (!video || !toggle) return;
+
+  const iconSpan = toggle.querySelector('.promo-video-toggle-icon');
+
+  function updateUI(){
+    if (video.paused){
+      iconSpan.textContent = '▶';
+      toggle.setAttribute('aria-label', 'Play background video');
+      toggle.setAttribute('title', 'Play background video');
+    } else {
+      iconSpan.textContent = '❚❚';
+      toggle.setAttribute('aria-label', 'Pause background video');
+      toggle.setAttribute('title', 'Pause background video');
+    }
+  }
+
+  function togglePlay(){
+    if (video.paused){
+      video.play();
+    } else {
+      video.pause();
+    }
+    updateUI();
+  }
+
+  toggle.addEventListener('click', togglePlay);
+
+  // Support clavier (Enter / espace)
+  toggle.addEventListener('keydown', (e)=>{
+    if (e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      togglePlay();
+    }
+  });
+
+  // Initialise l'état du bouton en fonction de l'état réel de la vidéo
+  if (video.autoplay && !video.paused){
+    updateUI();
+  } else {
+    video.pause();
+    updateUI();
+  }
 })();
 </script>
