@@ -99,7 +99,7 @@ full_bleed: true
   :root{
     --hero-spacing: 60px;   /* tu peux garder ici si tu fusionnes tout */
     --clock-speed: 120s;
-    --promo-overlap: clamp(980px, 115vh, 1900px);  /* ⬅ vidéo plus haute */
+    --promo-overlap: clamp(1500px, 150vh, 2600px);  /* ⬅ vidéo plus haute */
   }
   
   .promo-video{
@@ -203,7 +203,7 @@ full_bleed: true
   /* === Écrans à faible hauteur === */
   @media (max-height: 720px){
     :root{
-      --promo-overlap: clamp(280px, 48svh, 560px);
+      --promo-overlap: clamp(1200px, 130vh, 2200px);
     }
     .hero-video{
       min-height: clamp(320px, 54svh, 640px);
