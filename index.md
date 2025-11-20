@@ -831,6 +831,97 @@ full_bleed: true
     transform-origin: left center;
   }
 
+  /* === PARTICULES SUR LES AXES (suivent la flèche) === */
+  .axis-particles-y,
+  .axis-particles-x{
+    transform-box: fill-box;
+    pointer-events:none;
+  }
+  
+  /* Y : les particules montent vers la flèche */
+  .axis-particles-y{
+    transform-origin: center bottom;
+  }
+  
+  /* X : les particules avancent vers la droite */
+  .axis-particles-x{
+    transform-origin: left center;
+  }
+  
+  .axis-particle{
+    fill:#9ec8ff;
+    opacity:0;
+    filter:drop-shadow(0 0 6px rgba(44,140,255,.85));
+  }
+  
+  /* Quand le graphe devient visible, on déclenche les flux de particules */
+  .timeline-graph-wrapper.about-graph-visible .axis-particles-y .axis-particle{
+    animation: axisYParticles 1.8s cubic-bezier(.23,.83,.32,1.1) 0.15s infinite;
+  }
+  
+  .timeline-graph-wrapper.about-graph-visible .axis-particles-x .axis-particle{
+    animation: axisXParticles 1.9s cubic-bezier(.23,.83,.32,1.1) 0.55s infinite;
+  }
+  
+  /* Décalage léger entre les particules pour donner un effet de “train” */
+  .axis-particles-y .axis-particle:nth-child(2){
+    animation-delay: 0.25s;
+    animation-duration: 2.1s;
+  }
+  .axis-particles-y .axis-particle:nth-child(3){
+    animation-delay: 0.4s;
+    animation-duration: 2.4s;
+  }
+  
+  .axis-particles-x .axis-particle:nth-child(2){
+    animation-delay: 0.7s;
+    animation-duration: 2.2s;
+  }
+  .axis-particles-x .axis-particle:nth-child(3){
+    animation-delay: 0.9s;
+    animation-duration: 2.5s;
+  }
+  
+  /* Particules qui montent sur l’axe Y */
+  @keyframes axisYParticles{
+    0%{
+      opacity:0;
+      transform:translateY(0) scale(0.5);
+    }
+    15%{
+      opacity:1;
+      transform:translateY(-20px) scale(0.9);
+    }
+    70%{
+      opacity:1;
+      transform:translateY(-230px) scale(1);
+    }
+    100%{
+      opacity:0;
+      transform:translateY(-260px) scale(0.6);
+    }
+  }
+  
+  /* Particules qui avancent sur l’axe X */
+  @keyframes axisXParticles{
+    0%{
+      opacity:0;
+      transform:translateX(0) scale(0.5);
+    }
+    15%{
+      opacity:1;
+      transform:translateX(20px) scale(0.9);
+    }
+    70%{
+      opacity:1;
+      transform:translateX(430px) scale(1);
+    }
+    100%{
+      opacity:0;
+      transform:translateX(470px) scale(0.6);
+    }
+  }
+ 
   .timeline-grid-line{
     stroke:rgba(255,255,255,.04);
     stroke-width:1;
@@ -1273,6 +1364,21 @@ full_bleed: true
                     class="timeline-axis-line timeline-axis-x"
                     stroke="url(#axisGradient)"
                     marker-end="url(#axisArrow)"/>  <!-- flèche À DROITE -->
+            </g>
+
+            <!-- Particules qui “courent” sur les axes -->
+            <g class="axis-particles-y">
+              <!-- On place les particules au pied de l’axe Y (elles seront animées en translateY) -->
+              <circle class="axis-particle" cx="70" cy="340" r="2.3" />
+              <circle class="axis-particle" cx="70" cy="340" r="2" />
+              <circle class="axis-particle" cx="70" cy="340" r="1.7" />
+            </g>
+            
+            <g class="axis-particles-x">
+              <!-- On place les particules à l’origine de l’axe X (elles seront animées en translateX) -->
+              <circle class="axis-particle" cx="70" cy="340" r="2.3" />
+              <circle class="axis-particle" cx="70" cy="340" r="2" />
+              <circle class="axis-particle" cx="70" cy="340" r="1.7" />
             </g>
 
             <!-- Labels axe Y (événements abstraits, on pourra raffiner) -->
