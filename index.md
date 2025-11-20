@@ -823,13 +823,12 @@ full_bleed: true
         
           <!-- Teaser video (même zone que le texte) -->
           <div class="update-teaser-wrapper">
-            <video
+            <video>
               class="update-teaser-video"
               muted
               playsinline
               preload="none"
-              poster="/assets/images/book-teaser-poster.jpg">
-              <source src="/assets/videos/book-teaser.mp4" type="video/mp4">
+              <source src="[/assets/videos/book-teaser.mp4](https://github.com/user-attachments/assets/82d738f3-c182-4ac5-8121-9cef567f601f)" type="video/mp4">
             </video>
           </div>
         
