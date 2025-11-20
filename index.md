@@ -504,6 +504,15 @@ full_bleed: true
   .update-desc{ color:#c9cbd1; margin:0 0 12px; line-height:1.55; }
   .update-link{ display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border:1px solid rgba(255,255,255,.16); border-radius:10px; background:#0f0f0f; color:#fff; font-weight:700; text-decoration:none; }
   .update-link:hover{ border-color:#4da0ff; background:#141414; }
+  .update-link,
+  .update-link:visited{
+    color:#fff;
+  }
+
+  .update-link:hover,
+  .update-link:focus{
+    color:#fff;
+  }
 
   /* === SECTION HUB === */
   .after-market{ position:relative; z-index:4; /* au-dessus du bandeau lectures */ background:#050505; color:#ccc; padding:60px 20px 120px; border-top:1px solid #111; }
