@@ -412,7 +412,8 @@ full_bleed: true
   }
 
   .update-card.teaser-playing .update-teaser-wrapper{
-    max-height:600px; /* assez grand pour prendre toute la hauteur de la carte */
+    max-height:none;
+    height:100%;
     opacity:1;
     transform:translateY(0);
   }
@@ -1589,6 +1590,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   const bookVideo = bookCard ? bookCard.querySelector('.update-teaser-video') : null;
   const bookReplayLink = bookCard ? bookCard.querySelector('#bookTeaserReplay') : null;
   let bookTeaserPlayed = false;
+  let bookCardInitialHeight = null;
 
   if (bookVideo && bookCard){
     // Quand la vidéo se termine naturellement → on montre le texte
@@ -1596,6 +1598,8 @@ updateClocks(); setInterval(updateClocks, 1000);
       bookTeaserPlayed = true;
       bookCard.classList.remove('teaser-playing', 'teaser-armed');
       bookCard.classList.add('teaser-done');
+      // On rend la hauteur auto à la fin
+      bookCard.style.height = '';
     });
   }
 
@@ -1615,9 +1619,16 @@ updateClocks(); setInterval(updateClocks, 1000);
     if (!bookCard || !bookVideo) return;
     if (centerIndex !== bookIndex) return;
     if (bookTeaserPlayed) return; // déjà vue → on laisse le texte
-  
+
+    // On mémorise la hauteur initiale de la carte (une seule fois)
+    if (bookCardInitialHeight === null){
+      bookCardInitialHeight = bookCard.offsetHeight;
+    }
+    // On fige la hauteur pour éviter que l'étiquette grandisse
+    bookCard.style.height = bookCardInitialHeight + 'px';
+
     // Première fois qu'on arrive au centre sur la carte "book"
-    bookCard.classList.add('teaser-armed', 'teaser-playing'); // assure le bon état
+    bookCard.classList.add('teaser-armed', 'teaser-playing');
     bookVideo.currentTime = 0;
     const p = bookVideo.play();
     if (p && typeof p.then === 'function'){
@@ -1626,6 +1637,7 @@ updateClocks(); setInterval(updateClocks, 1000);
         bookTeaserPlayed = true;
         bookCard.classList.remove('teaser-playing', 'teaser-armed');
         bookCard.classList.add('teaser-done');
+        bookCard.style.height = '';
       });
     }
   }
