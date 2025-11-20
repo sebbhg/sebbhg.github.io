@@ -750,6 +750,13 @@ full_bleed: true
   .icon-btn svg{ width:22px; height:22px; fill:#9ec8ff; }
   .icon-btn:hover svg{ fill:#ffffff; }
   .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+ 
+  /* Accent color for "Haagerton" */
+  .brand-accent{
+    color:#55aaff;            /* bleu lumineux cohérent avec ton thème */
+    font-weight:800;          /* un peu plus affirmé */
+    letter-spacing:0.5px;     /* léger effet premium */
+  }
 </style>
 
 <section class="hero-video">
@@ -757,7 +764,7 @@ full_bleed: true
     <p class="eyebrow shifted">Quantitative Finance & Trading</p>
     <h1>Turning Models into Market Impact</h1>
     <p class="subtitle" style="text-align: justify;">
-      Welcome to Haagerton, my quantitative finance and trading lab.  
+      Welcome to <span class="brand-accent">Haagerton</span>, my quantitative finance and trading lab.  
       I explore the mechanics of modern markets through stochastic calculus and SDEs, 
       term-structure and volatility-surface models, Monte Carlo engines and PDE solvers, 
       as well as high-frequency order book dynamics and optimal execution.  
