@@ -363,6 +363,68 @@ full_bleed: true
     opacity:.7;
   }
 
+  /* === Teaser vidéo dans la carte "My first book" === */
+  .update-teaser-wrapper{
+    position:relative;
+    width:100%;
+    border-radius:12px;
+    overflow:hidden;
+    background:#000;
+    margin:0 0 10px;
+    max-height:0;
+    opacity:0;
+    transform:translateY(8px);
+    transition:
+      max-height .6s ease,
+      opacity .6s ease,
+      transform .6s ease;
+  }
+  
+  .update-teaser-video{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  
+  /* Texte + lien : transition douce */
+  .update-card .update-desc,
+  .update-card .update-link{
+    transition:opacity .45s ease, transform .45s ease;
+  }
+  
+  /* Avant la vidéo : texte caché (tant que teaser-armed présent) */
+  .update-card.teaser-armed .update-desc,
+  .update-card.teaser-armed .update-link{
+    opacity:0;
+    transform:translateY(6px);
+  }
+  
+  /* Pendant la lecture : on affiche la vidéo, texte toujours caché */
+  .update-card.teaser-playing .update-teaser-wrapper{
+    max-height:260px; /* ajuste la hauteur si besoin */
+    opacity:1;
+    transform:translateY(0);
+  }
+  
+  /* Quand la vidéo joue, on bloque l’interaction avec le texte */
+  .update-card.teaser-playing .update-desc,
+  .update-card.teaser-playing .update-link{
+    pointer-events:none;
+  }
+  
+  /* Après la vidéo : on cache la vidéo et on révèle le texte */
+  .update-card.teaser-done .update-teaser-wrapper{
+    max-height:0;
+    opacity:0;
+    pointer-events:none;
+  }
+  
+  .update-card.teaser-done .update-desc,
+  .update-card.teaser-done .update-link{
+    opacity:1;
+    transform:translateY(0);
+  }
+
   .update-badge{ display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff; background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; margin-bottom:10px; font-weight:800; }
   .update-title{ margin:0 0 6px; font-size:clamp(1.05rem,2.2vw,1.2rem); font-weight:800; }
   .update-meta{ color:#9aa3b2; font-size:.9rem; margin:0 0 10px; }
@@ -753,15 +815,30 @@ full_bleed: true
           </p>
         </article>
 
-        <!-- Card 3 (nouvelle étiquette) -->
-        <article class="update-card" data-card="2" tabindex="0">
+        <!-- Card 3 (Book teaser) -->
+        <article class="update-card teaser-armed" data-card="2" tabindex="0">
           <span class="update-badge">COMING SOON</span>
           <h3 class="update-title">My first book - Preview</h3>
           <p class="update-meta">March 2026 · Teaser</p>
+        
+          <!-- Teaser video (même zone que le texte) -->
+          <div class="update-teaser-wrapper">
+            <video
+              class="update-teaser-video"
+              muted
+              playsinline
+              preload="none"
+              poster="/assets/images/book-teaser-poster.jpg">
+              <source src="/assets/videos/book-teaser.mp4" type="video/mp4">
+            </video>
+          </div>
+        
+          <!-- Texte qui apparaîtra après la vidéo -->
           <p class="update-desc">
-            This first book outlines a modern, structured approach to modelling, pricing, and risk analysis, providing a clear foundation for understanding how today’s markets operate.
+            This first book outlines a modern, structured approach to modelling, pricing, and risk analysis,
+            providing a clear foundation for understanding how today’s markets operate.
           </p>
-          <a class="update-link" href="#">Watch the teaser →</a>
+          <a class="update-link" href="#" id="bookTeaserReplay">Watch the teaser →</a>
         </article>
       </div>
     </div>
@@ -1479,6 +1556,52 @@ updateClocks(); setInterval(updateClocks, 1000);
   const cards = Array.from(track.querySelectorAll('.update-card'));
   const counterEl = document.getElementById('updatesCounter');
 
+  // === Teaser vidéo "My first book" ===
+  const bookCard  = cards.find(c => c.dataset.card === '2');
+  const bookIndex = bookCard ? cards.indexOf(bookCard) : -1;
+  const bookVideo = bookCard ? bookCard.querySelector('.update-teaser-video') : null;
+  const bookReplayLink = bookCard ? bookCard.querySelector('#bookTeaserReplay') : null;
+  let bookTeaserPlayed = false;
+
+  if (bookVideo && bookCard){
+    // Quand la vidéo se termine naturellement → on montre le texte
+    bookVideo.addEventListener('ended', () => {
+      bookTeaserPlayed = true;
+      bookCard.classList.remove('teaser-playing', 'teaser-armed');
+      bookCard.classList.add('teaser-done');
+    });
+  }
+
+  // Option : clic sur "Watch the teaser →" pour rejouer
+  if (bookVideo && bookCard && bookReplayLink){
+    bookReplayLink.addEventListener('click', (e)=>{
+      e.preventDefault();
+      bookTeaserPlayed = false;
+      bookCard.classList.remove('teaser-done');
+      bookCard.classList.add('teaser-armed', 'teaser-playing');
+      bookVideo.currentTime = 0;
+      bookVideo.play().catch(()=>{});
+    });
+  }
+
+  function playBookTeaserIfNeeded(centerIndex){
+    if (!bookCard || !bookVideo) return;
+    if (centerIndex !== bookIndex) return;
+    if (bookTeaserPlayed) return; // déjà vue → on laisse le texte
+    // Première fois qu'on arrive au centre sur la carte "book"
+    bookCard.classList.add('teaser-playing');
+    bookVideo.currentTime = 0;
+    const p = bookVideo.play();
+    if (p && typeof p.then === 'function'){
+      p.catch(()=> {
+        // Autoplay bloqué → on abandonne la vidéo et on montre directement le texte
+        bookTeaserPlayed = true;
+        bookCard.classList.remove('teaser-playing', 'teaser-armed');
+        bookCard.classList.add('teaser-done');
+      });
+    }
+  }
+
   // --- Nouveau : suivi des cartes vues ---
   const seen = new Set();
   let unseenCount = cards.length;
@@ -1553,8 +1676,11 @@ updateClocks(); setInterval(updateClocks, 1000);
     target.classList.add('is-center');
     target.focus({preventScroll:true});
 
-    // --- Nouveau : cette carte centrale vient d'être vue ---
+    // Marque la carte comme "vue" (compteur LATEST UPDATES)
     markSeen(idx);
+
+    // Si c'est la carte "My first book", on lance le teaser vidéo une fois
+    playBookTeaserIfNeeded(idx);
   }
 
   function recalc(){
