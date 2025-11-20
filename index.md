@@ -1250,7 +1250,8 @@ full_bleed: true
                 class="timeline-path"
                 stroke="url(#pathGradient)"
                 d="
-                  M 70 220
+                  M 20 350
+                  L 70 300
                   L 150 220
                   L 230 180
                   L 310 140
