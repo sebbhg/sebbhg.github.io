@@ -816,18 +816,19 @@ full_bleed: true
         </article>
 
         <!-- Card 3 (Book teaser) -->
-        <article class="update-card teaser-armed" data-card="2" tabindex="0">
+        <article class="update-card" data-card="2" tabindex="0">
           <span class="update-badge">COMING SOON</span>
           <h3 class="update-title">My first book - Preview</h3>
           <p class="update-meta">March 2026 · Teaser</p>
   
-          <!-- Teaser video (même zone que le texte) -->
-          <div class="update-teaser-wrapper">
+          <div class="update-teaser-wrapper" style="max-height:none; opacity:1; transform:none;">
             <video
               class="update-teaser-video"
               muted
               playsinline
-              preload="none"
+              controls
+              preload="auto"
+              poster="{{ '/assets/images/book-teaser-poster.jpg' | relative_url }}">
               <source src="{{ '/assets/videos/f5150d5a-7fc4-4fa8-862c-555e8c402526.mp4' | relative_url }}" type="video/mp4">
               Your browser does not support the video tag.
             </video>
