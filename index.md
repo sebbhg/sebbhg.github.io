@@ -401,7 +401,7 @@ full_bleed: true
   
   /* Pendant la lecture : on affiche la vidéo, texte toujours caché */
   .update-card.teaser-playing .update-teaser-wrapper{
-    max-height:260px; /* ajuste la hauteur si besoin */
+    max-height:160px; /* ajuste la hauteur si besoin */
     opacity:1;
     transform:translateY(0);
   }
@@ -816,25 +816,25 @@ full_bleed: true
         </article>
 
         <!-- Card 3 (Book teaser) -->
-        <article class="update-card" data-card="2" tabindex="0">
+        <article class="update-card teaser-armed" data-card="2" tabindex="0">
           <span class="update-badge">COMING SOON</span>
           <h3 class="update-title">My first book - Preview</h3>
           <p class="update-meta">March 2026 · Teaser</p>
-  
-          <div class="update-teaser-wrapper" style="max-height:none; opacity:1; transform:none;">
+        
+          <!-- Teaser vidéo : même taille que le texte (hauteur limitée) -->
+          <div class="update-teaser-wrapper">
             <video
               class="update-teaser-video"
               muted
               playsinline
-              controls
-              preload="auto"
+              preload="none"
               poster="{{ '/assets/images/book-teaser-poster.jpg' | relative_url }}">
               <source src="{{ '/assets/videos/f5150d5a-7fc4-4fa8-862c-555e8c402526.mp4' | relative_url }}" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
         
-          <!-- Texte qui apparaîtra après la vidéo -->
+          <!-- Texte qui apparaît après la vidéo -->
           <p class="update-desc">
             This first book outlines a modern, structured approach to modelling, pricing, and risk analysis,
             providing a clear foundation for understanding how today’s markets operate.
@@ -1589,13 +1589,14 @@ updateClocks(); setInterval(updateClocks, 1000);
     if (!bookCard || !bookVideo) return;
     if (centerIndex !== bookIndex) return;
     if (bookTeaserPlayed) return; // déjà vue → on laisse le texte
+  
     // Première fois qu'on arrive au centre sur la carte "book"
-    bookCard.classList.add('teaser-playing');
+    bookCard.classList.add('teaser-armed', 'teaser-playing'); // assure le bon état
     bookVideo.currentTime = 0;
     const p = bookVideo.play();
     if (p && typeof p.then === 'function'){
       p.catch(()=> {
-        // Autoplay bloqué → on abandonne la vidéo et on montre directement le texte
+        // Autoplay bloqué → on montre directement le texte
         bookTeaserPlayed = true;
         bookCard.classList.remove('teaser-playing', 'teaser-armed');
         bookCard.classList.add('teaser-done');
