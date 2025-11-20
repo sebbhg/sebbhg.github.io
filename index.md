@@ -404,18 +404,22 @@ full_bleed: true
   }
 
   /* Pendant la lecture :
-     - la vidéo prend toute la carte
-     - TOUT le texte (badge, titre, meta, desc, lien) disparaît
+     - on garde le même padding pour que la hauteur de la carte
+       reste EXACTEMENT la même
+     - on colle la vidéo en absolu sur les bords de la carte
   */
   .update-card.teaser-playing{
-    padding:0;
+    padding:18px 18px 16px; /* même padding que l'état normal */
   }
-
+  
   .update-card.teaser-playing .update-teaser-wrapper{
+    position:absolute;
+    inset:0;                /* colle le wrapper aux bords de la carte */
     max-height:none;
     height:100%;
     opacity:1;
-    transform:translateY(0);
+    transform:none;
+    border-radius:inherit;  /* même arrondi que la carte */
   }
 
   .update-card.teaser-playing .update-badge,
