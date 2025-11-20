@@ -401,7 +401,7 @@ full_bleed: true
   
   /* Pendant la lecture : on affiche la vidéo, texte toujours caché */
   .update-card.teaser-playing .update-teaser-wrapper{
-    max-height:160px; /* ajuste la hauteur si besoin */
+    max-height:260px; /* ajuste la hauteur si besoin */
     opacity:1;
     transform:translateY(0);
   }
