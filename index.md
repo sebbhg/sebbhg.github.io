@@ -757,6 +757,206 @@ full_bleed: true
     font-weight:800;          /* un peu plus affirmé */
     letter-spacing:0.5px;     /* léger effet premium */
   }
+
+  /* === ABOUT ME — TIMELINE GRAPH (2020–2026) === */
+  .hub-split .about-graph-card{
+    grid-column:1 / -1;          /* la carte prend toute la largeur du grid */
+  }
+
+  .about-graph-card{
+    margin-top:12px;
+  }
+
+  .about-graph-header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    position:relative;
+    z-index:1;
+  }
+
+  .about-graph-header .card-sub{
+    margin-top:2px;
+    font-size:.9rem;
+    color:#9aa3b2;
+  }
+
+  .timeline-graph-wrapper{
+    position:relative;
+    margin-top:12px;
+    padding:14px 16px 10px;
+    border-radius:18px;
+    background: radial-gradient(120% 160% at 0% 0%, rgba(44,140,255,.08), transparent 60%),
+                radial-gradient(120% 180% at 100% 100%, rgba(159,122,255,.08), transparent 60%),
+                #050712;
+    border:1px solid rgba(76,139,255,.35);
+    box-shadow: 0 16px 38px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.03);
+    overflow:hidden;
+  }
+
+  .timeline-graph{
+    display:block;
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+  }
+
+  /* Axes + grille */
+  .timeline-axis-line{
+    stroke:#3f4e6d;
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-dasharray:520;
+    stroke-dashoffset:520;
+  }
+  .timeline-axis-y{ stroke-width:1.8; }
+
+  .timeline-grid-line{
+    stroke:rgba(255,255,255,.04);
+    stroke-width:1;
+    stroke-dasharray:4 4;
+  }
+
+  .timeline-label-year{
+    fill:#9aa3b2;
+    font-size:11px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  .timeline-label-event{
+    fill:#9ec8ff;
+    font-size:11px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  .timeline-label-axis{
+    fill:#cfe3ff;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  .timeline-path{
+    fill:none;
+    stroke-width:2.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:620;
+    stroke-dashoffset:620;
+    opacity:0;
+  }
+
+  .timeline-point{
+    stroke-width:1.8;
+  }
+
+  .timeline-point-core{
+    fill:#e7f1ff;
+    opacity:0;
+  }
+
+  .timeline-point-glow{
+    fill:url(#pointGlow);
+    opacity:0;
+  }
+
+  .timeline-tag{
+    fill:#e7efff;
+    font-size:11px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+
+  /* Animation: déclenchée quand .about-graph-visible est posé sur le wrapper */
+  .timeline-graph-wrapper.about-graph-visible .timeline-axis-y{
+    animation:drawAxis 0.7s ease-out forwards;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-axis-x{
+    animation:drawAxis 0.8s ease-out 0.25s forwards;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-path{
+    animation:drawPath 1.7s cubic-bezier(.23,.83,.32,1) 0.6s forwards;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-core,
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-glow{
+    animation:fadePoint 0.6s ease-out forwards;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-core:nth-of-type(1),
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-glow:nth-of-type(1){
+    animation-delay:0.85s;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-core:nth-of-type(2),
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-glow:nth-of-type(2){
+    animation-delay:1.0s;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-core:nth-of-type(3),
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-glow:nth-of-type(3){
+    animation-delay:1.15s;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-core:nth-of-type(4),
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-glow:nth-of-type(4){
+    animation-delay:1.3s;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-core:nth-of-type(5),
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-glow:nth-of-type(5){
+    animation-delay:1.45s;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-core:nth-of-type(6),
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-glow:nth-of-type(6){
+    animation-delay:1.6s;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-core:nth-of-type(7),
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-glow:nth-of-type(7){
+    animation-delay:1.75s;
+  }
+
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-core{
+    animation-name:fadePoint,pulsePoint;
+    animation-duration:0.6s,2.2s;
+    animation-timing-function:ease-out,ease-in-out;
+    animation-iteration-count:1,infinite;
+  }
+  .timeline-graph-wrapper.about-graph-visible .timeline-point-glow{
+    animation-name:fadePoint,softGlow;
+    animation-duration:0.6s,3.4s;
+    animation-timing-function:ease-out,ease-in-out;
+    animation-iteration-count:1,infinite;
+  }
+
+  @keyframes drawAxis{
+    from{ stroke-dashoffset:520; }
+    to  { stroke-dashoffset:0;   }
+  }
+
+  @keyframes drawPath{
+    0%{ stroke-dashoffset:620; opacity:1; }
+    100%{ stroke-dashoffset:0; opacity:1; }
+  }
+
+  @keyframes fadePoint{
+    from{ opacity:0; transform:scale(.4); }
+    to  { opacity:1; transform:scale(1); }
+  }
+
+  @keyframes pulsePoint{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.3); }
+  }
+
+  @keyframes softGlow{
+    0%,100%{ opacity:.45; }
+    50%{ opacity:.9; }
+  }
+
+  /* Légende en haut à droite du graphe */
+  .timeline-legend{
+    fill:#9aa3b2;
+    font-size:10px;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+ 
 </style>
 
 <section class="hero-video">
@@ -947,9 +1147,151 @@ full_bleed: true
 
     <h3 class="hub-selected-title" id="hubSelectedTitle">ABOUT ME</h3>
 
-    <!-- ===== SPLIT (left = stack, right = experiences) ===== -->
+    <!-- ===== SPLIT (ABOUT ME = timeline graph) ===== -->
     <div class="hub-split" id="hubSplit">
-      <!-- About Me content will go here -->
+      <div class="about-graph-card card-glass">
+        <div class="about-graph-header">
+          <div>
+            <h4 class="card-title">Quant Timeline 2020–2026</h4>
+            <p class="card-sub">Orthogonal view of my journey in quantitative finance.</p>
+          </div>
+        </div>
+
+        <div class="timeline-graph-wrapper" id="aboutTimeline">
+          <svg class="timeline-graph" viewBox="0 0 600 320" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Timeline 2020–2026">
+            <defs>
+              <!-- Dégradé pour les axes -->
+              <linearGradient id="axisGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#2c8cff" stop-opacity="0.3"/>
+                <stop offset="50%" stop-color="#9ec8ff" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#9f7aff" stop-opacity="0.6"/>
+              </linearGradient>
+
+              <!-- Dégradé pour la courbe -->
+              <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#2c8cff"/>
+                <stop offset="40%" stop-color="#7ad2ff"/>
+                <stop offset="100%" stop-color="#9f7aff"/>
+              </linearGradient>
+
+              <!-- Glow des points -->
+              <radialGradient id="pointGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#cfe3ff" stop-opacity="0.9"/>
+                <stop offset="40%" stop-color="#2c8cff" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#2c8cff" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <!-- Grille horizontale (événements / niveaux) -->
+            <g>
+              <!-- y=1 -->
+              <line x1="70" y1="220" x2="560" y2="220" class="timeline-grid-line"/>
+              <!-- y=2 -->
+              <line x1="70" y1="180" x2="560" y2="180" class="timeline-grid-line"/>
+              <!-- y=3 -->
+              <line x1="70" y1="140" x2="560" y2="140" class="timeline-grid-line"/>
+              <!-- y=4 -->
+              <line x1="70" y1="100" x2="560" y2="100" class="timeline-grid-line"/>
+            </g>
+
+            <!-- Axes -->
+            <g>
+              <!-- Axe Y (événements) -->
+              <line x1="70" y1="260" x2="70" y2="40" class="timeline-axis-line timeline-axis-y" stroke="url(#axisGradient)"/>
+              <!-- Axe X (temps) -->
+              <line x1="70" y1="260" x2="560" y2="260" class="timeline-axis-line timeline-axis-x" stroke="url(#axisGradient)"/>
+            </g>
+
+            <!-- Labels axe Y (événements abstraits, on pourra raffiner) -->
+            <g>
+              <text x="26" y="224" class="timeline-label-event">Studies</text>
+              <text x="26" y="184" class="timeline-label-event">Engineering</text>
+              <text x="26" y="144" class="timeline-label-event">Quant Research</text>
+              <text x="26" y="104" class="timeline-label-event">Trading Desk</text>
+            </g>
+
+            <!-- Labels axe X (années) -->
+            <g>
+              <text x="70"  y="276" class="timeline-label-year">2020</text>
+              <text x="150" y="276" class="timeline-label-year">2021</text>
+              <text x="230" y="276" class="timeline-label-year">2022</text>
+              <text x="310" y="276" class="timeline-label-year">2023</text>
+              <text x="390" y="276" class="timeline-label-year">2024</text>
+              <text x="470" y="276" class="timeline-label-year">2025</text>
+              <text x="550" y="276" class="timeline-label-year">2026</text>
+            </g>
+
+            <!-- Légende axes -->
+            <g>
+              <text x="340" y="296" class="timeline-label-axis">Years</text>
+              <text x="20" y="150" class="timeline-label-axis" transform="rotate(-90 20 150)">Events</text>
+            </g>
+
+            <!-- Courbe des événements (exemple : progression continue 2020 → 2026) -->
+            <g>
+              <path
+                class="timeline-path"
+                stroke="url(#pathGradient)"
+                d="
+                  M 70 220
+                  L 150 220
+                  L 230 180
+                  L 310 140
+                  L 390 140
+                  L 470 100
+                  L 550 100
+                "
+              />
+            </g>
+
+            <!-- Points marquants (alignés sur la courbe) -->
+            <g>
+              <!-- 2020 -->
+              <circle class="timeline-point timeline-point-glow" cx="70"  cy="220" r="9"/>
+              <circle class="timeline-point timeline-point-core" cx="70"  cy="220" r="3.3"/>
+
+              <!-- 2021 -->
+              <circle class="timeline-point timeline-point-glow" cx="150" cy="220" r="9"/>
+              <circle class="timeline-point timeline-point-core" cx="150" cy="220" r="3.3"/>
+
+              <!-- 2022 -->
+              <circle class="timeline-point timeline-point-glow" cx="230" cy="180" r="9"/>
+              <circle class="timeline-point timeline-point-core" cx="230" cy="180" r="3.3"/>
+
+              <!-- 2023 -->
+              <circle class="timeline-point timeline-point-glow" cx="310" cy="140" r="9"/>
+              <circle class="timeline-point timeline-point-core" cx="310" cy="140" r="3.3"/>
+
+              <!-- 2024 -->
+              <circle class="timeline-point timeline-point-glow" cx="390" cy="140" r="9"/>
+              <circle class="timeline-point timeline-point-core" cx="390" cy="140" r="3.3"/>
+
+              <!-- 2025 -->
+              <circle class="timeline-point timeline-point-glow" cx="470" cy="100" r="9"/>
+              <circle class="timeline-point timeline-point-core" cx="470" cy="100" r="3.3"/>
+
+              <!-- 2026 -->
+              <circle class="timeline-point timeline-point-glow" cx="550" cy="100" r="9"/>
+              <circle class="timeline-point timeline-point-core" cx="550" cy="100" r="3.3"/>
+            </g>
+
+            <!-- Petits tags textuels au-dessus de certains points (optionnel, très discret) -->
+            <g>
+              <text x="230" y="168" class="timeline-tag">LGM / IR modelling</text>
+              <text x="390" y="128" class="timeline-tag">CVA · XVA · GPR</text>
+              <text x="470" y="88"  class="timeline-tag">Front-Office</text>
+            </g>
+
+            <!-- Légende en haut à droite -->
+            <g class="timeline-legend">
+              <rect x="410" y="52" width="170" height="40" rx="10" ry="10" fill="rgba(5,8,16,0.82)" stroke="rgba(76,139,255,0.35)"/>
+              <circle cx="426" cy="71" r="3" fill="#2c8cff"/>
+              <text x="435" y="73">Path of key milestones</text>
+              <text x="426" y="87">Quantitative Finance · Trading focus</text>
+            </g>
+          </svg>
+        </div>
+      </div>
     </div><!-- /hub-split -->
 
     <!-- ===== COURSES PANEL ===== -->
@@ -1769,3 +2111,33 @@ updateClocks(); setInterval(updateClocks, 1000);
 })();
 </script>
 
+<script>
+  // === ABOUT ME TIMELINE — Activation à l'apparition ===
+  (function(){
+    const wrapper = document.getElementById('aboutTimeline');
+    if (!wrapper) return;
+
+    function activate(){
+      wrapper.classList.add('about-graph-visible');
+    }
+
+    // Si IntersectionObserver n'est pas dispo, on active directement
+    if (!('IntersectionObserver' in window)){
+      activate();
+      return;
+    }
+
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if (entry.isIntersecting){
+          activate();
+          io.disconnect();
+        }
+      });
+    }, {
+      threshold:0.35
+    });
+
+    io.observe(wrapper);
+  })();
+</script>
