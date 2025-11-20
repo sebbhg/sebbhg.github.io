@@ -937,8 +937,8 @@ full_bleed: true
 <!-- ===== SECTION HUB (tabs) ===== -->
 <section class="after-market">
   <div class="hub-inner">
-    <p class="hub-eyebrow">The different sections</p>
-    <h2 class="hub-title">Activities</h2>
+    <p class="hub-eyebrow">Activities</p>
+    <h2 class="hub-title">The different sections</h2>
 
     <nav class="hub-tabs" id="hubTabs" aria-label="Sections">
       <a class="hub-tab is-active" data-tab="what" href="#what" role="tab" aria-selected="true">What I do</a>
