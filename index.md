@@ -897,7 +897,7 @@ full_bleed: true
         <!-- Card 2 (ex-UPDATE) -->
         <article class="update-card" data-card="1" tabindex="0">
           <span class="update-badge">NOTE</span>
-          <h3 class="update-title">What I do - Quant Engineering</h3>
+          <h3 class="update-title">About Me - Quant Engineering</h3>
           <p class="update-meta">Oct 2025 · My professional background</p>
           <p class="update-desc">
             You will find below all the information about my background and my past professional experiences.
@@ -941,13 +941,11 @@ full_bleed: true
     <h2 class="hub-title">The different sections</h2>
 
     <nav class="hub-tabs" id="hubTabs" aria-label="Sections">
-      <a class="hub-tab is-active" data-tab="what" href="#what" role="tab" aria-selected="true">What I do</a>
-      <a class="hub-tab" data-tab="courses" href="#courses" role="tab" aria-selected="false">Courses</a>
-      <a class="hub-tab" data-tab="projects" href="#projects" role="tab" aria-selected="false">Projects</a>
-      <a class="hub-tab" data-tab="reading" href="#reading" role="tab" aria-selected="false">Reading</a>
+      <a class="hub-tab is-active" data-tab="what" href="#what" role="tab" aria-selected="true">About Me</a>
+      <a class="hub-tab" data-tab="reading" href="#reading" role="tab" aria-selected="false">Books</a>
     </nav>
 
-    <h3 class="hub-selected-title" id="hubSelectedTitle">WHAT I DO</h3>
+    <h3 class="hub-selected-title" id="hubSelectedTitle">ABOUT ME</h3>
 
     <!-- ===== SPLIT (left = stack, right = experiences) ===== -->
     <div class="hub-split" id="hubSplit">
@@ -1550,7 +1548,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     else                        showGeneric(key);
   }
 
-  activate('what', 'WHAT I DO');
+  activate('what', 'ABOUT ME');
   tabs.forEach(t => t.addEventListener('click', (e)=>{
     e.preventDefault();
     activate(t.dataset.tab, t.textContent.trim().toUpperCase());
