@@ -1158,7 +1158,7 @@ full_bleed: true
         </div>
 
         <div class="timeline-graph-wrapper" id="aboutTimeline">
-          <svg class="timeline-graph" viewBox="0 0 600 320" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Timeline 2020–2026">
+          <svg class="timeline-graph" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Timeline 2020–2026">
             <defs>
               <!-- Dégradé pour les axes -->
               <linearGradient id="axisGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -1207,13 +1207,13 @@ full_bleed: true
             <!-- Axes -->
             <g>
               <!-- Axe Y (événements) -->
-              <line x1="70" y1="260" x2="70" y2="40"
+              <line x1="70" y1="340" x2="70" y2="40"
                     class="timeline-axis-line timeline-axis-y"
                     stroke="url(#axisGradient)"
                     marker-end="url(#axisArrow)"/>   <!-- flèche EN HAUT -->
-              
+                    
               <!-- Axe X (temps) -->
-              <line x1="70" y1="260" x2="560" y2="260"
+              <line x1="70" y1="340" x2="560" y2="340"
                     class="timeline-axis-line timeline-axis-x"
                     stroke="url(#axisGradient)"
                     marker-end="url(#axisArrow)"/>  <!-- flèche À DROITE -->
@@ -1229,18 +1229,18 @@ full_bleed: true
 
             <!-- Labels axe X (années) -->
             <g>
-              <text x="70"  y="276" class="timeline-label-year">2020</text>
-              <text x="150" y="276" class="timeline-label-year">2021</text>
-              <text x="230" y="276" class="timeline-label-year">2022</text>
-              <text x="310" y="276" class="timeline-label-year">2023</text>
-              <text x="390" y="276" class="timeline-label-year">2024</text>
-              <text x="470" y="276" class="timeline-label-year">2025</text>
-              <text x="550" y="276" class="timeline-label-year">2026</text>
+              <text x="70"  y="356" class="timeline-label-year">2020</text>
+              <text x="150" y="356" class="timeline-label-year">2021</text>
+              <text x="230" y="356" class="timeline-label-year">2022</text>
+              <text x="310" y="356" class="timeline-label-year">2023</text>
+              <text x="390" y="356" class="timeline-label-year">2024</text>
+              <text x="470" y="356" class="timeline-label-year">2025</text>
+              <text x="550" y="356" class="timeline-label-year">2026</text>
             </g>
 
             <!-- Légende axes -->
             <g>
-              <text x="340" y="296" class="timeline-label-axis">Years</text>
+              <text x="340" y="376" class="timeline-label-axis">Years</text>
               <text x="20" y="150" class="timeline-label-axis" transform="rotate(-90 20 150)">Events</text>
             </g>
 
