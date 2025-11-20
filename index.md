@@ -952,6 +952,323 @@ full_bleed: true
       <!-- About Me content will go here -->
     </div><!-- /hub-split -->
 
+    <!-- ===== COURSES PANEL ===== -->
+    <div class="courses-panel" id="coursesPanel" role="region" aria-live="polite">
+      <p class="courses-lede">
+        A collection of focused, practitioner-grade courses in Quantitative Finance, Machine Learning and Trading.
+        Each course will come with concise notes, code notebooks, and applied exercises.
+      </p>
+
+      <div class="courses-stage">
+        <div class="glass-board" id="glassBoard" aria-label="Courses board" tabindex="0">
+          <div class="board-halo"></div>
+
+          <div class="board-header">
+            <div class="board-title">Courses — Live & On-site / Online</div>
+            <div class="board-actions">
+              <span class="btn-chip" aria-disabled="true" title="Coming soon">All courses</span>
+            </div>
+          </div>
+
+          <div class="board-grid">
+            <!-- Column 1: Quantitative Finance -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">𝛴</div>
+                <div>
+                  <div class="col-title">Quantitative Finance</div>
+                  <div class="col-sub">Risk, rates, derivatives</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Portfolio Theory & Risk Metrics</div>
+                  <div class="row-desc">Mean–Variance, VaR/ES (MC), Cornish–Fisher, drawdowns, factor models.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Interest Rate Modelling (LGM-1F)</div>
+                  <div class="row-desc">ZC bootstrapping, DF/forwards, swap pricing, exposures, sensitivities.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">CVA & XVA Modelling</div>
+                  <div class="row-desc">EE/EPE, default modeling, CSA, wrong-way risk, fast Greeks (GPR/BQ).</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2: Machine Learning -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">ML</div>
+                <div>
+                  <div class="col-title">Machine Learning</div>
+                  <div class="col-sub">For pricing & risk</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Gaussian Process Regression</div>
+                  <div class="row-desc">Kernels, training, uncertainty, surrogates for pricing, Greeks smoothing.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Bayesian Quadrature</div>
+                  <div class="row-desc">Probabilistic integration for exposure & Greeks estimation, variance control.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Neural Nets for Derivatives</div>
+                  <div class="row-desc">Calibration surrogates, PDE-to-NN, stability & monotonicity constraints.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3: Trading Strategies -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">α</div>
+                <div>
+                  <div class="col-title">Trading Strategies</div>
+                  <div class="col-sub">Backtesting & microstructure</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Options Hedging Simulation</div>
+                  <div class="row-desc">Delta/Gamma/Theta management, transaction costs, P&L explainability.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Quant Backtesting with Python</div>
+                  <div class="row-desc">Event-driven engine, slippage/latency models, robust metrics & pitfalls.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Volatility Surface Analysis</div>
+                  <div class="row-desc">Smile/skew dynamics, arbitrage checks, interpolation & extrapolation.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- floating particles -->
+          <div class="particles" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PROJECTS PANEL ===== -->
+    <div class="projects-panel" id="projectsPanel" role="region" aria-live="polite">
+      <p class="projects-lede">
+        Selection of academic and applied research on credit risk, derivatives, extremes and market microstructure.
+        Most projects include a write-up and reproducible code notebooks.
+      </p>
+
+      <div class="projects-stage">
+        <div class="glass-board" id="projectsBoard" aria-label="Projects board" tabindex="0">
+          <div class="board-halo"></div>
+
+          <div class="board-header">
+            <div class="board-title">Projects — Academic & Research</div>
+            <div class="board-actions">
+              <span class="btn-chip" aria-disabled="true" title="Coming soon">All projects</span>
+            </div>
+          </div>
+
+          <div class="board-grid">
+            <!-- Column 1: Credit Risk & XVA -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">X</div>
+                <div>
+                  <div class="col-title">Credit Risk & XVA</div>
+                  <div class="col-sub">CVA · BQ · LGM-1F</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Bayesian Quadrature for Efficient CVA Computation</div>
+                  <div class="row-meta">May 2025</div>
+                  <div class="row-desc">GPR surrogates + Bayesian Quadrature to accelerate CVA under LGM-1F; Monte Carlo + analytical hybrids; Basel/FRTB compliant.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Advanced Statistical & ML Techniques for Pricing & Risk</div>
+                  <div class="row-meta">Mar–May 2025</div>
+                  <div class="row-desc">GPR-accelerated VaR/ES with Monte Carlo; portfolio risk pipelines aligned with FRTB/Basel IV.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Calibration of the Heston Model</div>
+                  <div class="row-meta">In progress</div>
+                  <div class="row-desc">Levenberg–Marquardt calibration; fit implied vol surfaces; fast convergence on real market data.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 2: Risk & Dependence -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">Σ</div>
+                <div>
+                  <div class="col-title">Risk & Dependence</div>
+                  <div class="col-sub">EVT · Copulas · Networks</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Risk Management & Extreme Values</div>
+                  <div class="row-meta">Oct–Dec 2024</div>
+                  <div class="row-desc">GEV/GPD tail modeling, Gaussian/t/Gumbel copulas for dependence; joint Sims for 200-year losses & aggregate exposure.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Systemic Risks & Contagion in Financial Networks</div>
+                  <div class="row-meta">Jan–Apr 2024</div>
+                  <div class="row-desc">Interbank Monte Carlo stress, cascade thresholds, contagion chains and critical nodes.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Climate Risk and Institutional Investors</div>
+                  <div class="row-meta">Feb 2024</div>
+                  <div class="row-desc">Physical vs transition risks; ESG policy adaptation, risk disclosure and capital allocation.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Column 3: Derivatives & Methods -->
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">∂</div>
+                <div>
+                  <div class="col-title">Derivatives & Methods</div>
+                  <div class="col-sub">Structured · LSMC</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Autocallable Options: Mechanisms & Applications</div>
+                  <div class="row-meta">Jan–May 2023</div>
+                  <div class="row-desc">Pricing of autocallable structures; post-2008 design patterns; activation & payoff path modeling.</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <div class="row-title">Pricing American Options (Longstaff–Schwartz)</div>
+                  <div class="row-meta">In progress</div>
+                  <div class="row-desc">LSMC for early exercise; optimal stopping in high-dimensional settings; equity & exotic Americans.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- floating particles -->
+          <div class="particles" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== READING PANEL ===== -->
+    <div class="reading-panel" id="readingPanel" role="region" aria-live="polite">
+      <p class="reading-lede">
+        Technical readings in quantitative finance. For each book, I prepare a structured, application-oriented summary (pricing, risk, financial engineering). No public downloads available at the moment.
+      </p>
+
+      <div class="reading-stage">
+        <div class="glass-board" id="readingBoard" aria-label="Reading board" tabindex="0">
+          <div class="board-halo"></div>
+
+          <div class="board-header">
+            <div class="board-title">Reading — Selection in progress</div>
+            <div class="board-actions">
+              <span class="btn-chip" aria-disabled="true" title="Bientôt">All readings</span>
+            </div>
+          </div>
+
+          <div class="board-grid">
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">📘</div>
+                <div><div class="col-title">Derivatives</div><div class="col-sub">Hull · Fundamentals</div></div>
+              </div>
+              <div class="row">
+                <div>
+                  <div class="row-title">Options, Futures and Other Derivatives — John C. Hull</div>
+                  <div class="row-meta">Summary in progress</div>
+                  <div class="row-desc">
+                    Futures & options markets, Black–Scholes–Merton framework, hedging strategies (Greeks), exotic & structured products, Value-at-Risk and credit risk.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">📗</div>
+                <div><div class="col-title">Quantitative Finance</div><div class="col-sub">Wilmott · Models</div></div>
+              </div>
+              <div class="row">
+                <div>
+                  <div class="row-title">Paul Wilmott on Quantitative Finance</div>
+                  <div class="row-meta">Currently reading</div>
+                  <div class="row-desc">
+                    Stochastic calculus, volatility dynamics, calibration, pricing & risk management, robust methodologies for derivative products.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="board-col">
+              <div class="col-head">
+                <div class="col-icon">🅑</div>
+                <div><div class="col-title">Market & Data</div><div class="col-sub">Bloomberg</div></div>
+              </div>
+              <div class="row">
+                <div>
+                  <div class="row-title">Bloomberg Ultimate Guide (Terminal)</div>
+                  <div class="row-meta">Personal notes</div>
+                  <div class="row-desc">
+                    Terminal navigation, key functions (Equities, FI, FX), data extraction, Fixed Income analytics, pricing & risk workflows.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="particles" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- ===== Panneau générique (fallback) ===== -->
     <div class="hub-panel" id="hubPanelGeneric" style="display:none;" role="region" aria-live="polite"></div>
   </div>
@@ -1451,3 +1768,4 @@ updateClocks(); setInterval(updateClocks, 1000);
 
 })();
 </script>
+
