@@ -828,8 +828,7 @@ full_bleed: true
               muted
               playsinline
               preload="none"
-              poster="/assets/images/book-teaser-poster.jpg">
-              <source src="/assets/videos/book-teaser.mp4" type="video/mp4">
+              <source src="{{ '/assets/videos/f5150d5a-7fc4-4fa8-862c-555e8c402526.mp4' | relative_url }}" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
