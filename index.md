@@ -820,15 +820,17 @@ full_bleed: true
           <span class="update-badge">COMING SOON</span>
           <h3 class="update-title">My first book - Preview</h3>
           <p class="update-meta">March 2026 · Teaser</p>
-        
+  
           <!-- Teaser video (même zone que le texte) -->
           <div class="update-teaser-wrapper">
-            <video>
+            <video
               class="update-teaser-video"
               muted
               playsinline
               preload="none"
-              <source src="[/assets/videos/book-teaser.mp4](https://github.com/user-attachments/assets/82d738f3-c182-4ac5-8121-9cef567f601f)" type="video/mp4">
+              poster="/assets/images/book-teaser-poster.jpg">
+              <source src="/assets/videos/book-teaser.mp4" type="video/mp4">
+              Your browser does not support the video tag.
             </video>
           </div>
         
