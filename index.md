@@ -1478,9 +1478,60 @@ updateClocks(); setInterval(updateClocks, 1000);
   const btnNext = document.getElementById('updNext');
   const cards = Array.from(track.querySelectorAll('.update-card'));
   const counterEl = document.getElementById('updatesCounter');
-  if (counterEl) counterEl.textContent = String(cards.length);
+
+  // --- Nouveau : suivi des cartes vues ---
+  const seen = new Set();
+  let unseenCount = cards.length;
+
+  function updateCounter(){
+    if (!counterEl) return;
+    if (unseenCount > 0){
+      counterEl.textContent = String(unseenCount);
+      counterEl.style.display = '';
+    } else {
+      counterEl.style.display = 'none';
+    }
+  }
+  updateCounter(); // initialisation
+
+  function markSeen(i){
+    if (seen.has(i)) return;      // déjà vue → on ne fait rien
+    seen.add(i);
+    unseenCount = Math.max(0, unseenCount - 1);
+    updateCounter();
+  }
+  // ----------------------------------------
+
   let idx = 1; // démarre sur la carte du milieu (0,1,2)
   let lastRect = null;
+
+  function getCurrentTranslateX(el){
+    const tr = getComputedStyle(el).transform;
+    if (!tr || tr === 'none') return 0;
+
+    try{
+      if (typeof DOMMatrixReadOnly !== 'undefined'){
+        const m = new DOMMatrixReadOnly(tr);
+        return m.m41;
+      }
+      if (typeof DOMMatrix !== 'undefined'){
+        const m = new DOMMatrix(tr);
+        return m.m41;
+      }
+      if (typeof WebKitCSSMatrix !== 'undefined'){
+        const m = new WebKitCSSMatrix(tr);
+        return m.m41;
+      }
+      const match = tr.match(/matrix\(([^)]+)\)/);
+      if (match){
+        const parts = match[1].split(',');
+        return parseFloat(parts[4] || '0');
+      }
+    }catch(e){
+      console.warn('getCurrentTranslateX fallback', e);
+    }
+    return 0;
+  }
 
   function centerOn(i, withAnim=true){
     idx = (i + cards.length) % cards.length;
@@ -1501,42 +1552,12 @@ updateClocks(); setInterval(updateClocks, 1000);
     cards.forEach(c => c.classList.remove('is-center'));
     target.classList.add('is-center');
     target.focus({preventScroll:true});
+
+    // --- Nouveau : cette carte centrale vient d'être vue ---
+    markSeen(idx);
   }
 
-  function getCurrentTranslateX(el){
-    const tr = getComputedStyle(el).transform;
-    if (!tr || tr === 'none') return 0;
-
-    try{
-      // Si DOMMatrixReadOnly est dispo
-      if (typeof DOMMatrixReadOnly !== 'undefined'){
-        const m = new DOMMatrixReadOnly(tr);
-        return m.m41;
-      }
-      // Fallback plus large (DOMMatrix ou WebKitCSSMatrix)
-      if (typeof DOMMatrix !== 'undefined'){
-        const m = new DOMMatrix(tr);
-        return m.m41;
-      }
-      if (typeof WebKitCSSMatrix !== 'undefined'){
-        const m = new WebKitCSSMatrix(tr);
-        return m.m41;
-      }
-
-      // Fallback ultra simple si vraiment rien n’est supporté
-      const match = tr.match(/matrix\(([^)]+)\)/);
-      if (match){
-        const parts = match[1].split(',');
-        return parseFloat(parts[4] || '0'); // composante tx
-      }
-    }catch(e){
-      console.warn('getCurrentTranslateX fallback', e);
-    }
-    return 0;
-  }
-  
   function recalc(){
-    // remet le track à 0 puis recentre l’index courant pour tenir compte des tailles responsives
     track.style.transition = 'none';
     track.style.transform = 'translate3d(0,0,0)';
     requestAnimationFrame(()=> centerOn(idx, false));
@@ -1597,7 +1618,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     }
   });
 
-  // Initial center (sur la 2e carte)
+  // Initial center (sur la 2e carte) → compte comme "vue"
   requestAnimationFrame(()=> centerOn(idx, false));
 })();
 
