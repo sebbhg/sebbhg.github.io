@@ -809,8 +809,27 @@ full_bleed: true
     stroke-linecap:round;
     stroke-dasharray:520;
     stroke-dashoffset:520;
+    opacity:0;
   }
-  .timeline-axis-y{ stroke-width:1.8; }
+  
+  /* Y légèrement plus épais */
+  .timeline-axis-y{
+    stroke-width:1.8;
+  }
+  
+  /* Nécessaire pour animer le scale proprement dans le repère SVG */
+  .timeline-axis-y,
+  .timeline-axis-x{
+    transform-box: fill-box;
+  }
+  
+  /* On veut que l’axe Y “pousse” depuis le bas, et l’axe X depuis la gauche */
+  .timeline-axis-y{
+    transform-origin: center bottom;
+  }
+  .timeline-axis-x{
+    transform-origin: left center;
+  }
 
   .timeline-grid-line{
     stroke:rgba(255,255,255,.04);
@@ -871,13 +890,15 @@ full_bleed: true
 
   /* Animation: déclenchée quand .about-graph-visible est posé sur le wrapper */
   .timeline-graph-wrapper.about-graph-visible .timeline-axis-y{
-    animation:drawAxis 0.7s ease-out forwards;
+    animation: drawAxisY 1.6s cubic-bezier(.23,.83,.32,1.05) 0.1s forwards;
   }
+  
   .timeline-graph-wrapper.about-graph-visible .timeline-axis-x{
-    animation:drawAxis 0.8s ease-out 0.25s forwards;
+    animation: drawAxisX 1.8s cubic-bezier(.23,.83,.32,1.05) 0.45s forwards;
   }
+  
   .timeline-graph-wrapper.about-graph-visible .timeline-path{
-    animation:drawPath 1.7s cubic-bezier(.23,.83,.32,1) 0.6s forwards;
+    animation: drawPath 2.4s cubic-bezier(.23,.83,.32,1) 1.1s forwards;
   }
   .timeline-graph-wrapper.about-graph-visible .timeline-point-core,
   .timeline-graph-wrapper.about-graph-visible .timeline-point-glow{
@@ -925,9 +946,44 @@ full_bleed: true
     animation-iteration-count:1,infinite;
   }
 
-  @keyframes drawAxis{
-    from{ stroke-dashoffset:520; }
-    to  { stroke-dashoffset:0;   }
+  @keyframes drawAxisY{
+    0%{
+      stroke-dashoffset:520;
+      opacity:0;
+      transform:scaleY(0.4);
+    }
+    35%{
+      opacity:1;
+    }
+    70%{
+      stroke-dashoffset:60;
+      transform:scaleY(1.05);
+    }
+    100%{
+      stroke-dashoffset:0;
+      opacity:1;
+      transform:scaleY(1);
+    }
+  }
+  
+  @keyframes drawAxisX{
+    0%{
+      stroke-dashoffset:520;
+      opacity:0;
+      transform:scaleX(0.4);
+    }
+    35%{
+      opacity:1;
+    }
+    70%{
+      stroke-dashoffset:60;
+      transform:scaleX(1.04);
+    }
+    100%{
+      stroke-dashoffset:0;
+      opacity:1;
+      transform:scaleX(1);
+    }
   }
 
   @keyframes drawPath{
@@ -1250,8 +1306,7 @@ full_bleed: true
                 class="timeline-path"
                 stroke="url(#pathGradient)"
                 d="
-                  M 20 350
-                  L 70 300
+                  M 70 300
                   L 150 220
                   L 230 180
                   L 310 140
