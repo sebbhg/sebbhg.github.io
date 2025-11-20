@@ -785,7 +785,7 @@ full_bleed: true
   .timeline-graph-wrapper{
     position:relative;
     margin-top:12px;
-    padding:14px 16px 10px;
+    padding:22px 22px 18px;
     border-radius:18px;
     background: radial-gradient(120% 160% at 0% 0%, rgba(44,140,255,.08), transparent 60%),
                 radial-gradient(120% 180% at 100% 100%, rgba(159,122,255,.08), transparent 60%),
@@ -798,7 +798,7 @@ full_bleed: true
   .timeline-graph{
     display:block;
     width:100%;
-    max-width:900px;
+    max-width:1100px; 
     margin:0 auto;
   }
 
@@ -1180,6 +1180,16 @@ full_bleed: true
                 <stop offset="40%" stop-color="#2c8cff" stop-opacity="0.4"/>
                 <stop offset="100%" stop-color="#2c8cff" stop-opacity="0"/>
               </radialGradient>
+
+              <!-- Flèche des axes -->
+              <marker id="axisArrow"
+                      viewBox="0 0 10 10"
+                      refX="5" refY="5"
+                      markerWidth="7" markerHeight="7"
+                      orient="auto"
+                      markerUnits="strokeWidth">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ec8ff" />
+              </marker>        
             </defs>
 
             <!-- Grille horizontale (événements / niveaux) -->
@@ -1197,9 +1207,18 @@ full_bleed: true
             <!-- Axes -->
             <g>
               <!-- Axe Y (événements) -->
-              <line x1="70" y1="260" x2="70" y2="40" class="timeline-axis-line timeline-axis-y" stroke="url(#axisGradient)"/>
+              <line x1="70" y1="260" x2="70" y2="40"
+                    class="timeline-axis-line timeline-axis-y"
+                    stroke="url(#axisGradient)"
+                    marker-start="url(#axisArrow)"
+                    marker-end="url(#axisArrow)"/>
+              
               <!-- Axe X (temps) -->
-              <line x1="70" y1="260" x2="560" y2="260" class="timeline-axis-line timeline-axis-x" stroke="url(#axisGradient)"/>
+              <line x1="70" y1="260" x2="560" y2="260"
+                    class="timeline-axis-line timeline-axis-x"
+                    stroke="url(#axisGradient)"
+                    marker-start="url(#axisArrow)"
+                    marker-end="url(#axisArrow)"/>
             </g>
 
             <!-- Labels axe Y (événements abstraits, on pourra raffiner) -->
