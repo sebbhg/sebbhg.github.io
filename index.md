@@ -457,6 +457,47 @@ full_bleed: true
     pointer-events:auto;
   }
 
+  /* === OUTRO après la fin de la vidéo (0.7s) === */
+  .update-card.teaser-outro .update-teaser-wrapper{
+    animation: teaserCurtain 0.7s ease forwards;
+  }
+
+  /* Pendant l’outro, on garde le texte caché */
+  .update-card.teaser-outro .update-badge,
+  .update-card.teaser-outro .update-title,
+  .update-card.teaser-outro .update-meta,
+  .update-card.teaser-outro .update-desc,
+  .update-card.teaser-outro .update-link{
+    opacity:0;
+    transform:translateY(8px);
+  }
+
+  /* Animation de sortie de la vidéo : léger zoom + montée + blur */
+  @keyframes teaserCurtain{
+    0%{
+      opacity:1;
+      transform:scale(1) translateY(0);
+      filter:blur(0);
+    }
+    40%{
+      opacity:1;
+      transform:scale(1.02) translateY(-4px);
+      filter:blur(1px);
+    }
+    100%{
+      opacity:0;
+      transform:scale(1.06) translateY(-28px);
+      filter:blur(4px);
+    }
+  }
+
+  /* Cascade de retour du texte quand on passe en .teaser-done */
+  .update-card.teaser-done .update-badge{ transition-delay:0.05s; }
+  .update-card.teaser-done .update-title{ transition-delay:0.12s; }
+  .update-card.teaser-done .update-meta{  transition-delay:0.18s; }
+  .update-card.teaser-done .update-desc{  transition-delay:0.26s; }
+  .update-card.teaser-done .update-link{  transition-delay:0.34s; }
+
   .update-badge{ display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff; background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; margin-bottom:10px; font-weight:800; }
   .update-title{ margin:0 0 6px; font-size:clamp(1.05rem,2.2vw,1.2rem); font-weight:800; }
   .update-meta{ color:#9aa3b2; font-size:.9rem; margin:0 0 10px; }
@@ -1597,13 +1638,21 @@ updateClocks(); setInterval(updateClocks, 1000);
   let bookCardInitialHeight = null;
 
   if (bookVideo && bookCard){
-    // Quand la vidéo se termine naturellement → on montre le texte
+    // Quand la vidéo se termine naturellement → outro vidéo stylée puis texte
     bookVideo.addEventListener('ended', () => {
       bookTeaserPlayed = true;
+
+      // 1) on sort de l'état "playing" et on lance l'OUTRO
       bookCard.classList.remove('teaser-playing', 'teaser-armed');
-      bookCard.classList.add('teaser-done');
-      // On rend la hauteur auto à la fin
-      bookCard.style.height = '';
+      bookCard.classList.add('teaser-outro');
+
+      // 2) après l'outro (0.7s), on bascule sur le texte normal
+      setTimeout(() => {
+        bookCard.classList.remove('teaser-outro');
+        bookCard.classList.add('teaser-done');
+        // on rend la hauteur auto à la fin
+        bookCard.style.height = '';
+      }, 700);
     });
   }
 
@@ -1612,7 +1661,7 @@ updateClocks(); setInterval(updateClocks, 1000);
     bookReplayLink.addEventListener('click', (e)=>{
       e.preventDefault();
       bookTeaserPlayed = false;
-      bookCard.classList.remove('teaser-done');
+      bookCard.classList.remove('teaser-done', 'teaser-outro');
       bookCard.classList.add('teaser-armed', 'teaser-playing');
       bookVideo.currentTime = 0;
       bookVideo.play().catch(()=>{});
