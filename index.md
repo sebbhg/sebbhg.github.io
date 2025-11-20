@@ -836,8 +836,7 @@ full_bleed: true
         
           <!-- Texte qui apparaît après la vidéo -->
           <p class="update-desc">
-            This first book outlines a modern, structured approach to modelling, pricing, and risk analysis,
-            providing a clear foundation for understanding how today’s markets operate.
+            The core foundations of quantitative finance, distilled into one comprehensive volume.
           </p>
           <a class="update-link" href="#" id="bookTeaserReplay">Watch the teaser →</a>
         </article>
