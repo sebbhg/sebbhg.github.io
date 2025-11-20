@@ -1184,12 +1184,12 @@ full_bleed: true
               <!-- Flèche des axes -->
               <marker id="axisArrow"
                       viewBox="0 0 10 10"
-                      refX="5" refY="5"
-                      markerWidth="7" markerHeight="7"
+                      refX="10" refY="5"
+                      markerWidth="8" markerHeight="8"
                       orient="auto"
                       markerUnits="strokeWidth">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ec8ff" />
-              </marker>        
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ec8ff"/>
+              </marker>     
             </defs>
 
             <!-- Grille horizontale (événements / niveaux) -->
@@ -1210,15 +1210,13 @@ full_bleed: true
               <line x1="70" y1="260" x2="70" y2="40"
                     class="timeline-axis-line timeline-axis-y"
                     stroke="url(#axisGradient)"
-                    marker-start="url(#axisArrow)"
-                    marker-end="url(#axisArrow)"/>
+                    marker-end="url(#axisArrow)"/>   <!-- flèche EN HAUT -->
               
               <!-- Axe X (temps) -->
               <line x1="70" y1="260" x2="560" y2="260"
                     class="timeline-axis-line timeline-axis-x"
                     stroke="url(#axisGradient)"
-                    marker-start="url(#axisArrow)"
-                    marker-end="url(#axisArrow)"/>
+                    marker-end="url(#axisArrow)"/>  <!-- flèche À DROITE -->
             </g>
 
             <!-- Labels axe Y (événements abstraits, on pourra raffiner) -->
