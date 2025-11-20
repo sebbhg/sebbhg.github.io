@@ -831,94 +831,112 @@ full_bleed: true
     transform-origin: left center;
   }
 
-  /* === PARTICULES SUR LES AXES (suivent la flèche) === */
-  .axis-particles-y,
-  .axis-particles-x{
-    transform-box: fill-box;
+  /* === PARTICULES AU NIVEAU DES FLÈCHES (nuages lumineux) === */
+  
+  .axis-tip-particles{
     pointer-events:none;
+    transform-box:fill-box;
   }
   
-  /* Y : les particules montent vers la flèche */
-  .axis-particles-y{
-    transform-origin: center bottom;
-  }
-  
-  /* X : les particules avancent vers la droite */
-  .axis-particles-x{
-    transform-origin: left center;
-  }
-  
-  .axis-particle{
+  .axis-tip-particle{
     fill:#9ec8ff;
     opacity:0;
-    filter:drop-shadow(0 0 6px rgba(44,140,255,.85));
+    filter:drop-shadow(0 0 8px rgba(44,140,255,.95));
+    transform-origin:center center;
   }
   
-  /* Quand le graphe devient visible, on déclenche les flux de particules */
-  .timeline-graph-wrapper.about-graph-visible .axis-particles-y .axis-particle{
-    animation: axisYParticles 1.8s cubic-bezier(.23,.83,.32,1.1) 0.15s infinite;
+  /* Flèche Y (en haut) : nuage qui pulse + légère respiration */
+  .timeline-graph-wrapper.about-graph-visible .axis-tip-y .axis-tip-particle{
+    animation: tipParticlesY 3s ease-out 2.1s infinite alternate;
   }
   
-  .timeline-graph-wrapper.about-graph-visible .axis-particles-x .axis-particle{
-    animation: axisXParticles 1.9s cubic-bezier(.23,.83,.32,1.1) 0.55s infinite;
+  /* Flèche X (à droite) : nuage qui pulse + léger drift horizontal */
+  .timeline-graph-wrapper.about-graph-visible .axis-tip-x .axis-tip-particle{
+    animation: tipParticlesX 3.4s ease-out 2.4s infinite alternate;
   }
   
-  /* Décalage léger entre les particules pour donner un effet de “train” */
-  .axis-particles-y .axis-particle:nth-child(2){
-    animation-delay: 0.25s;
-    animation-duration: 2.1s;
+  /* Décalages individuels pour un effet “plein de petites particules” */
+  .axis-tip-y .axis-tip-particle:nth-child(2){
+    animation-delay:2.25s; animation-duration:3.2s;
   }
-  .axis-particles-y .axis-particle:nth-child(3){
-    animation-delay: 0.4s;
-    animation-duration: 2.4s;
+  .axis-tip-y .axis-tip-particle:nth-child(3){
+    animation-delay:2.4s;  animation-duration:3.5s;
+  }
+  .axis-tip-y .axis-tip-particle:nth-child(4){
+    animation-delay:2.55s; animation-duration:3.1s;
+  }
+  .axis-tip-y .axis-tip-particle:nth-child(5){
+    animation-delay:2.7s;  animation-duration:3.7s;
+  }
+  .axis-tip-y .axis-tip-particle:nth-child(6){
+    animation-delay:2.9s;  animation-duration:3.9s;
+  }
+  .axis-tip-y .axis-tip-particle:nth-child(7){
+    animation-delay:3.1s;  animation-duration:3.3s;
+  }
+  .axis-tip-y .axis-tip-particle:nth-child(8){
+    animation-delay:3.3s;  animation-duration:3.8s;
   }
   
-  .axis-particles-x .axis-particle:nth-child(2){
-    animation-delay: 0.7s;
-    animation-duration: 2.2s;
+  .axis-tip-x .axis-tip-particle:nth-child(2){
+    animation-delay:2.6s;  animation-duration:3.6s;
   }
-  .axis-particles-x .axis-particle:nth-child(3){
-    animation-delay: 0.9s;
-    animation-duration: 2.5s;
+  .axis-tip-x .axis-tip-particle:nth-child(3){
+    animation-delay:2.8s;  animation-duration:3.1s;
+  }
+  .axis-tip-x .axis-tip-particle:nth-child(4){
+    animation-delay:3.0s;  animation-duration:3.9s;
+  }
+  .axis-tip-x .axis-tip-particle:nth-child(5){
+    animation-delay:3.2s;  animation-duration:3.4s;
+  }
+  .axis-tip-x .axis-tip-particle:nth-child(6){
+    animation-delay:3.4s;  animation-duration:4.0s;
+  }
+  .axis-tip-x .axis-tip-particle:nth-child(7){
+    animation-delay:3.6s;  animation-duration:3.2s;
+  }
+  .axis-tip-x .axis-tip-particle:nth-child(8){
+    animation-delay:3.8s;  animation-duration:3.7s;
   }
   
-  /* Particules qui montent sur l’axe Y */
-  @keyframes axisYParticles{
+  /* Nuage au bout de la flèche Y : grosse respiration lumineuse */
+  @keyframes tipParticlesY{
     0%{
       opacity:0;
-      transform:translateY(0) scale(0.5);
+      transform:scale(.3);
     }
-    15%{
+    20%{
       opacity:1;
-      transform:translateY(-20px) scale(0.9);
+      transform:scale(1.0);
     }
-    70%{
+    60%{
       opacity:1;
-      transform:translateY(-230px) scale(1);
+      transform:scale(1.15);
     }
     100%{
       opacity:0;
-      transform:translateY(-260px) scale(0.6);
+      transform:scale(1.35);
     }
   }
   
-  /* Particules qui avancent sur l’axe X */
-  @keyframes axisXParticles{
+  /* Nuage au bout de la flèche X : léger drift horizontal + glow */
+  @keyframes tipParticlesX{
     0%{
       opacity:0;
-      transform:translateX(0) scale(0.5);
+      transform:translateX(0) scale(.35);
     }
-    15%{
+    20%{
       opacity:1;
-      transform:translateX(20px) scale(0.9);
+      transform:translateX(-2px) scale(1.0);
     }
-    70%{
+    60%{
       opacity:1;
-      transform:translateX(430px) scale(1);
+      transform:translateX(4px) scale(1.15);
     }
     100%{
       opacity:0;
-      transform:translateX(470px) scale(0.6);
+      transform:translateX(6px) scale(1.35);
     }
   }
  
@@ -979,13 +997,13 @@ full_bleed: true
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
 
-  /* Animation: déclenchée quand .about-graph-visible est posé sur le wrapper */
+  /* Axes qui se dessinent plus lentement, style “cinématique” */
   .timeline-graph-wrapper.about-graph-visible .timeline-axis-y{
-    animation: drawAxisY 1.6s cubic-bezier(.23,.83,.32,1.05) 0.1s forwards;
+    animation: drawAxisY 2.3s cubic-bezier(.19,.9,.25,1.02) 0.15s forwards;
   }
   
   .timeline-graph-wrapper.about-graph-visible .timeline-axis-x{
-    animation: drawAxisX 1.8s cubic-bezier(.23,.83,.32,1.05) 0.45s forwards;
+    animation: drawAxisX 2.6s cubic-bezier(.19,.9,.25,1.02) 0.65s forwards;
   }
   
   .timeline-graph-wrapper.about-graph-visible .timeline-path{
@@ -1366,19 +1384,28 @@ full_bleed: true
                     marker-end="url(#axisArrow)"/>  <!-- flèche À DROITE -->
             </g>
 
-            <!-- Particules qui “courent” sur les axes -->
-            <g class="axis-particles-y">
-              <!-- On place les particules au pied de l’axe Y (elles seront animées en translateY) -->
-              <circle class="axis-particle" cx="70" cy="340" r="2.3" />
-              <circle class="axis-particle" cx="70" cy="340" r="2" />
-              <circle class="axis-particle" cx="70" cy="340" r="1.7" />
+            <!-- Nuage de particules au bout de la flèche de l’axe Y (en haut) -->
+            <g class="axis-tip-particles axis-tip-y" transform="translate(70,40)">
+              <circle class="axis-tip-particle" cx="0"   cy="0"   r="2.4" />
+              <circle class="axis-tip-particle" cx="-4"  cy="-3"  r="2.1" />
+              <circle class="axis-tip-particle" cx="3"   cy="-4"  r="1.9" />
+              <circle class="axis-tip-particle" cx="-2"  cy="4"   r="1.7" />
+              <circle class="axis-tip-particle" cx="5"   cy="2"   r="1.6" />
+              <circle class="axis-tip-particle" cx="-6"  cy="1"   r="1.5" />
+              <circle class="axis-tip-particle" cx="1.5" cy="6"   r="1.4" />
+              <circle class="axis-tip-particle" cx="7"   cy="-1"  r="1.3" />
             </g>
             
-            <g class="axis-particles-x">
-              <!-- On place les particules à l’origine de l’axe X (elles seront animées en translateX) -->
-              <circle class="axis-particle" cx="70" cy="340" r="2.3" />
-              <circle class="axis-particle" cx="70" cy="340" r="2" />
-              <circle class="axis-particle" cx="70" cy="340" r="1.7" />
+            <!-- Nuage de particules au bout de la flèche de l’axe X (à droite) -->
+            <g class="axis-tip-particles axis-tip-x" transform="translate(560,340)">
+              <circle class="axis-tip-particle" cx="0"   cy="0"   r="2.4" />
+              <circle class="axis-tip-particle" cx="-3"  cy="-3"  r="2.1" />
+              <circle class="axis-tip-particle" cx="-4"  cy="2"   r="1.9" />
+              <circle class="axis-tip-particle" cx="3"   cy="-4"  r="1.8" />
+              <circle class="axis-tip-particle" cx="5.5" cy="1"   r="1.6" />
+              <circle class="axis-tip-particle" cx="2"   cy="4.5" r="1.5" />
+              <circle class="axis-tip-particle" cx="-6"  cy="0"   r="1.4" />
+              <circle class="axis-tip-particle" cx="7"   cy="-1"  r="1.3" />
             </g>
 
             <!-- Labels axe Y (événements abstraits, on pourra raffiner) -->
