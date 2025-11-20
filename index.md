@@ -367,10 +367,10 @@ full_bleed: true
   .update-teaser-wrapper{
     position:relative;
     width:100%;
-    border-radius:12px;
+    border-radius:14px;
     overflow:hidden;
     background:#000;
-    margin:0 0 10px;
+    margin:0;
     max-height:0;
     opacity:0;
     transform:translateY(8px);
@@ -379,50 +379,77 @@ full_bleed: true
       opacity .6s ease,
       transform .6s ease;
   }
-  
+
   .update-teaser-video{
     display:block;
     width:100%;
-    height:auto;
+    height:100%;
+    object-fit:cover;
   }
-  
-  /* Texte + lien : transition douce */
+
+  /* Transitions texte & lien */
+  .update-card .update-badge,
+  .update-card .update-title,
+  .update-card .update-meta,
   .update-card .update-desc,
   .update-card .update-link{
     transition:opacity .45s ease, transform .45s ease;
   }
-  
-  /* Avant la vidéo : texte caché (tant que teaser-armed présent) */
+
+  /* Avant la vidéo : on cache juste le texte long + lien (pour le reveal final) */
   .update-card.teaser-armed .update-desc,
   .update-card.teaser-armed .update-link{
     opacity:0;
     transform:translateY(6px);
   }
-  
-  /* Pendant la lecture : on affiche la vidéo, texte toujours caché */
+
+  /* Pendant la lecture :
+     - la vidéo prend toute la carte
+     - TOUT le texte (badge, titre, meta, desc, lien) disparaît
+  */
+  .update-card.teaser-playing{
+    padding:0;
+  }
+
   .update-card.teaser-playing .update-teaser-wrapper{
-    max-height:260px; /* ajuste la hauteur si besoin */
+    max-height:600px; /* assez grand pour prendre toute la hauteur de la carte */
     opacity:1;
     transform:translateY(0);
   }
-  
-  /* Quand la vidéo joue, on bloque l’interaction avec le texte */
+
+  .update-card.teaser-playing .update-badge,
+  .update-card.teaser-playing .update-title,
+  .update-card.teaser-playing .update-meta,
   .update-card.teaser-playing .update-desc,
   .update-card.teaser-playing .update-link{
+    opacity:0;
+    transform:translateY(6px);
     pointer-events:none;
   }
-  
-  /* Après la vidéo : on cache la vidéo et on révèle le texte */
+
+  /* Après la vidéo :
+     - on remet la padding par défaut
+     - on cache la vidéo
+     - on affiche TOUT le texte (badge + titre + meta + desc + lien)
+  */
+  .update-card.teaser-done{
+    padding:18px 18px 16px;
+  }
+
   .update-card.teaser-done .update-teaser-wrapper{
     max-height:0;
     opacity:0;
     pointer-events:none;
   }
-  
+
+  .update-card.teaser-done .update-badge,
+  .update-card.teaser-done .update-title,
+  .update-card.teaser-done .update-meta,
   .update-card.teaser-done .update-desc,
   .update-card.teaser-done .update-link{
     opacity:1;
     transform:translateY(0);
+    pointer-events:auto;
   }
 
   .update-badge{ display:inline-block; font-size:.72rem; letter-spacing:.08em; color:#9ec8ff; background:#0c1220; border:1px solid #1f3b66; border-radius:999px; padding:4px 8px; margin-bottom:10px; font-weight:800; }
