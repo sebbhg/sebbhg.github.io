@@ -1269,13 +1269,13 @@ full_bleed: true
       <div class="about-graph-card card-glass">
         <div class="about-graph-header">
           <div>
-            <h4 class="card-title">Quant Timeline 2020–2026</h4>
+            <h4 class="card-title">Quant Timeline 2020–2027</h4>
             <p class="card-sub">Orthogonal view of my journey in quantitative finance.</p>
           </div>
         </div>
 
         <div class="timeline-graph-wrapper" id="aboutTimeline">
-          <svg class="timeline-graph" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Timeline 2020–2026">
+          <svg class="timeline-graph" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Timeline 2020–2027">
             <defs>
               <!-- Dégradé pour les axes -->
               <linearGradient id="axisGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -1324,13 +1324,13 @@ full_bleed: true
             <!-- Grille horizontale (événements / niveaux) -->
             <g>
               <!-- y=1 -->
-              <line x1="70" y1="220" x2="560" y2="220" class="timeline-grid-line"/>
+              <line x1="70" y1="220" x2="590" y2="220" class="timeline-grid-line"/>
               <!-- y=2 -->
-              <line x1="70" y1="180" x2="560" y2="180" class="timeline-grid-line"/>
+              <line x1="70" y1="180" x2="590" y2="180" class="timeline-grid-line"/>
               <!-- y=3 -->
-              <line x1="70" y1="140" x2="560" y2="140" class="timeline-grid-line"/>
+              <line x1="70" y1="140" x2="590" y2="140" class="timeline-grid-line"/>
               <!-- y=4 -->
-              <line x1="70" y1="100" x2="560" y2="100" class="timeline-grid-line"/>
+              <line x1="70" y1="100" x2="590" y2="100" class="timeline-grid-line"/>
             </g>
 
             <!-- Axes -->
@@ -1361,7 +1361,7 @@ full_bleed: true
             </g>
             
             <!-- Nuage de particules au bout de la flèche de l’axe X (à droite) -->
-            <g class="axis-tip-particles axis-tip-x" transform="translate(560,340)">
+            <g class="axis-tip-particles axis-tip-x" transform="translate(590,340)">
               <circle class="axis-tip-particle" cx="0"   cy="0"   r="2.4" />
               <circle class="axis-tip-particle" cx="-3"  cy="-3"  r="2.1" />
               <circle class="axis-tip-particle" cx="-4"  cy="2"   r="1.9" />
@@ -1389,6 +1389,7 @@ full_bleed: true
               <text x="390" y="356" class="timeline-label-year">2024</text>
               <text x="470" y="356" class="timeline-label-year">2025</text>
               <text x="550" y="356" class="timeline-label-year">2026</text>
+              <text x="590" y="356" class="timeline-label-year">2027</text>
             </g>
 
             <!-- Légende axes -->
@@ -2326,7 +2327,7 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   // Position des axes (coordonnées finales des flèches)
   const xStart = { x: 70,  y: 340 };
-  const xEnd   = { x: 560, y: 340 };
+  const xEnd   = { x: 590, y: 340 };
 
   const yStart = { x: 70,  y: 340 };
   const yEnd   = { x: 70,  y: 40  };
