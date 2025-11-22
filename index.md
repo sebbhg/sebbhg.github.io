@@ -2294,7 +2294,7 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   // Position des axes (coordonnées finales des flèches)
   const xStart = { x: 70,  y: 340 };
-  const xEnd   = { x: 605, y: 340 };
+  const xEnd   = { x: 603, y: 340 };
 
   const yStart = { x: 70,  y: 340 };
   const yEnd   = { x: 70,  y: 40  };
