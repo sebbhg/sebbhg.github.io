@@ -103,6 +103,16 @@ full_bleed: true
     width: 100%;
     margin-top: calc(var(--promo-overlap) * -1);
   }
+
+  @keyframes tipParticlesFadeOut{
+  from{ opacity:1; }
+  to{ opacity:0; }
+  }
+  
+  .timeline-graph-wrapper.about-graph-visible .axis-tip-particles{
+    animation: tipParticlesFadeOut .8s ease forwards;
+    animation-delay: 2.6s; /* durée totale de drawAxisX */
+  }
   
   .promo-video-frame{
     position: relative;
@@ -847,57 +857,11 @@ full_bleed: true
   
   /* Flèche Y (en haut) : nuage qui pulse + légère respiration */
   .timeline-graph-wrapper.about-graph-visible .axis-tip-y .axis-tip-particle{
-    animation: tipParticlesY 3s ease-out 2.1s infinite alternate;
+      animation: tipParticlesY 2.6s ease-out;
   }
   
-  /* Flèche X (à droite) : nuage qui pulse + léger drift horizontal */
   .timeline-graph-wrapper.about-graph-visible .axis-tip-x .axis-tip-particle{
-    animation: tipParticlesX 3.4s ease-out 2.4s infinite alternate;
-  }
-  
-  /* Décalages individuels pour un effet “plein de petites particules” */
-  .axis-tip-y .axis-tip-particle:nth-child(2){
-    animation-delay:2.25s; animation-duration:3.2s;
-  }
-  .axis-tip-y .axis-tip-particle:nth-child(3){
-    animation-delay:2.4s;  animation-duration:3.5s;
-  }
-  .axis-tip-y .axis-tip-particle:nth-child(4){
-    animation-delay:2.55s; animation-duration:3.1s;
-  }
-  .axis-tip-y .axis-tip-particle:nth-child(5){
-    animation-delay:2.7s;  animation-duration:3.7s;
-  }
-  .axis-tip-y .axis-tip-particle:nth-child(6){
-    animation-delay:2.9s;  animation-duration:3.9s;
-  }
-  .axis-tip-y .axis-tip-particle:nth-child(7){
-    animation-delay:3.1s;  animation-duration:3.3s;
-  }
-  .axis-tip-y .axis-tip-particle:nth-child(8){
-    animation-delay:3.3s;  animation-duration:3.8s;
-  }
-  
-  .axis-tip-x .axis-tip-particle:nth-child(2){
-    animation-delay:2.6s;  animation-duration:3.6s;
-  }
-  .axis-tip-x .axis-tip-particle:nth-child(3){
-    animation-delay:2.8s;  animation-duration:3.1s;
-  }
-  .axis-tip-x .axis-tip-particle:nth-child(4){
-    animation-delay:3.0s;  animation-duration:3.9s;
-  }
-  .axis-tip-x .axis-tip-particle:nth-child(5){
-    animation-delay:3.2s;  animation-duration:3.4s;
-  }
-  .axis-tip-x .axis-tip-particle:nth-child(6){
-    animation-delay:3.4s;  animation-duration:4.0s;
-  }
-  .axis-tip-x .axis-tip-particle:nth-child(7){
-    animation-delay:3.6s;  animation-duration:3.2s;
-  }
-  .axis-tip-x .axis-tip-particle:nth-child(8){
-    animation-delay:3.8s;  animation-duration:3.7s;
+      animation: tipParticlesX 2.9s ease-out;
   }
   
   /* Nuage au bout de la flèche Y : grosse respiration lumineuse */
@@ -1353,8 +1317,20 @@ full_bleed: true
                       markerWidth="8" markerHeight="8"
                       orient="auto"
                       markerUnits="strokeWidth">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ec8ff"/>
-              </marker>     
+              
+                  <!-- Flèche -->
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ec8ff"/>
+              
+                  <!-- Particules collées à la flèche -->
+                  <g class="axis-tip-particles">
+                    <circle class="axis-tip-particle" cx="4"   cy="5"   r="2.2"/>
+                    <circle class="axis-tip-particle" cx="2"   cy="3"   r="1.6"/>
+                    <circle class="axis-tip-particle" cx="2"   cy="7"   r="1.6"/>
+                    <circle class="axis-tip-particle" cx="6"   cy="4"   r="1.4"/>
+                    <circle class="axis-tip-particle" cx="6"   cy="6"   r="1.4"/>
+                  </g>
+              
+              </marker>   
             </defs>
 
             <!-- Grille horizontale (événements / niveaux) -->
