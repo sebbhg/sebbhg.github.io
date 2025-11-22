@@ -1323,16 +1323,7 @@ full_bleed: true
             </defs>
 
             <!-- Grille horizontale (événements / niveaux) -->
-            <g>
-              <!-- y=1 -->
-              <line x1="70" y1="220" x2="580" y2="220" class="timeline-grid-line"/>
-              <!-- y=2 -->
-              <line x1="70" y1="180" x2="580" y2="180" class="timeline-grid-line"/>
-              <!-- y=3 -->
-              <line x1="70" y1="140" x2="580" y2="140" class="timeline-grid-line"/>
-              <!-- y=4 -->
-              <line x1="70" y1="100" x2="580" y2="100" class="timeline-grid-line"/>
-            </g>
+            <g></g>
 
             <!-- Axes -->
             <g>
@@ -1374,12 +1365,7 @@ full_bleed: true
             </g>
 
             <!-- Labels axe Y (événements abstraits, on pourra raffiner) -->
-            <g>
-              <text x="26" y="224" class="timeline-label-event">Studies</text>
-              <text x="26" y="184" class="timeline-label-event">Engineering</text>
-              <text x="26" y="144" class="timeline-label-event">Quant Research</text>
-              <text x="26" y="104" class="timeline-label-event">Trading Desk</text>
-            </g>
+            <g></g>
 
             <!-- Labels axe X (années) -->
             <g>
