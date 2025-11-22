@@ -1440,12 +1440,6 @@ full_bleed: true
             </g>
 
             <!-- Légende en haut à droite -->
-            <g class="timeline-legend">
-              <rect x="410" y="52" width="170" height="40" rx="10" ry="10" fill="rgba(5,8,16,0.82)" stroke="rgba(76,139,255,0.35)"/>
-              <circle cx="426" cy="71" r="3" fill="#2c8cff"/>
-              <text x="435" y="73">Path of key milestones</text>
-              <text x="426" y="87">Quantitative Finance · Trading focus</text>
-            </g>
             <g id="particleLayer"></g>
           </svg>
         </div>
