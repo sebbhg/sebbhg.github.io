@@ -817,9 +817,6 @@ full_bleed: true
     stroke:#3f4e6d;
     stroke-width:1.6;
     stroke-linecap:round;
-    stroke-dasharray:520;
-    stroke-dashoffset:520;
-    opacity:0;
   }
   
   /* Y légèrement plus épais */
@@ -959,15 +956,6 @@ full_bleed: true
     fill:#e7efff;
     font-size:11px;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  }
-
-  /* Axes qui se dessinent plus lentement, style “cinématique” */
-  .timeline-graph-wrapper.about-graph-visible .timeline-axis-y{
-    animation: drawAxisY 2.3s cubic-bezier(.19,.9,.25,1.02) 0.15s forwards;
-  }
-  
-  .timeline-graph-wrapper.about-graph-visible .timeline-axis-x{
-    animation: drawAxisX 2.6s cubic-bezier(.19,.9,.25,1.02) 0.65s forwards;
   }
   
   .timeline-graph-wrapper.about-graph-visible .timeline-path{
@@ -1348,16 +1336,16 @@ full_bleed: true
             <!-- Axes -->
             <g>
               <!-- Axe Y (événements) -->
-              <line x1="70" y1="340" x2="70" y2="40"
+              <line x1="70" y1="340" x2="70" y2="340"
                     class="timeline-axis-line timeline-axis-y"
                     stroke="url(#axisGradient)"
-                    marker-end="url(#axisArrow)"/>   <!-- flèche EN HAUT -->
+                    marker-end="url(#axisArrow)"/>
                     
               <!-- Axe X (temps) -->
-              <line x1="70" y1="340" x2="560" y2="340"
+              <line x1="70" y1="340" x2="70" y2="340"
                     class="timeline-axis-line timeline-axis-x"
                     stroke="url(#axisGradient)"
-                    marker-end="url(#axisArrow)"/>  <!-- flèche À DROITE -->
+                    marker-end="url(#axisArrow)"/>
             </g>
 
             <!-- Nuage de particules au bout de la flèche de l’axe Y (en haut) -->
@@ -1415,7 +1403,7 @@ full_bleed: true
                 class="timeline-path"
                 stroke="url(#pathGradient)"
                 d="
-                  M 70 300
+                  M 70 220
                   L 150 220
                   L 230 180
                   L 310 140
@@ -1471,6 +1459,7 @@ full_bleed: true
               <text x="435" y="73">Path of key milestones</text>
               <text x="426" y="87">Quantitative Finance · Trading focus</text>
             </g>
+            <g id="particleLayer"></g>
           </svg>
         </div>
       </div>
@@ -2322,4 +2311,103 @@ updateClocks(); setInterval(updateClocks, 1000);
 
     io.observe(wrapper);
   })();
+</script>
+
+<script>
+(function(){
+  const svg = document.querySelector('.timeline-graph');
+  const axisX = svg.querySelector('.timeline-axis-x');
+  const axisY = svg.querySelector('.timeline-axis-y');
+  const layer = svg.querySelector('#particleLayer');
+
+  const duration = 5000; // 5 secondes
+  let start = null;
+  let running = false;
+
+  // Position des axes (coordonnées finales des flèches)
+  const xStart = { x: 70,  y: 340 };
+  const xEnd   = { x: 560, y: 340 };
+
+  const yStart = { x: 70,  y: 340 };
+  const yEnd   = { x: 70,  y: 40  };
+
+  function spawnParticle(x, y){
+    const p = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    p.setAttribute("cx", x);
+    p.setAttribute("cy", y);
+    p.setAttribute("r", 1 + Math.random() * 2.2);
+    p.setAttribute("fill", "#9ec8ff");
+    p.style.opacity = 1;
+    p.style.filter = "drop-shadow(0 0 6px rgba(44,140,255,.9))";
+
+    layer.appendChild(p);
+
+    // animation individuelle de la particule
+    const driftX = (Math.random()*16 - 8);
+    const driftY = (Math.random()*16 - 8);
+
+    const life = 600 + Math.random()*500;
+
+    const startTime = performance.now();
+
+    function animParticles(now){
+      const t = now - startTime;
+      const k = t / life;
+
+      if (k >= 1){
+        p.remove();
+        return;
+      }
+
+      p.setAttribute("cx", x + driftX * k);
+      p.setAttribute("cy", y + driftY * k);
+      p.setAttribute("r", 1 + 2.2*k);
+      p.style.opacity = (1 - k);
+
+      requestAnimationFrame(animParticles);
+    }
+    requestAnimationFrame(animParticles);
+  }
+
+  function animateAxes(timestamp){
+    if(!start) start = timestamp;
+    const progress = Math.min(1, (timestamp - start) / duration);
+
+    // interp linéaire
+    const px = xStart.x + (xEnd.x - xStart.x) * progress;
+    const py = xStart.y + (xEnd.y - xStart.y) * progress;
+
+    const qx = yStart.x + (yEnd.x - yStart.x) * progress;
+    const qy = yStart.y + (yEnd.y - yStart.y) * progress;
+
+    // On met à jour les axes en temps réel (on remplace l’animation CSS)
+    axisX.setAttribute("x2", px);
+    axisX.setAttribute("y2", py);
+
+    axisY.setAttribute("x2", qx);
+    axisY.setAttribute("y2", qy);
+
+    // On génère des particules pendant tout l'avancement
+    if (progress < 1){
+      spawnParticle(px, py); // pointe X
+      spawnParticle(qx, qy); // pointe Y
+      requestAnimationFrame(animateAxes);
+    }
+  }
+
+  // Démarre au moment où la section devient visible
+  const wrapper = document.getElementById("aboutTimeline");
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !running){
+        running = true;
+        requestAnimationFrame(animateAxes);
+        io.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  io.observe(wrapper);
+})();
 </script>
