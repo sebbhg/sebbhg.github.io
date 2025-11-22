@@ -1378,12 +1378,6 @@ full_bleed: true
               <text x="550" y="356" class="timeline-label-year">2026</text>
             </g>
 
-            <!-- Légende axes -->
-            <g>
-              <text x="340" y="376" class="timeline-label-axis">Years</text>
-              <text x="20" y="150" class="timeline-label-axis" transform="rotate(-90 20 150)">Events</text>
-            </g>
-
             <!-- Courbe des événements (exemple : progression continue 2020 → 2026) -->
             <g>
               <path
@@ -1430,13 +1424,6 @@ full_bleed: true
               <!-- 2026 -->
               <circle class="timeline-point timeline-point-glow" cx="550" cy="100" r="9"/>
               <circle class="timeline-point timeline-point-core" cx="550" cy="100" r="3.3"/>
-            </g>
-
-            <!-- Petits tags textuels au-dessus de certains points (optionnel, très discret) -->
-            <g>
-              <text x="230" y="168" class="timeline-tag">LGM / IR modelling</text>
-              <text x="390" y="128" class="timeline-tag">CVA · XVA · GPR</text>
-              <text x="470" y="88"  class="timeline-tag">Front-Office</text>
             </g>
 
             <!-- Légende en haut à droite -->
