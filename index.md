@@ -1390,7 +1390,6 @@ full_bleed: true
               <text x="390" y="356" class="timeline-label-year">2024</text>
               <text x="470" y="356" class="timeline-label-year">2025</text>
               <text x="550" y="356" class="timeline-label-year">2026</text>
-              <text x="580" y="356" class="timeline-label-year">2027</text>
             </g>
 
             <!-- Légende axes -->
