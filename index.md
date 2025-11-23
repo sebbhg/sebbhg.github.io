@@ -1003,7 +1003,7 @@ full_bleed: true
   }
 
   /* === Bulle AMF sur la timeline === */
-  .timeline-bubble{
+  .timeline-bubble-inner{
     opacity:0;
     transform-origin:center center;
   }
@@ -1019,7 +1019,7 @@ full_bleed: true
     pointer-events:none;
   }
 
-  .timeline-graph-wrapper.about-graph-visible .timeline-bubble{
+  .timeline-graph-wrapper.about-graph-visible .timeline-bubble-inner{
     animation:bubbleIn .7s cubic-bezier(.22,.8,.25,1) 1.6s forwards;
   }
 
@@ -1427,16 +1427,18 @@ full_bleed: true
             </g>
 
             <!-- Bulle AMF (certification AMF en 2021) -->
-            <g class="timeline-bubble" transform="translate(150, 235)">
-              <!-- cercle de fond -->
-              <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-              <!-- logo AMF -->
-              <image
-                class="timeline-bubble-img"
-                href="{{ '/assets/images/image23.png' | relative_url }}"
-                x="-16" y="-16" width="32" height="32"
-                clip-path="url(#amfBubbleClip)"
-              />
+            <g class="timeline-bubble" transform="translate(150, 245)">
+              <g class="timeline-bubble-inner">
+                <!-- cercle de fond -->
+                <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
+                <!-- logo AMF -->
+                <image
+                  class="timeline-bubble-img"
+                  href="{{ '/assets/images/image23.png' | relative_url }}"
+                  x="-16" y="-16" width="32" height="32"
+                  clip-path="url(#amfBubbleClip)"
+                />
+              </g>
             </g>
 
             <!-- Points marquants (alignés sur la courbe) -->
