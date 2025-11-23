@@ -2254,7 +2254,7 @@ updateClocks(); setInterval(updateClocks, 1000);
   const axisY = svg.querySelector('.timeline-axis-y');
   const layer = svg.querySelector('#particleLayer');
 
-  const duration = 5000; // 5 secondes
+  const duration = 3800; // 5 secondes
   let start = null;
   let running = false;
 
