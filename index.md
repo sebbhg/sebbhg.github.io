@@ -694,12 +694,6 @@ full_bleed: true
   .board-col .row{ cursor:default; }
   .board-col .row:hover{ transform:none; }
 
-  /* Particles inside boards disabled */
-  .particles,
-  .particles .dot{
-    display:none !important;
-  }
-
   /* ===== Bandeau Lectures ===== */
   .reading-band{
     position:relative;
@@ -1516,8 +1510,6 @@ full_bleed: true
             </div>
           </div>
 
-          <!-- floating particles -->
-          <div class="particles" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -1639,8 +1631,6 @@ full_bleed: true
             </div>
           </div>
 
-          <!-- floating particles -->
-          <div class="particles" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -1712,7 +1702,6 @@ full_bleed: true
             </div>
           </div>
 
-          <div class="particles" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -1917,36 +1906,39 @@ updateClocks(); setInterval(updateClocks, 1000);
   card.addEventListener('keydown', (e)=>{ if (e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleFlip(); }});
 })();
 
-/* === Tilt 3D sur les Glass Boards + Particles spawn === */
+/* === Tilt 3D sur les Glass Boards (sans particules) === */
 (function(){
   function enhanceBoard(boardId){
     const board = document.getElementById(boardId);
-    const particles = board?.querySelector('.particles');
     if (!board) return;
-
-    // spawn dots (courses / projects / reading)
-    const p = particles || (()=>{ const el=document.createElement('div'); el.className='particles'; board.appendChild(el); return el; })();
-    const n = 0;
 
     const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
     let rAF;
+
     function onMove(e){
       const rect = board.getBoundingClientRect();
-      const clientX = (e.clientX ?? (e.touches&&e.touches[0].clientX));
-      const clientY = (e.clientY ?? (e.touches&&e.touches[0].clientY));
-      if (clientX==null || clientY==null) return;
+      const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
+      const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
+      if (clientX == null || clientY == null) return;
+
       const x = clientX - rect.left;
       const y = clientY - rect.top;
-      const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
-      const ry = clamp(((x/rect.width)-0.5)*-8,-8,8);
-      cancelAnimationFrame(rAF);
-      rAF = requestAnimationFrame(()=>{ board.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
-    }
-    function reset(){ board.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
+      const rx = clamp(((y/rect.height) - 0.5) * 6, -6, 6);
+      const ry = clamp(((x/rect.width) - 0.5) * -8, -8, 8);
 
-    board.addEventListener('mousemove', onMove, {passive:true});
+      cancelAnimationFrame(rAF);
+      rAF = requestAnimationFrame(()=>{
+        board.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+    }
+
+    function reset(){
+      board.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    }
+
+    board.addEventListener('mousemove', onMove, { passive:true });
     board.addEventListener('mouseleave', reset);
-    board.addEventListener('touchmove', onMove, {passive:true});
+    board.addEventListener('touchmove', onMove, { passive:true });
     board.addEventListener('touchend', reset);
   }
 
