@@ -995,6 +995,12 @@ full_bleed: true
     animation-delay:1.75s;
   }
 
+  .timeline-point,
+  .timeline-point-core,
+  .timeline-point-glow{
+    display: none;
+  }
+ 
   .timeline-graph-wrapper.about-graph-visible .timeline-point-core{
     animation-name:fadePoint,pulsePoint;
     animation-duration:0.6s,2.2s;
@@ -1310,15 +1316,6 @@ full_bleed: true
                 <!-- Flèche un peu plus grande -->
                 <path d="M 0 0 L 12 6 L 0 12 z" fill="#9ec8ff"/>
               
-                <!-- Particules collées à la flèche (on les laisse) -->
-                <g class="axis-tip-particles">
-                  <circle class="axis-tip-particle" cx="4"  cy="6"  r="2.6"/>
-                  <circle class="axis-tip-particle" cx="2"  cy="3"  r="1.8"/>
-                  <circle class="axis-tip-particle" cx="2"  cy="9"  r="1.8"/>
-                  <circle class="axis-tip-particle" cx="7"  cy="5"  r="1.6"/>
-                  <circle class="axis-tip-particle" cx="7"  cy="7"  r="1.6"/>
-                </g>
-              
               </marker>  
             </defs>
 
@@ -1397,33 +1394,6 @@ full_bleed: true
 
             <!-- Points marquants (alignés sur la courbe) -->
             <g>
-              <!-- 2020 -->
-              <circle class="timeline-point timeline-point-glow" cx="70"  cy="220" r="9"/>
-              <circle class="timeline-point timeline-point-core" cx="70"  cy="220" r="3.3"/>
-
-              <!-- 2021 -->
-              <circle class="timeline-point timeline-point-glow" cx="150" cy="220" r="9"/>
-              <circle class="timeline-point timeline-point-core" cx="150" cy="220" r="3.3"/>
-
-              <!-- 2022 -->
-              <circle class="timeline-point timeline-point-glow" cx="230" cy="180" r="9"/>
-              <circle class="timeline-point timeline-point-core" cx="230" cy="180" r="3.3"/>
-
-              <!-- 2023 -->
-              <circle class="timeline-point timeline-point-glow" cx="310" cy="140" r="9"/>
-              <circle class="timeline-point timeline-point-core" cx="310" cy="140" r="3.3"/>
-
-              <!-- 2024 -->
-              <circle class="timeline-point timeline-point-glow" cx="390" cy="140" r="9"/>
-              <circle class="timeline-point timeline-point-core" cx="390" cy="140" r="3.3"/>
-
-              <!-- 2025 -->
-              <circle class="timeline-point timeline-point-glow" cx="470" cy="100" r="9"/>
-              <circle class="timeline-point timeline-point-core" cx="470" cy="100" r="3.3"/>
-
-              <!-- 2026 -->
-              <circle class="timeline-point timeline-point-glow" cx="550" cy="100" r="9"/>
-              <circle class="timeline-point timeline-point-core" cx="550" cy="100" r="3.3"/>
             </g>
 
             <!-- Légende en haut à droite -->
@@ -2294,7 +2264,7 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   // Position des axes (coordonnées finales des flèches)
   const xStart = { x: 70,  y: 340 };
-  const xEnd   = { x: 602, y: 340 };
+  const xEnd   = { x: 601, y: 340 };
 
   const yStart = { x: 70,  y: 340 };
   const yEnd   = { x: 70,  y: 40  };
