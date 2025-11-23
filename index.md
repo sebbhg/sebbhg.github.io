@@ -694,6 +694,12 @@ full_bleed: true
   .board-col .row{ cursor:default; }
   .board-col .row:hover{ transform:none; }
 
+  /* Particles inside boards disabled */
+  .particles,
+  .particles .dot{
+    display:none !important;
+  }
+
   /* ===== Bandeau Lectures ===== */
   .reading-band{
     position:relative;
@@ -1009,19 +1015,6 @@ full_bleed: true
     animation-iteration-count:1,infinite;
   }
 
-  /* Animation des axes quand la section apparaît */
-  .timeline-graph-wrapper.about-graph-visible .timeline-axis-y{
-    stroke-dasharray:520;
-    stroke-dashoffset:520;
-    animation: drawAxisY 2.2s cubic-bezier(.23,.83,.32,1) forwards;
-  }
-  
-  .timeline-graph-wrapper.about-graph-visible .timeline-axis-x{
-    stroke-dasharray:520;
-    stroke-dashoffset:520;
-    animation: drawAxisX 2.2s cubic-bezier(.23,.83,.32,1) .15s forwards;
-  }
-
   @keyframes drawAxisY{
     0%{
       stroke-dashoffset:520;
@@ -1333,14 +1326,13 @@ full_bleed: true
             <!-- Axes -->
             <g>
               <!-- Axe Y (événements) -->
-              <!-- Axe Y -->
-              <line x1="70" y1="340" x2="70" y2="40"
+              <line x1="70" y1="340" x2="70" y2="340"
                     class="timeline-axis-line timeline-axis-y"
                     stroke="url(#axisGradient)"
                     marker-end="url(#axisArrow)"/>
-              
-              <!-- Axe X -->
-              <line x1="70" y1="340" x2="580" y2="340"
+                    
+              <!-- Axe X (temps) -->
+              <line x1="70" y1="340" x2="70" y2="340"
                     class="timeline-axis-line timeline-axis-x"
                     stroke="url(#axisGradient)"
                     marker-end="url(#axisArrow)"/>
@@ -1524,6 +1516,8 @@ full_bleed: true
             </div>
           </div>
 
+          <!-- floating particles -->
+          <div class="particles" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -1645,6 +1639,8 @@ full_bleed: true
             </div>
           </div>
 
+          <!-- floating particles -->
+          <div class="particles" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -1716,6 +1712,7 @@ full_bleed: true
             </div>
           </div>
 
+          <div class="particles" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -1920,39 +1917,36 @@ updateClocks(); setInterval(updateClocks, 1000);
   card.addEventListener('keydown', (e)=>{ if (e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleFlip(); }});
 })();
 
-/* === Tilt 3D sur les Glass Boards (sans particules) === */
+/* === Tilt 3D sur les Glass Boards + Particles spawn === */
 (function(){
   function enhanceBoard(boardId){
     const board = document.getElementById(boardId);
+    const particles = board?.querySelector('.particles');
     if (!board) return;
+
+    // spawn dots (courses / projects / reading)
+    const p = particles || (()=>{ const el=document.createElement('div'); el.className='particles'; board.appendChild(el); return el; })();
+    const n = 0;
 
     const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
     let rAF;
-
     function onMove(e){
       const rect = board.getBoundingClientRect();
-      const clientX = e.clientX ?? (e.touches && e.touches[0].clientX);
-      const clientY = e.clientY ?? (e.touches && e.touches[0].clientY);
-      if (clientX == null || clientY == null) return;
-
+      const clientX = (e.clientX ?? (e.touches&&e.touches[0].clientX));
+      const clientY = (e.clientY ?? (e.touches&&e.touches[0].clientY));
+      if (clientX==null || clientY==null) return;
       const x = clientX - rect.left;
       const y = clientY - rect.top;
-      const rx = clamp(((y/rect.height) - 0.5) * 6, -6, 6);
-      const ry = clamp(((x/rect.width) - 0.5) * -8, -8, 8);
-
+      const rx = clamp(((y/rect.height)-0.5)*6,-6,6);
+      const ry = clamp(((x/rect.width)-0.5)*-8,-8,8);
       cancelAnimationFrame(rAF);
-      rAF = requestAnimationFrame(()=>{
-        board.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
+      rAF = requestAnimationFrame(()=>{ board.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; });
     }
+    function reset(){ board.style.transform = 'rotateX(0deg) rotateY(0deg)'; }
 
-    function reset(){
-      board.style.transform = 'rotateX(0deg) rotateY(0deg)';
-    }
-
-    board.addEventListener('mousemove', onMove, { passive:true });
+    board.addEventListener('mousemove', onMove, {passive:true});
     board.addEventListener('mouseleave', reset);
-    board.addEventListener('touchmove', onMove, { passive:true });
+    board.addEventListener('touchmove', onMove, {passive:true});
     board.addEventListener('touchend', reset);
   }
 
@@ -2246,3 +2240,61 @@ updateClocks(); setInterval(updateClocks, 1000);
   })();
 </script>
 
+<script>
+(function(){
+  const svg = document.querySelector('.timeline-graph');
+  const axisX = svg.querySelector('.timeline-axis-x');
+  const axisY = svg.querySelector('.timeline-axis-y');
+  const layer = svg.querySelector('#particleLayer');
+
+  const duration = 3800; // 5 secondes
+  let start = null;
+  let running = false;
+
+  // Position des axes (coordonnées finales des flèches)
+  const xStart = { x: 70,  y: 340 };
+  const xEnd   = { x: 601, y: 340 };
+
+  const yStart = { x: 70,  y: 340 };
+  const yEnd   = { x: 70,  y: 40  };
+
+  function animateAxes(timestamp){
+    if(!start) start = timestamp;
+    const progress = Math.min(1, (timestamp - start) / duration);
+
+    // interp linéaire
+    const px = xStart.x + (xEnd.x - xStart.x) * progress;
+    const py = xStart.y + (xEnd.y - xStart.y) * progress;
+
+    const qx = yStart.x + (yEnd.x - yStart.x) * progress;
+    const qy = yStart.y + (yEnd.y - yStart.y) * progress;
+
+    // On met à jour les axes en temps réel (on remplace l’animation CSS)
+    axisX.setAttribute("x2", px);
+    axisX.setAttribute("y2", py);
+
+    axisY.setAttribute("x2", qx);
+    axisY.setAttribute("y2", qy);
+
+    // On supprime les particules "dans l'air"
+    if (progress < 1){
+      requestAnimationFrame(animateAxes);
+    }
+  }
+
+  // Démarre au moment où la section devient visible
+  const wrapper = document.getElementById("aboutTimeline");
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !running){
+        running = true;
+        requestAnimationFrame(animateAxes);
+        io.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  io.observe(wrapper);
+})();
+</script>
