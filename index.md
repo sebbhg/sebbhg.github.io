@@ -1001,6 +1001,38 @@ full_bleed: true
   .timeline-point-glow{
     display: none;
   }
+
+  /* === Bulle AMF sur la timeline === */
+  .timeline-bubble{
+    opacity:0;
+    transform-origin:center center;
+  }
+
+  .timeline-bubble-circle{
+    fill:rgba(5,8,20,.95);
+    stroke:#4d9cff;
+    stroke-width:1.4;
+    filter:drop-shadow(0 0 8px rgba(44,140,255,.65));
+  }
+
+  .timeline-bubble-img{
+    pointer-events:none;
+  }
+
+  .timeline-graph-wrapper.about-graph-visible .timeline-bubble{
+    animation:bubbleIn .7s cubic-bezier(.22,.8,.25,1) 1.6s forwards;
+  }
+
+  @keyframes bubbleIn{
+    from{
+      opacity:0;
+      transform:scale(.4) translateY(8px);
+    }
+    to{
+      opacity:1;
+      transform:scale(1) translateY(0);
+    }
+  }
  
   .timeline-graph-wrapper.about-graph-visible .timeline-point-core{
     animation-name:fadePoint,pulsePoint;
@@ -1306,6 +1338,11 @@ full_bleed: true
                 <stop offset="100%" stop-color="#2c8cff" stop-opacity="0"/>
               </radialGradient>
 
+              <!-- Clip pour la bulle AMF -->
+              <clipPath id="amfBubbleClip" clipPathUnits="userSpaceOnUse">
+                <circle cx="0" cy="0" r="16" />
+              </clipPath>
+
               <!-- Flèche des axes -->
               <marker id="axisArrow"
                       viewBox="0 0 12 12"
@@ -1386,6 +1423,19 @@ full_bleed: true
                   C 150 260, 220 180, 310 120
                   C 400 60,  470 180, 550 260
                 "
+              />
+            </g>
+
+            <!-- Bulle AMF (certification AMF en 2021) -->
+            <g class="timeline-bubble" transform="translate(150, 235)">
+              <!-- cercle de fond -->
+              <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
+              <!-- logo AMF -->
+              <image
+                class="timeline-bubble-img"
+                href="{{ '/assets/images/image23.png' | relative_url }}"
+                x="-16" y="-16" width="32" height="32"
+                clip-path="url(#amfBubbleClip)"
               />
             </g>
 
