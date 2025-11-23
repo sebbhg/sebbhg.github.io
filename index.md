@@ -2243,60 +2243,91 @@ updateClocks(); setInterval(updateClocks, 1000);
 <script>
 (function(){
   const svg = document.querySelector('.timeline-graph');
-  if (!svg) return;
-
   const axisX = svg.querySelector('.timeline-axis-x');
   const axisY = svg.querySelector('.timeline-axis-y');
-  if (!axisX || !axisY) return;
+  const layer = svg.querySelector('#particleLayer');
 
-  const duration = 3800; // même durée qu'avant
+  const duration = 3800; // 5 secondes
+  let start = null;
+  let running = false;
 
-  // Coordonnées de départ / arrivée des axes
+  // Position des axes (coordonnées finales des flèches)
   const xStart = { x: 70,  y: 340 };
-  const xEnd   = { x: 601, y: 340 }; // comme dans ton code actuel
+  const xEnd   = { x: 601, y: 340 };
 
   const yStart = { x: 70,  y: 340 };
   const yEnd   = { x: 70,  y: 40  };
 
-  let start = null;
-  let running = false;
+  function spawnParticle(x, y){
+    const p = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    p.setAttribute("cx", x);
+    p.setAttribute("cy", y);
+    p.setAttribute("r", 1 + Math.random() * 2.2);
+    p.setAttribute("fill", "#9ec8ff");
+    p.style.opacity = 1;
+    p.style.filter = "drop-shadow(0 0 6px rgba(44,140,255,.9))";
+
+    layer.appendChild(p);
+
+    // animation individuelle de la particule
+    const driftX = (Math.random()*16 - 8);
+    const driftY = (Math.random()*16 - 8);
+
+    const life = 600 + Math.random()*500;
+
+    const startTime = performance.now();
+
+    function animParticles(now){
+      const t = now - startTime;
+      const k = t / life;
+
+      if (k >= 1){
+        p.remove();
+        return;
+      }
+
+      p.setAttribute("cx", x + driftX * k);
+      p.setAttribute("cy", y + driftY * k);
+      p.setAttribute("r", 1 + 2.2*k);
+      p.style.opacity = (1 - k);
+
+      requestAnimationFrame(animParticles);
+    }
+    requestAnimationFrame(animParticles);
+  }
 
   function animateAxes(timestamp){
-    if (!start) start = timestamp;
-    const t = (timestamp - start) / duration;
-    const progress = Math.min(1, t);
+    if(!start) start = timestamp;
+    const progress = Math.min(1, (timestamp - start) / duration);
 
-    // interpolation linéaire
+    // interp linéaire
     const px = xStart.x + (xEnd.x - xStart.x) * progress;
     const py = xStart.y + (xEnd.y - xStart.y) * progress;
 
     const qx = yStart.x + (yEnd.x - yStart.x) * progress;
     const qy = yStart.y + (yEnd.y - yStart.y) * progress;
 
-    // mise à jour des axes
+    // On met à jour les axes en temps réel (on remplace l’animation CSS)
     axisX.setAttribute("x2", px);
     axisX.setAttribute("y2", py);
 
     axisY.setAttribute("x2", qx);
     axisY.setAttribute("y2", qy);
 
-    // plus AUCUNE particule JS
+    // On génère des particules pendant tout l'avancement
     if (progress < 1){
+      spawnParticle(px, py); // pointe X
+      spawnParticle(qx, qy); // pointe Y
       requestAnimationFrame(animateAxes);
     }
   }
 
+  // Démarre au moment où la section devient visible
   const wrapper = document.getElementById("aboutTimeline");
-  if (!wrapper){
-    // fallback : on anime quand même si le wrapper n'existe pas
-    requestAnimationFrame(animateAxes);
-    return;
-  }
 
-  // On démarre l'animation quand la section devient visible
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
-      if (entry.isIntersecting && !running){
+      if(entry.isIntersecting && !running){
         running = true;
         requestAnimationFrame(animateAxes);
         io.disconnect();
