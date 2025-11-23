@@ -1427,7 +1427,7 @@ full_bleed: true
             </g>
 
             <!-- Bulle AMF (certification AMF en 2021) -->
-            <g class="timeline-bubble" transform="translate(150, 245)">
+            <g class="timeline-bubble" transform="translate(158, 238)">
               <g class="timeline-bubble-inner">
                 <!-- cercle de fond -->
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
