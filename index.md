@@ -1927,14 +1927,6 @@ updateClocks(); setInterval(updateClocks, 1000);
     // spawn dots (courses / projects / reading)
     const p = particles || (()=>{ const el=document.createElement('div'); el.className='particles'; board.appendChild(el); return el; })();
     const n = 0;
-    for(let i=0;i<n;i++){
-      const d=document.createElement('div'); d.className='dot';
-      d.style.left = (Math.random()*100)+'%';
-      d.style.top  = (Math.random()*100)+'%';
-      d.style.animationDelay = (Math.random()*10).toFixed(2)+'s';
-      d.style.opacity = (0.15+Math.random()*0.45).toFixed(2);
-      p.appendChild(d);
-    }
 
     const clamp = (v,min,max)=>Math.max(min,Math.min(max,v));
     let rAF;
