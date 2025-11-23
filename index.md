@@ -2316,7 +2316,7 @@ updateClocks(); setInterval(updateClocks, 1000);
 
     // On génère des particules pendant tout l'avancement
     if (progress < 1){
-      spawnParticle(px, py); // pointe X
+      spawnParticle(px, py); // pointe X 
       spawnParticle(qx, qy); // pointe Y
       requestAnimationFrame(animateAxes);
     }
