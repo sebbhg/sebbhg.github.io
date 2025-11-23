@@ -1009,6 +1009,19 @@ full_bleed: true
     animation-iteration-count:1,infinite;
   }
 
+  /* Animation des axes quand la section apparaît */
+  .timeline-graph-wrapper.about-graph-visible .timeline-axis-y{
+    stroke-dasharray:520;
+    stroke-dashoffset:520;
+    animation: drawAxisY 2.2s cubic-bezier(.23,.83,.32,1) forwards;
+  }
+  
+  .timeline-graph-wrapper.about-graph-visible .timeline-axis-x{
+    stroke-dasharray:520;
+    stroke-dashoffset:520;
+    animation: drawAxisX 2.2s cubic-bezier(.23,.83,.32,1) .15s forwards;
+  }
+
   @keyframes drawAxisY{
     0%{
       stroke-dashoffset:520;
@@ -1320,13 +1333,14 @@ full_bleed: true
             <!-- Axes -->
             <g>
               <!-- Axe Y (événements) -->
-              <line x1="70" y1="340" x2="70" y2="340"
+              <!-- Axe Y -->
+              <line x1="70" y1="340" x2="70" y2="40"
                     class="timeline-axis-line timeline-axis-y"
                     stroke="url(#axisGradient)"
                     marker-end="url(#axisArrow)"/>
-                    
-              <!-- Axe X (temps) -->
-              <line x1="70" y1="340" x2="70" y2="340"
+              
+              <!-- Axe X -->
+              <line x1="70" y1="340" x2="580" y2="340"
                     class="timeline-axis-line timeline-axis-x"
                     stroke="url(#axisGradient)"
                     marker-end="url(#axisArrow)"/>
@@ -2232,101 +2246,3 @@ updateClocks(); setInterval(updateClocks, 1000);
   })();
 </script>
 
-<script>
-(function(){
-  const svg = document.querySelector('.timeline-graph');
-  const axisX = svg.querySelector('.timeline-axis-x');
-  const axisY = svg.querySelector('.timeline-axis-y');
-  const layer = svg.querySelector('#particleLayer');
-
-  const duration = 3800; // 5 secondes
-  let start = null;
-  let running = false;
-
-  // Position des axes (coordonnées finales des flèches)
-  const xStart = { x: 70,  y: 340 };
-  const xEnd   = { x: 601, y: 340 };
-
-  const yStart = { x: 70,  y: 340 };
-  const yEnd   = { x: 70,  y: 40  };
-
-  function spawnParticle(x, y){
-    const p = document.createElementNS("http://www.w3.org/2000/svg","circle");
-    p.setAttribute("cx", x);
-    p.setAttribute("cy", y);
-    p.setAttribute("r", 1 + Math.random() * 2.2);
-    p.setAttribute("fill", "#9ec8ff");
-    p.style.opacity = 1;
-    p.style.filter = "drop-shadow(0 0 6px rgba(44,140,255,.9))";
-
-    layer.appendChild(p);
-
-    // animation individuelle de la particule
-    const driftX = (Math.random()*16 - 8);
-    const driftY = (Math.random()*16 - 8);
-
-    const life = 600 + Math.random()*500;
-
-    const startTime = performance.now();
-
-    function animParticles(now){
-      const t = now - startTime;
-      const k = t / life;
-
-      if (k >= 1){
-        p.remove();
-        return;
-      }
-
-      p.setAttribute("cx", x + driftX * k);
-      p.setAttribute("cy", y + driftY * k);
-      p.setAttribute("r", 1 + 2.2*k);
-      p.style.opacity = (1 - k);
-
-      requestAnimationFrame(animParticles);
-    }
-    requestAnimationFrame(animParticles);
-  }
-
-  function animateAxes(timestamp){
-    if(!start) start = timestamp;
-    const progress = Math.min(1, (timestamp - start) / duration);
-
-    // interp linéaire
-    const px = xStart.x + (xEnd.x - xStart.x) * progress;
-    const py = xStart.y + (xEnd.y - xStart.y) * progress;
-
-    const qx = yStart.x + (yEnd.x - yStart.x) * progress;
-    const qy = yStart.y + (yEnd.y - yStart.y) * progress;
-
-    // On met à jour les axes en temps réel (on remplace l’animation CSS)
-    axisX.setAttribute("x2", px);
-    axisX.setAttribute("y2", py);
-
-    axisY.setAttribute("x2", qx);
-    axisY.setAttribute("y2", qy);
-
-    // On génère des particules pendant tout l'avancement
-    if (progress < 1){
-      spawnParticle(px, py); // pointe X
-      spawnParticle(qx, qy); // pointe Y
-      requestAnimationFrame(animateAxes);
-    }
-  }
-
-  // Démarre au moment où la section devient visible
-  const wrapper = document.getElementById("aboutTimeline");
-
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting && !running){
-        running = true;
-        requestAnimationFrame(animateAxes);
-        io.disconnect();
-      }
-    });
-  }, { threshold: 0.4 });
-
-  io.observe(wrapper);
-})();
-</script>
