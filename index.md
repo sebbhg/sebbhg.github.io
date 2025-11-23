@@ -1926,7 +1926,7 @@ updateClocks(); setInterval(updateClocks, 1000);
 
     // spawn dots (courses / projects / reading)
     const p = particles || (()=>{ const el=document.createElement('div'); el.className='particles'; board.appendChild(el); return el; })();
-    const n = 26;
+    const n = 0;
     for(let i=0;i<n;i++){
       const d=document.createElement('div'); d.className='dot';
       d.style.left = (Math.random()*100)+'%';
