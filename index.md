@@ -694,10 +694,11 @@ full_bleed: true
   .board-col .row{ cursor:default; }
   .board-col .row:hover{ transform:none; }
 
-  /* Subtle floating particles inside the board */
-  .particles{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
-  .dot{ position:absolute; width:4px; height:4px; border-radius:50%; background: radial-gradient(circle, #9ec8ff 0%, rgba(158,200,255,.0) 70%); opacity:.45; animation: drift 12s linear infinite; }
-  @keyframes drift{ 0%{ transform: translateY(0) translateX(0); opacity:.15;} 50%{ transform: translateY(-40px) translateX(20px); opacity:.5;} 100%{ transform: translateY(-80px) translateX(0); opacity:.15;} }
+  /* Particles inside boards disabled */
+  .particles,
+  .particles .dot{
+    display:none !important;
+  }
 
   /* ===== Bandeau Lectures ===== */
   .reading-band{
