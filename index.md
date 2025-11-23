@@ -2243,40 +2243,44 @@ updateClocks(); setInterval(updateClocks, 1000);
 <script>
 (function(){
   const svg = document.querySelector('.timeline-graph');
+  if (!svg) return;
+
   const axisX = svg.querySelector('.timeline-axis-x');
   const axisY = svg.querySelector('.timeline-axis-y');
-  const layer = svg.querySelector('#particleLayer');
 
-  const duration = 3800; // 5 secondes
+  const duration = 3800; // durée anim axes
   let start = null;
   let running = false;
 
-  // Position des axes (coordonnées finales des flèches)
+  // Coordonnées de départ / arrivée des axes
   const xStart = { x: 70,  y: 340 };
-  const xEnd   = { x: 601, y: 340 };
+  const xEnd   = { x: 580, y: 340 }; // un peu avant le bord, la flèche dépasse
 
   const yStart = { x: 70,  y: 340 };
   const yEnd   = { x: 70,  y: 40  };
 
   function animateAxes(timestamp){
-    if(!start) start = timestamp;
+    if (!start) start = timestamp;
     const progress = Math.min(1, (timestamp - start) / duration);
 
-    // interp linéaire
+    // interpolation linéaire
     const px = xStart.x + (xEnd.x - xStart.x) * progress;
     const py = xStart.y + (xEnd.y - xStart.y) * progress;
 
     const qx = yStart.x + (yEnd.x - yStart.x) * progress;
     const qy = yStart.y + (yEnd.y - yStart.y) * progress;
 
-    // On met à jour les axes en temps réel (on remplace l’animation CSS)
-    axisX.setAttribute("x2", px);
-    axisX.setAttribute("y2", py);
+    // mise à jour des axes en temps réel
+    if (axisX){
+      axisX.setAttribute("x2", px);
+      axisX.setAttribute("y2", py);
+    }
+    if (axisY){
+      axisY.setAttribute("x2", qx);
+      axisY.setAttribute("y2", qy);
+    }
 
-    axisY.setAttribute("x2", qx);
-    axisY.setAttribute("y2", qy);
-
-    // On supprime les particules "dans l'air"
+    // ❌ plus aucune particule générée dans l'air
     if (progress < 1){
       requestAnimationFrame(animateAxes);
     }
@@ -2284,10 +2288,11 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   // Démarre au moment où la section devient visible
   const wrapper = document.getElementById("aboutTimeline");
+  if (!wrapper) return;
 
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
-      if(entry.isIntersecting && !running){
+      if (entry.isIntersecting && !running){
         running = true;
         requestAnimationFrame(animateAxes);
         io.disconnect();
