@@ -2247,21 +2247,24 @@ updateClocks(); setInterval(updateClocks, 1000);
 
   const axisX = svg.querySelector('.timeline-axis-x');
   const axisY = svg.querySelector('.timeline-axis-y');
+  if (!axisX || !axisY) return;
 
-  const duration = 3800; // durée anim axes
-  let start = null;
-  let running = false;
+  const duration = 3800; // même durée qu'avant
 
   // Coordonnées de départ / arrivée des axes
   const xStart = { x: 70,  y: 340 };
-  const xEnd   = { x: 580, y: 340 }; // un peu avant le bord, la flèche dépasse
+  const xEnd   = { x: 601, y: 340 }; // comme dans ton code actuel
 
   const yStart = { x: 70,  y: 340 };
   const yEnd   = { x: 70,  y: 40  };
 
+  let start = null;
+  let running = false;
+
   function animateAxes(timestamp){
     if (!start) start = timestamp;
-    const progress = Math.min(1, (timestamp - start) / duration);
+    const t = (timestamp - start) / duration;
+    const progress = Math.min(1, t);
 
     // interpolation linéaire
     const px = xStart.x + (xEnd.x - xStart.x) * progress;
@@ -2270,26 +2273,27 @@ updateClocks(); setInterval(updateClocks, 1000);
     const qx = yStart.x + (yEnd.x - yStart.x) * progress;
     const qy = yStart.y + (yEnd.y - yStart.y) * progress;
 
-    // mise à jour des axes en temps réel
-    if (axisX){
-      axisX.setAttribute("x2", px);
-      axisX.setAttribute("y2", py);
-    }
-    if (axisY){
-      axisY.setAttribute("x2", qx);
-      axisY.setAttribute("y2", qy);
-    }
+    // mise à jour des axes
+    axisX.setAttribute("x2", px);
+    axisX.setAttribute("y2", py);
 
-    // ❌ plus aucune particule générée dans l'air
+    axisY.setAttribute("x2", qx);
+    axisY.setAttribute("y2", qy);
+
+    // plus AUCUNE particule JS
     if (progress < 1){
       requestAnimationFrame(animateAxes);
     }
   }
 
-  // Démarre au moment où la section devient visible
   const wrapper = document.getElementById("aboutTimeline");
-  if (!wrapper) return;
+  if (!wrapper){
+    // fallback : on anime quand même si le wrapper n'existe pas
+    requestAnimationFrame(animateAxes);
+    return;
+  }
 
+  // On démarre l'animation quand la section devient visible
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       if (entry.isIntersecting && !running){
