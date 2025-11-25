@@ -1419,91 +1419,66 @@ full_bleed: true
               <text x="550" y="356" class="timeline-label-year">2026</text>
             </g>
 
-            <!-- Courbe (moins convexe) -->
+            <!-- Courbe très adoucie (beaucoup moins convexe) -->
             <g>
               <path
                 class="timeline-path"
                 stroke="url(#pathGradient)"
                 d="
                   M 70 270
-                  L 110 266
-                  L 150 258
-                  L 190 246
-                  L 230 232
-                  L 270 214
-                  L 310 192
-                  L 350 166
-                  L 390 136
-                  L 430 102
-                  L 470 64
-                  L 510 24
-                  L 550 -28
+                  L 110 268
+                  L 150 263
+                  L 190 257
+                  L 230 248
+                  L 270 236
+                  L 310 221
+                  L 350 203
+                  L 390 182
+                  L 430 158
+                  L 470 131
+                  L 510 101
+                  L 550 70
                 "
               />
             </g>
             
-            <!-- Bulle AMF (2021) : alignée sur la courbe -->
-            <g class="timeline-bubble" transform="translate(158, 256)">
+            <!-- Bulle AMF 2021 -->
+            <g class="timeline-bubble" transform="translate(158, 262)">
               <g class="timeline-bubble-inner">
-                <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <image
-                  class="timeline-bubble-img"
-                  href="{{ '/assets/images/image23.png' | relative_url }}"
-                  x="-16" y="-16" width="32" height="32"
-                  clip-path="url(#amfBubbleClip)"
-                />
+                <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
+                <image href="{{ '/assets/images/image23.png' | relative_url }}" x="-16" y="-16" width="32" height="32" clip-path="url(#amfBubbleClip)"/>
               </g>
             </g>
             
-            <!-- Bulle Bloomberg (2022) -->
-            <g class="timeline-bubble" transform="translate(238, 228)">
+            <!-- Bulle Bloomberg 2022 -->
+            <g class="timeline-bubble" transform="translate(238, 246)">
               <g class="timeline-bubble-inner">
-                <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <image
-                  class="timeline-bubble-img"
-                  href="{{ '/assets/images/image24.png' | relative_url }}"
-                  x="-16" y="-16" width="32" height="32"
-                  clip-path="url(#amfBubbleClip)"
-                />
+                <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
+                <image href="{{ '/assets/images/image24.png' | relative_url }}" x="-16" y="-16" width="32" height="32" clip-path="url(#amfBubbleClip)"/>
               </g>
             </g>
             
-            <!-- Bulle Société Générale (2023) -->
-            <g class="timeline-bubble" transform="translate(318, 187)">
+            <!-- Bulle Société Générale 2023 -->
+            <g class="timeline-bubble" transform="translate(318, 218)">
               <g class="timeline-bubble-inner">
-                <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <image
-                  class="timeline-bubble-img"
-                  href="{{ '/assets/images/image26.png' | relative_url }}"
-                  x="-16" y="-16" width="32" height="32"
-                  clip-path="url(#amfBubbleClip)"
-                />
+                <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
+                <image href="{{ '/assets/images/image26.png' | relative_url }}" x="-16" y="-16" width="32" height="32" clip-path="url(#amfBubbleClip)"/>
               </g>
             </g>
             
-            <!-- Bulle Spread Research (2024) -->
-            <g class="timeline-bubble" transform="translate(398, 129)">
+            <!-- Bulle Spread Research 2024 -->
+            <g class="timeline-bubble" transform="translate(398, 181)">
               <g class="timeline-bubble-inner">
-                <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <image
-                  class="timeline-bubble-img"
-                  href="{{ '/assets/images/image28.jpeg' | relative_url }}"
-                  x="-16" y="-16" width="32" height="32"
-                  clip-path="url(#amfBubbleClip)"
-                />
+                <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
+                <image href="{{ '/assets/images/image28.jpeg' | relative_url }}" x="-16" y="-16" width="32" height="32" clip-path="url(#amfBubbleClip)"/>
               </g>
             </g>
             
-            <!-- Bulle Natixis (2025) -->
-            <g class="timeline-bubble" transform="translate(478, 56)">
+            <!-- Bulle Natixis 2025 -->
+            <g class="timeline-bubble" transform="translate(478, 128)">
               <g class="timeline-bubble-inner">
-                <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <image
-                  class="timeline-bubble-img"
-                  href="{{ '/assets/images/image29.png' | relative_url }}"
-                  x="-20" y="-20" width="40" height="40"
-                  clip-path="url(#amfBubbleClip)"
-                />
+                <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
+                <image href="{{ '/assets/images/image29.png' | relative_url }}" x="-20" y="-20" width="40" height="40" clip-path="url(#amfBubbleClip)"/>
               </g>
             </g>
 
