@@ -1491,7 +1491,7 @@ full_bleed: true
             <!-- Bulle 2026 : pilule avec 2 logos -->
             <g class="timeline-bubble" transform="translate(550, 70)">
               <g class="timeline-bubble-inner timeline-bubble-2026">
-                <!-- Fond pilule (même style que les autres bulles) -->
+                <!-- Fond pilule -->
                 <rect
                   x="-36" y="-18"
                   width="72" height="36"
@@ -1499,7 +1499,7 @@ full_bleed: true
                   class="timeline-bubble-circle"
                 />
             
-                <!-- Légère ligne de séparation au centre -->
+                <!-- Fine séparation au centre -->
                 <line
                   x1="0" y1="-14"
                   x2="0" y2="14"
@@ -1507,20 +1507,20 @@ full_bleed: true
                   stroke-width="1"
                 />
             
-                <!-- Logo gauche : image26.png -->
+                <!-- Logo gauche : Société Générale (image26) -->
                 <image
                   href="{{ '/assets/images/image26.png' | relative_url }}"
-                  x="-30" y="-14"
-                  width="28" height="28"
+                  x="-30" y="-12"
+                  width="24" height="24"
                   clip-path="url(#bubble2026Clip)"
                   class="timeline-bubble-img"
                 />
             
-                <!-- Logo droit : image31.png -->
+                <!-- Logo droit : autre logo (image31) -->
                 <image
                   href="{{ '/assets/images/image31.png' | relative_url }}"
-                  x="2" y="-14"
-                  width="28" height="28"
+                  x="6" y="-12"
+                  width="24" height="24"
                   clip-path="url(#bubble2026Clip)"
                   class="timeline-bubble-img"
                 />
