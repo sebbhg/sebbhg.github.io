@@ -1075,7 +1075,7 @@ full_bleed: true
 
   .timeline-tooltip-year{
     fill: #4ea1ff; /* bleu thème */
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: .08em;
     text-transform: uppercase;
@@ -1083,7 +1083,7 @@ full_bleed: true
   
   .timeline-tooltip-text{
     fill:#e7efff;
-    font-size:11px;
+    font-size:10px;
     font-weight:700;
     letter-spacing:.08em;
     text-transform:uppercase;
@@ -1542,7 +1542,7 @@ full_bleed: true
             </g>
 
             <!-- Tooltip AMF -->
-            <g id="amfTooltip" class="timeline-tooltip" transform="translate(158, 190)">
+            <g id="amfTooltip" class="timeline-tooltip" transform="translate(158, 170)">
               
               <!-- Fond -->
               <rect
