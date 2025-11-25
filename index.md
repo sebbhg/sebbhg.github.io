@@ -1441,12 +1441,13 @@ full_bleed: true
               <g class="timeline-bubble-inner">
                 <!-- cercle de fond -->
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <!-- logo AMF -->
+                <!-- logo AMF, un peu plus grand -->
                 <image
                   class="timeline-bubble-img"
                   href="{{ '/assets/images/image23.png' | relative_url }}"
-                  x="-16" y="-16" width="32" height="32"
+                  x="-18" y="-18" width="36" height="36"
                   clip-path="url(#amfBubbleClip)"
+                  preserveAspectRatio="xMidYMid slice"
                 />
               </g>
             </g>
