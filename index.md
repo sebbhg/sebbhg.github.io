@@ -1103,15 +1103,7 @@ full_bleed: true
   
   .timeline-tooltip-text{
     fill:#e7efff;
-    font-size:8px;
-    font-weight:700;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-  }
-  
-  .timeline-tooltip-text{
-    fill:#e7efff;
-    font-size:11px;
+    font-size:8px; /* ou 8px si tu veux encore plus petit */
     font-weight:700;
     letter-spacing:.08em;
     text-transform:uppercase;
