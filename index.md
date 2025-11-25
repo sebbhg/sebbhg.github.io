@@ -1330,6 +1330,12 @@ full_bleed: true
                 <stop offset="100%" stop-color="#9f7aff" stop-opacity="0.6"/>
               </linearGradient>
 
+              <!-- Clip pilule pour la bulle 2026 -->
+              <clipPath id="bubble2026Clip" clipPathUnits="userSpaceOnUse">
+                <!-- Pilule centrée en (0,0), largeur 72, hauteur 36 -->
+                <rect x="-36" y="-18" width="72" height="36" rx="18" ry="18" />
+              </clipPath>
+
               <!-- Dégradé pour la courbe -->
               <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#2c8cff"/>
@@ -1482,27 +1488,40 @@ full_bleed: true
               </g>
             </g>
 
-            <!-- Bulle 2026 : Société Générale + autre logo -->
-            <g class="timeline-bubble" transform="translate(558, 66)">
-              <g class="timeline-bubble-inner">
-                <!-- Cercle extérieur (même style que les autres) -->
-                <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
+            <!-- Bulle 2026 : pilule avec 2 logos -->
+            <g class="timeline-bubble" transform="translate(550, 70)">
+              <g class="timeline-bubble-inner timeline-bubble-2026">
+                <!-- Fond pilule (même style que les autres bulles) -->
+                <rect
+                  x="-36" y="-18"
+                  width="72" height="36"
+                  rx="18" ry="18"
+                  class="timeline-bubble-circle"
+                />
             
-                <!-- Demi-bulle gauche : image26.png -->
+                <!-- Légère ligne de séparation au centre -->
+                <line
+                  x1="0" y1="-14"
+                  x2="0" y2="14"
+                  stroke="rgba(156,200,255,0.35)"
+                  stroke-width="1"
+                />
+            
+                <!-- Logo gauche : image26.png -->
                 <image
                   href="{{ '/assets/images/image26.png' | relative_url }}"
-                  x="-20" y="-10"
-                  width="20" height="20"
-                  clip-path="url(#amfBubbleClip)"
+                  x="-30" y="-14"
+                  width="28" height="28"
+                  clip-path="url(#bubble2026Clip)"
                   class="timeline-bubble-img"
                 />
             
-                <!-- Demi-bulle droite : image31.png -->
+                <!-- Logo droit : image31.png -->
                 <image
                   href="{{ '/assets/images/image31.png' | relative_url }}"
-                  x="0" y="-10"
-                  width="20" height="20"
-                  clip-path="url(#amfBubbleClip)"
+                  x="2" y="-14"
+                  width="28" height="28"
+                  clip-path="url(#bubble2026Clip)"
                   class="timeline-bubble-img"
                 />
               </g>
