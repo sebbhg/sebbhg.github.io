@@ -1472,8 +1472,8 @@ full_bleed: true
               </g>
             </g>
 
-            <!-- Bulle Société Générale (Société Générale en 2025) -->
-            <g class="timeline-bubble" transform="translate(478, 47)">
+            <!-- Bulle Société Générale (Société Générale en 2023) -->
+            <g class="timeline-bubble" transform="translate(318, 186)">
               <g class="timeline-bubble-inner">
                 <!-- cercle de fond -->
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
