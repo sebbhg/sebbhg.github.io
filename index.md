@@ -1629,7 +1629,7 @@ full_bleed: true
             </g>
             
             <!-- Bulle Société Générale 2023 (CLIQUABLE) -->
-            <g class="timeline-bubble timeline-bubble-sg" transform="translate(318, 140)">
+            <g class="timeline-bubble timeline-bubble-sg" transform="translate(318, 205)">
               <g class="timeline-bubble-inner">
                 <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
                 <image
@@ -1640,7 +1640,7 @@ full_bleed: true
                 />
               </g>
             </g>
-            
+                        
             <!-- Bulle Spread Research 2024 -->
             <g class="timeline-bubble" transform="translate(398, 181)">
               <g class="timeline-bubble-inner">
