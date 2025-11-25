@@ -1565,7 +1565,7 @@ full_bleed: true
             </g>
 
             <!-- Tooltip Bloomberg (bulle agrandie) -->
-            <g id="bbgTooltip" class="timeline-tooltip" transform="translate(238, 190)">
+            <g id="bbgTooltip" class="timeline-tooltip" transform="translate(238, 140)">
               
               <!-- Fond large -->
               <rect
