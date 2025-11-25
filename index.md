@@ -1693,8 +1693,8 @@ full_bleed: true
             <g id="natixisTooltip" class="timeline-tooltip" transform="translate(478, 236)">
               <!-- Fond -->
               <rect
-                x="-135" y="-22"
-                width="270" height="44"
+                x="-120" y="-20"
+                width="240" height="40"
                 rx="12" ry="12"
                 class="timeline-tooltip-bg"
               />
