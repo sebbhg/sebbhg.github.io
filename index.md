@@ -1679,7 +1679,7 @@ full_bleed: true
               <g class="timeline-bubble-inner">
                 <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
                 <image
-                  href="{{ '/assets/images/imageSpread.png' | relative_url }}"
+                  href="{{ '/assets/images/image28.png' | relative_url }}"
                   x="-16" y="-16"
                   width="32"
                   height="32"
