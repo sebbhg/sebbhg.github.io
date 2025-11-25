@@ -1413,17 +1413,25 @@ full_bleed: true
               <text x="550" y="356" class="timeline-label-year">2026</text>
             </g>
 
-            <!-- Courbe des événements (croissance type exponentielle) -->
+            <!-- Courbe exponentielle pure y = e^x -->
             <g>
               <path
                 class="timeline-path"
                 stroke="url(#pathGradient)"
                 d="
-                  M 70 300
-                  C 120 295, 150 285, 170 270
-                  C 200 245, 230 210, 260 165
-                  C 300 110, 360 70, 430 45
-                  C 500 25, 540 20, 550 18
+                  M 70 270
+                  L 110 266
+                  L 150 259
+                  L 190 249
+                  L 230 235
+                  L 270 217
+                  L 310 194
+                  L 350 166
+                  L 390 133
+                  L 430 95
+                  L 470 51
+                  L 510 0
+                  L 550 -60
                 "
               />
             </g>
