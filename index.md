@@ -1521,18 +1521,25 @@ full_bleed: true
 
             <!-- Tooltip AMF -->
             <g id="amfTooltip" class="timeline-tooltip" transform="translate(158, 190)">
-              <!-- fond arrondi -->
+              
+              <!-- Fond -->
               <rect
                 x="-120" y="-26"
                 width="240" height="52"
                 rx="14" ry="14"
                 class="timeline-tooltip-bg"
               />
-                         
-              <!-- texte -->
-              <text x="0" y="4" class="timeline-tooltip-text">
+            
+              <!-- Texte "2021 :" en bleu -->
+              <text x="0" y="-4" class="timeline-tooltip-year">
+                2021 :
+              </text>
+            
+              <!-- Texte principal en blanc -->
+              <text x="0" y="12" class="timeline-tooltip-text">
                 Obtaining the AMF certification
               </text>
+            
             </g>
             
             <!-- Bulle Bloomberg 2022 -->
