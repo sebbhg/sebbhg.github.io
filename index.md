@@ -1564,13 +1564,14 @@ full_bleed: true
             
             </g>
 
-            <!-- Tooltip Bloomberg -->
+            <!-- Tooltip Bloomberg (bulle agrandie) -->
             <g id="bbgTooltip" class="timeline-tooltip" transform="translate(238, 190)">
-              <!-- Fond un peu plus large que AMF -->
+              
+              <!-- Fond large -->
               <rect
-                x="-130" y="-26"
-                width="260" height="52"
-                rx="14" ry="14"
+                x="-155" y="-28"
+                width="310" height="56"
+                rx="16" ry="16"
                 class="timeline-tooltip-bg"
               />
             
@@ -1580,9 +1581,10 @@ full_bleed: true
               </text>
             
               <!-- Texte principal -->
-              <text x="0" y="14" class="timeline-tooltip-text" text-anchor="middle">
+              <text x="0" y="16" class="timeline-tooltip-text" text-anchor="middle">
                 Obtaining the Bloomberg certification
               </text>
+            
             </g>
             
             <!-- Bulle Bloomberg 2022 (CLIQUABLE) -->
