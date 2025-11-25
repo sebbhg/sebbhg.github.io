@@ -79,6 +79,18 @@ full_bleed: true
     pointer-events:none;
   }
 
+  /* Enlève le focus rectangle moche */
+  .timeline-bubble-amf:focus{
+    outline: none;
+  }
+
+  /* Ajoute un halo circulaire autour de la bulle lorsqu’elle est focus */
+  .timeline-bubble-amf:focus .timeline-bubble-circle{
+    stroke: rgba(80,160,255,0.9);
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px rgba(80,160,255,0.6));
+  }
+
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
     position:absolute;
