@@ -1652,7 +1652,7 @@ full_bleed: true
             </g>
 
             <!-- Tooltip Spread Research 2024 -->
-            <g id="spreadTooltip" class="timeline-tooltip" transform="translate(395, 230)">
+            <g id="spreadTooltip" class="timeline-tooltip" transform="translate(390, 260)">
             
               <!-- Fond large -->
               <rect
@@ -1674,15 +1674,14 @@ full_bleed: true
             
             </g>
                         
-            <!-- Bulle Spread Research 2024 (CLIQUABLE) -->
-            <g class="timeline-bubble timeline-bubble-spread" transform="translate(395, 170)">
+              <!-- Bulle Spread Research 2024 (CLIQUABLE) -->
+              <g class="timeline-bubble timeline-bubble-spread" transform="translate(390, 182)">
               <g class="timeline-bubble-inner">
                 <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
                 <image
-                  href="{{ '/assets/images/image28.jpg' | relative_url }}"
+                  href="{{ '/assets/images/image28.jpeg' | relative_url }}"
                   x="-16" y="-16"
-                  width="32"
-                  height="32"
+                  width="32" height="32"
                   clip-path="url(#amfBubbleClip)"
                 />
               </g>
