@@ -1419,35 +1419,33 @@ full_bleed: true
               <text x="550" y="356" class="timeline-label-year">2026</text>
             </g>
 
-            <!-- Courbe exponentielle pure y = e^x -->
+            <!-- Courbe adoucie (moins convexe) -->
             <g>
               <path
                 class="timeline-path"
                 stroke="url(#pathGradient)"
                 d="
                   M 70 270
-                  L 110 266
-                  L 150 259
-                  L 190 249
-                  L 230 235
-                  L 270 217
-                  L 310 194
-                  L 350 166
-                  L 390 133
-                  L 430 95
-                  L 470 51
-                  L 510 0
-                  L 550 -60
+                  L 110 265
+                  L 150 255
+                  L 190 240
+                  L 230 220
+                  L 270 200
+                  L 310 175
+                  L 350 150
+                  L 390 125
+                  L 430 105
+                  L 470 90
+                  L 510 80
+                  L 550 75
                 "
               />
             </g>
 
             <!-- Bulle AMF (certification AMF en 2021) -->
-            <g class="timeline-bubble" transform="translate(158, 257)">
+            <g class="timeline-bubble" transform="translate(158, 247)">
               <g class="timeline-bubble-inner">
-                <!-- cercle de fond -->
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <!-- logo AMF, un peu plus grand -->
                 <image
                   class="timeline-bubble-img"
                   href="{{ '/assets/images/image23.png' | relative_url }}"
@@ -1458,11 +1456,9 @@ full_bleed: true
             </g>
 
             <!-- Bulle Bloomberg (Bloomberg Terminal en 2022) -->
-            <g class="timeline-bubble" transform="translate(238, 229)">
+            <g class="timeline-bubble" transform="translate(238, 210)">
               <g class="timeline-bubble-inner">
-                <!-- cercle de fond -->
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <!-- logo Bloomberg -->
                 <image
                   class="timeline-bubble-img"
                   href="{{ '/assets/images/image24.png' | relative_url }}"
@@ -1473,11 +1469,9 @@ full_bleed: true
             </g>
 
             <!-- Bulle Société Générale (Société Générale en 2023) -->
-            <g class="timeline-bubble" transform="translate(318, 186)">
+            <g class="timeline-bubble" transform="translate(318, 165)">
               <g class="timeline-bubble-inner">
-                <!-- cercle de fond -->
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <!-- logo Société Générale -->
                 <image
                   class="timeline-bubble-img"
                   href="{{ '/assets/images/image26.png' | relative_url }}"
@@ -1488,11 +1482,9 @@ full_bleed: true
             </g>
 
             <!-- Bulle Spread Research (Spread Research en 2024) -->
-            <g class="timeline-bubble" transform="translate(398, 120)">
+            <g class="timeline-bubble" transform="translate(398, 110)">
               <g class="timeline-bubble-inner">
-                <!-- cercle de fond -->
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <!-- logo Spread Research -->
                 <image
                   class="timeline-bubble-img"
                   href="{{ '/assets/images/image28.jpeg' | relative_url }}"
@@ -1503,11 +1495,9 @@ full_bleed: true
             </g>
 
             <!-- Bulle Natixis (Natixis en 2025) -->
-            <g class="timeline-bubble" transform="translate(478, 40)">
+            <g class="timeline-bubble" transform="translate(478, 70)">
               <g class="timeline-bubble-inner">
-                <!-- cercle de fond -->
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
-                <!-- logo Natixis -->
                 <image
                   class="timeline-bubble-img"
                   href="{{ '/assets/images/image29.png' | relative_url }}"
