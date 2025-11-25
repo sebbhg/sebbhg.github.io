@@ -839,6 +839,12 @@ full_bleed: true
     transform-origin: left center;
   }
 
+  .timeline-bubble-img-amf{
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  transform: scale(1.28); /* valeur idéale */
+  }
+
   /* === PARTICULES AU NIVEAU DES FLÈCHES (nuages lumineux) === */
   
   .axis-tip-particles{
@@ -1443,11 +1449,10 @@ full_bleed: true
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
                 <!-- logo AMF, un peu plus grand -->
                 <image
-                  class="timeline-bubble-img"
+                  class="timeline-bubble-img timeline-bubble-img-amf"
                   href="{{ '/assets/images/image23.png' | relative_url }}"
-                  x="-18" y="-18" width="36" height="36"
+                  x="-16" y="-16" width="32" height="32"
                   clip-path="url(#amfBubbleClip)"
-                  preserveAspectRatio="xMidYMid slice"
                 />
               </g>
             </g>
