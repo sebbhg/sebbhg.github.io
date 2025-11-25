@@ -1511,7 +1511,7 @@ full_bleed: true
                 <image
                   class="timeline-bubble-img"
                   href="{{ '/assets/images/image29.png' | relative_url }}"
-                  x="-16" y="-16" width="32" height="32"
+                  x="-20" y="-20" width="40" height="40"
                   clip-path="url(#amfBubbleClip)"
                 />
               </g>
