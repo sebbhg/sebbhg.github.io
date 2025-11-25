@@ -1419,7 +1419,7 @@ full_bleed: true
 
     <!-- ===== SPLIT (ABOUT ME = timeline graph) ===== -->
     <div class="hub-split" id="hubSplit">
-      <div class="about-graph-card card-glass">
+      <div class="about-graph-card">
         <div class="about-graph-header">
           <div>
             <h4 class="card-title">Quant Timeline 2020–2027</h4>
