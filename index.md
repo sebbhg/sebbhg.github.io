@@ -1482,6 +1482,32 @@ full_bleed: true
               </g>
             </g>
 
+            <!-- Bulle 2026 : Société Générale + autre logo -->
+            <g class="timeline-bubble" transform="translate(558, 66)">
+              <g class="timeline-bubble-inner">
+                <!-- Cercle extérieur (même style que les autres) -->
+                <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
+            
+                <!-- Demi-bulle gauche : image26.png -->
+                <image
+                  href="{{ '/assets/images/image26.png' | relative_url }}"
+                  x="-20" y="-10"
+                  width="20" height="20"
+                  clip-path="url(#amfBubbleClip)"
+                  class="timeline-bubble-img"
+                />
+            
+                <!-- Demi-bulle droite : image31.png -->
+                <image
+                  href="{{ '/assets/images/image31.png' | relative_url }}"
+                  x="0" y="-10"
+                  width="20" height="20"
+                  clip-path="url(#amfBubbleClip)"
+                  class="timeline-bubble-img"
+                />
+              </g>
+            </g>
+
             <!-- Légende en haut à droite -->
             <g id="particleLayer"></g>
           </svg>
