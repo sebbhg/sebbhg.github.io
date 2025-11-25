@@ -121,6 +121,16 @@ full_bleed: true
     filter: drop-shadow(0 0 6px rgba(80,160,255,0.6));
   }
 
+  .timeline-bubble-natixis:focus{
+    outline: none;
+  }
+  
+  .timeline-bubble-natixis:focus .timeline-bubble-circle{
+    stroke: rgba(80,160,255,0.9);
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px rgba(80,160,255,0.6));
+  }
+
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
     position:absolute;
@@ -1679,11 +1689,35 @@ full_bleed: true
               </g>
             </g>
             
-            <!-- Bulle Natixis 2025 -->
-            <g class="timeline-bubble" transform="translate(478, 128)">
+            <!-- Tooltip Natixis 2025 -->
+            <g id="natixisTooltip" class="timeline-tooltip" transform="translate(478, 236)">
+              <!-- Fond -->
+              <rect
+                x="-135" y="-22"
+                width="270" height="44"
+                rx="12" ry="12"
+                class="timeline-tooltip-bg"
+              />
+              <!-- Date en bleu -->
+              <text x="0" y="-2" class="timeline-tooltip-year" text-anchor="middle">
+                2025 :
+              </text>
+              <!-- Texte principal -->
+              <text x="0" y="16" class="timeline-tooltip-text" text-anchor="middle">
+                Intern : Quantitative Trading Analyst - XVA.
+              </text>
+            </g>
+
+            <!-- Bulle Natixis 2025 (CLIQUABLE) -->
+            <g class="timeline-bubble timeline-bubble-natixis" transform="translate(478, 128)">
               <g class="timeline-bubble-inner">
                 <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
-                <image href="{{ '/assets/images/image29.png' | relative_url }}" x="-20" y="-20" width="40" height="40" clip-path="url(#amfBubbleClip)"/>
+                <image
+                  href="{{ '/assets/images/image29.png' | relative_url }}"
+                  x="-20" y="-20"
+                  width="40" height="40"
+                  clip-path="url(#amfBubbleClip)"
+                />
               </g>
             </g>
 
@@ -2697,6 +2731,11 @@ updateClocks(); setInterval(updateClocks, 1000);
       bubble: svg.querySelector('.timeline-bubble-spread'),
       tooltip: svg.querySelector('#spreadTooltip'),
       label: '2024 : Intern : Quantitative Analyst - Equity Derivatives'
+    },
+    {
+      bubble: svg.querySelector('.timeline-bubble-natixis'),
+      tooltip: svg.querySelector('#natixisTooltip'),
+      label: '2025 : Intern : Quantitative Trading Analyst - XVA.'
     }
   ];
 
