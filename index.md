@@ -1606,7 +1606,7 @@ full_bleed: true
             </g>
 
             <!-- Tooltip Société Générale 2023 -->
-            <g id="sgTooltip" class="timeline-tooltip" transform="translate(308, 110)">
+            <g id="sgTooltip" class="timeline-tooltip" transform="translate(308, 90)">
               
               <!-- Fond large (même taille que Bloomberg pour être tranquille) -->
               <rect
