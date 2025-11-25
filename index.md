@@ -842,7 +842,7 @@ full_bleed: true
   .timeline-bubble-img{
     transform-box: fill-box;
     transform-origin: 50% 50%;
-    transform: scale(1.2); /* tu peux mettre 1, 1.1, 1.2... mais ce sera IDENTIQUE pour tous */
+    transform: scale(1); /* tu peux mettre 1, 1.1, 1.2... mais ce sera IDENTIQUE pour tous */
   }
 
   /* === PARTICULES AU NIVEAU DES FLÈCHES (nuages lumineux) === */
