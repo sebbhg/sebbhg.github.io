@@ -1458,7 +1458,7 @@ full_bleed: true
             </g>
 
             <!-- Bulle Bloomberg (Bloomberg Terminal en 2022) -->
-            <g class="timeline-bubble" transform="translate(238, 227)">
+            <g class="timeline-bubble" transform="translate(238, 229)">
               <g class="timeline-bubble-inner">
                 <!-- cercle de fond -->
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
