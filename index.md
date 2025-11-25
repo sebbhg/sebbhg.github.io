@@ -1451,6 +1451,21 @@ full_bleed: true
               </g>
             </g>
 
+            <!-- Bulle Bloomberg (Bloomberg Terminal en 2022) -->
+            <g class="timeline-bubble" transform="translate(238, 225)">
+              <g class="timeline-bubble-inner">
+                <!-- cercle de fond -->
+                <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
+                <!-- logo Bloomberg -->
+                <image
+                  class="timeline-bubble-img"
+                  href="{{ '/assets/images/image24.png' | relative_url }}"
+                  x="-16" y="-16" width="32" height="32"
+                  clip-path="url(#amfBubbleClip)"
+                />
+              </g>
+            </g>
+
             <!-- Points marquants (alignés sur la courbe) -->
             <g>
             </g>
