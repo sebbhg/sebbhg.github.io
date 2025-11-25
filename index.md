@@ -1025,6 +1025,40 @@ full_bleed: true
   .timeline-bubble-inner{
     opacity:0;
     transform-origin:center center;
+  } 
+
+  /* Bulle AMF cliquable */
+  .timeline-bubble-amf{
+    cursor:pointer;
+  }
+  
+  /* Tooltip AMF */
+  .timeline-tooltip{
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  
+  .timeline-tooltip.is-visible{
+    opacity:1;
+    pointer-events:auto;
+  }
+  
+  .timeline-tooltip-bg{
+    fill:rgba(5,10,25,.96);
+    stroke:rgba(156,200,255,.75);
+    stroke-width:1.2;
+    filter:drop-shadow(0 0 10px rgba(44,140,255,.6));
+  }
+  
+  .timeline-tooltip-text{
+    fill:#e7efff;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    text-anchor:middle;
   }
 
   .timeline-bubble-circle{
@@ -1461,12 +1495,34 @@ full_bleed: true
               />
             </g>
             
-            <!-- Bulle AMF 2021 -->
-            <g class="timeline-bubble" transform="translate(158, 262)">
+            <!-- Bulle AMF 2021 (CLIQUABLE) -->
+            <g class="timeline-bubble timeline-bubble-amf" transform="translate(158, 262)">
               <g class="timeline-bubble-inner">
                 <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
                 <image href="{{ '/assets/images/image23.png' | relative_url }}" x="-16" y="-16" width="32" height="32" clip-path="url(#amfBubbleClip)"/>
               </g>
+            </g>
+
+            <!-- Tooltip AMF -->
+            <g id="amfTooltip" class="timeline-tooltip" transform="translate(158, 190)">
+              <!-- fond arrondi -->
+              <rect
+                x="-120" y="-26"
+                width="240" height="52"
+                rx="14" ry="14"
+                class="timeline-tooltip-bg"
+              />
+              
+              <!-- petite ligne de décor au-dessus du texte -->
+              <line x1="-70" y1="-8" x2="70" y2="-8"
+                    stroke="rgba(156,200,255,0.35)"
+                    stroke-width="1"
+                    stroke-linecap="round" />
+            
+              <!-- texte -->
+              <text x="0" y="4" class="timeline-tooltip-text">
+                Obtaining the AMF certification
+              </text>
             </g>
             
             <!-- Bulle Bloomberg 2022 -->
@@ -2483,5 +2539,46 @@ updateClocks(); setInterval(updateClocks, 1000);
   }, { threshold: 0.4 });
 
   io.observe(wrapper);
+})();
+</script>
+
+<script>
+(function(){
+  const svg = document.querySelector('.timeline-graph');
+  if (!svg) return;
+
+  const amfBubble = svg.querySelector('.timeline-bubble-amf');
+  const tooltip   = svg.querySelector('#amfTooltip');
+  if (!amfBubble || !tooltip) return;
+
+  // Accessibilité + focus clavier
+  amfBubble.setAttribute('tabindex', '0');
+  amfBubble.setAttribute('role', 'button');
+  amfBubble.setAttribute('aria-label', 'Obtaining the AMF certification');
+
+  let visible = false;
+
+  function toggleTooltip(){
+    visible = !visible;
+    tooltip.classList.toggle('is-visible', visible);
+  }
+
+  amfBubble.addEventListener('click', toggleTooltip);
+  amfBubble.addEventListener('keydown', (e)=>{
+    if (e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggleTooltip();
+    }
+  });
+
+  // (optionnel) clic ailleurs pour fermer
+  document.addEventListener('click', (e)=>{
+    if (!visible) return;
+    // si on clique en dehors de la bulle AMF et du tooltip → on referme
+    if (!amfBubble.contains(e.target) && !tooltip.contains(e.target)){
+      visible = false;
+      tooltip.classList.remove('is-visible');
+    }
+  });
 })();
 </script>
