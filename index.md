@@ -1565,16 +1565,21 @@ full_bleed: true
             </g>
 
             <!-- Tooltip Bloomberg -->
-            <g id="bbgTooltip" class="timeline-tooltip" transform="translate(238, 140)">
+            <g id="bbgTooltip" class="timeline-tooltip" transform="translate(238, 190)">
+              <!-- Fond un peu plus large que AMF -->
               <rect
-                x="-140" y="-26"
-                width="280" height="52"
+                x="-130" y="-26"
+                width="260" height="52"
                 rx="14" ry="14"
                 class="timeline-tooltip-bg"
               />
+            
+              <!-- Date en bleu -->
               <text x="0" y="-2" class="timeline-tooltip-year" text-anchor="middle">
                 2022 :
               </text>
+            
+              <!-- Texte principal -->
               <text x="0" y="14" class="timeline-tooltip-text" text-anchor="middle">
                 Obtaining the Bloomberg certification
               </text>
