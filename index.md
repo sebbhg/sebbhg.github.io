@@ -1103,7 +1103,7 @@ full_bleed: true
   
   .timeline-tooltip-text{
     fill:#e7efff;
-    font-size:8px; /* ou 8px si tu veux encore plus petit */
+    font-size:7px; /* ou 8px si tu veux encore plus petit */
     font-weight:700;
     letter-spacing:.08em;
     text-transform:uppercase;
@@ -1644,7 +1644,7 @@ full_bleed: true
             </g>
 
             <!-- Tooltip Spread Research 2024 -->
-            <g id="spreadTooltip" class="timeline-tooltip" transform="translate(390, 260)">
+            <g id="spreadTooltip" class="timeline-tooltip" transform="translate(390, 290)">
             
               <!-- Fond large -->
               <rect
