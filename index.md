@@ -1512,13 +1512,7 @@ full_bleed: true
                 rx="14" ry="14"
                 class="timeline-tooltip-bg"
               />
-              
-              <!-- petite ligne de décor au-dessus du texte -->
-              <line x1="-70" y1="-8" x2="70" y2="-8"
-                    stroke="rgba(156,200,255,0.35)"
-                    stroke-width="1"
-                    stroke-linecap="round" />
-            
+                         
               <!-- texte -->
               <text x="0" y="4" class="timeline-tooltip-text">
                 Obtaining the AMF certification
