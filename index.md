@@ -91,6 +91,16 @@ full_bleed: true
     filter: drop-shadow(0 0 6px rgba(80,160,255,0.6));
   }
 
+  .timeline-bubble-bbg:focus{
+    outline: none;
+  }
+  
+  .timeline-bubble-bbg:focus .timeline-bubble-circle{
+    stroke: rgba(80,160,255,0.9);
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px rgba(80,160,255,0.6));
+  }
+
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
     position:absolute;
@@ -1553,9 +1563,25 @@ full_bleed: true
               </text>
             
             </g>
+
+            <!-- Tooltip Bloomberg -->
+            <g id="bbgTooltip" class="timeline-tooltip" transform="translate(238, 190)">
+              <rect
+                x="-140" y="-26"
+                width="280" height="52"
+                rx="14" ry="14"
+                class="timeline-tooltip-bg"
+              />
+              <text x="0" y="-2" class="timeline-tooltip-year" text-anchor="middle">
+                2022 :
+              </text>
+              <text x="0" y="14" class="timeline-tooltip-text" text-anchor="middle">
+                Obtaining the Bloomberg certification
+              </text>
+            </g>
             
-            <!-- Bulle Bloomberg 2022 -->
-            <g class="timeline-bubble" transform="translate(238, 246)">
+            <!-- Bulle Bloomberg 2022 (CLIQUABLE) -->
+            <g class="timeline-bubble timeline-bubble-bbg" transform="translate(238, 246)">
               <g class="timeline-bubble-inner">
                 <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
                 <image href="{{ '/assets/images/image24.png' | relative_url }}" x="-16" y="-16" width="32" height="32" clip-path="url(#amfBubbleClip)"/>
@@ -2576,38 +2602,70 @@ updateClocks(); setInterval(updateClocks, 1000);
   const svg = document.querySelector('.timeline-graph');
   if (!svg) return;
 
-  const amfBubble = svg.querySelector('.timeline-bubble-amf');
-  const tooltip   = svg.querySelector('#amfTooltip');
-  if (!amfBubble || !tooltip) return;
+  const entries = [
+    {
+      bubble:  svg.querySelector('.timeline-bubble-amf'),
+      tooltip: svg.querySelector('#amfTooltip'),
+      label:   'Obtaining the AMF certification'
+    },
+    {
+      bubble:  svg.querySelector('.timeline-bubble-bbg'),
+      tooltip: svg.querySelector('#bbgTooltip'),
+      label:   'Obtaining the Bloomberg certification'
+    }
+  ];
 
-  // Accessibilité + focus clavier
-  amfBubble.setAttribute('tabindex', '0');
-  amfBubble.setAttribute('role', 'button');
-  amfBubble.setAttribute('aria-label', 'Obtaining the AMF certification');
+  let current = null; // entrée actuellement ouverte
 
-  let visible = false;
-
-  function toggleTooltip(){
-    visible = !visible;
-    tooltip.classList.toggle('is-visible', visible);
+  function closeAll(){
+    entries.forEach(e => {
+      if (e.tooltip){
+        e.tooltip.classList.remove('is-visible');
+      }
+    });
+    current = null;
   }
 
-  amfBubble.addEventListener('click', toggleTooltip);
-  amfBubble.addEventListener('keydown', (e)=>{
-    if (e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
-      toggleTooltip();
-    }
-  });
+  function bindEntry(entry){
+    if (!entry.bubble || !entry.tooltip) return;
 
-  // (optionnel) clic ailleurs pour fermer
-  document.addEventListener('click', (e)=>{
-    if (!visible) return;
-    // si on clique en dehors de la bulle AMF et du tooltip → on referme
-    if (!amfBubble.contains(e.target) && !tooltip.contains(e.target)){
-      visible = false;
-      tooltip.classList.remove('is-visible');
+    // Accessibilité
+    entry.bubble.setAttribute('tabindex', '0');
+    entry.bubble.setAttribute('role', 'button');
+    entry.bubble.setAttribute('aria-label', entry.label);
+
+    function toggle(){
+      const opening = current !== entry;
+
+      // on ferme tout
+      closeAll();
+
+      // si on était en train d'en ouvrir un autre → on ouvre celui-ci
+      if (opening){
+        entry.tooltip.classList.add('is-visible');
+        current = entry;
+      }
     }
+
+    entry.bubble.addEventListener('click', (e)=>{
+      e.stopPropagation(); // évite que le clic document ferme tout immédiatement
+      toggle();
+    });
+
+    entry.bubble.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        toggle();
+      }
+    });
+  }
+
+  entries.forEach(bindEntry);
+
+  // clic n'importe où ailleurs → fermer
+  document.addEventListener('click', ()=>{
+    if (!current) return;
+    closeAll();
   });
 })();
 </script>
