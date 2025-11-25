@@ -101,6 +101,16 @@ full_bleed: true
     filter: drop-shadow(0 0 6px rgba(80,160,255,0.6));
   }
 
+  .timeline-bubble-sg:focus{
+    outline: none;
+  }
+  
+  .timeline-bubble-sg:focus .timeline-bubble-circle{
+    stroke: rgba(80,160,255,0.9);
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px rgba(80,160,255,0.6));
+  }
+
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
     position:absolute;
@@ -1594,12 +1604,40 @@ full_bleed: true
                 <image href="{{ '/assets/images/image24.png' | relative_url }}" x="-16" y="-16" width="32" height="32" clip-path="url(#amfBubbleClip)"/>
               </g>
             </g>
+
+            <!-- Tooltip Société Générale 2023 -->
+            <g id="sgTooltip" class="timeline-tooltip" transform="translate(318, 130)">
+              
+              <!-- Fond large (même taille que Bloomberg pour être tranquille) -->
+              <rect
+                x="-155" y="-28"
+                width="310" height="56"
+                rx="16" ry="16"
+                class="timeline-tooltip-bg"
+              />
             
-            <!-- Bulle Société Générale 2023 -->
-            <g class="timeline-bubble" transform="translate(318, 218)">
+              <!-- Date en bleu -->
+              <text x="0" y="-2" class="timeline-tooltip-year" text-anchor="middle">
+                2023 :
+              </text>
+            
+              <!-- Texte principal -->
+              <text x="0" y="16" class="timeline-tooltip-text" text-anchor="middle">
+                Portfolio Valuation Officer
+              </text>
+            
+            </g>
+            
+            <!-- Bulle Société Générale 2023 (CLIQUABLE) -->
+            <g class="timeline-bubble timeline-bubble-sg" transform="translate(318, 218)">
               <g class="timeline-bubble-inner">
                 <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
-                <image href="{{ '/assets/images/image26.png' | relative_url }}" x="-16" y="-16" width="32" height="32" clip-path="url(#amfBubbleClip)"/>
+                <image
+                  href="{{ '/assets/images/image26.png' | relative_url }}"
+                  x="-16" y="-16"
+                  width="32" height="32"
+                  clip-path="url(#amfBubbleClip)"
+                />
               </g>
             </g>
             
@@ -2619,6 +2657,11 @@ updateClocks(); setInterval(updateClocks, 1000);
       bubble:  svg.querySelector('.timeline-bubble-bbg'),
       tooltip: svg.querySelector('#bbgTooltip'),
       label:   'Obtaining the Bloomberg certification'
+    },
+    {
+      bubble:  svg.querySelector('.timeline-bubble-sg'),
+      tooltip: svg.querySelector('#sgTooltip'),
+      label:   '2023 : Portfolio Valuation Officer'
     }
   ];
 
