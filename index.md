@@ -1413,15 +1413,16 @@ full_bleed: true
               <text x="550" y="356" class="timeline-label-year">2026</text>
             </g>
 
-            <!-- Courbe des événements (forme en cloche / loi normale) -->
+            <!-- Courbe des événements (croissance type exponentielle) -->
             <g>
               <path
                 class="timeline-path"
                 stroke="url(#pathGradient)"
                 d="
-                  M 70 260
-                  C 150 260, 220 180, 310 120
-                  C 400 60,  470 180, 550 260
+                  M 70 300
+                  C 130 295, 180 285, 220 265
+                  C 280 235, 340 190, 400 140
+                  C 460 95, 510 60, 550 40
                 "
               />
             </g>
