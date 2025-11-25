@@ -845,6 +845,19 @@ full_bleed: true
     transform: scale(1); /* tu peux mettre 1, 1.1, 1.2... mais ce sera IDENTIQUE pour tous */
   }
 
+  /* Désactive le zoom global dans la bulle 2026 */
+  .timeline-bubble-2026 .timeline-bubble-img{
+    transform: scale(1);
+  }
+  
+  .timeline-bubble-2026 .logo-sg{
+    transform: scale(0.84);   /* un poil plus petit */
+  }
+  
+  .timeline-bubble-2026 .logo-cfa{
+    transform: scale(1.22);   /* un peu plus zoomé */
+  }
+
   /* === PARTICULES AU NIVEAU DES FLÈCHES (nuages lumineux) === */
   
   .axis-tip-particles{
@@ -1498,7 +1511,7 @@ full_bleed: true
                   rx="18" ry="18"
                   class="timeline-bubble-circle"
                 />
-            
+              
                 <!-- Fine séparation au centre -->
                 <line
                   x1="0" y1="-14"
@@ -1506,23 +1519,23 @@ full_bleed: true
                   stroke="rgba(156,200,255,0.35)"
                   stroke-width="1"
                 />
-            
-                <!-- Logo gauche : Société Générale (image26) -->
+              
+                <!-- Logo gauche : Société Générale -->
                 <image
                   href="{{ '/assets/images/image26.png' | relative_url }}"
                   x="-30" y="-12"
                   width="24" height="24"
                   clip-path="url(#bubble2026Clip)"
-                  class="timeline-bubble-img"
+                  class="timeline-bubble-img logo-sg"
                 />
-            
-                <!-- Logo droit : autre logo (image31) -->
+              
+                <!-- Logo droit : CFA -->
                 <image
                   href="{{ '/assets/images/image31.png' | relative_url }}"
                   x="6" y="-12"
                   width="24" height="24"
                   clip-path="url(#bubble2026Clip)"
-                  class="timeline-bubble-img"
+                  class="timeline-bubble-img logo-cfa"
                 />
               </g>
             </g>
