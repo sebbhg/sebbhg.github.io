@@ -1575,7 +1575,7 @@ full_bleed: true
             </g>
 
             <!-- Tooltip Bloomberg (bulle agrandie) -->
-            <g id="bbgTooltip" class="timeline-tooltip" transform="translate(238, 140)">
+            <g id="bbgTooltip" class="timeline-tooltip" transform="translate(238, 130)">
               
               <!-- Fond large -->
               <rect
@@ -1623,13 +1623,13 @@ full_bleed: true
             
               <!-- Texte principal -->
               <text x="0" y="16" class="timeline-tooltip-text" text-anchor="middle">
-                Portfolio Valuation Officer
+                Intern : Portfolio Valuation Officer
               </text>
             
             </g>
             
             <!-- Bulle Société Générale 2023 (CLIQUABLE) -->
-            <g class="timeline-bubble timeline-bubble-sg" transform="translate(318, 218)">
+            <g class="timeline-bubble timeline-bubble-sg" transform="translate(318, 140)">
               <g class="timeline-bubble-inner">
                 <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
                 <image
