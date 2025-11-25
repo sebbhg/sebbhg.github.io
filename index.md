@@ -1495,7 +1495,7 @@ full_bleed: true
                 <!-- logo Spread Research -->
                 <image
                   class="timeline-bubble-img"
-                  href="{{ '/assets/images/image27.jpeg' | relative_url }}"
+                  href="{{ '/assets/images/image28.jpeg' | relative_url }}"
                   x="-16" y="-16" width="32" height="32"
                   clip-path="url(#amfBubbleClip)"
                 />
