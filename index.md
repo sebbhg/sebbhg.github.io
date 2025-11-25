@@ -1472,6 +1472,21 @@ full_bleed: true
               </g>
             </g>
 
+            <!-- Bulle Société Générale (Société Générale en 2025) -->
+            <g class="timeline-bubble" transform="translate(478, 47)">
+              <g class="timeline-bubble-inner">
+                <!-- cercle de fond -->
+                <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
+                <!-- logo Société Générale -->
+                <image
+                  class="timeline-bubble-img"
+                  href="{{ '/assets/images/image25.png' | relative_url }}"
+                  x="-16" y="-16" width="32" height="32"
+                  clip-path="url(#amfBubbleClip)"
+                />
+              </g>
+            </g>
+
             <!-- Points marquants (alignés sur la courbe) -->
             <g>
             </g>
