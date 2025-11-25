@@ -1095,7 +1095,7 @@ full_bleed: true
 
   .timeline-tooltip-year{
     fill: #4ea1ff; /* bleu thème */
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 700;
     letter-spacing: .08em;
     text-transform: uppercase;
@@ -1103,7 +1103,7 @@ full_bleed: true
   
   .timeline-tooltip-text{
     fill:#e7efff;
-    font-size:10px;
+    font-size:8px;
     font-weight:700;
     letter-spacing:.08em;
     text-transform:uppercase;
@@ -1566,9 +1566,9 @@ full_bleed: true
               
               <!-- Fond -->
               <rect
-                x="-120" y="-26"
-                width="240" height="52"
-                rx="14" ry="14"
+                x="-105" y="-22"
+                width="210" height="44"
+                rx="12" ry="12"
                 class="timeline-tooltip-bg"
               />
             
@@ -1589,9 +1589,9 @@ full_bleed: true
               
               <!-- Fond large -->
               <rect
-                x="-155" y="-28"
-                width="310" height="56"
-                rx="16" ry="16"
+                x="-135" y="-22"
+                width="270" height="44"
+                rx="12" ry="12"
                 class="timeline-tooltip-bg"
               />
             
@@ -1620,9 +1620,9 @@ full_bleed: true
               
               <!-- Fond large (même taille que Bloomberg pour être tranquille) -->
               <rect
-                x="-155" y="-28"
-                width="310" height="56"
-                rx="16" ry="16"
+                x="-135" y="-22"
+                width="270" height="44"
+                rx="12" ry="12"
                 class="timeline-tooltip-bg"
               />
             
@@ -1656,9 +1656,9 @@ full_bleed: true
             
               <!-- Fond large -->
               <rect
-                x="-155" y="-28"
-                width="310" height="56"
-                rx="16" ry="16"
+                x="-135" y="-22"
+                width="270" height="44"
+                rx="12" ry="12"
                 class="timeline-tooltip-bg"
               />
             
