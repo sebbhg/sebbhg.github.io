@@ -49,6 +49,16 @@ full_bleed: true
     overflow:hidden;
     background:#050814;
   }
+
+  .about-graph-card {
+    background: #050914;                  /* noir profond comme le site */
+    border: 1px solid rgba(44,140,255,0.45);  /* liseré bleu */
+    border-radius: 14px;
+    padding: 22px 26px;
+    backdrop-filter: none;                /* on enlève le glass */
+    box-shadow: 0 0 18px rgba(44,140,255,0.22);  /* glow bleu subtil */
+  }
+ 
   .hero-video::after{
     content:"";
     position:absolute;
