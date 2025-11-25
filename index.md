@@ -1419,31 +1419,31 @@ full_bleed: true
               <text x="550" y="356" class="timeline-label-year">2026</text>
             </g>
 
-            <!-- Courbe adoucie (moins convexe) -->
+            <!-- Courbe (moins convexe) -->
             <g>
               <path
                 class="timeline-path"
                 stroke="url(#pathGradient)"
                 d="
                   M 70 270
-                  L 110 265
-                  L 150 255
-                  L 190 240
-                  L 230 220
-                  L 270 200
-                  L 310 175
-                  L 350 150
-                  L 390 125
-                  L 430 105
-                  L 470 90
-                  L 510 80
-                  L 550 75
+                  L 110 266
+                  L 150 258
+                  L 190 246
+                  L 230 232
+                  L 270 214
+                  L 310 192
+                  L 350 166
+                  L 390 136
+                  L 430 102
+                  L 470 64
+                  L 510 24
+                  L 550 -28
                 "
               />
             </g>
-
-            <!-- Bulle AMF (certification AMF en 2021) -->
-            <g class="timeline-bubble" transform="translate(158, 247)">
+            
+            <!-- Bulle AMF (2021) : alignée sur la courbe -->
+            <g class="timeline-bubble" transform="translate(158, 256)">
               <g class="timeline-bubble-inner">
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
                 <image
@@ -1454,9 +1454,9 @@ full_bleed: true
                 />
               </g>
             </g>
-
-            <!-- Bulle Bloomberg (Bloomberg Terminal en 2022) -->
-            <g class="timeline-bubble" transform="translate(238, 210)">
+            
+            <!-- Bulle Bloomberg (2022) -->
+            <g class="timeline-bubble" transform="translate(238, 228)">
               <g class="timeline-bubble-inner">
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
                 <image
@@ -1467,9 +1467,9 @@ full_bleed: true
                 />
               </g>
             </g>
-
-            <!-- Bulle Société Générale (Société Générale en 2023) -->
-            <g class="timeline-bubble" transform="translate(318, 165)">
+            
+            <!-- Bulle Société Générale (2023) -->
+            <g class="timeline-bubble" transform="translate(318, 187)">
               <g class="timeline-bubble-inner">
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
                 <image
@@ -1480,9 +1480,9 @@ full_bleed: true
                 />
               </g>
             </g>
-
-            <!-- Bulle Spread Research (Spread Research en 2024) -->
-            <g class="timeline-bubble" transform="translate(398, 110)">
+            
+            <!-- Bulle Spread Research (2024) -->
+            <g class="timeline-bubble" transform="translate(398, 129)">
               <g class="timeline-bubble-inner">
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
                 <image
@@ -1493,9 +1493,9 @@ full_bleed: true
                 />
               </g>
             </g>
-
-            <!-- Bulle Natixis (Natixis en 2025) -->
-            <g class="timeline-bubble" transform="translate(478, 70)">
+            
+            <!-- Bulle Natixis (2025) -->
+            <g class="timeline-bubble" transform="translate(478, 56)">
               <g class="timeline-bubble-inner">
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
                 <image
@@ -1505,10 +1505,6 @@ full_bleed: true
                   clip-path="url(#amfBubbleClip)"
                 />
               </g>
-            </g>
-
-            <!-- Points marquants (alignés sur la courbe) -->
-            <g>
             </g>
 
             <!-- Légende en haut à droite -->
