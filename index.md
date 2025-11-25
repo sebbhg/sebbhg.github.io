@@ -7,7 +7,7 @@ full_bleed: true
 ---
  
 <style>
-  /* ===== Root vars (incl. adjustable spacing) ===== */
+  /* ===== Root vars (incl. adjustable spacing) ===== */ 
   :root{
     --hero-spacing: 60px; /* valeur par défaut, ajustable via la poignée */
     --clock-speed: 120s; 
