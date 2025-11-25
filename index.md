@@ -1480,7 +1480,7 @@ full_bleed: true
                 <!-- logo Société Générale -->
                 <image
                   class="timeline-bubble-img"
-                  href="{{ '/assets/images/image25.png' | relative_url }}"
+                  href="{{ '/assets/images/image26.png' | relative_url }}"
                   x="-16" y="-16" width="32" height="32"
                   clip-path="url(#amfBubbleClip)"
                 />
