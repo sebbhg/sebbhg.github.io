@@ -839,10 +839,10 @@ full_bleed: true
     transform-origin: left center;
   }
 
-  .timeline-bubble-img-amf{
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
-  transform: scale(1.28); /* valeur idéale */
+  .timeline-bubble-img{
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    transform: scale(1.2); /* tu peux mettre 1, 1.1, 1.2... mais ce sera IDENTIQUE pour tous */
   }
 
   /* === PARTICULES AU NIVEAU DES FLÈCHES (nuages lumineux) === */
@@ -1449,7 +1449,7 @@ full_bleed: true
                 <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
                 <!-- logo AMF, un peu plus grand -->
                 <image
-                  class="timeline-bubble-img timeline-bubble-img-amf"
+                  class="timeline-bubble-img"
                   href="{{ '/assets/images/image23.png' | relative_url }}"
                   x="-16" y="-16" width="32" height="32"
                   clip-path="url(#amfBubbleClip)"
