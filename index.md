@@ -111,6 +111,16 @@ full_bleed: true
     filter: drop-shadow(0 0 6px rgba(80,160,255,0.6));
   }
 
+  .timeline-bubble-spread:focus{
+    outline: none;
+  }
+  
+  .timeline-bubble-spread:focus .timeline-bubble-circle{
+    stroke: rgba(80,160,255,0.9);
+    stroke-width: 3;
+    filter: drop-shadow(0 0 6px rgba(80,160,255,0.6));
+  }
+
   /* === LOGO IMAGE + halo pulsé === */
   .hero-logo-img{
     position:absolute;
@@ -1640,12 +1650,41 @@ full_bleed: true
                 />
               </g>
             </g>
+
+            <!-- Tooltip Spread Research 2024 -->
+            <g id="spreadTooltip" class="timeline-tooltip" transform="translate(395, 230)">
+            
+              <!-- Fond large -->
+              <rect
+                x="-155" y="-28"
+                width="310" height="56"
+                rx="16" ry="16"
+                class="timeline-tooltip-bg"
+              />
+            
+              <!-- Date en bleu -->
+              <text x="0" y="-2" class="timeline-tooltip-year" text-anchor="middle">
+                2024 :
+              </text>
+            
+              <!-- Texte principal -->
+              <text x="0" y="16" class="timeline-tooltip-text" text-anchor="middle">
+                Intern : Quantitative Analyst - Equity Derivatives
+              </text>
+            
+            </g>
                         
-            <!-- Bulle Spread Research 2024 -->
-            <g class="timeline-bubble" transform="translate(398, 181)">
+            <!-- Bulle Spread Research 2024 (CLIQUABLE) -->
+            <g class="timeline-bubble timeline-bubble-spread" transform="translate(395, 170)">
               <g class="timeline-bubble-inner">
                 <circle cx="0" cy="0" r="18" class="timeline-bubble-circle"/>
-                <image href="{{ '/assets/images/image28.jpeg' | relative_url }}" x="-16" y="-16" width="32" height="32" clip-path="url(#amfBubbleClip)"/>
+                <image
+                  href="{{ '/assets/images/imageSpread.png' | relative_url }}"
+                  x="-16" y="-16"
+                  width="32"
+                  height="32"
+                  clip-path="url(#amfBubbleClip)"
+                />
               </g>
             </g>
             
@@ -2662,6 +2701,11 @@ updateClocks(); setInterval(updateClocks, 1000);
       bubble:  svg.querySelector('.timeline-bubble-sg'),
       tooltip: svg.querySelector('#sgTooltip'),
       label:   '2023 : Portfolio Valuation Officer'
+    },
+    {
+      bubble: svg.querySelector('.timeline-bubble-spread'),
+      tooltip: svg.querySelector('#spreadTooltip'),
+      label: '2024 : Intern : Quantitative Analyst - Equity Derivatives'
     }
   ];
 
