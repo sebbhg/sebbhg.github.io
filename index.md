@@ -1487,6 +1487,21 @@ full_bleed: true
               </g>
             </g>
 
+            <!-- Bulle Spread Research (Spread Research en 2024) -->
+            <g class="timeline-bubble" transform="translate(398, 120)">
+              <g class="timeline-bubble-inner">
+                <!-- cercle de fond -->
+                <circle class="timeline-bubble-circle" cx="0" cy="0" r="18" />
+                <!-- logo Spread Research -->
+                <image
+                  class="timeline-bubble-img"
+                  href="{{ '/assets/images/image27.jpeg' | relative_url }}"
+                  x="-16" y="-16" width="32" height="32"
+                  clip-path="url(#amfBubbleClip)"
+                />
+              </g>
+            </g>
+
             <!-- Points marquants (alignés sur la courbe) -->
             <g>
             </g>
