@@ -1050,6 +1050,22 @@ full_bleed: true
     stroke-width:1.2;
     filter:drop-shadow(0 0 10px rgba(44,140,255,.6));
   }
+
+  .timeline-tooltip-year{
+    fill: #4ea1ff; /* bleu thème */
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  
+  .timeline-tooltip-text{
+    fill:#e7efff;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
   
   .timeline-tooltip-text{
     fill:#e7efff;
