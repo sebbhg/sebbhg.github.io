@@ -1531,12 +1531,12 @@ full_bleed: true
               />
             
               <!-- Texte "2021 :" en bleu -->
-              <text x="0" y="-4" class="timeline-tooltip-year">
+              <text x="0" y="-2" class="timeline-tooltip-year" text-anchor="middle">
                 2021 :
               </text>
             
               <!-- Texte principal en blanc -->
-              <text x="0" y="12" class="timeline-tooltip-text">
+              <text x="0" y="14" class="timeline-tooltip-text" text-anchor="middle">
                 Obtaining the AMF certification
               </text>
             
